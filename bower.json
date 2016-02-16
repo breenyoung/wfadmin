@@ -1,0 +1,28 @@
+{
+  "name": "adminapp",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Breen <breen.young@gmail.com>"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1",
+    "AngularJS": "angular-latest#~1.5.0",
+    "angular-material": "~1.0.5",
+    "angular-ui-router": "ui-router#~0.2.18",
+    "restangular": "~1.5.1",
+    "satellizer": "~0.13.4",
+    "angular-momentjs": "~0.2.2",
+    "moment": "*"
+  }
+}
