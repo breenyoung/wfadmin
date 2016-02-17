@@ -1,16 +1,11 @@
 (function(){
     "use strict";
 
-    angular.module('app.controllers').controller('ProductController', ['$auth', '$state', 'Restangular', function($auth, $state, Restangular)
+    angular.module('app.controllers').controller('ProductController', ['$auth', '$state', 'Restangular', 'RestService', function($auth, $state, Restangular, RestService)
     {
         var self = this;
 
-        var baseProducts = Restangular.all('product');
-
-        baseProducts.getList().then(function(data)
-        {
-            self.products = data;
-        });
+        RestService.getAllProducts(self);
 
 
     }]);
