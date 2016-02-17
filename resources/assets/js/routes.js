@@ -3,7 +3,6 @@
     "use strict";
     angular.module('app.routes').config( function($stateProvider, $urlRouterProvider, $authProvider ) {
 
-        console.log($authProvider);
         var getView = function( viewName ){
             return '/views/app/' + viewName + '/' + viewName + '.html';
         };
@@ -18,12 +17,12 @@
                     header: {
                         templateUrl: getView('header'),
                         controller: 'HeaderController',
-                        controllerAs: 'ctrl'
+                        controllerAs: 'ctrlHeader'
                     },
                     footer: {
                         templateUrl: getView('footer'),
                         controller: 'FooterController',
-                        controllerAs: 'ctrl'
+                        controllerAs: 'ctrlFooter'
                     },
                     main: {}
                 }
@@ -34,7 +33,7 @@
                     'main@': {
                         templateUrl: getView('login'),
                         controller: 'LoginController',
-                        controllerAs: 'ctrl'
+                        controllerAs: 'ctrlLogin'
                     }
                 }
             })
@@ -52,7 +51,7 @@
                     'main@': {
                         templateUrl: getView('products'),
                         controller: 'ProductController',
-                        controllerAs: 'ctrl'
+                        controllerAs: 'ctrlProduct'
                     }
                 }
 
