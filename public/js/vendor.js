@@ -83924,7 +83924,7 @@ angular.module("material.core").constant("$MD_THEME_CSS", "md-autocomplete.md-TH
 
 /**
  * Restful Resources service for AngularJS apps
- * @version v1.4.0 - 2015-04-03 * @link https://github.com/mgonto/restangular
+ * @version v1.5.2 - 2016-02-08 * @link https://github.com/mgonto/restangular
  * @author Martin Gontovnikas <martin@gon.to>
  * @license MIT License, http://www.opensource.org/licenses/MIT
  */(function() {
@@ -83942,7 +83942,7 @@ restangular.provider('Restangular', function() {
      */
     var safeMethods= ['get', 'head', 'options', 'trace', 'getlist'];
     config.isSafe = function(operation) {
-      return _.contains(safeMethods, operation.toLowerCase());
+      return _.includes(safeMethods, operation.toLowerCase());
     };
 
     var absolutePattern = /^https?:\/\//i;
@@ -84319,7 +84319,7 @@ restangular.provider('Restangular', function() {
     object.setParentless = function(values) {
       if (_.isArray(values)) {
         config.shouldSaveParent = function(route) {
-          return !_.contains(values, route);
+          return !_.includes(values, route);
         };
       } else if (_.isBoolean(values)) {
         config.shouldSaveParent = function() {
@@ -85089,9 +85089,9 @@ restangular.provider('Restangular', function() {
           var fullParams = response.config.params;
           var elem = parseResponse(resData, operation, route, fetchUrl, response, deferred);
           if (elem) {
-
+            var data;
             if (operation === 'post' && !__this[config.restangularFields.restangularCollection]) {
-              var data = restangularizeElem(
+              data = restangularizeElem(
                 __this[config.restangularFields.parentResource],
                 elem,
                 route,
@@ -85101,7 +85101,7 @@ restangular.provider('Restangular', function() {
               );
               resolvePromise(deferred, response, data, filledObject);
             } else {
-              var data = restangularizeElem(
+              data = restangularizeElem(
                 __this[config.restangularFields.parentResource],
                 elem,
                 __this[config.restangularFields.route],
@@ -85236,7 +85236,7 @@ restangular.provider('Restangular', function() {
         serv.getList = _.bind(collection.getList, collection);
 
         for (var prop in collection) {
-          if (collection.hasOwnProperty(prop) && _.isFunction(collection[prop]) && !_.contains(knownCollectionMethods, prop)) {
+          if (collection.hasOwnProperty(prop) && _.isFunction(collection[prop]) && !_.includes(knownCollectionMethods, prop)) {
             serv[prop] = _.bind(collection[prop], collection);
           }
         }

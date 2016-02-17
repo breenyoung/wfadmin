@@ -5,6 +5,10 @@
     <title>Products</title>
 </head>
 <body>
-
+    <div>
+        <div ng-repeat="p in ctrlProduct.products">
+            <a href="#/products/{{p.id}}">{{p.name}}</a>
+        </div>
+    </div>
 </body>
 </html>

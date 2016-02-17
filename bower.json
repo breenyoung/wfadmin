@@ -20,7 +20,7 @@
     "AngularJS": "angular-latest#~1.5.0",
     "angular-material": "~1.0.5",
     "angular-ui-router": "ui-router#~0.2.18",
-    "restangular": "~1.5.1",
+    "restangular": "~1.5.2",
     "satellizer": "~0.13.4",
     "angular-momentjs": "~0.2.2",
     "moment": "*"

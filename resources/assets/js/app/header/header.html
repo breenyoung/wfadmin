@@ -1,8 +1,8 @@
 <div>
-    <ul ng-if="!ctrl.isAuthenticated()">
+    <ul ng-if="!ctrlHeader.isAuthenticated()">
         <li><a href="#/login">Login</a></li>
     </ul>
-    <ul ng-if="ctrl.isAuthenticated()">
+    <ul ng-if="ctrlHeader.isAuthenticated()">
         <li><a href="#/logout">Logout</a></li>
     </ul>
 </div>
