@@ -4,7 +4,7 @@
     angular.module('app.routes').config( function($stateProvider, $urlRouterProvider, $authProvider ) {
 
         var getView = function( viewName ){
-            return '/views/app/' + viewName + '/' + viewName + '.html';
+            return '/views/app/' + viewName + '.html';
         };
 
         $urlRouterProvider.otherwise('/login');
@@ -41,7 +41,9 @@
                 url: '/landing',
                 views: {
                     'main@': {
-                        templateUrl: getView('landing')
+                        templateUrl: getView('landing'),
+                        controller: 'LandingController',
+                        controllerAs: 'ctrlLanding'
                     }
                 }
             })
@@ -54,7 +56,13 @@
                         controllerAs: 'ctrlProduct'
                     }
                 }
-
+            })
+            .state('app.products.detail', {
+                'main@': {
+                    url: '/products/:productId',
+                    templateUrl: getView('products.details'),
+                    controller: 'ProductC'
+                }
             })
             ;
 
