@@ -1,7 +1,7 @@
 (function(){
     "use strict";
 
-    angular.module('app.controllers').controller('LoginController', ['$auth', '$state', function($auth, $state)
+    function LoginController($auth, $state)
     {
         var self = this;
 
@@ -27,13 +27,15 @@
         // This request will hit the getData method in the AuthenticateController
         // on the Laravel side and will return your data that require authentication
         /*
-        $scope.getData = function()
-        {
-            Restangular.all('authenticate/data').get().then(function (response){
+         $scope.getData = function()
+         {
+         Restangular.all('authenticate/data').get().then(function (response){
 
-            }, function (error){});
-        };
-        */
-    }]);
+         }, function (error){});
+         };
+         */
+    }
+
+    angular.module('app.controllers').controller('LoginController', ['$auth', '$state', LoginController]);
 
 })();

@@ -1,10 +1,11 @@
 (function(){
     "use strict";
 
-    angular.module('app.controllers').controller('LandingController', ['$state', function($state)
+    function LandingController($state)
     {
         var self = this;
+    }
 
-    }]);
+    angular.module('app.controllers').controller('LandingController', ['$state', LandingController]);
 
 })();
