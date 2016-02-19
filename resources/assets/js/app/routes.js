@@ -58,10 +58,13 @@
                 }
             })
             .state('app.products.detail', {
-                'main@': {
-                    url: '/products/:productId',
-                    templateUrl: getView('products.details'),
-                    controller: 'ProductC'
+                url: '/detail/:productId',
+                views: {
+                    'main@': {
+                        templateUrl: getView('product.detail'),
+                        controller: 'ProductDetailController',
+                        controllerAs: 'ctrlProductDetail'
+                    }
                 }
             })
             ;
