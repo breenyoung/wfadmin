@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Detail</title>
+</head>
+<body>
+<h2>Product details</h2>
+
+{{ctrlProductDetail.product.name}}<br/>
+
+<input type="text" ng-model="ctrlProductDetail.product.name"/>
+<br/>
+<input type="text" ng-model="ctrlProductDetail.product.sku"/>
+<br/>
+<input type="text" ng-model="ctrlProductDetail.product.price"/>
+<br/>
+<input type="text" ng-model="ctrlProductDetail.product.sale_price"/>
+<br/>
+<input type="text" ng-model="ctrlProductDetail.product.cost"/>
+<br/>
+{{ctrlProductDetail.product.created_at}}
+<br/>
+{{ctrlProductDetail.product.updated_at}}
+<br/>
+<textarea ng-model="ctrlProductDetail.product.description"></textarea>
+<br/>
+<md-button class="md-raised md-primary" ng-click="ctrlProductDetail.updateProduct()">Submit</md-button>
+</body>
+</html>

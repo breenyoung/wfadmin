@@ -18,6 +18,15 @@
                     //console.log(data);
                     scope.products = data;
                 });
+            },
+
+            getProduct: function(scope, id)
+            {
+                Restangular.one('product', id).get().then(function(data)
+                {
+                    //console.log(data);
+                    scope.product = data;
+                });
             }
         };
     }]);
