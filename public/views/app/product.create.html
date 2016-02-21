@@ -6,20 +6,32 @@
 </head>
 <body>
 <h2>Product create</h2>
-
+<form name="form1">
 <div layout="row">
     <div flex>
+
         <md-input-container class="md-block" flex-gt-sm>
             <label>Product Name</label>
-            <input type="text" ng-model="ctrlProductCreate.product.name"/>
+            <input type="text" name="productname" ng-model="ctrlProductCreate.product.name" required ng-minlength="5" ng-maxlength="200"/>
         </md-input-container>
+
+        <div ng-messages="form1.productname.$error" role="alert">
+            <div ng-messages-include="error-messages"></div>
+        </div>
+
     </div>
 
     <div flex>
+
         <md-input-container class="md-block" flex-gt-sm>
             <label>SKU</label>
-            <input type="text" ng-model="ctrlProductCreate.product.sku"/>
+            <input type="text" ng-model="ctrlProductCreate.product.sku" name="sku" required ng-minlength="1" ng-maxlength="100"/>
         </md-input-container>
+
+        <div ng-messages="form1.sku.$error" role="alert">
+            <div ng-messages-include="error-messages"></div>
+        </div>
+
     </div>
 </div>
 
@@ -27,8 +39,13 @@
     <div flex>
         <md-input-container class="md-block" flex-gt-sm>
             <label>Price</label>
-            <input type="text" ng-model="ctrlProductCreate.product.price"/>
+            <input type="text" ng-model="ctrlProductCreate.product.price" name="price" required/>
         </md-input-container>
+
+        <div ng-messages="form1.price.$error" role="alert">
+            <div ng-messages-include="error-messages"></div>
+        </div>
+
     </div>
 
     <div flex>
@@ -39,18 +56,26 @@
     </div>
 
     <div flex>
+
         <md-input-container class="md-block" flex-gt-sm>
             <label>Cost</label>
-            <input type="text" ng-model="ctrlProductCreate.product.cost"/>
+            <input type="text" ng-model="ctrlProductCreate.product.cost" name="cost" required/>
         </md-input-container>
+
+        <div ng-messages="form1.cost.$error" role="alert">
+            <div ng-messages-include="error-messages"></div>
+        </div>
+
     </div>
 </div>
 
 <div layout="row">
+
     <md-input-container class="md-block" flex-gt-sm>
         <label>Description</label>
         <textarea ng-model="ctrlProductCreate.product.description"></textarea>
     </md-input-container>
+
 </div>
 
 
@@ -62,7 +87,7 @@
         <md-button class="md-raised" ui-sref="app.products">Cancel</md-button>
     </div>
 </div>
-
+</form>
 
 </body>
 </html>
