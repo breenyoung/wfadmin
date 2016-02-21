@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customers</title>
+</head>
+<body>
+<div>
+    <div ng-repeat="c in ctrlCustomer.customers">
+        <a ui-sref="app.customers.detail({customerId: c.id})">{{c.first_name}} {{c.last_name}}</a>
+    </div>
+</div>
+<hr/>
+<md-button class="md-raised md-primary" ui-sref="app.customers.create">Add New Customer</md-button>
+</body>
+</html>

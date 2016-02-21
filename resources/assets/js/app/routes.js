@@ -77,6 +77,36 @@
                     }
                 }
             })
+            .state('app.customers', {
+                url: '/customers',
+                views: {
+                    'main@': {
+                        templateUrl: getView('customers'),
+                        controller: 'CustomerController',
+                        controllerAs: 'ctrlCustomer'
+                    }
+                }
+            })
+            .state('app.customers.create', {
+                url: '/create',
+                views: {
+                    'main@': {
+                        templateUrl: getView('customer.create'),
+                        controller: 'CustomerCreateController',
+                        controllerAs: 'ctrlCustomerCreate'
+                    }
+                }
+            })
+            .state('app.customers.detail', {
+                url: '/detail/:customerId',
+                views: {
+                    'main@': {
+                        templateUrl: getView('customer.detail'),
+                        controller: 'CustomerDetailController',
+                        controllerAs: 'ctrlCustomerDetail'
+                    }
+                }
+            })
             ;
 
     } );
