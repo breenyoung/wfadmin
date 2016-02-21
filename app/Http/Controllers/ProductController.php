@@ -16,7 +16,7 @@ class ProductController extends Controller
     public function __construct()
     {
         // Apply the jwt.auth middleware to all methods in this controller
-        //$this->middleware('jwt.auth');
+        $this->middleware('jwt.auth');
     }
 
 
@@ -33,16 +33,6 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -50,7 +40,16 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product = new Product();
+        $product->name = $request->input('name');
+        $product->sku = $request->input('sku');
+        $product->description = $request->input('description');
+        $product->price = $request->input('price');
+        $product->sale_price = $request->input('sale_price');
+        $product->cost = $request->input('cost');
+        //$product->name = $request->input('active');
+
+        $product->save();
     }
 
     /**
@@ -67,17 +66,6 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -86,7 +74,19 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product = Product::find($id);
+        if(isset($product))
+        {
+            $product->name = $request->input('name');
+            $product->sku = $request->input('sku');
+            $product->description = $request->input('description');
+            $product->price = $request->input('price');
+            $product->sale_price = $request->input('sale_price');
+            $product->cost = $request->input('cost');
+            //$product->name = $request->input('active');
+
+            $product->save();
+        }
     }
 
     /**
@@ -97,6 +97,10 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+        if(isset($product))
+        {
+            $product->delete();
+        }
     }
 }

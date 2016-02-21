@@ -67,6 +67,16 @@
                     }
                 }
             })
+            .state('app.products.create', {
+                url: '/create',
+                views: {
+                    'main@': {
+                        templateUrl: getView('product.create'),
+                        controller: 'ProductCreateController',
+                        controllerAs: 'ctrlProductCreate'
+                    }
+                }
+            })
             ;
 
     } );
