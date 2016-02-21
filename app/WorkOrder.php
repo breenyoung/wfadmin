@@ -16,12 +16,12 @@ class WorkOrder extends Model
 
     protected $fillable = ['customer_id', 'product_id', 'start_date', 'end_date', 'completed', 'notes'];
 
-    protected function customer()
+    public function customer()
     {
         return $this->belongsTo('App\Customer');
     }
 
-    protected function product()
+    public function product()
     {
         return $this->belongsTo('App\Product');
     }

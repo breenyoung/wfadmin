@@ -1,7 +1,7 @@
 (function(){
     "use strict";
 
-    function ProductDetailController($auth, $state, Restangular, RestService, $stateParams)
+    function ProductDetailController($auth, $state, Restangular, RestService, $stateParams, ToastService)
     {
         var self = this;
 
@@ -13,7 +13,8 @@
             //RestService.updateProduct(self, self.product.id);
             self.product.put().then(function()
             {
-                console.log("updated");
+                //console.log("updated");
+                ToastService.show("Successfully updated");
             }, function()
             {
                 console.log("error updating");
@@ -32,6 +33,6 @@
 
     }
 
-    angular.module('app.controllers').controller('ProductDetailController', ['$auth', '$state', 'Restangular', 'RestService', '$stateParams', ProductDetailController]);
+    angular.module('app.controllers').controller('ProductDetailController', ['$auth', '$state', 'Restangular', 'RestService', '$stateParams', 'ToastService', ProductDetailController]);
 
 })();
