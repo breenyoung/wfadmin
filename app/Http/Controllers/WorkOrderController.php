@@ -8,6 +8,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\WorkOrder;
 
+use \Illuminate\Support\Facades\DB;
+
+
 class WorkOrderController extends Controller
 {
     /**
@@ -28,7 +31,8 @@ class WorkOrderController extends Controller
     public function index()
     {
         // Retrieve all the work orders in the database and return them
-        $workOrders = WorkOrder::all();
+        $workOrders = WorkOrder::with('product', 'customer')->get();
+
         return $workOrders;
     }
 
@@ -45,7 +49,7 @@ class WorkOrderController extends Controller
         $workOrder->product_id = $request->input('product_id');
         $workOrder->start_date = $request->input('start_date');
         $workOrder->end_date = $request->input('end_date');
-        $workOrder->completed = $request->input('completed');
+        $workOrder->completed = $request->input('completed') ? 1 : 0;
         $workOrder->notes = $request->input('notes');
 
         $workOrder->save();

@@ -5,7 +5,10 @@
     {
         var self = this;
 
-        self.createProduct = function()
+        RestService.getAllCustomers(self);
+        RestService.getAllProducts(self);
+
+        self.createWorkOrder = function()
         {
             console.log(self.workorder);
 
@@ -14,7 +17,8 @@
             Restangular.all('workorder').post(w).then(function()
             {
                 console.log("created");
-                $state.go('app.workorders.detail', {'workOrderId': 1});
+                //$state.go('app.workorders.detail', {'workOrderId': 1});
+                $state.go('app.workorders');
 
             });
 

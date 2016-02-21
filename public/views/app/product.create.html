@@ -7,38 +7,62 @@
 <body>
 <h2>Product create</h2>
 
-<md-input-container class="md-block" flex-gt-sm>
-    <label>Product Name</label>
-    <input type="text" ng-model="ctrlProductCreate.product.name"/>
-</md-input-container>
+<div layout="row">
+    <div flex>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Product Name</label>
+            <input type="text" ng-model="ctrlProductCreate.product.name"/>
+        </md-input-container>
+    </div>
 
-<md-input-container class="md-block" flex-gt-sm>
-    <label>SKU</label>
-    <input type="text" ng-model="ctrlProductCreate.product.sku"/>
-</md-input-container>
+    <div flex>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>SKU</label>
+            <input type="text" ng-model="ctrlProductCreate.product.sku"/>
+        </md-input-container>
+    </div>
+</div>
 
-<md-input-container class="md-block" flex-gt-sm>
-    <label>Price</label>
-    <input type="text" ng-model="ctrlProductCreate.product.price"/>
-</md-input-container>
+<div layout="row">
+    <div flex>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Price</label>
+            <input type="text" ng-model="ctrlProductCreate.product.price"/>
+        </md-input-container>
+    </div>
 
-<md-input-container class="md-block" flex-gt-sm>
-    <label>Sale Price</label>
-    <input type="text" ng-model="ctrlProductCreate.product.sale_price"/>
-</md-input-container>
+    <div flex>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Sale Price</label>
+            <input type="text" ng-model="ctrlProductCreate.product.sale_price"/>
+        </md-input-container>
+    </div>
 
-<md-input-container class="md-block" flex-gt-sm>
-    <label>Cost</label>
-    <input type="text" ng-model="ctrlProductCreate.product.cost"/>
-</md-input-container>
+    <div flex>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Cost</label>
+            <input type="text" ng-model="ctrlProductCreate.product.cost"/>
+        </md-input-container>
+    </div>
+</div>
 
-<md-input-container class="md-block" flex-gt-sm>
-    <label>Description</label>
-    <textarea ng-model="ctrlProductCreate.product.description"></textarea>
-</md-input-container>
+<div layout="row">
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Description</label>
+        <textarea ng-model="ctrlProductCreate.product.description"></textarea>
+    </md-input-container>
+</div>
 
-<br/>
-<md-button class="md-raised md-primary" ng-click="ctrlProductCreate.createProduct()">Submit</md-button>
-<md-button class="md-raised" ui-sref="app.products">Cancel</md-button>
+
+<div layout="row">
+    <div flex="10">
+        <md-button class="md-raised md-primary" ng-click="ctrlProductCreate.createProduct()">Submit</md-button>
+    </div>
+    <div flex="10">
+        <md-button class="md-raised" ui-sref="app.products">Cancel</md-button>
+    </div>
+</div>
+
+
 </body>
 </html>
