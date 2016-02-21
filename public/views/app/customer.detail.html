@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Detail</title>
+</head>
+<body>
+<h2>Customer details</h2>
+
+<md-input-container class="md-block" flex-gt-sm>
+    <label>First Name</label>
+    <input type="text" ng-model="ctrlCustomerDetail.customer.first_name"/>
+</md-input-container>
+
+<md-input-container class="md-block" flex-gt-sm>
+    <label>Last Name</label>
+    <input type="text" ng-model="ctrlCustomerDetail.customer.last_name"/>
+</md-input-container>
+
+<md-input-container class="md-block" flex-gt-sm>
+    <label>Email</label>
+    <input type="text" ng-model="ctrlCustomerCreate.customer.email"/>
+</md-input-container>
+
+<md-input-container class="md-block" flex-gt-sm>
+    <label>Description</label>
+    <textarea ng-model="ctrlCustomerDetail.customer.notes"></textarea>
+</md-input-container>
+
+<br/>
+Created on: {{ctrlCustomerDetail.customer.created_at}}
+<br/>
+Last updated: {{ctrlCustomerDetail.customer.updated_at}}
+<br/>
+<md-button class="md-raised md-primary" ng-click="ctrlCustomerDetail.updateCustomer()">Submit</md-button>
+<md-button class="md-raised md-warn" ng-click="ctrlCustomerDetail.deleteCustomer()">Delete</md-button>
+<md-button class="md-raised" ui-sref="app.customers">Cancel</md-button>
+</body>
+</html>

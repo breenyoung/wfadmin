@@ -27,6 +27,24 @@
                     //console.log(data);
                     scope.product = data;
                 });
+            },
+
+            getAllCustomers: function(scope)
+            {
+                Restangular.all('customer').getList().then(function(data)
+                {
+                    console.log(data);
+                    scope.customers = data;
+                });
+            },
+
+            getCustomer: function(scope, id)
+            {
+                Restangular.one('customer', id).get().then(function(data)
+                {
+                    //console.log(data);
+                    scope.customer = data;
+                });
             }
         };
     }]);

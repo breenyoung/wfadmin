@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Create</title>
+</head>
+<body>
+<h2>Customer create</h2>
+
+<md-input-container class="md-block" flex-gt-sm>
+    <label>First Name</label>
+    <input type="text" ng-model="ctrlCustomerCreate.product.first_name"/>
+</md-input-container>
+
+<md-input-container class="md-block" flex-gt-sm>
+    <label>Last Name</label>
+    <input type="text" ng-model="ctrlCustomerCreate.product.last_name"/>
+</md-input-container>
+
+<md-input-container class="md-block" flex-gt-sm>
+    <label>Email</label>
+    <input type="text" ng-model="ctrlCustomerCreate.product.email"/>
+</md-input-container>
+
+<md-input-container class="md-block" flex-gt-sm>
+    <label>Description</label>
+    <textarea ng-model="ctrlCustomerCreate.product.notes"></textarea>
+</md-input-container>
+
+<br/>
+<md-button class="md-raised md-primary" ng-click="ctrlCustomerCreate.createCustomer()">Submit</md-button>
+<md-button class="md-raised" ui-sref="app.customers">Cancel</md-button>
+</body>
+</html>
