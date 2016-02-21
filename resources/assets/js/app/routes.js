@@ -107,6 +107,37 @@
                     }
                 }
             })
+            .state('app.workorders', {
+                url: '/workorders',
+                views: {
+                    'main@': {
+                        templateUrl: getView('workorders'),
+                        controller: 'WorkOrderController',
+                        controllerAs: 'ctrlWorkOrder'
+                    }
+                }
+            })
+            .state('app.workorders.create', {
+                url: '/create',
+                views: {
+                    'main@': {
+                        templateUrl: getView('workorder.create'),
+                        controller: 'WorkOrderCreateController',
+                        controllerAs: 'ctrlWorkOrderCreate'
+                    }
+                }
+            })
+            .state('app.workorders.detail', {
+                url: '/detail/:workOrderId',
+                views: {
+                    'main@': {
+                        templateUrl: getView('workorder.detail'),
+                        controller: 'WorkOrderDetailController',
+                        controllerAs: 'ctrlWorkOrderDetail'
+                    }
+                }
+            })
+
             ;
 
     } );
