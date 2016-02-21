@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Work Orders</title>
+</head>
+<body>
+<div>
+    <div ng-repeat="w in ctrlWorkOrder.workorders">
+        <a ui-sref="app.workorders.detail({workOrderId: w.id})">{{w.id}}</a>
+    </div>
+</div>
+<hr/>
+<md-button class="md-raised md-primary" ui-sref="app.workorders.create">Create Work Order</md-button>
+</body>
+</html>
