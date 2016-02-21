@@ -10,7 +10,24 @@
 
         self.updateProduct = function()
         {
+            //RestService.updateProduct(self, self.product.id);
+            self.product.put().then(function()
+            {
+                console.log("updated");
+            }, function()
+            {
+                console.log("error updating");
+            });
+        };
 
+        self.deleteProduct = function()
+        {
+            self.product.remove().then(function()
+            {
+                console.log("deelted");
+            });
+
+            $state.go("app.products");
         };
 
     }

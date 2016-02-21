@@ -30,6 +30,8 @@ Route::group(['prefix' => 'api'], function()
     Route::post('authenticate', 'AuthenticateController@authenticate');
 
     Route::resource('product', 'ProductController');
+    Route::resource('customer', 'CustomerController');
+    Route::resource('workorder', 'WorkOrderController');
 });
 
 /*

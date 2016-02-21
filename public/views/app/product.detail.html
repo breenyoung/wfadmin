@@ -7,24 +7,43 @@
 <body>
 <h2>Product details</h2>
 
-{{ctrlProductDetail.product.name}}<br/>
+<md-input-container class="md-block" flex-gt-sm>
+    <label>Product Name</label>
+    <input type="text" ng-model="ctrlProductDetail.product.name"/>
+</md-input-container>
 
-<input type="text" ng-model="ctrlProductDetail.product.name"/>
+<md-input-container class="md-block" flex-gt-sm>
+    <label>SKU</label>
+    <input type="text" ng-model="ctrlProductDetail.product.sku"/>
+</md-input-container>
+
+<md-input-container class="md-block" flex-gt-sm>
+    <label>Price</label>
+    <input type="text" ng-model="ctrlProductDetail.product.price"/>
+</md-input-container>
+
+<md-input-container class="md-block" flex-gt-sm>
+    <label>Sale Price</label>
+    <input type="text" ng-model="ctrlProductDetail.product.sale_price"/>
+</md-input-container>
+
+<md-input-container class="md-block" flex-gt-sm>
+    <label>Cost</label>
+    <input type="text" ng-model="ctrlProductDetail.product.cost"/>
+</md-input-container>
+
+<md-input-container class="md-block" flex-gt-sm>
+    <label>Description</label>
+    <textarea ng-model="ctrlProductDetail.product.description"></textarea>
+</md-input-container>
+
 <br/>
-<input type="text" ng-model="ctrlProductDetail.product.sku"/>
+Created on: {{ctrlProductDetail.product.created_at}}
 <br/>
-<input type="text" ng-model="ctrlProductDetail.product.price"/>
-<br/>
-<input type="text" ng-model="ctrlProductDetail.product.sale_price"/>
-<br/>
-<input type="text" ng-model="ctrlProductDetail.product.cost"/>
-<br/>
-{{ctrlProductDetail.product.created_at}}
-<br/>
-{{ctrlProductDetail.product.updated_at}}
-<br/>
-<textarea ng-model="ctrlProductDetail.product.description"></textarea>
+Last updated: {{ctrlProductDetail.product.updated_at}}
 <br/>
 <md-button class="md-raised md-primary" ng-click="ctrlProductDetail.updateProduct()">Submit</md-button>
+<md-button class="md-raised md-warn" ng-click="ctrlProductDetail.deleteProduct()">Delete</md-button>
+<md-button class="md-raised" ui-sref="app.products">Cancel</md-button>
 </body>
 </html>
