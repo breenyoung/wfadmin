@@ -23,6 +23,7 @@
     "restangular": "~1.5.2",
     "satellizer": "~0.13.4",
     "angular-momentjs": "~0.2.2",
-    "moment": "*"
+    "moment": "*",
+    "highcharts": "~4.2.3"
   }
 }
