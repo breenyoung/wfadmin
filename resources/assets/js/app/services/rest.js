@@ -45,6 +45,24 @@
                     //console.log(data);
                     scope.customer = data;
                 });
+            },
+
+            getAllWorkOrders: function(scope)
+            {
+                Restangular.all('workorder').getList().then(function(data)
+                {
+                    //console.log(data);
+                    scope.workorders = data;
+                });
+            },
+
+            getWorkOrder: function(scope, id)
+            {
+                Restangular.one('workorder', id).get().then(function(data)
+                {
+                    //console.log(data);
+                    scope.workorder = data;
+                });
             }
         };
     }]);
