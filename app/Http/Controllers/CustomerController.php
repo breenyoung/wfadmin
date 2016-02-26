@@ -49,6 +49,8 @@ class CustomerController extends Controller
         $customer->notes = $request->input('notes');
 
         $customer->save();
+
+        return response()->json(['newId' => $customer->id]);
     }
 
     /**

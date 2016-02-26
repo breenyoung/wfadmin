@@ -13,14 +13,14 @@
 
             var p = self.product;
 
-            console.log($error);
+            //console.log($error);
 
-            //Restangular.all('product').post(p).then(function()
-            //{
-                //console.log("created");
-                //$state.go('app.products.detail', {'productId': 1});
+            Restangular.all('product').post(p).then(function(d)
+            {
+                console.log(d);
+                $state.go('app.products.detail', {'productId': d.newId});
 
-            //});
+            });
 
         };
 
