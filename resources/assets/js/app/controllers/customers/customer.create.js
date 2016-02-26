@@ -11,16 +11,12 @@
 
             var c = self.customer;
 
-            //Restangular.all('product').post(p).then(function()
-            //{
-            //console.log("created");
-            $state.go('app.customers.detail', {'customerId': 1});
-            $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams)
+            Restangular.all('customer').post(c).then(function(d)
             {
-                console.log("$stateChangeSuccess fired");
-            });
+                console.log(d);
+                $state.go('app.customers.detail', {'customerId': d.newId});
 
-            //});
+            });
 
         };
 

@@ -16,7 +16,7 @@ class ProductController extends Controller
     public function __construct()
     {
         // Apply the jwt.auth middleware to all methods in this controller
-        $this->middleware('jwt.auth');
+        //$this->middleware('jwt.auth');
     }
 
 
@@ -52,6 +52,8 @@ class ProductController extends Controller
         //$product->name = $request->input('active');
 
         $product->save();
+
+        return response()->json(['newId' => $product->id]);
     }
 
     /**
