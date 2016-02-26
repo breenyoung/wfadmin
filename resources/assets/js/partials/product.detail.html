@@ -47,6 +47,22 @@
 </div>
 
 <div layout="row">
+    <div flex>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Minimum Stock</label>
+            <input type="text" ng-model="ctrlProductDetail.product.minimum_stock"/>
+        </md-input-container>
+    </div>
+
+    <div flex>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Current Stock</label>
+            <input type="text" ng-model="ctrlProductDetail.product.current_stock"/>
+        </md-input-container>
+    </div>
+</div>
+
+<div layout="row">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Description</label>
         <textarea ng-model="ctrlProductDetail.product.description"></textarea>

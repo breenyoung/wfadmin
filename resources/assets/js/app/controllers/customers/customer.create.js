@@ -1,7 +1,7 @@
 (function(){
     "use strict";
 
-    function CustomerCreateController($auth, $state, Restangular, RestService, $stateParams)
+    function CustomerCreateController($auth, $state, ToastService, Restangular, RestService, $stateParams)
     {
         var self = this;
 
@@ -15,7 +15,10 @@
             //{
             //console.log("created");
             $state.go('app.customers.detail', {'customerId': 1});
-
+            $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams)
+            {
+                console.log("$stateChangeSuccess fired");
+            });
 
             //});
 
@@ -23,6 +26,6 @@
 
     }
 
-    angular.module('app.controllers').controller('CustomerCreateController', ['$auth', '$state', 'Restangular', 'RestService', '$stateParams', CustomerCreateController]);
+    angular.module('app.controllers').controller('CustomerCreateController', ['$auth', '$state', 'ToastService', 'Restangular', 'RestService', '$stateParams', CustomerCreateController]);
 
 })();
