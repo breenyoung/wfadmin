@@ -47,6 +47,8 @@ class ProductController extends Controller
         $product->price = $request->input('price');
         $product->sale_price = $request->input('sale_price');
         $product->cost = $request->input('cost');
+        $product->minimum_stock = $request->input('minimum_stock');
+        $product->current_stock = $request->input('current_stock');
         //$product->name = $request->input('active');
 
         $product->save();
@@ -83,6 +85,8 @@ class ProductController extends Controller
             $product->price = $request->input('price');
             $product->sale_price = $request->input('sale_price');
             $product->cost = $request->input('cost');
+            $product->minimum_stock = $request->input('minimum_stock');
+            $product->current_stock = $request->input('current_stock');
             //$product->name = $request->input('active');
 
             $product->save();

@@ -45,8 +45,8 @@ class CustomerController extends Controller
         $customer->first_name = $request->input('first_name');
         $customer->last_name = $request->input('last_name');
         $customer->email = $request->input('email');
+        $customer->phone = $request->input('phone');
         $customer->notes = $request->input('notes');
-
 
         $customer->save();
     }
@@ -80,6 +80,7 @@ class CustomerController extends Controller
             $customer->first_name = $request->input('first_name');
             $customer->last_name = $request->input('last_name');
             $customer->email = $request->input('email');
+            $customer->phone = $request->input('phone');
             $customer->notes = $request->input('notes');
 
             $customer->save();

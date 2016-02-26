@@ -1,7 +1,7 @@
 (function(){
     "use strict";
 
-    function CustomerDetailController($auth, $state, Restangular, RestService, $stateParams)
+    function CustomerDetailController($auth, $state, ToastService, Restangular, RestService, $stateParams)
     {
         var self = this;
 
@@ -12,9 +12,11 @@
         {
             self.customer.put().then(function()
             {
+                ToastService.show("Updated");
                 console.log("updated");
             }, function()
             {
+                ToastService.show("Error Updating");
                 console.log("error updating");
             });
         };
@@ -31,6 +33,6 @@
 
     }
 
-    angular.module('app.controllers').controller('CustomerDetailController', ['$auth', '$state', 'Restangular', 'RestService', '$stateParams', CustomerDetailController]);
+    angular.module('app.controllers').controller('CustomerDetailController', ['$auth', '$state', 'ToastService', 'Restangular', 'RestService', '$stateParams', CustomerDetailController]);
 
 })();
