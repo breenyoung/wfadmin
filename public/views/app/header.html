@@ -4,13 +4,22 @@
     <div ng-message="maxlength">This field is too long</div>
 </script>
 
-<div>
-    <ul ng-if="!ctrlHeader.isAuthenticated()">
-        <li><a href="#/login">Login</a></li>
-    </ul>
-    <ul ng-if="ctrlHeader.isAuthenticated()">
-        <li><a href="#/logout">Logout</a></li>
-    </ul>
+<div layout="row">
 
+    <div ng-if="!ctrlHeader.isAuthenticated()" layout="column" layout-margin>
+        <a href="#/login">Login</a>
+    </div>
+
+    <div ng-if="ctrlHeader.isAuthenticated()" layout="column" layout-margin>
+        <a href="#/logout">Logout</a>
+    </div>
+
+    <div layout="column" layout-margin><a href="#/products">Products</a></div>
+
+    <div layout="column" layout-margin><a href="#/customers">Customers</a></div>
+
+    <div layout="column" layout-margin><a href="#/workorders">Work Orders</a></div>
+
+    <div layout="column" layout-margin><a href="#/reports">Reports</a></div>
 
 </div>

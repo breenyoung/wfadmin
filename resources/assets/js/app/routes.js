@@ -137,7 +137,16 @@
                     }
                 }
             })
-
+            .state('app.reports', {
+                url: '/reports',
+                views: {
+                    'main@': {
+                        templateUrl: getView('reports'),
+                        controller: 'ReportController',
+                        controllerAs: 'ctrlReports'
+                    }
+                }
+            })
             ;
 
     } );

@@ -5,9 +5,22 @@
     <title>Products</title>
 </head>
 <body>
+    <div layout="row">
+        <div flex>Name</div>
+        <div flex>SKU</div>
+        <div flex>Price</div>
+        <div flex>Sale Price</div>
+        <div flex>Cost</div>
+        <div flex>Current Stock</div>
+    </div>
     <div>
-        <div ng-repeat="p in ctrlProduct.products">
-            <a ui-sref="app.products.detail({productId: p.id})">{{p.name}}</a>
+        <div ng-repeat="p in ctrlProduct.products" layout="row">
+            <div flex><a ui-sref="app.products.detail({productId: p.id})">{{p.name}}</a></div>
+            <div flex>{{p.sku}}</div>
+            <div flex>{{p.price}}</div>
+            <div flex>{{p.sale_price}}</div>
+            <div flex>{{p.cost}}</div>
+            <div flex>{{p.current_stock}}</div>
         </div>
     </div>
     <hr/>
