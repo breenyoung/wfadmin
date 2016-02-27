@@ -63,7 +63,26 @@
                     //console.log(data);
                     scope.workorder = data;
                 });
+            },
+
+            getAllEvents: function(scope)
+            {
+                Restangular.all('event').getList().then(function(data)
+                {
+                    console.log(data);
+                    scope.events = data;
+                });
+            },
+
+            getEvent: function(scope, id)
+            {
+                Restangular.one('event', id).get().then(function(data)
+                {
+                    //console.log(data);
+                    scope.event = data;
+                });
             }
+
         };
     }]);
 })();

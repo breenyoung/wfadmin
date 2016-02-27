@@ -137,6 +137,36 @@
                     }
                 }
             })
+            .state('app.events', {
+                url: '/events',
+                views: {
+                    'main@': {
+                        templateUrl: getView('events'),
+                        controller: 'EventController',
+                        controllerAs: 'ctrlEvent'
+                    }
+                }
+            })
+            .state('app.events.create', {
+                url: '/create',
+                views: {
+                    'main@': {
+                        templateUrl: getView('event.create'),
+                        controller: 'EventCreateController',
+                        controllerAs: 'ctrlEventCreate'
+                    }
+                }
+            })
+            .state('app.events.detail', {
+                url: '/detail/:eventId',
+                views: {
+                    'main@': {
+                        templateUrl: getView('event.detail'),
+                        controller: 'EventDetailController',
+                        controllerAs: 'ctrlEventDetail'
+                    }
+                }
+            })
             .state('app.reports', {
                 url: '/reports',
                 views: {

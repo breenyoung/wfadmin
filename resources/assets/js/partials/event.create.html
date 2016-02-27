@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Create</title>
+</head>
+<body>
+<h2>Event create</h2>
+
+<div layout="row">
+    <div flex>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Event Name</label>
+            <input type="text" ng-model="ctrlEventCreate.event.name"/>
+        </md-input-container>
+    </div>
+
+</div>
+
+<div layout="row">
+
+    <div flex>
+            <md-datepicker ng-model="ctrlEventCreate.event.start_date" md-placeholder="Start Date"></md-datepicker>
+    </div>
+
+    <div flex>
+            <md-datepicker ng-model="ctrlEventCreate.event.end_date" md-placeholder="End Date"></md-datepicker>
+    </div>
+
+</div>
+
+<div layout="row">
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Notes</label>
+        <textarea ng-model="ctrlEventCreate.event.notes"></textarea>
+    </md-input-container>
+</div>
+
+
+<div layout="row">
+    <div flex="10">
+        <md-button class="md-raised md-primary" ng-click="ctrlEventCreate.createEvent()">Submit</md-button>
+    </div>
+    <div flex="10">
+        <md-button class="md-raised" ui-sref="app.events">Cancel</md-button>
+    </div>
+</div>
+</body>
+</html>
