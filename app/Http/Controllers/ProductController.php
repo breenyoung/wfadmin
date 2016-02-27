@@ -45,7 +45,6 @@ class ProductController extends Controller
         $product->sku = $request->input('sku');
         $product->description = $request->input('description');
         $product->price = $request->input('price');
-        $product->sale_price = $request->input('sale_price');
         $product->cost = $request->input('cost');
         $product->minimum_stock = $request->input('minimum_stock');
         $product->current_stock = $request->input('current_stock');
@@ -85,7 +84,6 @@ class ProductController extends Controller
             $product->sku = $request->input('sku');
             $product->description = $request->input('description');
             $product->price = $request->input('price');
-            $product->sale_price = $request->input('sale_price');
             $product->cost = $request->input('cost');
             $product->minimum_stock = $request->input('minimum_stock');
             $product->current_stock = $request->input('current_stock');
