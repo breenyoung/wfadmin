@@ -28,9 +28,9 @@
     </md-select>
 </md-input-container>
 <br/>
-<md-datepicker ng-model="ctrlWorkOrderDetail.workorder.start_date" md-placeholder="Start Date"></md-datepicker>
+<md-datepicker ng-model="ctrlWorkOrderDetail.workorder.start_date" md-placeholder="Start Date" utc-Parser></md-datepicker>
 
-<md-datepicker ng-model="ctrlWorkOrderDetail.workorder.end_date" md-placeholder="End Date"></md-datepicker>
+<md-datepicker ng-model="ctrlWorkOrderDetail.workorder.end_date" md-placeholder="End Date" utc-Parser></md-datepicker>
 
 <md-switch class="md-primary" ng-model="ctrlWorkOrderDetail.workorder.completed" aria-label="Completed">
     Completed: {{ ctrlWorkOrderDetail.workorder.completed }}

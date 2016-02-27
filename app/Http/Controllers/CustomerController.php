@@ -29,7 +29,7 @@ class CustomerController extends Controller
     public function index()
     {
         // Retrieve all the customers in the database and return them
-        $customers = Customer::all();
+        $customers = Customer::orderBy('first_name', 'asc')->get();
         return $customers;
     }
 

@@ -28,7 +28,7 @@ class ProductController extends Controller
     public function index()
     {
         // Retrieve all the products in the database and return them
-        $products = Product::all();
+        $products = Product::orderBy('name', 'asc')->get();
         return $products;
     }
 
