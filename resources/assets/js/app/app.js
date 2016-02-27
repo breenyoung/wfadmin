@@ -17,7 +17,7 @@
     angular.module('app.controllers', ['ui.router', 'ngMaterial', 'restangular', 'angular-momentjs', 'app.services', 'ngMessages']);
     angular.module('app.filters', []);
 
-    angular.module('app.directives', []);
+    angular.module('app.directives', ['angular-momentjs']);
     angular.module('app.config', []);
 
     // Configuration

@@ -2,9 +2,49 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Work Order Details</title>
 </head>
 <body>
+<h2>Work Order details</h2>
 
+<md-input-container>
+    <label>Customer</label>
+    <md-select ng-model="ctrlWorkOrderDetail.workorder.customer_id">
+        <md-option ng-repeat="c in ctrlWorkOrderDetail.customers" value="{{c.id}}">
+            {{c.first_name}} {{c.last_name}}
+        </md-option>
+    </md-select>
+</md-input-container>
+<br/>
+<md-input-container>
+    <label>Product</label>
+
+    <select ng-model="ctrlWorkOrderDetail.workorder.product_id" ng-options="p.name for p in ctrlWorkOrderDetail.products"></select>
+
+    <md-select ng-model="ctrlWorkOrderDetail.workorder.product_id">
+        <md-option ng-repeat="p in ctrlWorkOrderDetail.products" value="{{p.id}}">
+            {{p.name}}
+        </md-option>
+    </md-select>
+</md-input-container>
+<br/>
+<md-datepicker ng-model="ctrlWorkOrderDetail.workorder.start_date" md-placeholder="Start Date" nx-model-formatter="['moment','toDate']" nx-model-parser="getTime"></md-datepicker>
+
+<md-datepicker ng-model="ctrlWorkOrderDetail.workorder.end_date" md-placeholder="End Date"></md-datepicker>
+
+<md-switch class="md-primary" ng-model="ctrlWorkOrderDetail.workorder.completed" aria-label="Completed">
+    Completed: {{ ctrlWorkOrderDetail.workorder.completed }}
+</md-switch>
+
+<md-input-container class="md-block" flex-gt-sm>
+    <label>Notes</label>
+    <textarea ng-model="ctrlWorkOrderDetail.workorder.notes"></textarea>
+</md-input-container>
+
+
+
+<br/>
+<md-button class="md-raised md-primary" ng-click="ctrlWorkOrderDetail.updateWorkOrder()">Submit</md-button>
+<md-button class="md-raised" ui-sref="app.workorders">Cancel</md-button>
 </body>
 </html>
