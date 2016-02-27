@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Detail</title>
+</head>
+<body>
+<h2>Event details</h2>
+
+<div layout="row">
+    <div flex>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Event Name</label>
+            <input type="text" ng-model="ctrlEventDetail.event.name"/>
+        </md-input-container>
+    </div>
+
+</div>
+
+<div layout="row">
+
+    <div flex>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Start Date</label>
+            <input type="text" ng-model="ctrlEventDetail.event.start_date"/>
+        </md-input-container>
+    </div>
+
+    <div flex>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>End Date</label>
+            <input type="text" ng-model="ctrlEventDetail.event.end_date"/>
+        </md-input-container>
+    </div>
+
+</div>
+
+<div layout="row">
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Notes</label>
+        <textarea ng-model="ctrlEventDetail.event.notes"></textarea>
+    </md-input-container>
+</div>
+
+<div layout="row">
+    <div flex>
+        <select>
+            <option value="">Select a Product</option>
+            <option ng-repeat="p in ctrlEventDetail.products" value="{{p.id}}">{{p.name}}</option>
+        </select>
+
+        <input type="text" name="quantity" placeholder="Quantity"/>
+
+        <md-button class="md-raised md-primary" ng-click="ctrlEventDetail.addProduct()">Add</md-button>
+    </div>
+</div>
+
+<div layout="row" ng-repeat="ep in ctrlEventDetail.event.event_products">
+    <div flex>{{ep.product.name}} x {{ep.quantity}}</div>
+</div>
+
+<div layout="row">
+    <div flex>
+        Created on: {{ctrlEventDetail.event.created_at}}
+        |
+        Last updated: {{ctrlEventDetail.event.updated_at}}
+    </div>
+</div>
+
+
+
+<div layout="row">
+    <div flex="10">
+        <md-button class="md-raised md-primary" ng-click="ctrlEventDetail.updateEvent()">Submit</md-button>
+    </div>
+    <div flex="10">
+        <md-button class="md-raised md-warn" ng-click="ctrlEventDetail.deleteEvent()">Delete</md-button>
+    </div>
+    <div flex="10">
+        <md-button class="md-raised" ui-sref="app.events">Cancel</md-button>
+    </div>
+</div>
+</body>
+</html>

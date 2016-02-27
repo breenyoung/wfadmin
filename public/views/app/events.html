@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Events</title>
+</head>
+<body>
+<div layout="row">
+    <div flex>Name</div>
+    <div flex>Start Date</div>
+    <div flex>End Date</div>
+</div>
+<div>
+    <div ng-repeat="e in ctrlEvent.events" layout="row">
+        <div flex><a ui-sref="app.events.detail({eventId: e.id})">{{e.name}}</a></div>
+        <div flex>{{e.start_date}}</div>
+        <div flex>{{e.end_date}}</div>
+    </div>
+</div>
+<hr/>
+<md-button class="md-raised md-primary" ui-sref="app.events.create">Add New Event</md-button>
+</body>
+</html>
