@@ -8,25 +8,25 @@
 <div>
 
     <div>
-        <h2>Work Order Report for <b>{{todaysDate}}</b></h2>
+        <h2>Work Order Report for <b>{{$viewdata['todaysDate']}}</b></h2>
     </div>
 
     <div>
-        You have <b>{{startCount}}</b> work orders that need to be started today
-        <hr/>
+        You have <b>{{$viewdata['startCount']}}</b> work order(s) that need to be started today
         <ul>
-        @foreach ($startWorkOrders as $swo)
-                <li>{{$swo->customer_id}} for product: {{$swo->product_id}}</li>
+        @foreach ($viewdata['startWorkOrders'] as $swo)
+                <li><a href="{{url('/#/workorders/detail', $swo->id)}}">{{$swo->customer->first_name}} {{$swo->customer->last_name}} for product: {{$swo->product->name}}</a></li>
         @endforeach
         </ul>
     </div>
 
+    <hr/>
+
     <div>
-        You have <b>{{endCount}}</b> work orders that are due in <b>2</b> days ({{endDueDate}})
-        <hr/>
+        You have <b>{{$viewdata['endCount']}}</b> work order(s) that are due in <b>{{$viewdata['pickupDateReminder']}}</b> days ({{$viewdata['endDueDate']}})
         <ul>
-        @foreach ($endWorkOrders as $ewo)
-            <li>{{$ewo->customer_id}} for product: {{$ewo->product_id}}</li>
+        @foreach ($viewdata['endWorkOrders'] as $ewo)
+            <li><a href="{{url('/#/workorders/detail', $ewo->id)}}">{{$ewo->customer->first_name}} {{$ewo->customer->last_name}} for product: {{$ewo->product->name}}</a></li>
         @endforeach
         </ul>
     </div>
