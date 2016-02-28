@@ -24,6 +24,8 @@
 
 Route::get('/', 'AngularController@serveApp');
 
+Route::get('/test', 'HomeController@testMethod');
+
 Route::group(['prefix' => 'api'], function()
 {
     Route::resource('authenticate', 'AuthenticateController', ['only' => ['index']]);

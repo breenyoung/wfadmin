@@ -208,4 +208,13 @@ return [
 
     ],
 
+
+    /* Application specific config settings */
+    'pickup_reminder_days_to_remind' => '2',
+    'pickup_reminder_email_to' => 'anne@woodfinds.com',
+    'pickup_reminder_email_from' => 'workorders@woodfinds.com',
+    'pickup_reminder_email_subject' => 'Subject line here',
+    'pickup_reminder_email_view' => 'emails.workorders',
+
+
 ];

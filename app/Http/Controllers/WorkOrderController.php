@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\WorkOrder;
+use Carbon\Carbon;
 
 use \Illuminate\Support\Facades\DB;
 
@@ -31,7 +32,7 @@ class WorkOrderController extends Controller
     public function index()
     {
         // Retrieve all the work orders in the database and return them
-        $workOrders = WorkOrder::with('product', 'customer')->orderBy('start_date', 'asc')->get();
+        $workOrders = WorkOrder::with('product', 'customer')->orderBy('start_date', 'desc')->get();
 
         return $workOrders;
     }
@@ -47,8 +48,21 @@ class WorkOrderController extends Controller
         $workOrder = new WorkOrder();
         $workOrder->customer_id = $request->input('customer_id');
         $workOrder->product_id = $request->input('product_id');
-        $workOrder->start_date = $request->input('start_date');
-        $workOrder->end_date = $request->input('end_date');
+
+        if($request->input('start_date'))
+        {
+            $strStartDate = substr($request->input('start_date'), 0, strpos($request->input('start_date'), 'T'));
+            $startDate = Carbon::createFromFormat('Y-m-d', $strStartDate);
+            $workOrder->start_date = $startDate;
+        }
+
+        if($request->input('end_date'))
+        {
+            $strEndDate = substr($request->input('end_date'), 0, strpos($request->input('end_date'), 'T'));
+            $endDate = Carbon::createFromFormat('Y-m-d', $strEndDate);
+            $workOrder->end_date = $endDate;
+        }
+
         $workOrder->completed = $request->input('completed') ? 1 : 0;
         $workOrder->notes = $request->input('notes');
 
