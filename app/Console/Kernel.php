@@ -85,6 +85,6 @@ class Kernel extends ConsoleKernel
             Log::info('Ending work order reminder service');
             Log::info('=============================================');
 
-        })->everyMinute();
+        })->daily()->timezone('America/Halifax');
     }
 }
