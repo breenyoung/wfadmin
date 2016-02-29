@@ -35,7 +35,7 @@
 
         self.showDeleteConfirm = function(ev)
         {
-            var dialog = DialogService.confirm(ev, 'Delete event?', '')
+            var dialog = DialogService.confirm(ev, 'Delete event?', '');
             dialog.then(function()
                 {
                     self.deleteEvent();

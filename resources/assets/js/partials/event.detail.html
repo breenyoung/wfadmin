@@ -17,23 +17,10 @@
 
 </div>
 
-<div layout="row">
+<md-datepicker ng-model="ctrlEventDetail.event.start_date" md-placeholder="Start Date" utc-Parser></md-datepicker>
 
-    <div flex>
-        <md-input-container class="md-block" flex-gt-sm>
-            <label>Start Date</label>
-            <input type="text" ng-model="ctrlEventDetail.event.start_date"/>
-        </md-input-container>
-    </div>
+<md-datepicker ng-model="ctrlEventDetail.event.end_date" md-placeholder="End Date" utc-Parser></md-datepicker>
 
-    <div flex>
-        <md-input-container class="md-block" flex-gt-sm>
-            <label>End Date</label>
-            <input type="text" ng-model="ctrlEventDetail.event.end_date"/>
-        </md-input-container>
-    </div>
-
-</div>
 
 <div layout="row">
     <md-input-container class="md-block" flex-gt-sm>
