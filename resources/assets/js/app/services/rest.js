@@ -53,6 +53,8 @@
                 {
                     //console.log(data);
                     scope.workorders = data;
+
+                    console.log(scope);
                 });
             },
 
