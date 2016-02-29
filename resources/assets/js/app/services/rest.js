@@ -5,7 +5,7 @@
 (function(){
     "use strict";
 
-    angular.module("app.services").factory('RestService', ['$auth', 'Restangular', function($auth, Restangular){
+    angular.module("app.services").factory('RestService', ['$auth', 'Restangular', '$moment', function($auth, Restangular, $moment){
 
         var baseProducts = Restangular.all('product');
 
@@ -63,6 +63,14 @@
                 Restangular.one('workorder', id).get().then(function(data)
                 {
                     //console.log(data);
+
+                    // Format string dates into date objects
+                    data.start_date = $moment(data.start_date);
+                    data.end_date = $moment(data.end_date);
+
+                    self.workorder = data;
+
+
                     scope.workorder = data;
                 });
             },

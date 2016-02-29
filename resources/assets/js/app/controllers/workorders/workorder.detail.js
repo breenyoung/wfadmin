@@ -1,7 +1,7 @@
 (function(){
     "use strict";
 
-    function WorkOrderDetailController($auth, $state, Restangular, RestService, DialogService, $stateParams)
+    function WorkOrderDetailController($auth, $state, Restangular, RestService, DialogService, $moment, $stateParams)
     {
         var self = this;
 
@@ -31,7 +31,7 @@
 
         self.showDeleteConfirm = function(ev)
         {
-            var dialog = DialogService.confirm(ev, 'Delete work order?', '')
+            var dialog = DialogService.confirm(ev, 'Delete work order?', '');
             dialog.then(function()
                 {
                     self.deleteWorkOrder();
@@ -43,6 +43,6 @@
 
     }
 
-    angular.module('app.controllers').controller('WorkOrderDetailController', ['$auth', '$state', 'Restangular', 'RestService', 'DialogService', '$stateParams', WorkOrderDetailController]);
+    angular.module('app.controllers').controller('WorkOrderDetailController', ['$auth', '$state', 'Restangular', 'RestService', 'DialogService', '$moment', '$stateParams', WorkOrderDetailController]);
 
 })();

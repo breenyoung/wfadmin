@@ -8,8 +8,8 @@
 <div>
 
     <div layout="row">
-        <md-switch class="md-primary" ng-model="ctrlWorkOrder.showIncompleteOnly" aria-label="Incomplete Only">
-            Incomplete Only
+        <md-switch class="md-primary" ng-model="ctrlWorkOrder.showComplete" ng-change="ctrlWorkOrder.toggleCompleteOnly(ctrlWorkOrder.showComplete)" aria-label="Show Complete">
+            Show Complete {{ctrlWorkOrder.showComplete}}
         </md-switch>
     </div>
 
@@ -24,7 +24,7 @@
 
     <div ng-repeat="w in ctrlWorkOrder.workorders">
 
-        <div layout="row" ng-show="{{ctrlWorkOrder.showIncompleteOnly}}">
+        <div layout="row">
             <div flex>
                 <a ui-sref="app.workorders.detail({workOrderId: w.id})">Work Order {{w.id}}</a>
             </div>

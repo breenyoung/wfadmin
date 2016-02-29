@@ -5,19 +5,21 @@
     {
         var self = this;
 
+        self.showComplete = false;
+
         RestService.getAllWorkOrders(self);
 
-        self.showIncompleteOnly = true;
+
 
         console.log(self);
 
-        /*
-        self.toggleComplete = function()
+
+        self.toggleCompleteOnly = function(cbState)
         {
             console.log('toggle');
-            console.log(self.workorders);
+            console.log(cbState);
         };
-        */
+
     }
 
     angular.module('app.controllers').controller('WorkOrderController', ['$auth', '$state', 'Restangular', 'RestService', WorkOrderController]);

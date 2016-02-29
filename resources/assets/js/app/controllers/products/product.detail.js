@@ -33,7 +33,7 @@
 
         self.showDeleteConfirm = function(ev)
         {
-            var dialog = DialogService.confirm(ev, 'Delete product?', 'This will also delete any work order or event stock levels associated with this product')
+            var dialog = DialogService.confirm(ev, 'Delete product?', 'This will also delete any work order or event stock levels associated with this product');
             dialog.then(function()
             {
                 self.deleteProduct();

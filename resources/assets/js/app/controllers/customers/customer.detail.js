@@ -33,7 +33,7 @@
 
         self.showDeleteConfirm = function(ev)
         {
-            var dialog = DialogService.confirm(ev, 'Delete customer?', 'This will also delete any work orders associated with this customer')
+            var dialog = DialogService.confirm(ev, 'Delete customer?', 'This will also delete any work orders associated with this customer');
             dialog.then(function()
                 {
                     self.deleteCustomer();
