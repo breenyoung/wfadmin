@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'url' => 'http://localhost',
+    'url' => 'http://stock.woodfinds.com',
 
     /*
     |--------------------------------------------------------------------------
@@ -213,7 +213,7 @@ return [
     'pickup_reminder_days_to_remind' => '2',
     'pickup_reminder_email_to' => 'anne@woodfinds.com',
     'pickup_reminder_email_from' => 'workorders@woodfinds.com',
-    'pickup_reminder_email_subject' => 'Subject line here',
+    'pickup_reminder_email_subject' => 'Wood Finds Work Order Report for ',
     'pickup_reminder_email_view' => 'emails.workorders',
 
 
