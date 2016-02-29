@@ -1,7 +1,7 @@
 (function(){
     "use strict";
 
-    function CustomerDetailController($auth, $state, ToastService, Restangular, RestService, $stateParams)
+    function CustomerDetailController($auth, $state, ToastService, Restangular, RestService, DialogService, $stateParams)
     {
         var self = this;
 
@@ -31,8 +31,20 @@
             $state.go("app.customers");
         };
 
+        self.showDeleteConfirm = function(ev)
+        {
+            var dialog = DialogService.confirm(ev, 'Delete customer?', 'This will also delete any work orders associated with this customer')
+            dialog.then(function()
+                {
+                    self.deleteCustomer();
+                },
+                function()
+                {
+                });
+        };
+
     }
 
-    angular.module('app.controllers').controller('CustomerDetailController', ['$auth', '$state', 'ToastService', 'Restangular', 'RestService', '$stateParams', CustomerDetailController]);
+    angular.module('app.controllers').controller('CustomerDetailController', ['$auth', '$state', 'ToastService', 'Restangular', 'RestService', 'DialogService', '$stateParams', CustomerDetailController]);
 
 })();

@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('app.directives')
-    .directive('utcParser', function () {
-
+    .directive('utcParser', function ()
+    {
         function link(scope, element, attrs, ngModel) {
 
-            console.log("In utcParser directive");
+            //console.log("In utcParser directive");
 
             var parser = function (val) {
                 val = moment.utc(val).format();
@@ -28,5 +28,5 @@ angular.module('app.directives')
             require: 'ngModel',
             link: link,
             restrict: 'A'
-        }
+        };
     });

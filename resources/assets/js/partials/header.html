@@ -5,6 +5,10 @@
 </script>
 
 <div layout="row">
+    Today is: <b>{{ctrlHeader.todaysDate}}</b>
+</div>
+
+<div layout="row">
 
     <div ng-if="!ctrlHeader.isAuthenticated()" layout="column" layout-margin>
         <a href="#/login">Login</a>

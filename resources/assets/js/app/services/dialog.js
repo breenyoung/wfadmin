@@ -32,6 +32,20 @@
                         .content(content)
                         .ok('Ok')
                 );
+            },
+
+            confirm: function(event, title, content)
+            {
+                var confirm = $mdDialog.confirm()
+                    .title(title)
+                    .textContent(content)
+                    .ariaLabel('')
+                    .targetEvent(event)
+                    .ok('Yes')
+                    .cancel('No');
+
+                return $mdDialog.show(confirm);
+
             }
         };
     });

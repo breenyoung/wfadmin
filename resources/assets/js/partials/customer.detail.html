@@ -28,17 +28,19 @@
 </md-input-container>
 
 <md-input-container class="md-block" flex-gt-sm>
+    <label>Facebook Url</label>
+    <input type="text" ng-model="ctrlCustomerDetail.customer.facebook_url"/>
+</md-input-container>
+
+<md-input-container class="md-block" flex-gt-sm>
     <label>Description</label>
     <textarea ng-model="ctrlCustomerDetail.customer.notes"></textarea>
 </md-input-container>
 
 <br/>
-Created on: {{ctrlCustomerDetail.customer.created_at}}
-<br/>
-Last updated: {{ctrlCustomerDetail.customer.updated_at}}
-<br/>
+
 <md-button class="md-raised md-primary" ng-click="ctrlCustomerDetail.updateCustomer()">Submit</md-button>
-<md-button class="md-raised md-warn" ng-click="ctrlCustomerDetail.deleteCustomer()">Delete</md-button>
+<md-button class="md-raised md-warn" ng-click="ctrlCustomerDetail.showDeleteConfirm()">Delete</md-button>
 <md-button class="md-raised" ui-sref="app.customers">Cancel</md-button>
 </body>
 </html>

@@ -63,23 +63,17 @@
 </div>
 
 <div layout="row">
-    <div flex>
-        Created on: {{ctrlProductDetail.product.created_at}}
-        |
-        Last updated: {{ctrlProductDetail.product.updated_at}}
-    </div>
-</div>
-
-<div layout="row">
     <div flex="10">
         <md-button class="md-raised md-primary" ng-click="ctrlProductDetail.updateProduct()">Submit</md-button>
     </div>
     <div flex="10">
-        <md-button class="md-raised md-warn" ng-click="ctrlProductDetail.deleteProduct()">Delete</md-button>
+        <md-button class="md-raised md-warn" ng-click="ctrlProductDetail.showDeleteConfirm($event)">Delete</md-button>
     </div>
     <div flex="10">
         <md-button class="md-raised" ui-sref="app.products">Cancel</md-button>
     </div>
 </div>
+
+
 </body>
 </html>
