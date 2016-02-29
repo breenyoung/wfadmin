@@ -5,9 +5,11 @@
     {
         var self = this;
 
+        RestService.getAllWorkOrders(self);
+
         self.showIncompleteOnly = true;
 
-        RestService.getAllWorkOrders(self);
+        console.log(self);
 
         /*
         self.toggleComplete = function()
