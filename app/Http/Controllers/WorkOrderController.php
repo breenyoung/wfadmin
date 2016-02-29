@@ -94,12 +94,24 @@ class WorkOrderController extends Controller
         $workOrder = WorkOrder::find($id);
         if(isset($workOrder))
         {
-            $workOrder = new WorkOrder();
             $workOrder->customer_id = $request->input('customer_id');
             $workOrder->product_id = $request->input('product_id');
-            $workOrder->start_date = $request->input('start_date');
-            $workOrder->end_date = $request->input('end_date');
-            $workOrder->completed = $request->input('completed');
+
+            if($request->input('start_date'))
+            {
+                $strStartDate = substr($request->input('start_date'), 0, strpos($request->input('start_date'), 'T'));
+                $startDate = Carbon::createFromFormat('Y-m-d', $strStartDate);
+                $workOrder->start_date = $startDate;
+            }
+
+            if($request->input('end_date'))
+            {
+                $strEndDate = substr($request->input('end_date'), 0, strpos($request->input('end_date'), 'T'));
+                $endDate = Carbon::createFromFormat('Y-m-d', $strEndDate);
+                $workOrder->end_date = $endDate;
+            }
+
+            $workOrder->completed = $request->input('completed') ? 1 : 0;
             $workOrder->notes = $request->input('notes');
 
             $workOrder->save();
