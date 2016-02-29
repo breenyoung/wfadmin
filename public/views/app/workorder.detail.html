@@ -19,8 +19,6 @@
 <md-input-container>
     <label>Product</label>
 
-    <select ng-model="ctrlWorkOrderDetail.workorder.product_id" ng-options="p.name for p in ctrlWorkOrderDetail.products"></select>
-
     <md-select ng-model="ctrlWorkOrderDetail.workorder.product_id">
         <md-option ng-repeat="p in ctrlWorkOrderDetail.products" value="{{p.id}}">
             {{p.name}}

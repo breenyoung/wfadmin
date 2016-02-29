@@ -7,6 +7,9 @@
 
         //console.log($stateParams);
         RestService.getWorkOrder(self, $stateParams.workOrderId);
+        RestService.getAllCustomers(self);
+        RestService.getAllProducts(self);
+
 
         self.updateWorkOrder = function()
         {
