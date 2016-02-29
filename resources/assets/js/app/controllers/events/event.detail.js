@@ -1,7 +1,7 @@
 (function(){
     "use strict";
 
-    function EventDetailController($auth, $state, Restangular, RestService, $stateParams, ToastService)
+    function EventDetailController($auth, $state, Restangular, RestService, $stateParams, ToastService, DialogService)
     {
         var self = this;
 
@@ -33,8 +33,20 @@
             $state.go("app.events");
         };
 
+        self.showDeleteConfirm = function(ev)
+        {
+            var dialog = DialogService.confirm(ev, 'Delete event?', '')
+            dialog.then(function()
+                {
+                    self.deleteEvent();
+                },
+                function()
+                {
+                });
+        };
+
     }
 
-    angular.module('app.controllers').controller('EventDetailController', ['$auth', '$state', 'Restangular', 'RestService', '$stateParams', 'ToastService', EventDetailController]);
+    angular.module('app.controllers').controller('EventDetailController', ['$auth', '$state', 'Restangular', 'RestService', '$stateParams', 'ToastService', 'DialogService', EventDetailController]);
 
 })();

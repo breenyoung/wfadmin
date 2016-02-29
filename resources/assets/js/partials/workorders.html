@@ -6,6 +6,13 @@
 </head>
 <body>
 <div>
+
+    <div layout="row">
+        <md-switch class="md-primary" ng-model="ctrlWorkOrder.showIncompleteOnly" aria-label="Incomplete Only">
+            Incomplete Only
+        </md-switch>
+    </div>
+
     <div layout="row">
         <div flex></div>
         <div flex>Product</div>
@@ -15,15 +22,18 @@
         <div flex>Complete</div>
     </div>
 
-    <div ng-repeat="w in ctrlWorkOrder.workorders" layout="row">
-        <div flex>
-            <a ui-sref="app.workorders.detail({workOrderId: w.id})">Work Order {{w.id}}</a>
+    <div ng-repeat="w in ctrlWorkOrder.workorders">
+
+        <div layout="row" ng-show="{{ctrlWorkOrder.showIncompleteOnly}}">
+            <div flex>
+                <a ui-sref="app.workorders.detail({workOrderId: w.id})">Work Order {{w.id}}</a>
+            </div>
+            <div flex><a ui-sref="app.products.detail({productId: w.product.id})">{{w.product.name}}</a></div>
+            <div flex><a ui-sref="app.customers.detail({customerId: w.customer.id})">{{w.customer.first_name}} {{w.customer.last_name}}</a></div>
+            <div flex>{{w.start_date}}</div>
+            <div flex>{{w.end_date}}</div>
+            <div flex>{{w.completed ? 'Yes' : 'No'}}</div>
         </div>
-        <div flex><a ui-sref="app.products.detail({productId: w.product.id})">{{w.product.name}}</a></div>
-        <div flex><a ui-sref="app.customers.detail({customerId: w.customer.id})">{{w.customer.first_name}} {{w.customer.last_name}}</a></div>
-        <div flex>{{w.start_date}}</div>
-        <div flex>{{w.end_date}}</div>
-        <div flex>{{w.completed ? 'Yes' : 'No'}}</div>
     </div>
 </div>
 <hr/>

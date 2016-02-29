@@ -59,22 +59,13 @@
     <div flex>{{ep.product.name}} x {{ep.quantity}}</div>
 </div>
 
-<div layout="row">
-    <div flex>
-        Created on: {{ctrlEventDetail.event.created_at}}
-        |
-        Last updated: {{ctrlEventDetail.event.updated_at}}
-    </div>
-</div>
-
-
 
 <div layout="row">
     <div flex="10">
         <md-button class="md-raised md-primary" ng-click="ctrlEventDetail.updateEvent()">Submit</md-button>
     </div>
     <div flex="10">
-        <md-button class="md-raised md-warn" ng-click="ctrlEventDetail.deleteEvent()">Delete</md-button>
+        <md-button class="md-raised md-warn" ng-click="ctrlEventDetail.showDeleteConfirm()">Delete</md-button>
     </div>
     <div flex="10">
         <md-button class="md-raised" ui-sref="app.events">Cancel</md-button>

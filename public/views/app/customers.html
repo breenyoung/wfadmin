@@ -9,12 +9,14 @@
     <div flex>Name</div>
     <div flex>Email</div>
     <div flex>Phone</div>
+    <div flex>Facebook</div>
 </div>
 
 <div ng-repeat="c in ctrlCustomer.customers" layout="row">
     <div flex><a ui-sref="app.customers.detail({customerId: c.id})">{{c.first_name}} {{c.last_name}}</a></div>
     <div flex><a href="mailto:{{c.email}}">{{c.email}}</a></div>
     <div flex>{{c.phone}}</div>
+    <div flex><a href="{{c.facebook_url}}" target="_blank">{{c.facebook_url}}</a></div>
 </div>
 
 <hr/>
