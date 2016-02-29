@@ -36,6 +36,7 @@ class Kernel extends ConsoleKernel
         $schedule->call(function()
         {
 
+            Log::info('=============================================');
             Log::info('Starting work order reminder service');
 
             // Setup the dates
@@ -43,11 +44,12 @@ class Kernel extends ConsoleKernel
             $today = Carbon::today('America/Halifax');
             $twoDaysFromNow = Carbon::today('America/Halifax')->addDay($pickupDateReminder);
 
+            Log::info('The date is: ' . $today->toFormattedDateString() . ' (America/Halifax)');
+
             // Get work orders to start today
             $startWorkOrders = WorkOrder::whereDate('start_date', '=', $today)->get();
             $startCount = $startWorkOrders->count();
 
-            Log::info('=============================================');
             Log::info('Start Work Orders found: '.$startCount);
 
             // Get work orders due for pick up in [$pickupDateReminder] days
@@ -55,6 +57,7 @@ class Kernel extends ConsoleKernel
             $endCount = $endWorkOrders->count();
             $endDueDate = $twoDaysFromNow->toFormattedDateString();
 
+            Log::info('Sending end reminders for work orders due in [' . $twoDaysFromNow . '] day(s) - [' . $endDueDate . ']');
             Log::info('End Work Orders found: '.$endCount);
 
             $viewData = [
