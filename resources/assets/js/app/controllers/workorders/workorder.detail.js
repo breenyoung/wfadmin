@@ -11,6 +11,13 @@
         RestService.getAllProducts(self);
 
 
+        self.toggleComplete = function(cbState)
+        {
+            console.log(cbState);
+            //if(cbState) { self.workorder.completed = 1; }
+            //else { self.workorder.completed = 0; }
+        };
+
         self.updateWorkOrder = function()
         {
             self.workorder.put().then(function()

@@ -30,8 +30,8 @@
 
 <md-datepicker ng-model="ctrlWorkOrderDetail.workorder.end_date" md-placeholder="End Date" utc-Parser></md-datepicker>
 
-<md-switch class="md-primary" ng-model="ctrlWorkOrderDetail.workorder.completed" aria-label="Completed">
-    Completed: {{ ctrlWorkOrderDetail.workorder.completed }}
+<md-switch class="md-primary" ng-true-value="1" ng-false-value="0" ng-model="ctrlWorkOrderDetail.workorder.completed"  aria-label="Completed">
+    Completed:
 </md-switch>
 
 <md-input-container class="md-block" flex-gt-sm>
