@@ -19,8 +19,8 @@ class CreateWorkOrdersTable extends Migration
             $table->increments('id');
             $table->integer('customer_id')->unsigned();
             $table->integer('product_id')->unsigned();
-            $table->dateTime('start_date');
-            $table->dateTime('end_date');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->boolean('completed')->default('0');
             $table->text('notes')->nullable();
             $table->timestamps();
