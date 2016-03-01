@@ -1,7 +1,7 @@
 (function(){
     "use strict";
 
-    function WorkOrderDetailController($auth, $state, Restangular, RestService, DialogService, $moment, $stateParams)
+    function WorkOrderDetailController($auth, $state, ToastService, Restangular, RestService, DialogService, $moment, $stateParams)
     {
         var self = this;
 
@@ -15,10 +15,11 @@
         {
             self.workorder.put().then(function()
             {
-                console.log("updated");
+                ToastService.show("Successfully updated");
+                $state.go("app.workorders");
             }, function()
             {
-                console.log("error updating");
+                ToastService.show("Error updating");
             });
         };
 
@@ -26,10 +27,12 @@
         {
             self.workorder.remove().then(function()
             {
-                console.log("deelted");
+                ToastService.show("Successfully deleted");
+                $state.go("app.workorders");
+            }, function()
+            {
+                ToastService.show("Error deleting");
             });
-
-            $state.go("app.workorders");
         };
 
         self.showDeleteConfirm = function(ev)
@@ -46,6 +49,6 @@
 
     }
 
-    angular.module('app.controllers').controller('WorkOrderDetailController', ['$auth', '$state', 'Restangular', 'RestService', 'DialogService', '$moment', '$stateParams', WorkOrderDetailController]);
+    angular.module('app.controllers').controller('WorkOrderDetailController', ['$auth', '$state', 'ToastService', 'Restangular', 'RestService', 'DialogService', '$moment', '$stateParams', WorkOrderDetailController]);
 
 })();

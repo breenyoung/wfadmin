@@ -1,7 +1,7 @@
 (function(){
     "use strict";
 
-    function WorkOrderCreateController($auth, $state, Restangular, $moment, RestService, $stateParams)
+    function WorkOrderCreateController($auth, $state, Restangular, ToastService, $moment, RestService, $stateParams)
     {
         var self = this;
 
@@ -10,7 +10,6 @@
 
         self.createWorkOrder = function()
         {
-
             //Tue Feb 02 2016 00:00:00 GMT-0400 (Atlantic Standard Time)
             console.log(self.workorder);
 
@@ -18,16 +17,14 @@
 
             Restangular.all('workorder').post(w).then(function()
             {
-                console.log("created");
+                ToastService.show("Successfully created");
                 //$state.go('app.workorders.detail', {'workOrderId': 1});
                 $state.go('app.workorders');
 
             });
-
         };
-
     }
 
-    angular.module('app.controllers').controller('WorkOrderCreateController', ['$auth', '$state', 'Restangular', '$moment', 'RestService', '$stateParams', WorkOrderCreateController]);
+    angular.module('app.controllers').controller('WorkOrderCreateController', ['$auth', '$state', 'Restangular', 'ToastService', '$moment', 'RestService', '$stateParams', WorkOrderCreateController]);
 
 })();

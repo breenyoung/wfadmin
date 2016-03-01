@@ -15,8 +15,10 @@
             {
                 //console.log("updated");
                 ToastService.show("Successfully updated");
+                $state.go("app.products");
             }, function()
             {
+                ToastService.show("Error updating");
                 console.log("error updating");
             });
         };
@@ -26,9 +28,14 @@
             self.product.remove().then(function()
             {
                 console.log("deelted");
-            });
+                ToastService.show("Successfully deleted");
+                $state.go("app.products");
 
-            $state.go("app.products");
+            }, function()
+            {
+                ToastService.show("Error deleting");
+                console.log("error deleting");
+            });
         };
 
         self.showDeleteConfirm = function(ev)

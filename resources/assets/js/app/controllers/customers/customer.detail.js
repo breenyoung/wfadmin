@@ -12,11 +12,12 @@
         {
             self.customer.put().then(function()
             {
-                ToastService.show("Updated");
-                console.log("updated");
+                ToastService.show("Successfully updated");
+                $state.go("app.customers");
+
             }, function()
             {
-                ToastService.show("Error Updating");
+                ToastService.show("Error updating");
                 console.log("error updating");
             });
         };
@@ -25,10 +26,14 @@
         {
             self.customer.remove().then(function()
             {
-                console.log("deelted");
+                ToastService.show("Successfully deleted");
+                $state.go("app.customers");
+            }, function()
+            {
+                ToastService.show("Error Deleting");
             });
 
-            $state.go("app.customers");
+
         };
 
         self.showDeleteConfirm = function(ev)
