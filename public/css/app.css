@@ -1,0 +1,15 @@
+.closestWorkOrder {
+  color: red;
+}
+
+.closerWorkOrder {
+  color: orange;
+}
+
+.closeWorkOrder {
+  color: cornflowerblue;
+}
+
+.farWorkOrder {
+  color: green;
+}

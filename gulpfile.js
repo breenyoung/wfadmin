@@ -7,7 +7,7 @@ elixir(function(mix){
     mix
         .bower('vendor.js', './public/js', 'vendor.css', './public/css')
         .angular('./resources/assets/js/', './public/js')
-        .less('./resources/assets/js/**/*.less', 'public/css')
+        .less('./resources/assets/less/**/*.less', 'public/css')
         .copy('./resources/assets/js/partials/*.html', 'public/views/app/')
         .copy('./resources/assets/js/app/directives/**/*.html', 'public/views/directives/')
         //.copy('./resources/assets/js/dialogs/**/*.html', 'public/views/dialogs/')
