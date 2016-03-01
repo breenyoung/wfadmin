@@ -14,8 +14,13 @@
             Restangular.all('customer').post(c).then(function(d)
             {
                 console.log(d);
-                $state.go('app.customers.detail', {'customerId': d.newId});
+                //$state.go('app.customers.detail', {'customerId': d.newId});
+                ToastService.show("Successfully created");
+                $state.go('app.customers');
 
+            }, function()
+            {
+                ToastService.show("Error creating");
             });
 
         };
