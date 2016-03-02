@@ -53,11 +53,11 @@ class Kernel extends ConsoleKernel
             Log::info('Start Work Orders found: '.$startCount);
 
             // Get work orders due for pick up in [$pickupDateReminder] days
-            $endWorkOrders = WorkOrder::whereDate('end_date', '=', $twoDaysFromNow)->with('product', 'customer')->get();
+            $endWorkOrders = WorkOrder::whereDate('end_date', '<=', $twoDaysFromNow)->with('product', 'customer')->get();
             $endCount = $endWorkOrders->count();
             $endDueDate = $twoDaysFromNow->toFormattedDateString();
 
-            Log::info('Sending end reminders for work orders due in [' . $twoDaysFromNow . '] day(s) - [' . $endDueDate . ']');
+            Log::info('Sending end reminders for work orders due in [' . $pickupDateReminder . '] day(s) - [' . $endDueDate . ']');
             Log::info('End Work Orders found: '.$endCount);
 
             $viewData = [
