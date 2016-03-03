@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Materials</title>
+</head>
+<body>
+<div layout="row">
+    <div flex>Name</div>
+    <div flex>Unit</div>
+    <div flex>Unit Cost</div>
+</div>
+
+<div ng-repeat="m in ctrlMaterial.materials" layout="row">
+    <div flex><a ui-sref="app.materials.detail({materialId: m.id})">{{m.name}}</a></div>
+    <div flex>{{m.unit_id}}</a></div>
+    <div flex>{{m.unit_cost}}</div>
+</div>
+
+<hr/>
+<md-button class="md-raised md-primary" ui-sref="app.materials.create">Add New Material</md-button>
+</body>
+</html>

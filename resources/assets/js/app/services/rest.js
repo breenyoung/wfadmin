@@ -92,6 +92,42 @@
                     //console.log(data);
                     scope.event = data;
                 });
+            },
+
+            getAllUnits: function(scope)
+            {
+                Restangular.all('unit').getList().then(function(data)
+                {
+                    console.log(data);
+                    scope.units = data;
+                });
+            },
+
+            getUnit: function(scope, id)
+            {
+                Restangular.one('unit', id).get().then(function(data)
+                {
+                    //console.log(data);
+                    scope.unit = data;
+                });
+            },
+
+            getAllMaterials: function(scope)
+            {
+                Restangular.all('material').getList().then(function(data)
+                {
+                    console.log(data);
+                    scope.materials = data;
+                });
+            },
+
+            getMaterial: function(scope, id)
+            {
+                Restangular.one('material', id).get().then(function(data)
+                {
+                    //console.log(data);
+                    scope.material = data;
+                });
             }
 
         };

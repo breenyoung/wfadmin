@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Material Detail</title>
+</head>
+<body>
+<h2>Material details</h2>
+
+<md-input-container class="md-block" flex-gt-sm>
+    <label>Name</label>
+    <input type="text" ng-model="ctrlMaterialDetail.material.name"/>
+</md-input-container>
+
+<md-input-container class="md-block" flex-gt-sm>
+    <label>Unit Cost</label>
+    <input type="text" ng-model="ctrlMaterialDetail.material.unit_cost"/>
+</md-input-container>
+
+<md-input-container class="md-block" flex-gt-sm>
+    <label>Unit</label>
+    <input type="text" ng-model="ctrlMaterialDetail.material.unit_id"/>
+</md-input-container>
+
+<br/>
+
+<md-button class="md-raised md-primary" ng-click="ctrlMaterialDetail.updateMaterial()">Submit</md-button>
+<md-button class="md-raised md-warn" ng-click="ctrlMaterialDetail.showDeleteConfirm()">Delete</md-button>
+<md-button class="md-raised" ui-sref="app.materials">Cancel</md-button>
+</body>
+</html>
