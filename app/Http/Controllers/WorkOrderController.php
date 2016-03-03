@@ -111,7 +111,8 @@ class WorkOrderController extends Controller
                 $workOrder->end_date = $endDate;
             }
 
-            $workOrder->completed = $request->input('completed') ? 1 : 0;
+            //$workOrder->completed = $request->input('completed') ? 1 : 0;
+            $workOrder->completed = (int)$request->input('completed');
             $workOrder->notes = $request->input('notes');
 
             $workOrder->save();

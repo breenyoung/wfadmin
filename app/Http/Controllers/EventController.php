@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use \Illuminate\Support\Facades\DB;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -70,6 +71,21 @@ class EventController extends Controller
             $event->start_date = $request->input('start_date');
             $event->end_date = $request->input('end_date');
             $event->notes = $request->input('notes');
+
+            // Sync event products
+            EventProduct::where('event_id', $event->id)->delete();
+            //$pIds = [];
+            if($request->input('event_products') && is_array($request->input('event_products')))
+            {
+                foreach($request->input('event_products') as $ep)
+                {
+                    //array_push($pIds, $ep['product_id']);
+                    $event->eventProducts()->create(['event_id' => $event->id,
+                        'product_id' => $ep['product_id'],
+                        'quantity' => $ep['quantity']
+                    ]);
+                }
+            }
 
             $event->save();
         }
