@@ -177,6 +177,66 @@
                     }
                 }
             })
+            .state('app.units', {
+                url: '/units',
+                views: {
+                    'main@': {
+                        templateUrl: getView('units'),
+                        controller: 'UnitController',
+                        controllerAs: 'ctrlUnit'
+                    }
+                }
+            })
+            .state('app.units.create', {
+                url: '/create',
+                views: {
+                    'main@': {
+                        templateUrl: getView('unit.create'),
+                        controller: 'UnitCreateController',
+                        controllerAs: 'ctrlUnitCreate'
+                    }
+                }
+            })
+            .state('app.units.detail', {
+                url: '/detail/:unitId',
+                views: {
+                    'main@': {
+                        templateUrl: getView('unit.detail'),
+                        controller: 'UnitDetailController',
+                        controllerAs: 'ctrlUnitDetail'
+                    }
+                }
+            })
+            .state('app.materials', {
+                url: '/materials',
+                views: {
+                    'main@': {
+                        templateUrl: getView('materials'),
+                        controller: 'MaterialController',
+                        controllerAs: 'ctrlMaterial'
+                    }
+                }
+            })
+            .state('app.materials.create', {
+                url: '/create',
+                views: {
+                    'main@': {
+                        templateUrl: getView('material.create'),
+                        controller: 'MaterialCreateController',
+                        controllerAs: 'ctrlMaterialCreate'
+                    }
+                }
+            })
+            .state('app.materials.detail', {
+                url: '/detail/:materialId',
+                views: {
+                    'main@': {
+                        templateUrl: getView('material.detail'),
+                        controller: 'MaterialDetailController',
+                        controllerAs: 'ctrlMaterialDetail'
+                    }
+                }
+            })
             ;
 
     } );

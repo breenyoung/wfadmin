@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Units</title>
+</head>
+<body>
+<div layout="row">
+    <div flex>Name</div>
+</div>
+
+<div ng-repeat="u in ctrlUnit.units" layout="row">
+    <div flex><a ui-sref="app.units.detail({unitId: u.id})">{{u.name}}</a></div>
+</div>
+
+<hr/>
+<md-button class="md-raised md-primary" ui-sref="app.units.create">Add New Unit</md-button>
+</body>
+</html>

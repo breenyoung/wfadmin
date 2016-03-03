@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unit Create</title>
+</head>
+<body>
+<h2>Unit create</h2>
+
+<md-input-container class="md-block" flex-gt-sm>
+    <label>Name</label>
+    <input type="text" ng-model="ctrlUnitCreate.unit.name"/>
+</md-input-container>
+
+<br/>
+<md-button class="md-raised md-primary" ng-click="ctrlUnitCreate.createUnit()">Submit</md-button>
+<md-button class="md-raised" ui-sref="app.units">Cancel</md-button>
+</body>
+</html>
