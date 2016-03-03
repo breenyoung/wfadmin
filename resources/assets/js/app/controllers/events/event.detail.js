@@ -5,6 +5,9 @@
     {
         var self = this;
 
+        self.selectedProduct = "";
+        self.selectedQuantity = 0;
+
         //console.log($stateParams);
         RestService.getEvent(self, $stateParams.eventId);
         RestService.getAllProducts(self);
@@ -17,20 +20,60 @@
             {
                 //console.log("updated");
                 ToastService.show("Successfully updated");
+                $state.go("app.events");
             }, function()
             {
+                ToastService.show("Error updating");
                 console.log("error updating");
             });
+        };
+
+        self.addProduct = function()
+        {
+            console.log(self.selectedProduct);
+
+            self.event.event_products.push({
+                event_id: self.event.id,
+                product_id: self.selectedProduct.id,
+                quantity: self.selectedQuantity,
+                product: self.selectedProduct
+            });
+
+            self.selectedProduct = "";
+            self.selectedQuantity = 0;
+        };
+
+        self.deleteProduct = function(e, productId)
+        {
+            var indexToRemove;
+            for(var i = 0; i < self.event.event_products.length; i++)
+            {
+                if(productId == self.event.event_products[i].product_id)
+                {
+                    indexToRemove = i;
+                    break;
+                }
+            }
+
+            console.log(indexToRemove);
+            self.event.event_products.splice(indexToRemove, 1);
+
+            e.preventDefault();
         };
 
         self.deleteEvent = function()
         {
             self.event.remove().then(function()
             {
+                ToastService.show("Successfully deleted");
                 console.log("deelted");
+                $state.go("app.events");
+            }, function()
+            {
+                ToastService.show("Error Deleting");
             });
 
-            $state.go("app.events");
+
         };
 
         self.showDeleteConfirm = function(ev)

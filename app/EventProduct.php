@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 class EventProduct extends Model
 {
     protected $table = 'event_products';
+    public $timestamps = false;
 
     protected $fillable = ['event_id', 'product_id', 'quantity'];
 

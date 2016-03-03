@@ -18,7 +18,8 @@
             Restangular.all('event').post(e).then(function(e)
             {
                 console.log(e);
-                $state.go('app.events.detail', {'eventId': e.newId});
+                ToastService.show("Successfully created");
+                $state.go('app.events');
 
             });
 

@@ -31,19 +31,21 @@
 
 <div layout="row">
     <div flex>
-        <select>
-            <option value="">Select a Product</option>
-            <option ng-repeat="p in ctrlEventDetail.products" value="{{p.id}}">{{p.name}}</option>
-        </select>
 
-        <input type="text" name="quantity" placeholder="Quantity"/>
+        <select ng-model="ctrlEventDetail.selectedProduct" ng-options="p as p.name for p in ctrlEventDetail.products"></select>
+
+        <input type="text" name="quantity" placeholder="Quantity" ng-model="ctrlEventDetail.selectedQuantity"/>
 
         <md-button class="md-raised md-primary" ng-click="ctrlEventDetail.addProduct()">Add</md-button>
     </div>
 </div>
 
 <div layout="row" ng-repeat="ep in ctrlEventDetail.event.event_products">
-    <div flex>{{ep.product.name}} x {{ep.quantity}}</div>
+    <div flex>
+        {{ep.product.name}} x {{ep.quantity}}
+        (<a href="#" ng-click="ctrlEventDetail.deleteProduct($event, ep.product_id)">Delete</a>)
+    </div>
+
 </div>
 
 

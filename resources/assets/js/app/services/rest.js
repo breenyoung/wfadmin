@@ -67,6 +67,7 @@
                     // Format string dates into date objects
                     data.start_date = $moment(data.start_date);
                     data.end_date = $moment(data.end_date);
+                    data.completed = parseInt(data.completed);
 
                     self.workorder = data;
 
