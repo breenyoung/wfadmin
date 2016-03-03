@@ -21,7 +21,8 @@ class UnitSeeder extends Seeder
             ['name' => 'Feet'],
             ['name' => 'Inches'],
             ['name' => 'Each'],
-            ['name' => 'Ounces']
+            ['name' => 'Ounces'],
+            ['name' => 'Square Foot']
         );
 
         foreach ($units as $u)
