@@ -35,6 +35,8 @@ Route::group(['prefix' => 'api'], function()
     Route::resource('customer', 'CustomerController');
     Route::resource('workorder', 'WorkOrderController');
     Route::resource('event', 'EventController');
+    Route::resource('unit', 'UnitController');
+    Route::resource('material', 'MaterialController');
 });
 
 /*
