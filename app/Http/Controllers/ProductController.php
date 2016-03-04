@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ProductMaterial;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -63,7 +64,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::find($id);
+        $product = Product::where('id', $id)->with('productMaterials.material')->first();
 
         return $product;
     }
@@ -88,6 +89,19 @@ class ProductController extends Controller
             $product->minimum_stock = $request->input('minimum_stock');
             $product->current_stock = $request->input('current_stock');
             //$product->name = $request->input('active');
+
+            // Sync event product materials
+            ProductMaterial::where('product_id', $product->id)->delete();
+            if($request->input('product_materials') && is_array($request->input('product_materials')))
+            {
+                foreach($request->input('product_materials') as $pm)
+                {
+                    $product->productMaterials()->create(['product_id' => $product->id,
+                        'material_id' => $pm['material_id'],
+                        'quantity' => $pm['quantity']
+                    ]);
+                }
+            }
 
             $product->save();
         }

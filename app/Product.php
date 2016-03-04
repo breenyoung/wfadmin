@@ -20,4 +20,10 @@ class Product extends Model
     {
         return $this->hasMany('App\WorkOrder');
     }
+
+    public function productMaterials()
+    {
+        //return $this->belongsToMany('App\Material', 'product_materials', 'product_id', 'material_id');
+        return $this->hasMany('App\ProductMaterial');
+    }
 }
