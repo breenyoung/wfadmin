@@ -64,8 +64,15 @@
                 material: self.selectedMaterial
             });
 
+            var currentCost = parseFloat(self.product.cost);
+            var btest = (parseFloat(self.selectedMaterial.unit_cost) * parseInt(self.selectedQuantity));
+            currentCost += btest;
+            self.product.cost = currentCost;
+
+
             self.selectedMaterial = "";
             self.selectedQuantity = 0;
+
         };
 
         self.deleteMaterial = function(e, materialId)
@@ -81,6 +88,13 @@
             }
 
             console.log(indexToRemove);
+
+            var currentCost = parseFloat(self.product.cost);
+            var btest = (parseFloat(self.product.product_materials[indexToRemove].material.unit_cost) * parseInt(self.product.product_materials[indexToRemove].quantity));
+            currentCost -= btest;
+            self.product.cost = currentCost;
+
+
             self.product.product_materials.splice(indexToRemove, 1);
 
             e.preventDefault();
