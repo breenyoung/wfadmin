@@ -12,19 +12,30 @@
     <input type="text" ng-model="ctrlMaterialCreate.material.name"/>
 </md-input-container>
 
-<md-input-container class="md-block" flex-gt-sm>
-    <label>Unit Cost</label>
-    <input type="text" ng-model="ctrlMaterialCreate.material.unit_cost"/>
-</md-input-container>
+<div layout="row">
 
-<md-input-container class="md-block" flex-gt-sm>
-    <label>Unit</label>
-    <md-select ng-model="ctrlMaterialCreate.material.unit_id">
-        <md-option ng-repeat="u in ctrlMaterialCreate.units" value="{{u.id}}">
-            {{u.name}}
-        </md-option>
-    </md-select>
-</md-input-container>
+    <div flex>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Unit Cost</label>
+            <input type="text" ng-model="ctrlMaterialCreate.material.unit_cost"/>
+        </md-input-container>
+    </div>
+
+    <div flex>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Unit</label>
+            <md-select ng-model="ctrlMaterialCreate.material.unit_id">
+                <md-option ng-repeat="u in ctrlMaterialCreate.units" value="{{u.id}}">
+                    {{u.name}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+    </div>
+</div>
+
+
+
+
 
 <br/>
 <md-button class="md-raised md-primary" ng-click="ctrlMaterialCreate.createMaterial()">Submit</md-button>
