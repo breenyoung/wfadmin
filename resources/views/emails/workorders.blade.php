@@ -26,7 +26,11 @@
         You have <b>{{$viewdata['endCount']}}</b> work order(s) that are due in <b>{{$viewdata['pickupDateReminder']}}</b> days ({{$viewdata['endDueDate']}})
         <ul>
         @foreach ($viewdata['endWorkOrders'] as $ewo)
-            <li><a href="{{url('/#/workorders/detail', $ewo->id)}}">{{$ewo->customer->first_name}} {{$ewo->customer->last_name}} for product: {{$ewo->product->name}}</a></li>
+            @if($ewo->completed)
+                <li><strike><a href="{{url('/#/workorders/detail', $ewo->id)}}">{{$ewo->customer->first_name}} {{$ewo->customer->last_name}} for product: {{$ewo->product->name}}</a></strike></li>
+            @else
+                <li><a href="{{url('/#/workorders/detail', $ewo->id)}}">{{$ewo->customer->first_name}} {{$ewo->customer->last_name}} for product: {{$ewo->product->name}}</a></li>
+            @endif
         @endforeach
         </ul>
     </div>
