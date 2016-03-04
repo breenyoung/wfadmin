@@ -22,7 +22,7 @@ class CreateMaterialsTable extends Migration
             $table->integer('unit_id')->nullable()->unsigned();
             $table->timestamps();
 
-            $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
+            $table->foreign('unit_id')->references('id')->on('units')->onDelete('set null');
 
         });
     }

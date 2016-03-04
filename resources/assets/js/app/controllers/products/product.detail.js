@@ -6,6 +6,7 @@
         var self = this;
 
         //console.log($stateParams);
+        RestService.getAllMaterials(self);
         RestService.getProduct(self, $stateParams.productId);
 
         self.updateProduct = function()
@@ -48,6 +49,41 @@
             function()
             {
             });
+        };
+
+        self.addMaterial = function()
+        {
+            console.log(self.selectedMaterial);
+
+            if(self.product.product_materials === undefined) { self.product.product_materials = []; }
+
+            self.product.product_materials.push({
+                product_id: self.product.id,
+                material_id: self.selectedMaterial.id,
+                quantity: self.selectedQuantity,
+                material: self.selectedMaterial
+            });
+
+            self.selectedMaterial = "";
+            self.selectedQuantity = 0;
+        };
+
+        self.deleteMaterial = function(e, materialId)
+        {
+            var indexToRemove;
+            for(var i = 0; i < self.product.product_materials.length; i++)
+            {
+                if(materialId == self.product.product_materials[i].material_id)
+                {
+                    indexToRemove = i;
+                    break;
+                }
+            }
+
+            console.log(indexToRemove);
+            self.product.product_materials.splice(indexToRemove, 1);
+
+            e.preventDefault();
         };
     }
 

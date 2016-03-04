@@ -63,6 +63,26 @@
 </div>
 
 <div layout="row">
+    <div flex>
+
+        <select ng-model="ctrlProductDetail.selectedMaterial" ng-options="p as p.name for p in ctrlProductDetail.materials"></select>
+
+        <input type="text" name="quantity" placeholder="Quantity" ng-model="ctrlProductDetail.selectedQuantity"/>
+
+        <md-button class="md-raised md-primary" ng-click="ctrlProductDetail.addMaterial()">Add</md-button>
+    </div>
+</div>
+
+<div layout="row" ng-repeat="pm in ctrlProductDetail.product.product_materials">
+    <div flex>
+        {{pm.material.name}} x {{pm.quantity}}
+        (<a href="#" ng-click="ctrlProductDetail.deleteMaterial($event, pm.material_id)">Delete</a>)
+    </div>
+
+</div>
+
+
+<div layout="row">
     <div flex="10">
         <md-button class="md-raised md-primary" ng-click="ctrlProductDetail.updateProduct()">Submit</md-button>
     </div>
