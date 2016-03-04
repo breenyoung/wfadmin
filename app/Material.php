@@ -17,9 +17,9 @@ class Material extends Model
 
     protected $fillable = ['name', 'unit_cost', 'unit_id'];
 
-    public function Unit()
+    public function unit()
     {
-        return $this->hasOne('App\Unit');
+        return $this->belongsTo('App\Unit');
     }
 
 }

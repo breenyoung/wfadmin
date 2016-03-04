@@ -28,7 +28,7 @@ class MaterialController extends Controller
      */
     public function index()
     {
-        $materials = Material::orderBy('name', 'asc')->get();
+        $materials = Material::with('unit')->orderBy('name', 'asc')->get();
         return $materials;
     }
 

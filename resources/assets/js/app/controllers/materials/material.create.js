@@ -5,6 +5,8 @@
     {
         var self = this;
 
+        RestService.getAllUnits(self);
+
         self.createMaterial = function()
         {
             console.log(self.material);
