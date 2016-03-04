@@ -75,7 +75,7 @@
 
 <div layout="row" ng-repeat="pm in ctrlProductDetail.product.product_materials">
     <div flex>
-        {{pm.material.name}} x {{pm.quantity}}
+        {{pm.material.name}} x {{pm.quantity}} (@{{pm.material.unit_cost}} each = ${{pm.material.unit_cost * pm.quantity }} )
         (<a href="#" ng-click="ctrlProductDetail.deleteMaterial($event, pm.material_id)">Delete</a>)
     </div>
 
