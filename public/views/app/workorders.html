@@ -30,8 +30,8 @@
             </div>
             <div flex><a ui-sref="app.products.detail({productId: w.product.id})">{{w.product.name}}</a></div>
             <div flex><a ui-sref="app.customers.detail({customerId: w.customer.id})">{{w.customer.first_name}} {{w.customer.last_name}}</a></div>
-            <div flex>{{w.start_date}}</div>
-            <div flex><span ng-class="ctrlWorkOrder.setUrgency(w.end_date)">{{w.end_date}}</span></div>
+            <div flex>{{w.start_date | amDateFormat:'YYYY-MM-DD'}}</div>
+            <div flex><span ng-class="ctrlWorkOrder.setUrgency(w.end_date)">{{w.end_date | amDateFormat:'YYYY-MM-DD'}}</span></div>
             <div flex>{{w.completed == 1 ? 'Yes' : 'No'}}</div>
         </div>
     </div>
