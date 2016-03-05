@@ -14,8 +14,11 @@
             <md-button ng-click="toggleSidenav('left')" hide-gt-sm class="md-icon-button">
                 <md-icon aria-label="Menu" md-svg-icon="https://s3-us-west-2.amazonaws.com/s.cdpn.io/68133/menu.svg"></md-icon>
             </md-button>
-            <h1>Wood Finds</h1>
-            &nbsp; - @{{todaysDate}}
+
+
+            <span hide show-gt-sm>Wood Finds - @{{todaysDate | amDateFormat: "dddd, MMMM Do YYYY"}}</span>
+            <span hide-gt-sm>WF - @{{todaysDate | amDateFormat: "YYYY-MM-DD"}}</span>
+
         </div>
     </md-toolbar>
 
