@@ -2,6 +2,7 @@
 <html ng-app="app" lang="en">
 <head>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+
     <link rel="stylesheet" href="{{url('/css/vendor.css')}}">
     <link rel="stylesheet" href="{{url('/css/app.css')}}">
 
@@ -9,16 +10,54 @@
 </head>
 <body layout="column" ng-controller="CoreController">
 
-    <md-toolbar layout="row">
+    <md-toolbar layout="row" ng-show="!showSearch">
         <div class="md-toolbar-tools">
+
             <md-button ng-click="toggleSidenav('left')" hide-gt-sm class="md-icon-button">
                 <md-icon aria-label="Menu" md-svg-icon="https://s3-us-west-2.amazonaws.com/s.cdpn.io/68133/menu.svg"></md-icon>
             </md-button>
 
-
             <span hide show-gt-sm>Wood Finds - @{{todaysDate | amDateFormat: "dddd, MMMM Do YYYY"}}</span>
             <span hide-gt-sm>WF - @{{todaysDate | amDateFormat: "YYYY-MM-DD"}}</span>
 
+            <span flex></span>
+
+            <md-button class="md-icon-button" aria-label="Search" ng-click="toggleSearch()">
+                <ng-md-icon icon="search"></ng-md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-toolbar ng-show="showSearch" class="animate-show md-hue-1 md-whiteframe-z1">
+        <div class="md-toolbar-tools">
+
+            <md-button class="md-icon-button" ng-click="toggleSearch()" aria-label="Menu">
+                <ng-md-icon icon="arrow_back" aria-label="Back"></ng-md-icon>
+            </md-button>
+
+            <h3 role="button" ng-click="toggleSearch()">Back</h3>
+
+            <span flex="5"></span>
+
+            <span ng-controller="SearchController as ctrlSearch" flex>
+                <md-autocomplete
+                                 md-input-name="autocompleteField"
+                                 md-no-cache="ctrlSearch.noCache"
+                                 md-selected-item="false"
+                                 md-search-text="ctrlSearch.searchText"
+                                 md-items="item in ctrlSearch.doSearch(ctrlSearch.searchText)"
+                                 md-item-text="item.name"
+                                 md-min-length="3"
+                                 placeholder="Search">
+
+                    <md-item-template>
+                        <span md-highlight-text="ctrlSearch.searchText">@{{item.content_type }} - @{{item.name}}</span>
+                    </md-item-template>
+
+                    <md-not-found>No matches found.</md-not-found>
+
+                </md-autocomplete>
+            </span>
         </div>
     </md-toolbar>
 
@@ -26,7 +65,7 @@
         <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" md-swipe-left="hideSideNav('left')">
             <md-list>
                 <md-list-item >
-                    <a href="#/products">
+                    <a href="#/products" ng-click="hideSideNav('left')">
                         <md-item-content md-ink-ripple layout="row" layout-align="start center">
                             <div class="inset">
                                 <ng-md-icon icon="shopping_cart"></ng-md-icon>
@@ -36,7 +75,7 @@
                     </a>
                 </md-list-item>
                 <md-list-item>
-                    <a href="#/customers">
+                    <a href="#/customers" ng-click="hideSideNav('left')">
                         <md-item-content md-ink-ripple layout="row" layout-align="start center">
                             <div class="inset">
                                 <ng-md-icon icon="people"></ng-md-icon>
@@ -46,7 +85,7 @@
                     </a>
                 </md-list-item>
                 <md-list-item>
-                    <a href="#/workorders">
+                    <a href="#/workorders" ng-click="hideSideNav('left')">
                         <md-item-content md-ink-ripple layout="row" layout-align="start center">
                             <div class="inset">
                                 <ng-md-icon icon="my_library_books"></ng-md-icon>
@@ -56,7 +95,7 @@
                     </a>
                 </md-list-item>
                 <md-list-item>
-                    <a href="#/events">
+                    <a href="#/events" ng-click="hideSideNav('left')">
                         <md-item-content md-ink-ripple layout="row" layout-align="start center">
                             <div class="inset">
                                 <ng-md-icon icon="event_available"></ng-md-icon>
@@ -66,7 +105,7 @@
                     </a>
                 </md-list-item>
                 <md-list-item>
-                    <a href="#/units">
+                    <a href="#/units" ng-click="hideSideNav('left')">
                         <md-item-content md-ink-ripple layout="row" layout-align="start center">
                             <div class="inset">
                                 <ng-md-icon icon="sync"></ng-md-icon>
@@ -76,7 +115,7 @@
                     </a>
                 </md-list-item>
                 <md-list-item>
-                    <a href="#/materials">
+                    <a href="#/materials" ng-click="hideSideNav('left')">
                         <md-item-content md-ink-ripple layout="row" layout-align="start center">
                             <div class="inset">
                                 <ng-md-icon icon="work"></ng-md-icon>
@@ -86,7 +125,7 @@
                     </a>
                 </md-list-item>
                 <md-list-item>
-                    <a href="#/reports">
+                    <a href="#/reports" ng-click="hideSideNav('left')">
                         <md-item-content md-ink-ripple layout="row" layout-align="start center">
                             <div class="inset">
                                 <ng-md-icon icon="poll"></ng-md-icon>
@@ -111,6 +150,11 @@
         </div>
     </div>
 
+<script type="text/ng-template" id="error-messages">
+    <div ng-message="required">This field is required</div>
+    <div ng-message="minlength">This field is too short</div>
+    <div ng-message="maxlength">This field is too long</div>
+</script>
 
 <script src="{{url('/js/vendor.js')}}"></script>
 <script src="{{url('/js/app.js')}}"></script>

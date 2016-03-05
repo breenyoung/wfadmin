@@ -8,6 +8,7 @@
         var today = new Date();
 
         $scope.todaysDate = today;
+        $scope.showSearch = false;
 
         $scope.toggleSidenav = function(menuId)
         {
@@ -28,6 +29,11 @@
             {
                 $mdSidenav(menuId).close();
             }
+        };
+
+        $scope.toggleSearch = function()
+        {
+            $scope.showSearch = !$scope.showSearch;
         };
 
     }

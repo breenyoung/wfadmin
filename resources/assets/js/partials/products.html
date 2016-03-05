@@ -6,22 +6,24 @@
 </head>
 <body>
     <div layout="row">
+    <md-subheader class="md-primary">Products</md-subheader>
+    </div>
+
+    <div layout="row">
         <div flex>Name</div>
-        <div flex>SKU</div>
         <div flex>Price</div>
         <div flex>Cost</div>
         <div flex>Current Stock</div>
     </div>
+
     <div>
         <div ng-repeat="p in ctrlProduct.products" layout="row">
             <div flex><a ui-sref="app.products.detail({productId: p.id})">{{p.name}}</a></div>
-            <div flex>{{p.sku}}</div>
             <div flex>{{p.price}}</div>
             <div flex>{{p.cost}}</div>
             <div flex>{{p.current_stock}}</div>
         </div>
     </div>
-
 
     <md-button class="md-fab md-fab-bottom-right" aria-label=”Add”>
         <ng-md-icon icon="add" ui-sref="app.products.create"></ng-md-icon>
