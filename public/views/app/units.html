@@ -13,7 +13,9 @@
     <div flex><a ui-sref="app.units.detail({unitId: u.id})">{{u.name}}</a></div>
 </div>
 
-<hr/>
-<md-button class="md-raised md-primary" ui-sref="app.units.create">Add New Unit</md-button>
+<md-button class="md-fab md-fab-bottom-right" aria-label=”Add”>
+    <ng-md-icon icon="add" ui-sref="app.units.create"></ng-md-icon>
+</md-button>
+
 </body>
 </html>
