@@ -13,8 +13,8 @@
 <div>
     <div ng-repeat="e in ctrlEvent.events" layout="row">
         <div flex><a ui-sref="app.events.detail({eventId: e.id})">{{e.name}}</a></div>
-        <div flex>{{e.start_date}}</div>
-        <div flex>{{e.end_date}}</div>
+        <div flex>{{e.start_date | amDateFormat:'YYYY-MM-DD'}}</div>
+        <div flex>{{e.end_date | amDateFormat:'YYYY-MM-DD'}}</div>
     </div>
 </div>
 <hr/>
