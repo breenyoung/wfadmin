@@ -13,7 +13,7 @@
 
     angular.module('app.services', ['ui.router', 'satellizer', 'restangular', 'angular-momentjs']);
     angular.module('app.routes', ['ui.router', 'satellizer']);
-    angular.module('app.controllers', ['ui.router', 'ngMaterial', 'restangular', 'angular-momentjs', 'app.services', 'ngMessages']);
+    angular.module('app.controllers', ['ui.router', 'ngMaterial', 'restangular', 'angular-momentjs', 'app.services', 'ngMessages', 'ngMdIcons']);
     angular.module('app.filters', []);
 
     angular.module('app.directives', ['angular-momentjs']);
@@ -42,10 +42,23 @@
 
     angular.module('app.config').config( function($mdThemingProvider) {
         /* For more info, visit https://material.angularjs.org/#/Theming/01_introduction */
+
+        var customBlueMap = $mdThemingProvider.extendPalette('light-blue',
+        {
+            'contrastDefaultColor': 'light',
+            'contrastDarkColors': ['50'],
+            '50': 'ffffff'
+        });
+
+        $mdThemingProvider.definePalette('customBlue', customBlueMap);
         $mdThemingProvider.theme('default')
-            .primaryPalette('orange')
-            .accentPalette('green')
-            .warnPalette('red');
+            .primaryPalette('customBlue',
+            {
+                'default': '500',
+                'hue-1': '50'
+            })
+            .accentPalette('pink');
+
     });
 
 
