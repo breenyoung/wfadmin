@@ -19,7 +19,9 @@
     <div flex><a href="{{c.facebook_url}}" target="_blank">{{c.facebook_url}}</a></div>
 </div>
 
-<hr/>
-<md-button class="md-raised md-primary" ui-sref="app.customers.create">Add New Customer</md-button>
+<md-button class="md-fab md-fab-bottom-right" aria-label=”Add”>
+    <ng-md-icon icon="add" ui-sref="app.customers.create"></ng-md-icon>
+</md-button>
+
 </body>
 </html>

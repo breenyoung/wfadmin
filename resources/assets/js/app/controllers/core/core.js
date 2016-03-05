@@ -1,11 +1,13 @@
 (function(){
     "use strict";
 
-    function CoreController($scope, $auth, $moment, $mdSidenav)
+    function CoreController($scope, $auth, $moment, $mdSidenav, $mdMedia)
     {
         var self = this;
 
-        $scope.todaysDate = $moment().format('dddd, MMMM Do YYYY');
+        var today = new Date();
+
+        $scope.todaysDate = today;
 
         $scope.toggleSidenav = function(menuId)
         {
@@ -14,6 +16,6 @@
 
     }
 
-    angular.module('app.controllers').controller('CoreController', ['$scope', '$auth', '$moment', '$mdSidenav', CoreController]);
+    angular.module('app.controllers').controller('CoreController', ['$scope', '$auth', '$moment', '$mdSidenav', '$mdMedia', CoreController]);
 
 })();
