@@ -19,7 +19,10 @@
     angular.module('app.directives', ['angular-momentjs']);
     angular.module('app.config', []);
 
-    // Configuration
+    //-------------------------------------------------------
+    // Configuration stuff
+    //-------------------------------------------------------
+
     angular.module('app.config').config(function ($authProvider)
     {
         // Satellizer configuration that specifies which API

@@ -37,6 +37,8 @@ Route::group(['prefix' => 'api'], function()
     Route::resource('event', 'EventController');
     Route::resource('unit', 'UnitController');
     Route::resource('material', 'MaterialController');
+
+    Route::get('search/{query}', 'SearchController@index');
 });
 
 /*

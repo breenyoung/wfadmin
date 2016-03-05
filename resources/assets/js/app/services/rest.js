@@ -128,6 +128,18 @@
                     //console.log(data);
                     scope.material = data;
                 });
+            },
+
+            doSearch: function(scope, query)
+            {
+                console.log("Call WS with: " + query);
+
+                Restangular.one('search', query).getList().then(function(data)
+                {
+                   console.log(data);
+
+                });
+
             }
 
         };
