@@ -21,7 +21,11 @@
             <div flex>{{p.current_stock}}</div>
         </div>
     </div>
-    <hr/>
-    <md-button class="md-raised md-primary" ui-sref="app.products.create">Add New Product</md-button>
+
+
+    <md-button class="md-fab md-fab-bottom-right" aria-label=”Add”>
+        <ng-md-icon icon="add" ui-sref="app.products.create"></ng-md-icon>
+    </md-button>
+
 </body>
 </html>

@@ -23,7 +23,7 @@
     </md-toolbar>
 
     <div layout="row" flex>
-        <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
+        <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" md-swipe-left="hideSideNav('left')">
             <md-list>
                 <md-list-item >
                     <a href="#/products">
@@ -98,12 +98,16 @@
             </md-list>
         </md-sidenav>
 
+        <div layout="column" flex="5" md-swipe-right="showSideNav('left')" hide-gt-sm><!-- EDGE GRAB FOR FLYOUT MENU --></div>
+
         <div layout="column" flex id="content">
+
             <md-content layout="column" flex class="md-padding">
                 <!-- START MAIN PAGE CONTENT -->
                 <div ui-view="main"></div>
                 <!-- END MAIN PAGE CONTENT -->
             </md-content>
+
         </div>
     </div>
 
