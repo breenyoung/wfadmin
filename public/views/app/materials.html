@@ -5,18 +5,18 @@
     <title>Materials</title>
 </head>
 <body>
-<div layout="row">
-    <div flex>Name</div>
-    <div flex>Unit Cost</div>
-    <div flex>Unit</div>
 
-</div>
-
-<div ng-repeat="m in ctrlMaterial.materials" layout="row">
-    <div flex><a ui-sref="app.materials.detail({materialId: m.id})">{{m.name}}</a></div>
-    <div flex>{{m.unit_cost}}</div>
-    <div flex>{{m.unit.name}}</a></div>
-</div>
+<md-list>
+    <md-list-item class="md-3-line" ng-repeat="m in ctrlMaterial.materials">
+        <div class="md-list-item-text" layout="column">
+            <h3><a ui-sref="app.materials.detail({materialId: m.id})" class="nounderline">{{m.name}}</a></h3>
+            <h4>
+                <ng-md-icon icon="attach_money" aria-label="Unit Cost"></ng-md-icon>&nbsp;{{m.unit_cost}} per {{m.unit.name}}
+            </h4>
+        </div>
+        <md-divider ng-if="!$last"></md-divider>
+    </md-list-item>
+</md-list>
 
 <md-button class="md-fab md-fab-bottom-right" aria-label=”Add”>
     <ng-md-icon icon="add" ui-sref="app.materials.create"></ng-md-icon>
