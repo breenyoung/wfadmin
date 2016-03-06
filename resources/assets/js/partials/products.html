@@ -9,19 +9,26 @@
     <md-subheader class="md-primary">Products</md-subheader>
     </div>
 
-    <md-list>
-        <md-list-item class="md-3-line" ng-repeat="p in ctrlProduct.products">
-            <div class="md-list-item-text" layout="column">
-                <h3><a ui-sref="app.products.detail({productId: p.id})" class="nounderline">{{p.name | truncateName:25}}</a></h3>
-                <h4>
-                    <ng-md-icon icon="local_offer" aria-label="Price"></ng-md-icon>&nbsp;{{p.price}}
-                    <ng-md-icon icon="attach_money" aria-label="Cost"></ng-md-icon>&nbsp;{{p.cost}}
-                    <ng-md-icon icon="local_shipping" aria-label="Current Stock"></ng-md-icon>&nbsp;{{p.current_stock}}
-                </h4>
-            </div>
-            <md-divider ng-if="!$last"></md-divider>
-        </md-list-item>
-    </md-list>
+    <md-table-container>
+        <table md-table md-row-select>
+            <thead md-head>
+            <tr md-row>
+                <th md-column>Product</th>
+                <th md-column>Price</th>
+                <th md-column>Cost</th>
+                <th md-column>Current Stock</th>
+            </tr>
+            </thead>
+            <tbody md-body>
+            <tr md-row ng-repeat="p in ctrlProduct.products">
+                <td md-cell><a ui-sref="app.products.detail({productId: p.id})" class="nounderline">{{p.name | truncateName:25}}</a></td>
+                <td md-cell>{{p.price}}</td>
+                <td md-cell>{{p.cost}}</td>
+                <td md-cell>{{p.current_stock}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </md-table-container>
 
     <md-button class="md-fab md-fab-bottom-right" aria-label=”Add”>
         <ng-md-icon icon="add" ui-sref="app.products.create"></ng-md-icon>
