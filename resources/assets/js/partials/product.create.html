@@ -88,6 +88,26 @@
 
 </div>
 
+<div layout="row">
+    <div flex>
+
+        <select ng-model="ctrlProductCreate.selectedMaterial" ng-options="p as p.name for p in ctrlProductCreate.materials"></select>
+
+        <input type="text" name="quantity" placeholder="Quantity" ng-model="ctrlProductCreate.selectedQuantity"/>
+
+        <md-button class="md-raised md-primary" ng-click="ctrlProductCreate.addMaterial()">Add</md-button>
+    </div>
+</div>
+
+
+<div layout="row" ng-repeat="pm in ctrlProductCreate.product.product_materials">
+    <div flex>
+        {{pm.material.name}} x {{pm.quantity}} (@{{pm.material.unit_cost}} each = ${{pm.material.unit_cost * pm.quantity }} )
+        (<a href="#" ng-click="ctrlProductCreate.deleteMaterial($event, pm.material_id)">Delete</a>)
+    </div>
+
+</div>
+
 
 <div layout="row">
     <div flex="10">
