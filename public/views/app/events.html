@@ -12,7 +12,8 @@
             <h3><a ui-sref="app.events.detail({eventId: e.id})" class="nounderline">{{e.name}}</a></h3>
             <h4>
                 <ng-md-icon icon="event_note"></ng-md-icon>
-                S: {{e.start_date | amDateFormat:'YYYY-MM-DD'}} - E: {{e.end_date | amDateFormat:'YYYY-MM-DD'}}</h4>
+                S: {{e.start_date | amDateFormat:'YYYY-MM-DD'}} - E: {{e.end_date | amDateFormat:'YYYY-MM-DD'}}
+            </h4>
         </div>
         <md-divider ng-if="!$last"></md-divider>
     </md-list-item>
