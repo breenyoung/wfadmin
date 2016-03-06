@@ -25,12 +25,20 @@ class SearchController extends Controller
             ->select('id', 'name', DB::raw('\'material\' as content_type'))
             ->where('name', 'like', '%' . $query . '%');
 
+        $workOrderSearch = DB::table('work_orders')
+            ->select('work_orders.id', DB::raw('concat(\'Work Order \', work_orders.id, \' for \',customers.first_name, \' \', customers.last_name) as name'), DB::raw('\'workorder\' as content_type'))
+            ->join('customers', 'work_orders.customer_id', '=', 'customers.id')
+            ->where('customers.first_name', 'like', '%' . $query . '%')
+            ->orWhere('customers.last_name', 'like', '%' . $query . '%');
+            ;
+
         $eventSearch = DB::table('events')
             ->select('id', 'name', DB::raw('\'event\' as content_type'))
             ->where('name', 'like', '%' . $query . '%')
             ->union($productSearch)
             ->union($customerSearch)
             ->union($materialSearch)
+            ->union($workOrderSearch)
             ->get();
 
         //dd(DB::getQueryLog());
