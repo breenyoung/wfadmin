@@ -1,3 +1,11 @@
+[ng-click]:hover {
+  cursor: pointer;
+}
+
+.nounderline {
+  text-decoration: none;
+}
+
 .closestWorkOrder {
   color: red;
 }
