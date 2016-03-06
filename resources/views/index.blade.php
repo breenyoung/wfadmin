@@ -67,7 +67,7 @@
         <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" md-swipe-left="hideSideNav('left')">
             <md-list>
                 <md-list-item >
-                    <a href="#/products" ng-click="hideSideNav('left')">
+                    <a href="#/products" ng-click="hideSideNav('left')" class="nounderline">
                         <md-item-content md-ink-ripple layout="row" layout-align="start center">
                             <div class="inset">
                                 <ng-md-icon icon="shopping_cart"></ng-md-icon>
@@ -77,7 +77,7 @@
                     </a>
                 </md-list-item>
                 <md-list-item>
-                    <a href="#/customers" ng-click="hideSideNav('left')">
+                    <a href="#/customers" ng-click="hideSideNav('left')" class="nounderline">
                         <md-item-content md-ink-ripple layout="row" layout-align="start center">
                             <div class="inset">
                                 <ng-md-icon icon="people"></ng-md-icon>
@@ -87,7 +87,7 @@
                     </a>
                 </md-list-item>
                 <md-list-item>
-                    <a href="#/workorders" ng-click="hideSideNav('left')">
+                    <a href="#/workorders" ng-click="hideSideNav('left')" class="nounderline">
                         <md-item-content md-ink-ripple layout="row" layout-align="start center">
                             <div class="inset">
                                 <ng-md-icon icon="my_library_books"></ng-md-icon>
@@ -97,7 +97,7 @@
                     </a>
                 </md-list-item>
                 <md-list-item>
-                    <a href="#/events" ng-click="hideSideNav('left')">
+                    <a href="#/events" ng-click="hideSideNav('left')" class="nounderline">
                         <md-item-content md-ink-ripple layout="row" layout-align="start center">
                             <div class="inset">
                                 <ng-md-icon icon="event_available"></ng-md-icon>
@@ -107,7 +107,7 @@
                     </a>
                 </md-list-item>
                 <md-list-item>
-                    <a href="#/units" ng-click="hideSideNav('left')">
+                    <a href="#/units" ng-click="hideSideNav('left')" class="nounderline">
                         <md-item-content md-ink-ripple layout="row" layout-align="start center">
                             <div class="inset">
                                 <ng-md-icon icon="sync"></ng-md-icon>
@@ -117,7 +117,7 @@
                     </a>
                 </md-list-item>
                 <md-list-item>
-                    <a href="#/materials" ng-click="hideSideNav('left')">
+                    <a href="#/materials" ng-click="hideSideNav('left')" class="nounderline">
                         <md-item-content md-ink-ripple layout="row" layout-align="start center">
                             <div class="inset">
                                 <ng-md-icon icon="work"></ng-md-icon>
@@ -127,7 +127,7 @@
                     </a>
                 </md-list-item>
                 <md-list-item>
-                    <a href="#/reports" ng-click="hideSideNav('left')">
+                    <a href="#/reports" ng-click="hideSideNav('left')" class="nounderline">
                         <md-item-content md-ink-ripple layout="row" layout-align="start center">
                             <div class="inset">
                                 <ng-md-icon icon="poll"></ng-md-icon>
