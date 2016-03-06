@@ -53,6 +53,18 @@ class ProductController extends Controller
 
         $product->save();
 
+        // Add product materials now
+        if($request->input('product_materials') && is_array($request->input('product_materials')))
+        {
+            foreach($request->input('product_materials') as $pm)
+            {
+                $product->productMaterials()->create(['product_id' => $product->id,
+                    'material_id' => $pm['material_id'],
+                    'quantity' => $pm['quantity']
+                ]);
+            }
+        }
+
         return response()->json(['newId' => $product->id]);
     }
 
