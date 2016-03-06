@@ -43,15 +43,17 @@
                 <md-autocomplete
                                  md-input-name="autocompleteField"
                                  md-no-cache="ctrlSearch.noCache"
-                                 md-selected-item="false"
+                                 md-selected-item="ctrlSearch.selectedResult"
                                  md-search-text="ctrlSearch.searchText"
                                  md-items="item in ctrlSearch.doSearch(ctrlSearch.searchText)"
                                  md-item-text="item.name"
                                  md-min-length="3"
+                                 md-delay="500"
+                                 md-selected-item-change="ctrlSearch.gotoItem()"
                                  placeholder="Search">
 
                     <md-item-template>
-                        <span md-highlight-text="ctrlSearch.searchText">@{{item.content_type }} - @{{item.name}}</span>
+                        <span><strong>@{{item.content_type }}</strong> - @{{item.name}}</span>
                     </md-item-template>
 
                     <md-not-found>No matches found.</md-not-found>
@@ -140,6 +142,7 @@
         <div layout="column" flex="5" md-swipe-right="showSideNav('left')" hide-gt-sm><!-- EDGE GRAB FOR FLYOUT MENU --></div>
 
         <div layout="column" flex id="content">
+
 
             <md-content layout="column" flex class="md-padding">
                 <!-- START MAIN PAGE CONTENT -->

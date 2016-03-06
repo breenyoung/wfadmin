@@ -25,11 +25,22 @@ class SearchController extends Controller
             ->select('id', 'name', DB::raw('\'material\' as content_type'))
             ->where('name', 'like', '%' . $query . '%');
 
-        $workOrderSearch = DB::table('work_orders')
+        $workOrderCustomerSearch = DB::table('work_orders')
             ->select('work_orders.id', DB::raw('concat(\'Work Order \', work_orders.id, \' for \',customers.first_name, \' \', customers.last_name) as name'), DB::raw('\'workorder\' as content_type'))
             ->join('customers', 'work_orders.customer_id', '=', 'customers.id')
-            ->where('customers.first_name', 'like', '%' . $query . '%')
-            ->orWhere('customers.last_name', 'like', '%' . $query . '%');
+            ->where('work_orders.completed', 0)
+            ->where(function ($subQuery) use(&$query)
+            {
+                $subQuery->where('customers.first_name', 'like', '%' . $query . '%')
+                    ->orWhere('customers.last_name', 'like', '%' . $query . '%');
+            })
+            ;
+
+        $workOrderProductSearch = DB::table('work_orders')
+            ->select('work_orders.id', DB::raw('concat(\'Work Order \', work_orders.id, \' using \',products.name) as name'), DB::raw('\'workorder\' as content_type'))
+            ->join('products', 'work_orders.product_id', '=', 'products.id')
+            ->where('work_orders.completed', 0)
+            ->where('products.name', 'like', '%' . $query . '%')
             ;
 
         $eventSearch = DB::table('events')
@@ -38,7 +49,8 @@ class SearchController extends Controller
             ->union($productSearch)
             ->union($customerSearch)
             ->union($materialSearch)
-            ->union($workOrderSearch)
+            ->union($workOrderCustomerSearch)
+            ->union($workOrderProductSearch)
             ->get();
 
         //dd(DB::getQueryLog());

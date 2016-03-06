@@ -36,6 +36,12 @@
             $scope.showSearch = !$scope.showSearch;
         };
 
+        // Listen for toggleSearch events
+        $scope.$on("toggleSearch", function (event, args)
+        {
+            $scope.toggleSearch();
+        });
+
     }
 
     angular.module('app.controllers').controller('CoreController', ['$scope', '$auth', '$moment', '$mdSidenav', '$mdMedia', CoreController]);
