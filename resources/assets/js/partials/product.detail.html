@@ -56,6 +56,12 @@
 </div>
 
 <div layout="row">
+    <md-checkbox ng-model="ctrlProductDetail.product.is_custom" ng-true-value="1" ng-false-value="0" aria-label="Custom Product">
+        Custom Product
+    </md-checkbox>
+</div>
+
+<div layout="row">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Description</label>
         <textarea ng-model="ctrlProductDetail.product.description"></textarea>

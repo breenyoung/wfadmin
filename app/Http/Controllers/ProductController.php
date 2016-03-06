@@ -47,9 +47,10 @@ class ProductController extends Controller
         $product->description = $request->input('description');
         $product->price = $request->input('price');
         $product->cost = $request->input('cost');
+        //$product->name = $request->input('active');
         $product->minimum_stock = $request->input('minimum_stock');
         $product->current_stock = $request->input('current_stock');
-        //$product->name = $request->input('active');
+        $product->is_custom = ($request->input('is_custom') ? 1 : 0);
 
         $product->save();
 
@@ -98,9 +99,11 @@ class ProductController extends Controller
             $product->description = $request->input('description');
             $product->price = $request->input('price');
             $product->cost = $request->input('cost');
+            //$product->name = $request->input('active');
             $product->minimum_stock = $request->input('minimum_stock');
             $product->current_stock = $request->input('current_stock');
-            //$product->name = $request->input('active');
+            $product->is_custom = ($request->input('is_custom') ? 1 : 0);
+
 
             // Sync event product materials
             ProductMaterial::where('product_id', $product->id)->delete();

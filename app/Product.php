@@ -14,7 +14,7 @@ class Product extends Model
 {
     protected $table = 'products';
 
-    protected $fillable = ['name', 'sku', 'description', 'price', 'sale_price', 'cost', 'active'];
+    protected $fillable = ['name', 'sku', 'description', 'price', 'cost', 'active', 'minimum_stock', 'current_stock', 'is_custom'];
 
     public function workOrders()
     {
