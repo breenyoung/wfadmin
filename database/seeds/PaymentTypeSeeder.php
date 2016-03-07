@@ -28,7 +28,7 @@ class PaymentTypeSeeder extends Seeder
 
         foreach ($payment_types as $pt)
         {
-            PaymenType::create($pt);
+            PaymentType::create($pt);
         }
 
         Model::reguard();
