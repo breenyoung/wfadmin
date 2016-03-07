@@ -76,6 +76,7 @@
                         </md-item-content>
                     </a>
                 </md-list-item>
+                <md-divider></md-divider>
                 <md-list-item>
                     <a href="#/customers" ng-click="hideSideNav('left')" class="nounderline">
                         <md-item-content md-ink-ripple layout="row" layout-align="start center">
@@ -86,16 +87,18 @@
                         </md-item-content>
                     </a>
                 </md-list-item>
+                <md-divider></md-divider>
                 <md-list-item>
                     <a href="#/purchaseorders" ng-click="hideSideNav('left')" class="nounderline">
                         <md-item-content md-ink-ripple layout="row" layout-align="start center">
                             <div class="inset">
-                                <ng-md-icon icon="my_library_books"></ng-md-icon>
+                                <ng-md-icon icon="assignment"></ng-md-icon>
                             </div>
                             <div class="inset">Purchase Orders</div>
                         </md-item-content>
                     </a>
                 </md-list-item>
+                <md-divider></md-divider>
                 <md-list-item>
                     <a href="#/workorders" ng-click="hideSideNav('left')" class="nounderline">
                         <md-item-content md-ink-ripple layout="row" layout-align="start center">
@@ -106,6 +109,7 @@
                         </md-item-content>
                     </a>
                 </md-list-item>
+                <md-divider></md-divider>
                 <md-list-item>
                     <a href="#/events" ng-click="hideSideNav('left')" class="nounderline">
                         <md-item-content md-ink-ripple layout="row" layout-align="start center">
@@ -116,6 +120,7 @@
                         </md-item-content>
                     </a>
                 </md-list-item>
+                <md-divider></md-divider>
                 <md-list-item>
                     <a href="#/units" ng-click="hideSideNav('left')" class="nounderline">
                         <md-item-content md-ink-ripple layout="row" layout-align="start center">
@@ -126,6 +131,7 @@
                         </md-item-content>
                     </a>
                 </md-list-item>
+                <md-divider></md-divider>
                 <md-list-item>
                     <a href="#/materials" ng-click="hideSideNav('left')" class="nounderline">
                         <md-item-content md-ink-ripple layout="row" layout-align="start center">
@@ -136,6 +142,7 @@
                         </md-item-content>
                     </a>
                 </md-list-item>
+                <md-divider></md-divider>
                 <md-list-item>
                     <a href="#/reports" ng-click="hideSideNav('left')" class="nounderline">
                         <md-item-content md-ink-ripple layout="row" layout-align="start center">

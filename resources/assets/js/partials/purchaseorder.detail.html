@@ -45,7 +45,7 @@
 
         <input type="text" name="quantity" placeholder="Quantity" ng-model="ctrlPurchaseOrderDetail.selectedQuantity"/>
 
-        <md-button class="md-raised md-primary" ng-click="ctrlPurchaseOrderDetail.addPurchaseOrder()">Add</md-button>
+        <md-button class="md-raised md-primary" ng-click="ctrlPurchaseOrderDetail.addProduct()">Add</md-button>
     </div>
 </div>
 
@@ -53,7 +53,7 @@
 <div layout="row" ng-repeat="pop in ctrlPurchaseOrderDetail.purchaseorder.purchase_order_products">
     <div flex>
         {{pop.product.name}} x {{pop.quantity}}
-        (<a href="#" ng-click="ctrlPurchaseOrderDetail.deletePurchaseOrder($event, pop.product_id)">Delete</a>)
+        (<a href="#" ng-click="ctrlPurchaseOrderDetail.deleteProduct($event, pop.product_id)">Delete</a>)
     </div>
 </div>
 
