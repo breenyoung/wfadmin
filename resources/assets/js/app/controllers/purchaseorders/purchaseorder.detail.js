@@ -8,6 +8,7 @@
         //console.log($stateParams);
         RestService.getAllCustomers(self);
         RestService.getAllProducts(self);
+        RestService.getAllPaymentTypes(self);
         RestService.getPurchaseOrder(self, $stateParams.purchaseOrderId);
 
         self.updatePurchaseOrder = function()
