@@ -43,6 +43,10 @@ class PurchaseOrderController extends Controller
         $purchaseOrder = new PurchaseOrder();
         $purchaseOrder->customer_id = $request->input('customer_id');
         $purchaseOrder->fulfilled = ($request->input('fulfilled') ? 1 : 0);
+        $purchaseOrder->paid = ($request->input('paid') ? 1 : 0);
+        $purchaseOrder->payment_type_id = $request->input('payment_type_id');
+        $purchaseOrder->amount_paid = $request->input('amount_paid');
+        $purchaseOrder->total = $request->input('total');
         $purchaseOrder->pickup_date = $request->input('pickup_date');
         $purchaseOrder->notes = $request->input('notes');
 
@@ -90,6 +94,10 @@ class PurchaseOrderController extends Controller
         {
             $purchaseOrder->customer_id = $request->input('customer_id');
             $purchaseOrder->fulfilled = (int)$request->input('fulfilled');
+            $purchaseOrder->paid = ($request->input('paid') ? 1 : 0);
+            $purchaseOrder->payment_type_id = $request->input('payment_type_id');
+            $purchaseOrder->amount_paid = $request->input('amount_paid');
+            $purchaseOrder->total = $request->input('total');
             $purchaseOrder->pickup_date = $request->input('pickup_date');
             $purchaseOrder->notes = $request->input('notes');
 
