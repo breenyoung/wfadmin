@@ -15,11 +15,11 @@ class AlterTablePurchaseOrdersAddFieldsPaidPaymentTypeAmountPaidTotal extends Mi
         Schema::table('purchase_orders', function ($table)
         {
             $table->boolean('paid')->default(0)->after('fulfilled');
-            $table->integer('payment_type_id')->unsigned()->after('paid');
-            $table->decimal('amount_paid', 6, 2)->unsigned()->after('payment_type_id');
-            $table->decimal('total', 6, 2)->unsigned()->after('amount_paid');
+            $table->integer('payment_type_id')->unsigned()->nullable()->after('paid');
+            $table->decimal('amount_paid', 6, 2)->unsigned()->default(0)->after('payment_type_id');
+            $table->decimal('total', 6, 2)->unsigned()->default(0)->after('amount_paid');
 
-            $table->foreign('payment_type_id')->references('id')->on('payment_types')->onDelete('restrict');
+            //$table->foreign('payment_type_id')->references('id')->on('payment_types')->onDelete('restrict');
         });
     }
 
