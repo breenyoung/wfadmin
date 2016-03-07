@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Purchase Orders</title>
+</head>
+<body>
+    <div layout="row">
+    <md-subheader class="md-primary">Purchase Orders</md-subheader>
+    </div>
+
+    <md-table-container>
+        <table md-table>
+            <thead md-head>
+            <tr md-row>
+                <th md-column></th>
+                <th md-column>Customer</th>
+                <th md-column>Pickup Date</th>
+                <th md-column>Fulfilled</th>
+            </tr>
+            </thead>
+            <tbody md-body>
+            <tr md-row ng-repeat="p in ctrlPurchaseOrder.purchaseorders">
+                <td md-cell><a ui-sref="app.purchaseorders.detail({purchaseOrderId: p.id})" class="nounderline">PO #{{p.id}}</a></td>
+                <td md-cell><a ui-sref="app.customers.detail({customerId: p.customer_id})" class="nounderline">{{p.customer.first_name}} {{p.customer.last_name}}</a></td>
+                <td md-cell>{{p.pickup_date}}</td>
+                <td md-cell>{{w.fulfilled == 1 ? 'Yes' : 'No'}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </md-table-container>
+
+    <md-button class="md-fab md-fab-bottom-right" aria-label=”Add”>
+        <ng-md-icon icon="add" ui-sref="app.purchaseorders.create"></ng-md-icon>
+    </md-button>
+
+</body>
+</html>

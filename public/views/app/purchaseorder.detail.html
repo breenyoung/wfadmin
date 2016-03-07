@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Purchase Order Details</title>
+</head>
+<body>
+<h2>Purchase Order Detail</h2>
+<form name="form1">
+
+<div layout="row">
+
+    <md-input-container>
+        <label>Customer</label>
+        <md-select ng-model="ctrlPurchaseOrderDetail.purchaseorder.customer_id">
+            <md-option ng-repeat="c in ctrlPurchaseOrderCreate.customers" value="{{c.id}}">
+                {{c.first_name}} {{c.last_name}}
+            </md-option>
+        </md-select>
+    </md-input-container>
+
+</div>
+
+<div layout="row">
+    <md-checkbox ng-model="ctrlPurchaseOrderDetail.purchaseorder.fulfilled" aria-label="Fulfilled">
+        Fulfilled?
+    </md-checkbox>
+</div>
+
+<div layout="row">
+    <md-datepicker ng-model="ctrlPurchaseOrderDetail.purchaseorder.pickup_date" md-placeholder="Pickup Date"></md-datepicker>
+</div>
+
+<div layout="row">
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Notes</label>
+        <textarea ng-model="ctrlPurchaseOrderDetail.purchaseorder.notes"></textarea>
+    </md-input-container>
+</div>
+
+<div layout="row">
+    <div flex>
+
+        <select ng-model="ctrlPurchaseOrderDetail.selectedProduct" ng-options="p as p.name for p in ctrlPurchaseOrderCreate.products"></select>
+
+        <input type="text" name="quantity" placeholder="Quantity" ng-model="ctrlPurchaseOrderCreate.selectedQuantity"/>
+
+        <md-button class="md-raised md-primary" ng-click="ctrlPurchaseOrderCreate.addPurchaseOrder()">Add</md-button>
+    </div>
+</div>
+
+
+<div layout="row" ng-repeat="pop in ctrlPurchaseOrderDetail.purchaseorder.purchase_order_products">
+    <div flex>
+        {{pop.product.name}} x {{pop.quantity}}
+        (<a href="#" ng-click="ctrlPurchaseOrderDetail.deletePurchaseOrder($event, pop.product_id)">Delete</a>)
+    </div>
+</div>
+
+<div layout="row">
+    <div flex="10">
+        <md-button class="md-raised md-primary" ng-click="ctrlPurchaseOrderDetail.updatePurchaseOrder()">Submit</md-button>
+    </div>
+    <div flex="10">
+        <md-button class="md-raised md-warn" ng-click="ctrlPurchaseOrderDetail.showDeleteConfirm($event)">Delete</md-button>
+    </div>
+    <div flex="10">
+        <md-button class="md-raised" ui-sref="app.purchaseorders">Cancel</md-button>
+    </div>
+</div>
+
+</form>
+
+</body>
+</html>

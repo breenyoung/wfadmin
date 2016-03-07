@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Purchase Order Create</title>
+</head>
+<body>
+<h2>Purchase Order create</h2>
+<form name="form1">
+
+<div layout="row">
+
+    <md-input-container>
+        <label>Customer</label>
+        <md-select ng-model="ctrlPurchaseOrderCreate.purchaseorder.customer_id">
+            <md-option ng-repeat="c in ctrlPurchaseOrderCreate.customers" value="{{c.id}}">
+                {{c.first_name}} {{c.last_name}}
+            </md-option>
+        </md-select>
+    </md-input-container>
+
+</div>
+
+<div layout="row">
+    <md-checkbox ng-model="ctrlPurchaseOrderCreate.purchaseorder.fulfilled" aria-label="Fulfilled">
+        Fulfilled?
+    </md-checkbox>
+</div>
+
+<div layout="row">
+    <md-datepicker ng-model="ctrlPurchaseOrderCreate.purchaseorder.pickup_date" md-placeholder="Pickup Date"></md-datepicker>
+</div>
+
+<div layout="row">
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Notes</label>
+        <textarea ng-model="ctrlPurchaseOrderCreate.purchaseorder.notes"></textarea>
+    </md-input-container>
+</div>
+
+<div layout="row">
+    <div flex>
+
+        <select ng-model="ctrlPurchaseOrderCreate.selectedProduct" ng-options="p as p.name for p in ctrlPurchaseOrderCreate.products"></select>
+
+        <input type="text" name="quantity" placeholder="Quantity" ng-model="ctrlPurchaseOrderCreate.selectedQuantity"/>
+
+        <md-button class="md-raised md-primary" ng-click="ctrlPurchaseOrderCreate.addPurchaseOrder()">Add</md-button>
+    </div>
+</div>
+
+
+<div layout="row" ng-repeat="pop in ctrlPurchaseOrderCreate.purchaseorder.purchase_order_products">
+    <div flex>
+        {{pop.product.name}} x {{pop.quantity}}
+        (<a href="#" ng-click="ctrlPurchaseOrderCreate.deletePurchaseOrder($event, pop.product_id)">Delete</a>)
+    </div>
+
+</div>
+
+
+<div layout="row">
+    <div flex="10">
+        <md-button class="md-raised md-primary" ng-click="ctrlPurchaseOrderCreate.createPurchaseOrder()">Submit</md-button>
+    </div>
+    <div flex="10">
+        <md-button class="md-raised" ui-sref="app.purchaseorders">Cancel</md-button>
+    </div>
+</div>
+</form>
+
+</body>
+</html>
