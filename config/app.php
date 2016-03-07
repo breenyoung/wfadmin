@@ -215,8 +215,10 @@ return [
     'pickup_reminder_email_from' => 'workorders@woodfinds.com',
     'pickup_reminder_email_subject' => 'Wood Finds Work Order Report for ',
     'pickup_reminder_email_view' => 'emails.workorders',
+
     'scheduling_work_orders_done_per_week' => 10,
-    'scheduling_week_start' => 7,
+    'scheduling_work_orders_done_per_week_overflow' => 5,
+    'scheduling_week_start_day' => 7,
 
 
 ];
