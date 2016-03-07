@@ -13,7 +13,7 @@
     <md-input-container>
         <label>Customer</label>
         <md-select ng-model="ctrlPurchaseOrderDetail.purchaseorder.customer_id">
-            <md-option ng-repeat="c in ctrlPurchaseOrderCreate.customers" value="{{c.id}}">
+            <md-option ng-repeat="c in ctrlPurchaseOrderDetail.customers" value="{{c.id}}">
                 {{c.first_name}} {{c.last_name}}
             </md-option>
         </md-select>
@@ -22,13 +22,13 @@
 </div>
 
 <div layout="row">
-    <md-checkbox ng-model="ctrlPurchaseOrderDetail.purchaseorder.fulfilled" aria-label="Fulfilled">
+    <md-checkbox ng-model="ctrlPurchaseOrderDetail.purchaseorder.fulfilled" ng-true-value="1" ng-false-value="0" aria-label="Fulfilled">
         Fulfilled?
     </md-checkbox>
 </div>
 
 <div layout="row">
-    <md-datepicker ng-model="ctrlPurchaseOrderDetail.purchaseorder.pickup_date" md-placeholder="Pickup Date"></md-datepicker>
+    <md-datepicker ng-model="ctrlPurchaseOrderDetail.purchaseorder.pickup_date" md-placeholder="Pickup Date" utc-Parser></md-datepicker>
 </div>
 
 <div layout="row">
@@ -41,11 +41,11 @@
 <div layout="row">
     <div flex>
 
-        <select ng-model="ctrlPurchaseOrderDetail.selectedProduct" ng-options="p as p.name for p in ctrlPurchaseOrderCreate.products"></select>
+        <select ng-model="ctrlPurchaseOrderDetail.selectedProduct" ng-options="p as p.name for p in ctrlPurchaseOrderDetail.products"></select>
 
-        <input type="text" name="quantity" placeholder="Quantity" ng-model="ctrlPurchaseOrderCreate.selectedQuantity"/>
+        <input type="text" name="quantity" placeholder="Quantity" ng-model="ctrlPurchaseOrderDetail.selectedQuantity"/>
 
-        <md-button class="md-raised md-primary" ng-click="ctrlPurchaseOrderCreate.addPurchaseOrder()">Add</md-button>
+        <md-button class="md-raised md-primary" ng-click="ctrlPurchaseOrderDetail.addPurchaseOrder()">Add</md-button>
     </div>
 </div>
 

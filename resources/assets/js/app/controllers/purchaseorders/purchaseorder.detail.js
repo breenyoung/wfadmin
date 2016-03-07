@@ -51,7 +51,7 @@
             });
         };
 
-        self.addProduct = function()
+        self.addPurchaseOrder = function()
         {
             console.log(self.selectedProduct);
 
@@ -68,7 +68,7 @@
 
         };
 
-        self.deleteProduct = function(e, productId)
+        self.deletePurchaseOrder = function(e, productId)
         {
             var indexToRemove;
             for(var i = 0; i < self.purchaseorder.purchase_order_products.length; i++)

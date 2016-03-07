@@ -89,7 +89,7 @@ class PurchaseOrderController extends Controller
         if(isset($purchaseOrder))
         {
             $purchaseOrder->customer_id = $request->input('customer_id');
-            $purchaseOrder->fulfilled = ($request->input('fulfilled') ? 1 : 0);
+            $purchaseOrder->fulfilled = (int)$request->input('fulfilled');
             $purchaseOrder->pickup_date = $request->input('pickup_date');
             $purchaseOrder->notes = $request->input('notes');
 
