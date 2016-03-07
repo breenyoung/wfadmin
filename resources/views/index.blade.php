@@ -100,6 +100,17 @@
                 </md-list-item>
                 <md-divider></md-divider>
                 <md-list-item>
+                    <a href="#/paymenttypes" ng-click="hideSideNav('left')" class="nounderline">
+                        <md-item-content md-ink-ripple layout="row" layout-align="start center">
+                            <div class="inset">
+                                <ng-md-icon icon="money"></ng-md-icon>
+                            </div>
+                            <div class="inset">Payment Types</div>
+                        </md-item-content>
+                    </a>
+                </md-list-item>
+                <md-divider></md-divider>
+                <md-list-item>
                     <a href="#/workorders" ng-click="hideSideNav('left')" class="nounderline">
                         <md-item-content md-ink-ripple layout="row" layout-align="start center">
                             <div class="inset">

@@ -267,6 +267,37 @@
                     }
                 }
             })
+            .state('app.paymenttypes', {
+                url: '/paymenttypes',
+                views: {
+                    'main@': {
+                        templateUrl: getView('paymenttypes'),
+                        controller: 'PaymentTypeController',
+                        controllerAs: 'ctrlPaymentType'
+                    }
+                }
+            })
+            .state('app.paymenttypes.create', {
+                url: '/create',
+                views: {
+                    'main@': {
+                        templateUrl: getView('paymenttype.create'),
+                        controller: 'PaymentTypeCreateController',
+                        controllerAs: 'ctrlPaymentTypeCreate'
+                    }
+                }
+            })
+            .state('app.paymenttypes.detail', {
+                url: '/detail/:paymentTypeId',
+                views: {
+                    'main@': {
+                        templateUrl: getView('paymenttype.detail'),
+                        controller: 'PaymentTypeDetailController',
+                        controllerAs: 'ctrlPaymentTypeDetail'
+                    }
+                }
+            })
+
 
             ;
 

@@ -168,6 +168,24 @@
 
                     scope.purchaseorder = data;
                 });
+            },
+
+            getAllPaymentTypes: function(scope)
+            {
+                Restangular.all('paymenttype').getList().then(function(data)
+                {
+                    console.log(data);
+                    scope.paymenttypes = data;
+                });
+            },
+
+            getPaymentType: function(scope, id)
+            {
+                Restangular.one('paymenttype', id).get().then(function(data)
+                {
+                    //console.log(data);
+                    scope.paymenttype = data;
+                });
             }
 
         };
