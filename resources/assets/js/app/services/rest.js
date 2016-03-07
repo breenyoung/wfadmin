@@ -25,6 +25,8 @@
                 Restangular.one('product', id).get().then(function(data)
                 {
                     //console.log(data);
+                    // Hack for OLD mysql drivers on Hostgator which don't properly encode integer and return them as strings
+                    data.is_custom = parseInt(data.is_custom);
                     scope.product = data;
                 });
             },
@@ -67,6 +69,8 @@
                     // Format string dates into date objects
                     data.start_date = $moment(data.start_date);
                     data.end_date = $moment(data.end_date);
+
+                    // Hack for OLD mysql drivers on Hostgator which don't properly encode integer and return them as strings
                     data.completed = parseInt(data.completed);
 
                     self.workorder = data;
