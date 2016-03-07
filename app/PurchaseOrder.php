@@ -10,6 +10,11 @@ class PurchaseOrder extends Model
 
     protected $fillable = ['customer_id', 'fulfilled', 'pickup_date', 'notes'];
 
+    public function customer()
+    {
+        return $this->belongsTo('App\Customer');
+    }
+
     public function purchaseOrderProducts()
     {
         //return $this->belongsToMany('App\Material', 'product_materials', 'product_id', 'material_id');

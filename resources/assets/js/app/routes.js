@@ -237,6 +237,37 @@
                     }
                 }
             })
+            .state('app.purchaseorders', {
+                url: '/purchaseorders',
+                views: {
+                    'main@': {
+                        templateUrl: getView('purchaseorders'),
+                        controller: 'PurchaseOrderController',
+                        controllerAs: 'ctrlPurchaseOrder'
+                    }
+                }
+            })
+            .state('app.purchaseorders.create', {
+                url: '/create',
+                views: {
+                    'main@': {
+                        templateUrl: getView('purchaseorder.create'),
+                        controller: 'PurchaseOrderCreateController',
+                        controllerAs: 'ctrlPurchaseOrderCreate'
+                    }
+                }
+            })
+            .state('app.purchaseorders.detail', {
+                url: '/detail/:purchaseOrderId',
+                views: {
+                    'main@': {
+                        templateUrl: getView('purchaseorder.detail'),
+                        controller: 'PurchaseOrderDetailController',
+                        controllerAs: 'ctrlPurchaseOrderDetail'
+                    }
+                }
+            })
+
             ;
 
     } );

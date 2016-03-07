@@ -11,8 +11,8 @@ class PurchaseOrderProduct extends Model
 
     protected $fillable = ['purchase_order_id', 'product_id', 'quantity'];
 
-    public function purchaseOrder()
+    public function product()
     {
-        return $this->belongsTo('App\PurchaseOrder');
+        return $this->belongsTo('App\Product');
     }
 }

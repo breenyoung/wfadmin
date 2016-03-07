@@ -87,6 +87,16 @@
                     </a>
                 </md-list-item>
                 <md-list-item>
+                    <a href="#/purchaseorders" ng-click="hideSideNav('left')" class="nounderline">
+                        <md-item-content md-ink-ripple layout="row" layout-align="start center">
+                            <div class="inset">
+                                <ng-md-icon icon="my_library_books"></ng-md-icon>
+                            </div>
+                            <div class="inset">Purchase Orders</div>
+                        </md-item-content>
+                    </a>
+                </md-list-item>
+                <md-list-item>
                     <a href="#/workorders" ng-click="hideSideNav('left')" class="nounderline">
                         <md-item-content md-ink-ripple layout="row" layout-align="start center">
                             <div class="inset">

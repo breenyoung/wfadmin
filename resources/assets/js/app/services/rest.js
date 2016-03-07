@@ -143,7 +143,31 @@
                    console.log(data);
 
                 });
+            },
 
+            getAllPurchaseOrders: function(scope)
+            {
+                Restangular.all('purchaseorder').getList().then(function(data)
+                {
+                    //console.log(data);
+                    scope.purchaseorders = data;
+                });
+            },
+
+            getPurchaseOrder: function(scope, id)
+            {
+                Restangular.one('purchaseorder', id).get().then(function(data)
+                {
+                    //console.log(data);
+
+                    // Format string dates into date objects
+                    data.pickup_date = $moment(data.pickup_date);
+
+                    // Hack for OLD mysql drivers on Hostgator which don't properly encode integer and return them as strings
+                    data.fulfilled = parseInt(data.fulfilled);
+
+                    scope.purchaseorder = data;
+                });
             }
 
         };
