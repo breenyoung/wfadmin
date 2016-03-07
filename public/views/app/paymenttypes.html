@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Types</title>
+</head>
+<body>
+
+<div layout="row">
+    <md-subheader class="md-primary">Payment Types</md-subheader>
+</div>
+
+<md-list>
+    <md-list-item class="md-3-line" ng-repeat="pt in ctrlPaymentType.paymenttypes">
+        <div class="md-list-item-text" layout="column">
+            <h3><a ui-sref="app.paymenttypes.detail({paymentTypeId: pt.id})" class="nounderline">{{pt.name}}</a></h3>
+        </div>
+        <md-divider ng-if="!$last"></md-divider>
+    </md-list-item>
+</md-list>
+
+<md-button class="md-fab md-fab-bottom-right" aria-label=”Add”>
+    <ng-md-icon icon="add" ui-sref="app.paymenttypes.create"></ng-md-icon>
+</md-button>
+
+</body>
+</html>
