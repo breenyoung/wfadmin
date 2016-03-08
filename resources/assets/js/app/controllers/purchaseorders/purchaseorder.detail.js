@@ -64,6 +64,12 @@
                 product: self.selectedProduct
             });
 
+            if(self.purchaseorder.total === undefined || self.purchaseorder.total === null) { self.purchaseorder.total = 0; }
+            var currentCost = parseFloat(self.purchaseorder.total);
+            var btest = (parseFloat(self.selectedProduct.price) * parseInt(self.selectedQuantity));
+            currentCost += btest;
+            self.purchaseorder.total = currentCost;
+
             self.selectedProduct = "";
             self.selectedQuantity = 0;
 
@@ -82,6 +88,11 @@
             }
 
             console.log(indexToRemove);
+
+            var currentCost = parseFloat(self.purchaseorder.total);
+            var btest = (parseFloat(self.purchaseorder.purchase_order_products[indexToRemove].product.price) * parseInt(self.purchaseorder.purchase_order_products[indexToRemove].quantity));
+            currentCost -= btest;
+            self.purchaseorder.total = currentCost;
 
             self.purchaseorder.purchase_order_products.splice(indexToRemove, 1);
 
