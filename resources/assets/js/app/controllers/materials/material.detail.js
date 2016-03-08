@@ -6,6 +6,7 @@
         var self = this;
 
         RestService.getAllUnits(self);
+        RestService.getMaterialAllTypes(self);
 
         //console.log($stateParams);
         RestService.getMaterial(self, $stateParams.materialId);

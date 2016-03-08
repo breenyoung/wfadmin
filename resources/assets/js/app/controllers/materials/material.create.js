@@ -6,6 +6,7 @@
         var self = this;
 
         RestService.getAllUnits(self);
+        RestService.getMaterialAllTypes(self);
 
         self.createMaterial = function()
         {
