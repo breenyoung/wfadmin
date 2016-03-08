@@ -50,6 +50,15 @@ class PurchaseOrderController extends Controller
         $purchaseOrder->pickup_date = $request->input('pickup_date');
         $purchaseOrder->notes = $request->input('notes');
 
+        // TEMP StuFF TODO: REMOVE LATER
+        if($request->input('created_at'))
+        {
+            $strStartDate = substr($request->input('created_at'), 0, strpos($request->input('created_at'), 'T'));
+            $startDate = \Carbon\Carbon::createFromFormat('Y-m-d', $strStartDate);
+            $purchaseOrder->created_at = $startDate;
+        }
+        //////////////////////////////
+
         $purchaseOrder->save();
 
         // Add purchase order products now
