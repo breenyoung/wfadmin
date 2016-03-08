@@ -103,7 +103,7 @@
                     <a href="#/paymenttypes" ng-click="hideSideNav('left')" class="nounderline">
                         <md-item-content md-ink-ripple layout="row" layout-align="start center">
                             <div class="inset">
-                                <ng-md-icon icon="money"></ng-md-icon>
+                                <ng-md-icon icon="attach_money"></ng-md-icon>
                             </div>
                             <div class="inset">Payment Types</div>
                         </md-item-content>
