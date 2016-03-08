@@ -22,15 +22,6 @@
 </div>
 
 <div layout="row">
-    <md-checkbox ng-model="ctrlPurchaseOrderDetail.purchaseorder.fulfilled" ng-true-value="1" ng-false-value="0" aria-label="Fulfilled">
-        Fulfilled?
-    </md-checkbox>
-    <md-checkbox ng-model="ctrlPurchaseOrderDetail.purchaseorder.paid" ng-true-value="1" ng-false-value="0" aria-label="Paid" ng-click="((ctrlPurchaseOrderCreate.purchaseorder.paid == 0) ? ctrlPurchaseOrderCreate.purchaseorder.amount_paid = ctrlPurchaseOrderCreate.purchaseorder.total : ctrlPurchaseOrderCreate.purchaseorder.amount_paid = 0)">
-        Paid?
-    </md-checkbox>
-</div>
-
-<div layout="row">
     <md-datepicker ng-model="ctrlPurchaseOrderDetail.purchaseorder.pickup_date" md-placeholder="Pickup Date" utc-Parser></md-datepicker>
 </div>
 
@@ -68,6 +59,15 @@
         <label>Notes</label>
         <textarea ng-model="ctrlPurchaseOrderDetail.purchaseorder.notes"></textarea>
     </md-input-container>
+</div>
+
+<div layout="row">
+    <md-checkbox ng-model="ctrlPurchaseOrderDetail.purchaseorder.fulfilled" ng-true-value="1" ng-false-value="0" aria-label="Fulfilled">
+        Fulfilled?
+    </md-checkbox>
+    <md-checkbox ng-model="ctrlPurchaseOrderDetail.purchaseorder.paid" ng-true-value="1" ng-false-value="0" aria-label="Paid" ng-click="((ctrlPurchaseOrderDetail.purchaseorder.paid == undefined || ctrlPurchaseOrderDetail.purchaseorder.paid == 0) ? ctrlPurchaseOrderDetail.purchaseorder.amount_paid = ctrlPurchaseOrderDetail.purchaseorder.total : ctrlPurchaseOrderDetail.purchaseorder.amount_paid = 0)">
+        Paid?
+    </md-checkbox>
 </div>
 
 <div layout="row">
