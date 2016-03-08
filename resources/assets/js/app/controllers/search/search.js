@@ -7,7 +7,7 @@
 
         self.noCache = true;
         self.searchText = "";
-        self.selectedResult;
+        self.selectedResult = undefined;
 
         self.doSearch = function(query)
         {
@@ -28,7 +28,7 @@
         self.gotoItem = function()
         {
             console.log(self.selectedResult);
-            if(self.selectedResult != null && self.selectedResult != undefined)
+            if(self.selectedResult !== null && self.selectedResult !== undefined)
             {
                 self.searchText = "";
                 self.fireToggleSearchEvent();
@@ -56,7 +56,7 @@
                         break;
                 }
             }
-        }
+        };
     }
 
     angular.module('app.controllers').controller('SearchController', ['$scope', '$auth', 'Restangular', '$state', SearchController]);
