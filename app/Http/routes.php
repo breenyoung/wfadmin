@@ -39,6 +39,7 @@ Route::group(['prefix' => 'api'], function()
     Route::resource('material', 'MaterialController');
     Route::resource('purchaseorder', 'PurchaseOrderController');
     Route::resource('paymenttype', 'PaymentTypeController');
+    Route::resource('materialtype', 'MaterialTypeController');
 
     Route::get('search/{query}', 'SearchController@index');
 });
