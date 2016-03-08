@@ -186,6 +186,15 @@
                     //console.log(data);
                     scope.paymenttype = data;
                 });
+            },
+
+            getMaterialAllTypes: function(scope)
+            {
+                Restangular.all('materialtype').getList().then(function(data)
+                {
+                    console.log(data);
+                    scope.materialtypes = data;
+                });
             }
 
         };

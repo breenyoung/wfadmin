@@ -33,7 +33,18 @@
     </div>
 </div>
 
-
+<div layout="row">
+    <div flex>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Type</label>
+            <md-select ng-model="ctrlMaterialCreate.material.material_type_id">
+                <md-option ng-repeat="mt in ctrlMaterialCreate.materialtypes" value="{{mt.id}}">
+                    {{mt.name}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+    </div>
+</div>
 
 
 
