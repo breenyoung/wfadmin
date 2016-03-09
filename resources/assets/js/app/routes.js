@@ -177,6 +177,16 @@
                     }
                 }
             })
+            .state('app.reports.currentstock', {
+                url: '/currentstock',
+                views: {
+                    'main@': {
+                        templateUrl: getView('report.currentstock'),
+                        controller: 'ReportController',
+                        controllerAs: 'ctrlReports'
+                    }
+                }
+            })
             .state('app.units', {
                 url: '/units',
                 views: {
