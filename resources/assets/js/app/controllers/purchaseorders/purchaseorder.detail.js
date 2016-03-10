@@ -56,22 +56,47 @@
         {
             console.log(self.selectedProduct);
 
-            if(self.purchaseorder.purchase_order_products === undefined) { self.purchaseorder.purchase_order_products = []; }
-
-            self.purchaseorder.purchase_order_products.push({
+            var popObj = {
                 product_id: self.selectedProduct.id,
                 quantity: self.selectedQuantity,
                 product: self.selectedProduct
+            };
+
+            Restangular.all('scheduler/getWorkOrders').post({productsToFulfill: [popObj], purchaseOrderId: self.purchaseorder.id}).then(function(data)
+            {
+                console.log(data.workOrdersToCreate);
+
+                if(self.purchaseorder.purchase_order_products === undefined) { self.purchaseorder.purchase_order_products = []; }
+                self.purchaseorder.purchase_order_products.push(popObj);
+
+                // Recalculate PO total
+                if(self.purchaseorder.total === undefined || self.purchaseorder.total === null) { self.purchaseorder.total = 0; }
+                var currentCost = parseFloat(self.purchaseorder.total);
+                var btest = (parseFloat(self.selectedProduct.price) * parseInt(self.selectedQuantity));
+                currentCost += btest;
+                self.purchaseorder.total = currentCost;
+
+                self.selectedProduct = "";
+                self.selectedQuantity = 0;
+
+                if(data.workOrdersToCreate > 0)
+                {
+
+                    // There are workorders needed for this PO, alert of their creation
+                    $scope.workOrdersToCreate = data.workOrdersToCreate;
+                    $scope.workOrders = data.workOrders;
+
+                    DialogService.fromTemplate(e, 'dlgAlertWorkOrders', $scope).then(
+                        function()
+                        {
+                            console.log('confirmed');
+                        }
+                    );
+                }
+            }, function()
+            {
+                ToastService.show("Error adding product, please try again");
             });
-
-            if(self.purchaseorder.total === undefined || self.purchaseorder.total === null) { self.purchaseorder.total = 0; }
-            var currentCost = parseFloat(self.purchaseorder.total);
-            var btest = (parseFloat(self.selectedProduct.price) * parseInt(self.selectedQuantity));
-            currentCost += btest;
-            self.purchaseorder.total = currentCost;
-
-            self.selectedProduct = "";
-            self.selectedQuantity = 0;
         };
 
         self.deleteProduct = function(e, productId)
@@ -90,6 +115,7 @@
 
             Restangular.all('scheduler/restoreStockForProduct').post({purchase_order_id: self.purchaseorder.id, product_id: self.purchaseorder.purchase_order_products[indexToRemove].product_id}).then(function(data)
             {
+                // Recalculate PO total
                 var currentCost = parseFloat(self.purchaseorder.total);
                 var btest = (parseFloat(self.purchaseorder.purchase_order_products[indexToRemove].product.price) * parseInt(self.purchaseorder.purchase_order_products[indexToRemove].quantity));
                 currentCost -= btest;
