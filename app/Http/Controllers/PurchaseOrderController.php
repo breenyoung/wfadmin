@@ -49,15 +49,13 @@ class PurchaseOrderController extends Controller
      */
     public function store(Request $request)
     {
-
-        //return 1;
-
         $workOrderScheduleService = new WorkOrderSchedulerService();
 
         try
         {
             \DB::beginTransaction();
 
+            // First create the PO object
             $purchaseOrder = new PurchaseOrder();
             $purchaseOrder->customer_id = $request->input('customer_id');
             $purchaseOrder->fulfilled = ($request->input('fulfilled') ? 1 : 0);
@@ -78,7 +76,7 @@ class PurchaseOrderController extends Controller
 
             $purchaseOrder->save();
 
-            // Add purchase order products now
+            // Now add purchase order products for PO
             if ($request->input('purchase_order_products') && is_array($request->input('purchase_order_products'))) {
                 foreach ($request->input('purchase_order_products') as $pop) {
                     $purchaseOrder->purchaseOrderProducts()->create([
@@ -141,7 +139,7 @@ class PurchaseOrderController extends Controller
             $purchaseOrder->pickup_date = $request->input('pickup_date');
             $purchaseOrder->notes = $request->input('notes');
 
-
+            /*
             // Sync purchase order products now
             PurchaseOrderProduct::where('purchase_order_id', $purchaseOrder->id)->delete();
             if($request->input('purchase_order_products') && is_array($request->input('purchase_order_products')))
@@ -154,6 +152,7 @@ class PurchaseOrderController extends Controller
                     ]);
                 }
             }
+            */
 
             $purchaseOrder->save();
         }
@@ -173,12 +172,18 @@ class PurchaseOrderController extends Controller
         {
             try
             {
+                $workOrderScheduleService = new WorkOrderSchedulerService();
+
+
                 \DB::beginTransaction();
 
                 // Restore stock for any non workorder quantities
-                $workOrderScheduleService = new WorkOrderSchedulerService();
                 $workOrderScheduleService->restoreStockForProducts($purchaseOrder->id);
 
+                // Delete any work orders for this PO
+                $workOrderScheduleService->deleteWorkOrdersForPo($purchaseOrder->id);
+
+                // Now delete the PO itself
                 $purchaseOrder->delete();
 
                 \DB::commit();

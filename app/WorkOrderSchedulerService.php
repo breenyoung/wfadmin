@@ -151,6 +151,19 @@ class WorkOrderSchedulerService
         return $workOrders;
     }
 
+    public function deleteWorkOrdersForPo($purchaseOrderId, $productId = null)
+    {
+        $query = WorkOrder::where('purchase_order_id', $purchaseOrderId);
+        if($productId != null) { $query->where('product_id', $productId); }
+
+        $query->delete();
+    }
+
+    public function deletePurchaseOrderProduct($purchaseOrderId, $productId)
+    {
+        PurchaseOrderProduct::where('purchase_order_id', $purchaseOrderId)->where('product_id', $productId)->delete();
+    }
+
     private function getProductStock($productId)
     {
         return Product::where('id', $productId)->select('id', 'name', 'current_stock')->first();
