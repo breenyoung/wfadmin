@@ -8,14 +8,28 @@
     angular.module("app.services").factory('DialogService', function( $mdDialog ){
 
         return {
-            fromTemplate: function( template, $scope ) {
-
+            fromTemplate: function(ev, template, scope ) {
                 var options = {
-                    templateUrl: '/views/dialogs/' + template + '/' + template + '.html'
+                    templateUrl: '/views/dialogs/' + template + '.html',
+                    targetEvent: ev,
+                    controller: function DialogController($scope, $mdDialog)
+                    {
+                        $scope.confirmDialog = function () {
+                            $mdDialog.hide();
+                        };
+
+                        $scope.cancelDialog = function()
+                        {
+                            $mdDialog.cancel();
+                        };
+                    }
                 };
 
-                if ( $scope ){
-                    options.scope = $scope.$new();
+                if ( scope )
+                {
+                    //console.log(scope);
+                    options.scope = scope.$new();
+                    //options.preserveScope = true;
                 }
 
                 return $mdDialog.show(options);

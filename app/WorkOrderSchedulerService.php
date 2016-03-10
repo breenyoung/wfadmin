@@ -9,7 +9,7 @@
 namespace App;
 
 use \DB;
-use Carbon\Carbon;
+use \Carbon\Carbon;
 
 use App\PurchaseOrder;
 use App\WorkOrder;
@@ -19,8 +19,7 @@ use App\Material;
 class WorkOrderSchedulerService
 {
     protected $today;
-    protected $workOrdersDonePerWeek;
-    protected $workOrdersOverflowPerWeek;
+    protected $daysLeadTimeFromPickup;
 
     /**
      * WorkOrderSchedulerService constructor.
@@ -28,36 +27,133 @@ class WorkOrderSchedulerService
     public function __construct()
     {
         $this->today = Carbon::today('America/Halifax');
-        $this->workOrdersDonePerWeek = config('scheduling_work_orders_done_per_week');
-        $this->workOrdersOverflowPerWeek = config('scheduling_work_orders_done_per_week_overflow');
+        $this->daysLeadTimeFromPickup = config('app.scheduler_days_lead_time_from_pickup_date');
     }
 
-    public function getWorkOrdersForThisWeek()
+    public function determineWorkOrdersForPo($productsToFulfill)
     {
-        $this->getWorkOrdersForWeek($this->today);
-    }
+        $workOrdersToCreate = 0;
+        $workOrders = [];
+        $workOrderSchedule = [];
 
-    public function getWorkOrdersForWeek($date)
-    {
-        // Convert to Carbon date if this is just a vanilla PHP DateTime class
-        if($date instanceof DateTime)
+        // ===============================================================================
+        // Determine first if any work orders actually have to be done for this PO
+        // ===============================================================================
+        foreach($productsToFulfill as $p)
         {
-            $date = Carbon::instance($date);
+            $product_id = $p['product_id'];
+            $quantity = $p['quantity'];
+
+            $productStock = $this->getProductStock($product_id);
+
+            if($productStock->current_stock < $quantity)
+            {
+                // We have less then the quantity the PO needs, find out exact number we're missing
+                $stockDiff = $quantity - $productStock->current_stock;
+                //$workOrdersToCreate += $stockDiff;
+                $workOrdersToCreate += 1;
+
+                array_push($workOrders, ['product_id' => $productStock->id, 'product_name' => $productStock->name, 'quantity_to_create' => $stockDiff]);
+            }
         }
 
-        $startOfTheWeek = $date->startOfTheWeek();
-        $endOfTheWeek = $date->endOfTheWeek();
+        $workOrderSchedule['workOrdersToCreate'] = $workOrdersToCreate;
+        $workOrderSchedule['workOrders'] = $workOrders;
 
-        $workOrdersThisWeek = WorkOrder::whereDate('start_date', '>=', $startOfTheWeek)->whereDate('start_date', '<=', $endOfTheWeek)->get();
-
-        $workOrderCount = $workOrdersThisWeek->count();
-
+        return $workOrderSchedule;
     }
 
-    public function getProductStock($productIds)
+    public function deductStockFromProducts($products)
     {
-        return Product::whereIn('id', $productIds)->select('id', 'current_stock')->get();
+        if ($products && is_array($products))
+        {
+            foreach ($products as $p)
+            {
+                $product = Product::find($p['product_id']);
+                if(isset($product))
+                {
+                    $newStock = $product->current_stock - $p['quantity'];
+                    $product->current_stock = ($newStock < 0) ? 0 : $newStock;
+                    $product->save();
+                }
+            }
+        }
     }
 
+    public function restoreStockForProducts($purchaseOrderId, $productId = null)
+    {
+        // First get any open work orders for this PO
+        //  We will need to deduct those quantities from the total PO quantity
+        // as we're only restoring stock that was actually made at the time of the PO
+
+        $query = PurchaseOrderProduct::where('purchase_order_id', $purchaseOrderId);
+        if($productId != null) { $query->where('product_id', $productId); }
+
+        $pops = $query->get();
+
+        $workOrders = $this->getWorkOrdersForPo($purchaseOrderId);
+
+        foreach($pops as $pop)
+        {
+            $totalQuantity = $pop->quantity;
+
+            $wosForPop = $workOrders->where('product_id', $pop->product_id);
+
+            $quantityToRestore = $totalQuantity;
+
+            // Now remove any quantities from WO's for the PO since they weren't actually real inventory
+            foreach($wosForPop as $wfp)
+            {
+                $quantityToRestore -= $wfp->quantity;
+            }
+
+            $product = Product::where('id', $productId)->first();
+            if(isset($product))
+            {
+                $product->current_stock += $quantityToRestore;
+                $product->save();
+            }
+        }
+    }
+
+    public function generateWorkOrdersForPo($po, $workOrders)
+    {
+        if($workOrders && is_array($workOrders))
+        {
+            $pickupDate = new Carbon($po->pickup_date);
+            $pickupDate->timezone = 'America/Halifax';
+
+            $workOrderStart = $pickupDate->copy()->subDays($this->daysLeadTimeFromPickup);
+            $workOrderEnd = $pickupDate;
+
+            foreach($workOrders as $wo)
+            {
+                WorkOrder::create(['customer_id' => $po->customer_id,
+                    'product_id' => $wo['product_id'],
+                    'purchase_order_id' => $po->id,
+                    'quantity' => $wo['quantity_to_create'],
+                    'start_date' => $workOrderStart,
+                    'end_date' => $workOrderEnd,
+                    'completed' => 0,
+                    'notes' => 'Generated by PO #' . $po->id
+                ]);
+            }
+        }
+    }
+
+    public function getWorkOrdersForPo($purchaseOrderId, $incompleteOnly = true)
+    {
+        $query = WorkOrder::where('purchase_order_id', $purchaseOrderId);
+        if($incompleteOnly) { $query->where('completed', 0); }
+
+        $workOrders = $query->get();
+
+        return $workOrders;
+    }
+
+    private function getProductStock($productId)
+    {
+        return Product::where('id', $productId)->select('id', 'name', 'current_stock')->first();
+    }
 
 }

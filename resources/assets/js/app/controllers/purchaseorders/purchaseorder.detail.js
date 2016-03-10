@@ -87,7 +87,7 @@
                 }
             }
 
-            console.log(indexToRemove);
+            //console.log(indexToRemove);
 
             var currentCost = parseFloat(self.purchaseorder.total);
             var btest = (parseFloat(self.purchaseorder.purchase_order_products[indexToRemove].product.price) * parseInt(self.purchaseorder.purchase_order_products[indexToRemove].quantity));

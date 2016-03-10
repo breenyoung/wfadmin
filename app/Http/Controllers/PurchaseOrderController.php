@@ -3,14 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\PurchaseOrder;
 use App\PurchaseOrderProduct;
+use App\WorkOrder;
+use App\Product;
+use App\WorkOrderSchedulerService;
+
 
 class PurchaseOrderController extends Controller
 {
+    protected $daysLeadTimeFromPickup;
+
     /**
      * PurchaseOrderController constructor.
      */
@@ -18,6 +25,8 @@ class PurchaseOrderController extends Controller
     {
         // Apply the jwt.auth middleware to all methods in this controller
         //$this->middleware('jwt.auth');
+
+        $this->daysLeadTimeFromPickup = config('app.scheduler_days_lead_time_from_pickup_date');
     }
 
     /**
@@ -40,40 +49,62 @@ class PurchaseOrderController extends Controller
      */
     public function store(Request $request)
     {
-        $purchaseOrder = new PurchaseOrder();
-        $purchaseOrder->customer_id = $request->input('customer_id');
-        $purchaseOrder->fulfilled = ($request->input('fulfilled') ? 1 : 0);
-        $purchaseOrder->paid = ($request->input('paid') ? 1 : 0);
-        $purchaseOrder->payment_type_id = $request->input('payment_type_id');
-        $purchaseOrder->amount_paid = $request->input('amount_paid');
-        $purchaseOrder->total = $request->input('total');
-        $purchaseOrder->pickup_date = $request->input('pickup_date');
-        $purchaseOrder->notes = $request->input('notes');
 
-        // TEMP StuFF TODO: REMOVE LATER
-        if($request->input('created_at'))
+        //return 1;
+
+        $workOrderScheduleService = new WorkOrderSchedulerService();
+
+        try
         {
-            $strStartDate = substr($request->input('created_at'), 0, strpos($request->input('created_at'), 'T'));
-            $startDate = \Carbon\Carbon::createFromFormat('Y-m-d', $strStartDate);
-            $purchaseOrder->created_at = $startDate;
-        }
-        //////////////////////////////
+            \DB::beginTransaction();
 
-        $purchaseOrder->save();
+            $purchaseOrder = new PurchaseOrder();
+            $purchaseOrder->customer_id = $request->input('customer_id');
+            $purchaseOrder->fulfilled = ($request->input('fulfilled') ? 1 : 0);
+            $purchaseOrder->paid = ($request->input('paid') ? 1 : 0);
+            $purchaseOrder->payment_type_id = $request->input('payment_type_id');
+            $purchaseOrder->amount_paid = $request->input('amount_paid');
+            $purchaseOrder->total = $request->input('total');
+            $purchaseOrder->pickup_date = $request->input('pickup_date');
+            $purchaseOrder->notes = $request->input('notes');
 
-        // Add purchase order products now
-        if($request->input('purchase_order_products') && is_array($request->input('purchase_order_products')))
-        {
-            foreach($request->input('purchase_order_products') as $pop)
-            {
-                $purchaseOrder->purchaseOrderProducts()->create(['purchase_order_id' => $purchaseOrder->id,
-                    'product_id' => $pop['product_id'],
-                    'quantity' => $pop['quantity']
-                ]);
+            // TEMP StuFF TODO: REMOVE LATER
+            if ($request->input('created_at')) {
+                //$strStartDate = substr($request->input('created_at'), 0, strpos($request->input('created_at'), 'T'));
+                //$startDate = \Carbon\Carbon::createFromFormat('Y-m-d', $strStartDate);
+                //$purchaseOrder->created_at = $startDate;
             }
-        }
+            //////////////////////////////
 
-        return response()->json(['newId' => $purchaseOrder->id]);
+            $purchaseOrder->save();
+
+            // Add purchase order products now
+            if ($request->input('purchase_order_products') && is_array($request->input('purchase_order_products'))) {
+                foreach ($request->input('purchase_order_products') as $pop) {
+                    $purchaseOrder->purchaseOrderProducts()->create([
+                        'purchase_order_id' => $purchaseOrder->id,
+                        'product_id' => $pop['product_id'],
+                        'quantity' => $pop['quantity']
+                    ]);
+                }
+            }
+
+            // If there are work orders needed for this PO, add them now
+            $workOrderScheduleService->generateWorkOrdersForPo($purchaseOrder, $request->input('work_orders'));
+
+            // Lastly, deduct the quantity ordered from the current stock for the product
+            $workOrderScheduleService->deductStockFromProducts($request->input('purchase_order_products'));
+
+            \DB::commit();
+
+            return response()->json(['newId' => $purchaseOrder->id]);
+
+        }
+        catch(\Exception $ex)
+        {
+            \DB::rollBack();
+            throw $ex;
+        }
     }
 
     /**
@@ -136,10 +167,27 @@ class PurchaseOrderController extends Controller
      */
     public function destroy($id)
     {
-        $purchaseOrder = PurchaseOrder::find($id);
+        $purchaseOrder = PurchaseOrder::where('id', $id)->first();
+
         if(isset($purchaseOrder))
         {
-            $purchaseOrder->delete();
+            try
+            {
+                \DB::beginTransaction();
+
+                // Restore stock for any non workorder quantities
+                $workOrderScheduleService = new WorkOrderSchedulerService();
+                $workOrderScheduleService->restoreStockForProducts($purchaseOrder->id);
+
+                $purchaseOrder->delete();
+
+                \DB::commit();
+            }
+            catch(\Exception $ex)
+            {
+                \DB::rollBack();
+                throw $ex;
+            }
         }
     }
 }

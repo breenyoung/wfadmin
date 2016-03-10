@@ -25,4 +25,9 @@ class PurchaseOrder extends Model
     {
         return $this->hasOne('App\PaymentType');
     }
+
+    public function workOrders()
+    {
+        return $this->hasMany('App\WorkOrder');
+    }
 }
