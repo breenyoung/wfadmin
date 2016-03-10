@@ -1,7 +1,7 @@
 (function(){
     "use strict";
 
-    function PurchaseOrderCreateController($auth, $state, Restangular, ToastService, RestService, $stateParams)
+    function PurchaseOrderCreateController($auth, $state, $scope, Restangular, ToastService, RestService, DialogService, $stateParams)
     {
         var self = this;
 
@@ -34,7 +34,7 @@
             });
         };
 
-        self.addPurchaseOrder = function()
+        self.addProduct = function()
         {
             console.log(self.selectedProduct);
 
@@ -58,7 +58,7 @@
             console.log(self.purchaseorder);
         };
 
-        self.deletePurchaseOrder = function(e, productId)
+        self.deleteProduct = function(e, productId)
         {
             var indexToRemove;
             for(var i = 0; i < self.purchaseorder.purchase_order_products.length; i++)
@@ -82,8 +82,52 @@
             e.preventDefault();
         };
 
+        self.determineWorkOrders = function(e)
+        {
+            if(self.purchaseorder.purchase_order_products !== undefined)
+            {
+                var productsToFulfill = [];
+                for(var i = 0; i < self.purchaseorder.purchase_order_products.length; i++)
+                {
+                    productsToFulfill.push({
+                        product_id: self.purchaseorder.purchase_order_products[i].product_id,
+                        quantity: self.purchaseorder.purchase_order_products[i].quantity
+                    });
+                }
+
+                Restangular.all('scheduler/getWorkOrders').post({productsToFulfill: productsToFulfill}).then(function(data)
+                {
+                    console.log(data.workOrdersToCreate);
+                    if(data.workOrdersToCreate > 0)
+                    {
+                        // There are workorders needed for this PO, confirm their creation
+                        $scope.workOrdersToCreate = data.workOrdersToCreate;
+                        $scope.workOrders = data.workOrders;
+
+                        DialogService.fromTemplate(e, 'dlgConfirmWorkOrders', $scope).then(
+                            function()
+                            {
+                                self.purchaseorder.work_orders = $scope.workOrders;
+                                //console.log('confirmed');
+                                self.createPurchaseOrder();
+                            },
+                            function()
+                            {
+                                //console.log('cancelled');
+                            }
+                        );
+                    }
+                    else
+                    {
+                        // Just process the PO as normal
+                        self.createPurchaseOrder();
+                    }
+                });
+            }
+        };
+
     }
 
-    angular.module('app.controllers').controller('PurchaseOrderCreateController', ['$auth', '$state', 'Restangular', 'ToastService', 'RestService', '$stateParams', PurchaseOrderCreateController]);
+    angular.module('app.controllers').controller('PurchaseOrderCreateController', ['$auth', '$state', '$scope', 'Restangular', 'ToastService', 'RestService', 'DialogService', '$stateParams', PurchaseOrderCreateController]);
 
 })();

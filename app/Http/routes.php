@@ -42,6 +42,10 @@ Route::group(['prefix' => 'api'], function()
     Route::resource('materialtype', 'MaterialTypeController');
 
     Route::get('search/{query}', 'SearchController@index');
+
+    Route::post('scheduler/getWorkOrders', 'SchedulerController@determineWorkOrders');
+    Route::post('scheduler/restoreStockForProduct', 'SchedulerController@restoreStockForProduct');
+
 });
 
 /*
