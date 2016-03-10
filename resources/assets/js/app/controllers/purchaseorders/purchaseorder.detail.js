@@ -89,12 +89,19 @@
 
             //console.log(indexToRemove);
 
-            var currentCost = parseFloat(self.purchaseorder.total);
-            var btest = (parseFloat(self.purchaseorder.purchase_order_products[indexToRemove].product.price) * parseInt(self.purchaseorder.purchase_order_products[indexToRemove].quantity));
-            currentCost -= btest;
-            self.purchaseorder.total = currentCost;
+            Restangular.all('scheduler/restoreStockForProduct').post({purchase_order_id: self.purchaseorder.id, product_id: self.purchaseorder.purchase_order_products[indexToRemove].product_id}).then(function(data)
+            {
+                var currentCost = parseFloat(self.purchaseorder.total);
+                var btest = (parseFloat(self.purchaseorder.purchase_order_products[indexToRemove].product.price) * parseInt(self.purchaseorder.purchase_order_products[indexToRemove].quantity));
+                currentCost -= btest;
+                self.purchaseorder.total = currentCost;
 
-            self.purchaseorder.purchase_order_products.splice(indexToRemove, 1);
+                self.purchaseorder.purchase_order_products.splice(indexToRemove, 1);
+
+            }, function()
+            {
+                ToastService.show("Error updating stock, please try again");
+            });
 
             e.preventDefault();
         };
