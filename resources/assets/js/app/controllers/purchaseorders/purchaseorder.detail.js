@@ -72,7 +72,6 @@
 
             self.selectedProduct = "";
             self.selectedQuantity = 0;
-
         };
 
         self.deleteProduct = function(e, productId)
