@@ -21,9 +21,17 @@
 
 </div>
 
+<div layout="row">
+    <md-datepicker ng-model="ctrlPurchaseOrderCreate.purchaseorder.start_date"
+                   md-placeholder="Start Date"
+                   md-date-filter="ctrlPurchaseOrderCreate.onlyOpenDays">
+    </md-datepicker>
+</div>
 
 <div layout="row">
-    <md-datepicker ng-model="ctrlPurchaseOrderCreate.purchaseorder.pickup_date" md-placeholder="Pickup Date"></md-datepicker>
+    <md-datepicker ng-model="ctrlPurchaseOrderCreate.purchaseorder.pickup_date"
+                   md-placeholder="Pickup Date">
+    </md-datepicker>
 </div>
 
     <div layout="row">

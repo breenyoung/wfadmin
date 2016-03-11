@@ -52,7 +52,6 @@ class SchedulerController extends Controller
 
                     }
 
-
                     if($workOrdersToCreate['workOrdersToCreate'] > 0)
                     {
                         if(isset($po))
@@ -61,7 +60,6 @@ class SchedulerController extends Controller
                             $this->workOrderSchedulerService->generateWorkOrdersForPo($po, $workOrdersToCreate['workOrders']);
                         }
                     }
-
                 }
 
                 \DB::commit();

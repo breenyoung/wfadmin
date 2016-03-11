@@ -118,14 +118,22 @@ class WorkOrderSchedulerService
         }
     }
 
-    public function generateWorkOrdersForPo($po, $workOrders)
+    public function generateWorkOrdersForPo($po, $workOrders, $startDate = null)
     {
         if($workOrders && is_array($workOrders))
         {
             $pickupDate = new Carbon($po->pickup_date);
             $pickupDate->timezone = 'America/Halifax';
 
-            $workOrderStart = $pickupDate->copy()->subDays($this->daysLeadTimeFromPickup);
+            if($startDate != null)
+            {
+                $workOrderStart = new Carbon($startDate);
+            }
+            else
+            {
+                $workOrderStart = $pickupDate->copy()->subDays($this->daysLeadTimeFromPickup);
+            }
+
             $workOrderEnd = $pickupDate;
 
             foreach($workOrders as $wo)

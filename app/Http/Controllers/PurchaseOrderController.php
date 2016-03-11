@@ -93,7 +93,7 @@ class PurchaseOrderController extends Controller
             if($request->input('suppressworkorder') != "1")
             {
                 // If there are work orders needed for this PO, add them now
-                $workOrderScheduleService->generateWorkOrdersForPo($purchaseOrder, $request->input('work_orders'));
+                $workOrderScheduleService->generateWorkOrdersForPo($purchaseOrder, $request->input('work_orders'), $request->input('start_date'));
 
                 // Lastly, deduct the quantity ordered from the current stock for the product
                 $workOrderScheduleService->deductStockFromProducts($request->input('purchase_order_products'));
