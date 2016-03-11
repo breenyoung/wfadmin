@@ -16,7 +16,7 @@ class WorkOrder extends Model
 
     protected $dates = ['created_at', 'updated_at', 'start_date', 'end_date'];
 
-    protected $fillable = ['customer_id', 'product_id', 'start_date', 'end_date', 'completed', 'notes'];
+    protected $fillable = ['customer_id', 'product_id', 'purchase_order_id', 'quantity', 'start_date', 'end_date', 'completed', 'notes'];
 
     public function customer()
     {
@@ -26,5 +26,10 @@ class WorkOrder extends Model
     public function product()
     {
         return $this->belongsTo('App\Product');
+    }
+
+    public function purchaseOrder()
+    {
+        return $this->belongsTo('App\PurchaseOrder');
     }
 }

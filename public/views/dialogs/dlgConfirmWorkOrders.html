@@ -1,0 +1,19 @@
+<md-dialog aria-label="Confirm Work Orders" ng-cloak>
+
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <p>
+                <strong>{{workOrdersToCreate}}</strong> work order(s) will be generated for this P.O
+            </p>
+            <div ng-repeat="wo in workOrders">
+                - {{wo.product_name}} x {{wo.quantity_to_create}}
+            </div>
+        </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+        <md-button style="margin-right:20px;" ng-click="confirmDialog()">Confirm</md-button>
+        <md-button ng-click="cancelDialog()">Cancel</md-button>
+    </md-dialog-actions>
+
+</md-dialog>

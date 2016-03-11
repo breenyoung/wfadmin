@@ -10,7 +10,7 @@ elixir(function(mix){
         .less('./resources/assets/less/**/*.less', 'public/css')
         .copy('./resources/assets/js/partials/*.html', 'public/views/app/')
         .copy('./resources/assets/js/app/directives/**/*.html', 'public/views/directives/')
-        //.copy('./resources/assets/js/dialogs/**/*.html', 'public/views/dialogs/')
+        .copy('./resources/assets/js/dialogs/*.html', 'public/views/dialogs/')
         .livereload([
             'public/js/vendor.js',
             'public/js/app.js',
