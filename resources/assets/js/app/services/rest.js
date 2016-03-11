@@ -201,7 +201,8 @@
             {
                 Restangular.one('scheduler/getFullyBookedDays').getList().then(function(data)
                 {
-                    console.log(data);
+                    scope.bookedDays = data;
+                    //console.log(data);
                 });
             }
 

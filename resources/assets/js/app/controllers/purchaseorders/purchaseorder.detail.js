@@ -1,7 +1,7 @@
 (function(){
     "use strict";
 
-    function PurchaseOrderDetailController($auth, $state, $scope, Restangular, RestService, $stateParams, ToastService, DialogService)
+    function PurchaseOrderDetailController($auth, $state, $scope, $moment, Restangular, RestService, $stateParams, ToastService, DialogService)
     {
         var self = this;
 
@@ -10,8 +10,23 @@
         RestService.getAllProducts(self);
         RestService.getAllPaymentTypes(self);
         RestService.getPurchaseOrder(self, $stateParams.purchaseOrderId);
+        RestService.getFullyBookedDays(self);
 
         var originalTotal = 0;
+
+        self.onlyOpenDays = function(date)
+        {
+            var result = true;
+            for(var i = 0; i < self.bookedDays.length; i++)
+            {
+                //console.log(self.bookedDays[i].start_date);
+                //console.log($moment(self.bookedDays[i].start_date));
+                result = !$moment(date).isSame(self.bookedDays[i].start_date);
+                break;
+            }
+
+            return result;
+        };
 
         self.updatePurchaseOrder = function()
         {
@@ -153,6 +168,6 @@
         };
     }
 
-    angular.module('app.controllers').controller('PurchaseOrderDetailController', ['$auth', '$state', '$scope', 'Restangular', 'RestService', '$stateParams', 'ToastService', 'DialogService', PurchaseOrderDetailController]);
+    angular.module('app.controllers').controller('PurchaseOrderDetailController', ['$auth', '$state', '$scope', '$moment', 'Restangular', 'RestService', '$stateParams', 'ToastService', 'DialogService', PurchaseOrderDetailController]);
 
 })();
