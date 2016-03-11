@@ -54,6 +54,10 @@
                     case "material":
                         $state.go('app.materials.detail', {'materialId': self.selectedResult.id});
                         break;
+
+                    case "purchaseorder":
+                        $state.go('app.purchaseorders.detail', {'purchaseOrderId': self.selectedResult.id});
+                        break;
                 }
             }
         };

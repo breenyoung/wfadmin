@@ -48,7 +48,7 @@
                                  md-items="item in ctrlSearch.doSearch(ctrlSearch.searchText)"
                                  md-item-text="item.name"
                                  md-min-length="3"
-                                 md-delay="500"
+                                 md-delay="1000"
                                  md-selected-item-change="ctrlSearch.gotoItem()"
                                  placeholder="Search">
 
