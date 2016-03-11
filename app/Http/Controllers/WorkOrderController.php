@@ -48,6 +48,7 @@ class WorkOrderController extends Controller
         $workOrder = new WorkOrder();
         $workOrder->customer_id = $request->input('customer_id');
         $workOrder->product_id = $request->input('product_id');
+        $workOrder->quantity = $request->input('quantity');
 
         if($request->input('start_date'))
         {
@@ -96,6 +97,7 @@ class WorkOrderController extends Controller
         {
             $workOrder->customer_id = $request->input('customer_id');
             $workOrder->product_id = $request->input('product_id');
+            $workOrder->quantity = $request->input('quantity');
 
             if($request->input('start_date'))
             {

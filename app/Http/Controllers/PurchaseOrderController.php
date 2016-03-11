@@ -62,6 +62,7 @@ class PurchaseOrderController extends Controller
             $purchaseOrder->paid = ($request->input('paid') ? 1 : 0);
             $purchaseOrder->payment_type_id = $request->input('payment_type_id');
             $purchaseOrder->amount_paid = $request->input('amount_paid');
+            $purchaseOrder->discount = $request->input('discount');
             $purchaseOrder->total = $request->input('total');
             $purchaseOrder->pickup_date = $request->input('pickup_date');
             $purchaseOrder->notes = $request->input('notes');
@@ -130,31 +131,45 @@ class PurchaseOrderController extends Controller
         $purchaseOrder = PurchaseOrder::find($id);
         if(isset($purchaseOrder))
         {
-            $purchaseOrder->customer_id = $request->input('customer_id');
-            $purchaseOrder->fulfilled = (int)$request->input('fulfilled');
-            $purchaseOrder->paid = ($request->input('paid') ? 1 : 0);
-            $purchaseOrder->payment_type_id = $request->input('payment_type_id');
-            $purchaseOrder->amount_paid = $request->input('amount_paid');
-            $purchaseOrder->total = $request->input('total');
-            $purchaseOrder->pickup_date = $request->input('pickup_date');
-            $purchaseOrder->notes = $request->input('notes');
-
-            /*
-            // Sync purchase order products now
-            PurchaseOrderProduct::where('purchase_order_id', $purchaseOrder->id)->delete();
-            if($request->input('purchase_order_products') && is_array($request->input('purchase_order_products')))
+            try
             {
-                foreach($request->input('purchase_order_products') as $pop)
-                {
-                    $purchaseOrder->purchaseOrderProducts()->create(['purchase_order_id' => $purchaseOrder->id,
-                        'product_id' => $pop['product_id'],
-                        'quantity' => $pop['quantity']
-                    ]);
-                }
-            }
-            */
+                \DB::beginTransaction();
 
-            $purchaseOrder->save();
+                $purchaseOrder->customer_id = $request->input('customer_id');
+                $purchaseOrder->fulfilled = (int)$request->input('fulfilled');
+                $purchaseOrder->paid = ($request->input('paid') ? 1 : 0);
+                $purchaseOrder->payment_type_id = $request->input('payment_type_id');
+                $purchaseOrder->amount_paid = $request->input('amount_paid');
+                $purchaseOrder->discount = $request->input('discount');
+                $purchaseOrder->total = $request->input('total');
+                $purchaseOrder->pickup_date = $request->input('pickup_date');
+                $purchaseOrder->notes = $request->input('notes');
+
+                /*
+                // Sync purchase order products now
+                PurchaseOrderProduct::where('purchase_order_id', $purchaseOrder->id)->delete();
+                if($request->input('purchase_order_products') && is_array($request->input('purchase_order_products')))
+                {
+                    foreach($request->input('purchase_order_products') as $pop)
+                    {
+                        $purchaseOrder->purchaseOrderProducts()->create(['purchase_order_id' => $purchaseOrder->id,
+                            'product_id' => $pop['product_id'],
+                            'quantity' => $pop['quantity']
+                        ]);
+                    }
+                }
+                */
+
+                $purchaseOrder->save();
+
+
+                \DB::commit();
+            }
+            catch(\Exception $ex)
+            {
+                \DB::rollBack();
+                throw $ex;
+            }
         }
     }
 
