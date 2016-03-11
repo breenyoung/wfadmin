@@ -75,6 +75,9 @@
         <md-checkbox ng-model="ctrlPurchaseOrderCreate.purchaseorder.paid" ng-true-value="1" ng-false-value="0" aria-label="Paid" ng-click="((ctrlPurchaseOrderCreate.purchaseorder.paid == undefined || ctrlPurchaseOrderCreate.purchaseorder.paid == 0) ? ctrlPurchaseOrderCreate.purchaseorder.amount_paid = ctrlPurchaseOrderCreate.purchaseorder.total : ctrlPurchaseOrderCreate.purchaseorder.amount_paid = 0)">
             Paid?
         </md-checkbox>
+        <md-checkbox ng-model="ctrlPurchaseOrderCreate.suppressworkorder" ng-true-value="1" ng-false-value="0" aria-label="Supress work order creation">
+            Suppress work orders
+        </md-checkbox>
     </div>
 
 </div>
@@ -86,6 +89,13 @@
         <md-input-container class="md-block" flex-gt-sm>
             <label>Amount Paid</label>
             <input type="text" ng-model="ctrlPurchaseOrderCreate.purchaseorder.amount_paid"/>
+        </md-input-container>
+    </div>
+
+    <div flex>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Discount</label>
+            <input type="text" ng-model="ctrlPurchaseOrderCreate.purchaseorder.discount" ng-change="ctrlPurchaseOrderCreate.applyDiscount()"/>
         </md-input-container>
     </div>
 
