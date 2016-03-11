@@ -45,6 +45,7 @@ Route::group(['prefix' => 'api'], function()
 
     Route::post('scheduler/getWorkOrders', 'SchedulerController@determineWorkOrders');
     Route::post('scheduler/restoreStockForProduct', 'SchedulerController@restoreStockForProduct');
+    Route::get('scheduler/getFullyBookedDays', 'SchedulerController@getFullyBookedDays');
 
 });
 

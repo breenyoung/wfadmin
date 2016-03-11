@@ -69,16 +69,18 @@ class PurchaseOrderController extends Controller
 
             // TEMP StuFF TODO: REMOVE LATER
             if ($request->input('created_at')) {
-                //$strStartDate = substr($request->input('created_at'), 0, strpos($request->input('created_at'), 'T'));
-                //$startDate = \Carbon\Carbon::createFromFormat('Y-m-d', $strStartDate);
-                //$purchaseOrder->created_at = $startDate;
+                $strStartDate = substr($request->input('created_at'), 0, strpos($request->input('created_at'), 'T'));
+                $startDate = \Carbon\Carbon::createFromFormat('Y-m-d', $strStartDate);
+                $purchaseOrder->created_at = $startDate;
             }
             //////////////////////////////
 
             $purchaseOrder->save();
 
             // Now add purchase order products for PO
-            if ($request->input('purchase_order_products') && is_array($request->input('purchase_order_products'))) {
+            if ($request->input('purchase_order_products')
+                && is_array($request->input('purchase_order_products')))
+            {
                 foreach ($request->input('purchase_order_products') as $pop) {
                     $purchaseOrder->purchaseOrderProducts()->create([
                         'purchase_order_id' => $purchaseOrder->id,
@@ -88,11 +90,14 @@ class PurchaseOrderController extends Controller
                 }
             }
 
-            // If there are work orders needed for this PO, add them now
-            $workOrderScheduleService->generateWorkOrdersForPo($purchaseOrder, $request->input('work_orders'));
+            if($request->input('suppressworkorder') != "1")
+            {
+                // If there are work orders needed for this PO, add them now
+                $workOrderScheduleService->generateWorkOrdersForPo($purchaseOrder, $request->input('work_orders'));
 
-            // Lastly, deduct the quantity ordered from the current stock for the product
-            $workOrderScheduleService->deductStockFromProducts($request->input('purchase_order_products'));
+                // Lastly, deduct the quantity ordered from the current stock for the product
+                $workOrderScheduleService->deductStockFromProducts($request->input('purchase_order_products'));
+            }
 
             \DB::commit();
 

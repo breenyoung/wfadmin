@@ -9,12 +9,15 @@
         RestService.getAllProducts(self);
         RestService.getAllPaymentTypes(self);
 
+        RestService.getFullyBookedDays(self);
+
+
         self.purchaseorder = {};
         self.purchaseorder.amount_paid = 0;
         self.purchaseorder.discount = 0;
         self.purchaseorder.total = 0;
 
-        self.suppressworkorder = 0;
+        self.purchaseorder.suppressworkorder = 0;
 
         var originalTotal = 0;
 
@@ -111,7 +114,7 @@
         {
             if(self.purchaseorder.purchase_order_products !== undefined)
             {
-                if(self.suppressworkorder == 1)
+                if(self.purchaseorder.suppressworkorder == 1)
                 {
                     // Just process the PO as normal
                     self.createPurchaseOrder();

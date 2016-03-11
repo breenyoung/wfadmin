@@ -20,6 +20,7 @@ class WorkOrderSchedulerService
 {
     protected $today;
     protected $daysLeadTimeFromPickup;
+    protected $maxWorkOrdersPerDay;
 
     /**
      * WorkOrderSchedulerService constructor.
@@ -28,6 +29,7 @@ class WorkOrderSchedulerService
     {
         $this->today = Carbon::today('America/Halifax');
         $this->daysLeadTimeFromPickup = config('app.scheduler_days_lead_time_from_pickup_date');
+        $this->maxWorkOrdersPerDay = config('app.scheduler_max_workorders_per_day');
     }
 
     public function determineWorkOrdersForPo($productsToFulfill)
@@ -162,6 +164,17 @@ class WorkOrderSchedulerService
     public function deletePurchaseOrderProduct($purchaseOrderId, $productId)
     {
         PurchaseOrderProduct::where('purchase_order_id', $purchaseOrderId)->where('product_id', $productId)->delete();
+    }
+
+    public function getFullyBookedDays()
+    {
+        $bookedDays = \DB::table('work_orders')->select(\DB::raw('start_date, count(start_date) as wocount'))
+                            ->groupBy('start_date')
+                            ->having('wocount', '>=', $this->maxWorkOrdersPerDay)
+                            ->orderBy('wocount', 'desc')
+                            ->get();
+
+        return $bookedDays;
     }
 
     private function getProductStock($productId)

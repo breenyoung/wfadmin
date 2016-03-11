@@ -195,6 +195,14 @@
                     console.log(data);
                     scope.materialtypes = data;
                 });
+            },
+
+            getFullyBookedDays: function(scope)
+            {
+                Restangular.one('scheduler/getFullyBookedDays').getList().then(function(data)
+                {
+                    console.log(data);
+                });
             }
 
         };
