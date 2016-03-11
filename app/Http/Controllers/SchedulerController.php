@@ -48,7 +48,7 @@ class SchedulerController extends Controller
                         ]);
 
                         // Deduct the quantity ordered from the current stock for the product
-                        $this->workOrderSchedulerService->deductStockFromProducts([$p['product_id']]);
+                        $this->workOrderSchedulerService->deductStockFromProducts([$p]);
 
                     }
 

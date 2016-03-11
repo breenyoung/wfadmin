@@ -8,7 +8,7 @@ class PurchaseOrder extends Model
 {
     protected $table = 'purchase_orders';
 
-    protected $fillable = ['customer_id', 'fulfilled', 'paid', 'payment_type_id', 'amount_paid', 'total', 'pickup_date', 'notes'];
+    protected $fillable = ['customer_id', 'fulfilled', 'paid', 'payment_type_id', 'amount_paid', 'discount', 'total', 'pickup_date', 'notes'];
 
     public function customer()
     {

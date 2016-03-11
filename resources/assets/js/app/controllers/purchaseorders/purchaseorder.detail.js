@@ -1,7 +1,7 @@
 (function(){
     "use strict";
 
-    function PurchaseOrderDetailController($auth, $state, Restangular, RestService, $stateParams, ToastService, DialogService)
+    function PurchaseOrderDetailController($auth, $state, $scope, Restangular, RestService, $stateParams, ToastService, DialogService)
     {
         var self = this;
 
@@ -10,6 +10,8 @@
         RestService.getAllProducts(self);
         RestService.getAllPaymentTypes(self);
         RestService.getPurchaseOrder(self, $stateParams.purchaseOrderId);
+
+        var originalTotal = 0;
 
         self.updatePurchaseOrder = function()
         {
@@ -52,7 +54,25 @@
             });
         };
 
-        self.addProduct = function()
+        self.applyDiscount = function()
+        {
+            if(self.purchaseorder.discount == null || self.purchaseorder.discount == 0)
+            {
+                self.purchaseorder.total = originalTotal;
+            }
+            else
+            {
+                if(self.purchaseorder.total !== undefined
+                    && self.purchaseorder.total !== null
+                    && self.purchaseorder.total > 0)
+                {
+                    var discounted = originalTotal - self.purchaseorder.discount;
+                    discounted >= 0 ? self.purchaseorder.total = discounted : 0;
+                }
+            }
+        };
+
+        self.addProduct = function(e)
         {
             console.log(self.selectedProduct);
 
@@ -75,13 +95,13 @@
                 var btest = (parseFloat(self.selectedProduct.price) * parseInt(self.selectedQuantity));
                 currentCost += btest;
                 self.purchaseorder.total = currentCost;
+                originalTotal = currentCost;
 
                 self.selectedProduct = "";
                 self.selectedQuantity = 0;
 
                 if(data.workOrdersToCreate > 0)
                 {
-
                     // There are workorders needed for this PO, alert of their creation
                     $scope.workOrdersToCreate = data.workOrdersToCreate;
                     $scope.workOrders = data.workOrders;
@@ -120,6 +140,7 @@
                 var btest = (parseFloat(self.purchaseorder.purchase_order_products[indexToRemove].product.price) * parseInt(self.purchaseorder.purchase_order_products[indexToRemove].quantity));
                 currentCost -= btest;
                 self.purchaseorder.total = currentCost;
+                originalTotal = currentCost;
 
                 self.purchaseorder.purchase_order_products.splice(indexToRemove, 1);
 
@@ -132,6 +153,6 @@
         };
     }
 
-    angular.module('app.controllers').controller('PurchaseOrderDetailController', ['$auth', '$state', 'Restangular', 'RestService', '$stateParams', 'ToastService', 'DialogService', PurchaseOrderDetailController]);
+    angular.module('app.controllers').controller('PurchaseOrderDetailController', ['$auth', '$state', '$scope', 'Restangular', 'RestService', '$stateParams', 'ToastService', 'DialogService', PurchaseOrderDetailController]);
 
 })();

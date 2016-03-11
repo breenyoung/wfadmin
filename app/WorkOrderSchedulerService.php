@@ -107,7 +107,7 @@ class WorkOrderSchedulerService
                 $quantityToRestore -= $wfp->quantity;
             }
 
-            $product = Product::where('id', $productId)->first();
+            $product = Product::where('id', $pop->product_id)->first();
             if(isset($product))
             {
                 $product->current_stock += $quantityToRestore;

@@ -11,7 +11,12 @@
 
         self.purchaseorder = {};
         self.purchaseorder.amount_paid = 0;
+        self.purchaseorder.discount = 0;
         self.purchaseorder.total = 0;
+
+        self.suppressworkorder = 0;
+
+        var originalTotal = 0;
 
 
         self.createPurchaseOrder = function()
@@ -34,6 +39,24 @@
             });
         };
 
+        self.applyDiscount = function()
+        {
+            if(self.purchaseorder.discount == null || self.purchaseorder.discount == 0)
+            {
+                self.purchaseorder.total = originalTotal;
+            }
+            else
+            {
+                if(self.purchaseorder.total !== undefined
+                    && self.purchaseorder.total !== null
+                    && self.purchaseorder.total > 0)
+                {
+                    var discounted = originalTotal - self.purchaseorder.discount;
+                    discounted >= 0 ? self.purchaseorder.total = discounted : 0;
+                }
+            }
+        };
+
         self.addProduct = function()
         {
             console.log(self.selectedProduct);
@@ -51,6 +74,7 @@
             var btest = (parseFloat(self.selectedProduct.price) * parseInt(self.selectedQuantity));
             currentCost += btest;
             self.purchaseorder.total = currentCost;
+            originalTotal = currentCost;
 
             self.selectedProduct = "";
             self.selectedQuantity = 0;
@@ -76,6 +100,7 @@
             var btest = (parseFloat(self.purchaseorder.purchase_order_products[indexToRemove].product.price) * parseInt(self.purchaseorder.purchase_order_products[indexToRemove].quantity));
             currentCost -= btest;
             self.purchaseorder.total = currentCost;
+            originalTotal = currentCost;
 
             self.purchaseorder.purchase_order_products.splice(indexToRemove, 1);
 
@@ -86,43 +111,46 @@
         {
             if(self.purchaseorder.purchase_order_products !== undefined)
             {
-                var productsToFulfill = [];
-                for(var i = 0; i < self.purchaseorder.purchase_order_products.length; i++)
+                if(self.suppressworkorder == 1)
                 {
-                    productsToFulfill.push({
-                        product_id: self.purchaseorder.purchase_order_products[i].product_id,
-                        quantity: self.purchaseorder.purchase_order_products[i].quantity
+                    // Just process the PO as normal
+                    self.createPurchaseOrder();
+                }
+                else
+                {
+
+                    var productsToFulfill = [];
+                    for (var i = 0; i < self.purchaseorder.purchase_order_products.length; i++) {
+                        productsToFulfill.push({
+                            product_id: self.purchaseorder.purchase_order_products[i].product_id,
+                            quantity: self.purchaseorder.purchase_order_products[i].quantity
+                        });
+                    }
+
+                    Restangular.all('scheduler/getWorkOrders').post({productsToFulfill: productsToFulfill}).then(function (data) {
+                        console.log(data.workOrdersToCreate);
+                        if (data.workOrdersToCreate > 0) {
+                            // There are workorders needed for this PO, confirm their creation
+                            $scope.workOrdersToCreate = data.workOrdersToCreate;
+                            $scope.workOrders = data.workOrders;
+
+                            DialogService.fromTemplate(e, 'dlgConfirmWorkOrders', $scope).then(
+                                function () {
+                                    self.purchaseorder.work_orders = $scope.workOrders;
+                                    //console.log('confirmed');
+                                    self.createPurchaseOrder();
+                                },
+                                function () {
+                                    //console.log('cancelled');
+                                }
+                            );
+                        }
+                        else {
+                            // Just process the PO as normal
+                            self.createPurchaseOrder();
+                        }
                     });
                 }
-
-                Restangular.all('scheduler/getWorkOrders').post({productsToFulfill: productsToFulfill}).then(function(data)
-                {
-                    console.log(data.workOrdersToCreate);
-                    if(data.workOrdersToCreate > 0)
-                    {
-                        // There are workorders needed for this PO, confirm their creation
-                        $scope.workOrdersToCreate = data.workOrdersToCreate;
-                        $scope.workOrders = data.workOrders;
-
-                        DialogService.fromTemplate(e, 'dlgConfirmWorkOrders', $scope).then(
-                            function()
-                            {
-                                self.purchaseorder.work_orders = $scope.workOrders;
-                                //console.log('confirmed');
-                                self.createPurchaseOrder();
-                            },
-                            function()
-                            {
-                                //console.log('cancelled');
-                            }
-                        );
-                    }
-                    else
-                    {
-                        // Just process the PO as normal
-                        self.createPurchaseOrder();
-                    }
-                });
             }
         };
 

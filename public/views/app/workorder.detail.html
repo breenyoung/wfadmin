@@ -26,6 +26,17 @@
     </md-select>
 </md-input-container>
 <br/>
+
+<div layout="row">
+    <div flex>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Quantity</label>
+            <input type="text" ng-model="ctrlWorkOrderDetail.workorder.quantity"/>
+        </md-input-container>
+    </div>
+</div>
+
+
 <md-datepicker ng-model="ctrlWorkOrderDetail.workorder.start_date" md-placeholder="Start Date" utc-Parser></md-datepicker>
 
 <md-datepicker ng-model="ctrlWorkOrderDetail.workorder.end_date" md-placeholder="End Date" utc-Parser></md-datepicker>
