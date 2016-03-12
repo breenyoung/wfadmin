@@ -9,6 +9,33 @@
     <md-subheader class="md-primary">Products</md-subheader>
     </div>
 
+    <div layout="row">
+        <md-input-container>
+            <label>Show</label>
+            <md-select ng-model="ctrlProduct.filterType">
+                <md-option value=""></md-option>
+                <md-option value="stock">Current Stock</md-option>
+                <md-option value="price">Price</md-option>
+                <md-option value="cost">Cost</md-option>
+            </md-select>
+        </md-input-container>
+        <md-input-container>
+            <label></label>
+            <md-select ng-model="ctrlProduct.filterOperator">
+                <md-option value=""></md-option>
+                <md-option value="=">=</md-option>
+                <md-option value=">">&gt;</md-option>
+                <md-option value=">=">&gt;=</md-option>
+                <md-option value="<">&lt;</md-option>
+                <md-option value="<=">&lt;=</md-option>
+            </md-select>
+        </md-input-container>
+        <md-input-container>
+            <label></label>
+            <input type="text" name="filterValue" placeholder="" ng-model="ctrlProduct.filterValue"/>
+        </md-input-container>
+    </div>
+
     <md-table-container>
         <table md-table>
             <thead md-head>
@@ -20,7 +47,7 @@
             </tr>
             </thead>
             <tbody md-body>
-            <tr md-row ng-repeat="p in ctrlProduct.products">
+            <tr md-row ng-repeat="p in ctrlProduct.products" ng-show="ctrlProduct.applyProductFilter(p)">
                 <td md-cell><a ui-sref="app.products.detail({productId: p.id})" class="nounderline">{{p.name | truncateName:25}}</a></td>
                 <td md-cell>{{p.price}}</td>
                 <td md-cell>{{p.cost}}</td>
