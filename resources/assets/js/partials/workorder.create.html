@@ -49,9 +49,15 @@
 </md-input-container>
 
 
+<div layout="row" layout-xs="column">
+    <div flex layout="column">
+        <md-button class="md-raised md-primary" ng-click="ctrlWorkOrderCreate.createWorkOrder()">Submit</md-button>
+    </div>
+    <div flex layout="column">
+        <md-button class="md-raised" ui-sref="app.workorders">Cancel</md-button>
+    </div>
+</div>
 
-<br/>
-<md-button class="md-raised md-primary" ng-click="ctrlWorkOrderCreate.createWorkOrder()">Submit</md-button>
-<md-button class="md-raised" ui-sref="app.workorders">Cancel</md-button>
+
 </body>
 </html>

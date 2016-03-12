@@ -49,14 +49,14 @@
 </div>
 
 
-<div layout="row">
-    <div flex="10">
+<div layout="row" layout-xs="column">
+    <div flex layout="column">
         <md-button class="md-raised md-primary" ng-click="ctrlEventDetail.updateEvent()">Submit</md-button>
     </div>
-    <div flex="10">
+    <div flex layout="column">
         <md-button class="md-raised md-warn" ng-click="ctrlEventDetail.showDeleteConfirm()">Delete</md-button>
     </div>
-    <div flex="10">
+    <div flex layout="column">
         <md-button class="md-raised" ui-sref="app.events">Cancel</md-button>
     </div>
 </div>
