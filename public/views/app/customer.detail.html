@@ -39,9 +39,21 @@
 
 <br/>
 
-<md-button class="md-raised md-primary" ng-click="ctrlCustomerDetail.updateCustomer()">Submit</md-button>
-<md-button class="md-raised md-warn" ng-click="ctrlCustomerDetail.showDeleteConfirm()">Delete</md-button>
-<md-button class="md-raised" ui-sref="app.customers">Cancel</md-button>
+<div layout="row" layout-xs="column">
+    <div flex layout="column">
+        <md-button class="md-raised md-primary" ng-click="ctrlCustomerDetail.updateCustomer()">Submit</md-button>
+    </div>
+    <div flex layout="column">
+        <md-button class="md-raised md-warn" ng-click="ctrlCustomerDetail.showDeleteConfirm()">Delete</md-button>
+    </div>
+    <div flex layout="column">
+        <md-button class="md-raised" ui-sref="app.customers">Cancel</md-button>
+    </div>
+</div>
+
+
+
+
 
 
 </body>

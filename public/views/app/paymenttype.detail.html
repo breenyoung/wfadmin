@@ -12,10 +12,17 @@
     <input type="text" ng-model="ctrlPaymentTypeDetail.paymenttype.name"/>
 </md-input-container>
 
-<br/>
+<div layout="row" layout-xs="column">
+    <div flex layout="column">
+        <md-button class="md-raised md-primary" ng-click="ctrlPaymentTypeDetail.updatePaymentType()">Submit</md-button>
+    </div>
+    <div flex layout="column">
+        <md-button class="md-raised md-warn" ng-click="ctrlPaymentTypeDetail.showDeleteConfirm()">Delete</md-button>
+    </div>
+    <div flex layout="column">
+        <md-button class="md-raised" ui-sref="app.paymenttypes">Cancel</md-button>
+    </div>
+</div>
 
-<md-button class="md-raised md-primary" ng-click="ctrlPaymentTypeDetail.updatePaymentType()">Submit</md-button>
-<md-button class="md-raised md-warn" ng-click="ctrlPaymentTypeDetail.showDeleteConfirm()">Delete</md-button>
-<md-button class="md-raised" ui-sref="app.paymenttypes">Cancel</md-button>
 </body>
 </html>

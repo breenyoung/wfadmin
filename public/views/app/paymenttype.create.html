@@ -12,8 +12,16 @@
     <input type="text" ng-model="ctrlPaymentTypeCreate.paymenttype.name"/>
 </md-input-container>
 
-<br/>
-<md-button class="md-raised md-primary" ng-click="ctrlPaymentTypeCreate.createPaymentType()">Submit</md-button>
-<md-button class="md-raised" ui-sref="app.paymenttypes">Cancel</md-button>
+<div layout="row" layout-xs="column">
+    <div flex layout="column">
+        <md-button class="md-raised md-primary" ng-click="ctrlPaymentTypeCreate.createPaymentType()">Submit</md-button>
+    </div>
+    <div flex layout="column">
+        <md-button class="md-raised" ui-sref="app.paymenttypes">Cancel</md-button>
+    </div>
+</div>
+
+
+
 </body>
 </html>
