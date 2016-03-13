@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Report - Sales</title>
+</head>
+<body>
+<div layout="row" layout-xs="column">
+
+    <div flex layout="column">
+    <md-input-container>
+        <label>Customer</label>
+        <md-select ng-model="ctrlReport.reportParams.customer_id">
+            <md-option value=""></md-option>
+            <md-option ng-repeat="c in ctrlReport.customers" value="{{c.id}}">
+                {{c.first_name}} {{c.last_name}}
+            </md-option>
+        </md-select>
+    </md-input-container>
+    </div>
+
+    <div flex layout="column">
+    <md-input-container>
+        <label>Product</label>
+        <md-select ng-model="ctrlReport.reportParams.product_id">
+            <md-option value=""></md-option>
+            <md-option ng-repeat="p in ctrlReport.products" value="{{p.id}}">
+                {{p.name}}
+            </md-option>
+        </md-select>
+    </md-input-container>
+    </div>
+
+</div>
+
+<div layout="row" layout-xs="column">
+    <div flex layout="column">
+
+        <md-datepicker ng-model="ctrlReport.reportParams.start_date" md-placeholder="Start Date"></md-datepicker>
+    </div>
+
+    <div flex layout="column">
+        <md-datepicker ng-model="ctrlReport.reportParams.end_date" md-placeholder="End Date"></md-datepicker>
+    </div>
+</div>
+
+<div layout="row" layout-xs="column">
+    <div flex layout="column">
+        <md-button class="md-raised md-primary" ng-click="ctrlReport.getSalesReport()">Submit</md-button>
+    </div>
+</div>
+
+<div layout="row" ng-show="ctrlReport.results !== undefined">
+    <md-table-container>
+        <table md-table>
+            <thead md-head>
+            <tr md-row>
+                <th md-column></th>
+                <th md-column>Customer</th>
+                <th md-column>Total</th>
+                <th md-column>Created</th>
+            </tr>
+            </thead>
+            <tbody md-body>
+                <tr md-row ng-repeat="r in ctrlReport.results" ng-init="ctrlReport.setPoTotal(r)">
+                    <td md-cell><a ui-sref="app.purchaseorders.detail({purchaseOrderId: r.id})" class="nounderline">PO #{{r.id}}</a></td>
+                    <td md-cell><a ui-sref="app.customers.detail({customerId: r.customer_id})" class="nounderline">{{r.first_name}} {{r.last_name}}</a></td>
+                    <td md-cell>${{r.total | number:2}}</td>
+                    <td md-cell>{{r.created_at | amDateFormat:'YYYY-MM-DD'}}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr md-row>
+                    <td md-cell></td>
+                    <td md-cell><strong>{{ctrlReport.poCount}} PO's @</strong></td>
+                    <td md-cell>
+                        <strong>${{ctrlReport.poTotal | number:2}}</strong>
+                    </td>
+                    <td md-cell></td>
+                </tr>
+            </tfoot>
+        </table>
+    </md-table-container>
+</div>
+
+</body>
+</html>
