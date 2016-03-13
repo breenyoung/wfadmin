@@ -24,7 +24,8 @@
 
 Route::get('/', 'AngularController@serveApp');
 
-Route::get('/test', 'HomeController@testMethod');
+//Route::get('/test', 'HomeController@testMethod');
+Route::get('/test', 'HomeController@scheduleTest');
 
 Route::group(['prefix' => 'api'], function()
 {
@@ -48,7 +49,8 @@ Route::group(['prefix' => 'api'], function()
     Route::get('scheduler/getFullyBookedDays', 'SchedulerController@getFullyBookedDays');
 
     Route::post('reports/getSalesReport', 'ReportController@getSalesReport');
-
+    Route::post('reports/getMonthlySalesReport', 'ReportController@getSalesByMonth');
+    Route::get('reports/getTopSellingProducts', 'ReportController@getTopSellingProducts');
 });
 
 /*

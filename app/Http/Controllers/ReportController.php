@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\PurchaseOrderProduct;
+use DB;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Http\Requests;
@@ -54,5 +56,31 @@ class ReportController extends Controller
 
         return response()->json($query->get());
 
+    }
+
+    public function getSalesByMonth()
+    {
+        //SELECT date_format(created_at, '%Y-%m') as month, sum(total) as monthtotal from purchase_orders group by date_format(created_at, '%Y-%m')
+
+        $dataPoints = DB::select('SELECT date_format(created_at, \'%Y\') as year, date_format(created_at, \'%m\') as month, count(id) as pocount, sum(total) as monthtotal from purchase_orders group by date_format(created_at, \'%Y-%m\')');
+
+
+        return response()->json($dataPoints);
+
+    }
+
+    public function getTopSellingProducts()
+    {
+        $dataPoints = DB::table('purchase_order_products')
+                    ->join('products', 'purchase_order_products.product_id', '=', 'products.id')
+                    ->select('purchase_order_products.product_id', 'products.name', DB::Raw('count(purchase_order_products.product_id) as pcount'))
+                    ->groupBy('purchase_order_products.product_id')
+                    ->orderBy('pcount', 'desc')
+                    ->take(10)
+                    ->get();
+
+        //DB::select('select pop.product_id, p.name, count(pop.product_id) as pcount')
+
+        return $dataPoints;
     }
 }
