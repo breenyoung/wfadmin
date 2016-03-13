@@ -68,7 +68,12 @@
     {
         $mdDateLocaleProvider.formatDate = function(date)
         {
-            return moment(date).format('MM-DD-YYYY');
+            if(date !== undefined)
+            {
+                return moment(date).format('MM-DD-YYYY');
+            }
+
+            return '';
         };
     });
 
