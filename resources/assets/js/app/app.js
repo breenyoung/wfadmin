@@ -13,7 +13,7 @@
 
     angular.module('app.services', ['ui.router', 'satellizer', 'restangular', 'angular-momentjs']);
     angular.module('app.routes', ['ui.router', 'satellizer']);
-    angular.module('app.controllers', ['ui.router', 'ngMaterial', 'restangular', 'angular-momentjs', 'app.services', 'ngMessages', 'ngMdIcons', 'md.data.table']);
+    angular.module('app.controllers', ['ui.router', 'ngMaterial', 'restangular', 'angular-momentjs', 'app.services', 'ngMessages', 'ngMdIcons', 'md.data.table', 'highcharts-ng']);
     angular.module('app.filters', []);
 
     angular.module('app.directives', ['angular-momentjs']);
@@ -62,6 +62,14 @@
             })
             .accentPalette('pink');
 
+    });
+
+    angular.module('app.config').config(function($mdDateLocaleProvider)
+    {
+        $mdDateLocaleProvider.formatDate = function(date)
+        {
+            return moment(date).format('MM-DD-YYYY');
+        };
     });
 
 
