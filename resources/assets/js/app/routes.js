@@ -197,6 +197,16 @@
                     }
                 }
             })
+            .state('app.reports.salesbymonth', {
+                url: '/salesbymonth',
+                views: {
+                    'main@': {
+                        templateUrl: getView('report.salesbymonth'),
+                        controller: 'ReportController',
+                        controllerAs: 'ctrlReport'
+                    }
+                }
+            })
             .state('app.units', {
                 url: '/units',
                 views: {
