@@ -15,6 +15,7 @@
             <tr md-row>
                 <th md-column></th>
                 <th md-column>Customer</th>
+                <th md-column>Creation Date</th>
                 <th md-column>Pickup Date</th>
                 <th md-column>Fulfilled</th>
                 <th md-column>Paid</th>
@@ -24,7 +25,8 @@
             <tr md-row ng-repeat="p in ctrlPurchaseOrder.purchaseorders">
                 <td md-cell><a ui-sref="app.purchaseorders.detail({purchaseOrderId: p.id})" class="nounderline">PO #{{p.id}}</a></td>
                 <td md-cell><a ui-sref="app.customers.detail({customerId: p.customer_id})" class="nounderline">{{p.customer.first_name}} {{p.customer.last_name}}</a></td>
-                <td md-cell>{{p.pickup_date}}</td>
+                <td md-cell>{{p.created_at | amDateFormat:'MM-DD-YYYY'}}</td>
+                <td md-cell>{{p.pickup_date | amDateFormat:'MM-DD-YYYY'}}</td>
                 <td md-cell>{{p.fulfilled == 1 ? 'Yes' : 'No'}}</td>
                 <td md-cell>{{p.paid == 1 ? 'Yes' : 'No'}}</td>
             </tr>

@@ -21,7 +21,15 @@
 
 </div>
 
+<md-content>
+    <p><strong>
+        Created on {{ctrlPurchaseOrderDetail.purchaseorder.created_at | amDateFormat:'MM-DD-YYYY'}}
+    </strong>
+    </p>
+</md-content>
+
 <div layout="row">
+    <label>Pickup Date</label>
     <md-datepicker ng-model="ctrlPurchaseOrderDetail.purchaseorder.pickup_date"
                    md-placeholder="Pickup Date" utc-Parser>
     </md-datepicker>

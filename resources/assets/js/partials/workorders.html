@@ -35,8 +35,8 @@
                     <td md-cell><a ui-sref="app.workorders.detail({workOrderId: w.id})" class="nounderline">W.O #{{w.id}}</a></td>
                     <td md-cell><a ui-sref="app.products.detail({productId: w.product.id})" class="nounderline">{{w.product.name}}</a></td>
                     <td md-cell><a ui-sref="app.customers.detail({customerId: w.customer.id})" class="nounderline">{{w.customer.first_name}} {{w.customer.last_name}}</a></td>
-                    <td md-cell>{{w.start_date | amDateFormat:'YYYY-MM-DD'}}</td>
-                    <td md-cell><span ng-class="ctrlWorkOrder.setUrgency(w.end_date)">{{w.end_date | amDateFormat:'YYYY-MM-DD'}}</span></td>
+                    <td md-cell>{{w.start_date | amDateFormat:'MM-DD-YYYY'}}</td>
+                    <td md-cell><span ng-class="ctrlWorkOrder.setUrgency(w.end_date)">{{w.end_date | amDateFormat:'MM-DD-YYYY'}}</span></td>
                     <td md-cell>{{w.completed == 1 ? 'Yes' : 'No'}}</td>
                 </tr>
             </tbody>
