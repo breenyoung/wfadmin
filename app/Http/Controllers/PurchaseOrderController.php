@@ -37,7 +37,7 @@ class PurchaseOrderController extends Controller
     public function index()
     {
         // Retrieve all the purchase orders in the database and return them
-        $purchaseOrders = PurchaseOrder::with('customer')->orderBy('pickup_date', 'asc')->get();
+        $purchaseOrders = PurchaseOrder::with('customer')->orderBy('created_at', 'desc')->get();
         return $purchaseOrders;
     }
 
