@@ -173,7 +173,7 @@
                     'main@': {
                         templateUrl: getView('reports'),
                         controller: 'ReportController',
-                        controllerAs: 'ctrlReports'
+                        controllerAs: 'ctrlReport'
                     }
                 }
             })
@@ -183,7 +183,17 @@
                     'main@': {
                         templateUrl: getView('report.currentstock'),
                         controller: 'ReportController',
-                        controllerAs: 'ctrlReports'
+                        controllerAs: 'ctrlReport'
+                    }
+                }
+            })
+            .state('app.reports.sales', {
+                url: '/sales',
+                views: {
+                    'main@': {
+                        templateUrl: getView('report.sales'),
+                        controller: 'ReportController',
+                        controllerAs: 'ctrlReport'
                     }
                 }
             })
