@@ -12,21 +12,10 @@
             {
                 var credentials = { email: email, password: password };
 
-                console.log(credentials);
+                //console.log(credentials);
 
                 // Use Satellizer's $auth service to login because it'll automatically save the JWT in localStorage
-                $auth.login(credentials).then(function (data)
-                {
-                    // If login is successful, redirect to the users state
-                    //$state.go('app.landing');
-                    console.log('successful login');
-
-                    return 1;
-                }).catch(function(data)
-                {
-                    console.log('Error logging in');
-                    return 0;
-                });
+                return $auth.login(credentials);
             },
 
             isAuthenticated: function()
