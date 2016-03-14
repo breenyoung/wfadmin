@@ -35,7 +35,7 @@
             {
                 Restangular.all('customer').getList().then(function(data)
                 {
-                    console.log(data);
+                    //console.log(data);
                     scope.customers = data;
                 });
             },
@@ -56,7 +56,7 @@
                     //console.log(data);
                     scope.workorders = data;
 
-                    console.log(scope);
+                    //console.log(scope);
                 });
             },
 
@@ -84,7 +84,7 @@
             {
                 Restangular.all('event').getList().then(function(data)
                 {
-                    console.log(data);
+                    //console.log(data);
                     scope.events = data;
                 });
             },
@@ -102,7 +102,7 @@
             {
                 Restangular.all('unit').getList().then(function(data)
                 {
-                    console.log(data);
+                    //console.log(data);
                     scope.units = data;
                 });
             },
@@ -120,7 +120,7 @@
             {
                 Restangular.all('material').getList().then(function(data)
                 {
-                    console.log(data);
+                    //console.log(data);
                     scope.materials = data;
                 });
             },
@@ -140,7 +140,7 @@
 
                 Restangular.one('search', query).getList().then(function(data)
                 {
-                   console.log(data);
+                   //console.log(data);
 
                 });
             },
@@ -165,6 +165,7 @@
 
                     // Hack for OLD mysql drivers on Hostgator which don't properly encode integer and return them as strings
                     data.fulfilled = parseInt(data.fulfilled);
+                    data.paid = parseInt(data.paid);
 
                     scope.purchaseorder = data;
                 });
@@ -174,7 +175,7 @@
             {
                 Restangular.all('paymenttype').getList().then(function(data)
                 {
-                    console.log(data);
+                    //console.log(data);
                     scope.paymenttypes = data;
                 });
             },
@@ -192,7 +193,7 @@
             {
                 Restangular.all('materialtype').getList().then(function(data)
                 {
-                    console.log(data);
+                    //console.log(data);
                     scope.materialtypes = data;
                 });
             },
