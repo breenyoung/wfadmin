@@ -5,9 +5,15 @@
 (function(){
     "use strict";
 
-    angular.module("app.services").factory('DialogService', function( $mdDialog, $mdMedia ){
+    angular.module("app.services").factory('DialogService', function( $mdDialog ){
 
         return {
+
+            fromCustom: function(options)
+            {
+                return $mdDialog.show(options);
+            },
+
             fromTemplate: function(ev, template, scope ) {
                 var options = {
                     templateUrl: '/views/dialogs/' + template + '.html',
