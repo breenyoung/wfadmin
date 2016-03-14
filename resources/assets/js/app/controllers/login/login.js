@@ -1,11 +1,25 @@
 (function(){
     "use strict";
 
-    function LoginController($auth, $state)
+    function LoginController($auth, $state, DialogService)
     {
         var self = this;
 
         self.title = 'Login';
+
+
+        DialogService.fromTemplate(null, 'dlgLogin').then(
+            function () {
+
+                //console.log('confirmed');
+                self.createPurchaseOrder();
+            },
+            function () {
+                //console.log('cancelled');
+            }
+        );
+
+
 
         self.requestToken = function()
         {
@@ -36,6 +50,6 @@
          */
     }
 
-    angular.module('app.controllers').controller('LoginController', ['$auth', '$state', LoginController]);
+    angular.module('app.controllers').controller('LoginController', ['$auth', '$state', 'DialogService', LoginController]);
 
 })();

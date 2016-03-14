@@ -5,13 +5,13 @@
 (function(){
     "use strict";
 
-    angular.module("app.services").factory('DialogService', function( $mdDialog ){
+    angular.module("app.services").factory('DialogService', function( $mdDialog, $mdMedia ){
 
         return {
             fromTemplate: function(ev, template, scope ) {
                 var options = {
                     templateUrl: '/views/dialogs/' + template + '.html',
-                    targetEvent: ev,
+                    escapeToClose: false,
                     controller: function DialogController($scope, $mdDialog)
                     {
                         $scope.confirmDialog = function () {
@@ -24,6 +24,11 @@
                         };
                     }
                 };
+
+                if(ev !== null)
+                {
+                    options.targetEvent = ev;
+                }
 
                 if ( scope )
                 {

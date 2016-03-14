@@ -11,7 +11,7 @@
             'app.config'
         ]);
 
-    angular.module('app.services', ['ui.router', 'satellizer', 'restangular', 'angular-momentjs']);
+    angular.module('app.services', ['ui.router', 'satellizer', 'restangular', 'angular-momentjs', 'ngMaterial']);
     angular.module('app.routes', ['ui.router', 'satellizer']);
     angular.module('app.controllers', ['ui.router', 'ngMaterial', 'restangular', 'angular-momentjs', 'app.services', 'ngMessages', 'ngMdIcons', 'md.data.table', 'highcharts-ng']);
     angular.module('app.filters', []);
@@ -78,5 +78,25 @@
     });
 
 
+    app.run(['$rootScope', '$location', '$state', 'AuthService', function ($rootScope, $location, $state, AuthService) {
+
+        $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams, options)
+        {
+            console.log('Attempting to get url: [' + toState.name + ']');
+            if(toState.name !== 'app.login')
+            {
+                if(AuthService.isAuthenticated())
+                {
+                    console.log("user is logged in");
+                }
+                else
+                {
+                    console.log("user not logged in, redirect to login page");
+                    event.preventDefault();
+                    $state.go('app.login');
+                }
+            }
+        });
+    }]);
 
 })();
