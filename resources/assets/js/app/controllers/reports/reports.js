@@ -41,6 +41,8 @@
         {
             ChartService.getTopSellingProducts(self, 'Top Selling All Time');
             ChartService.getWorstSellingProducts(self, 'Worst Selling All Time');
+
+            getOverduePurchaseOrders(self);
         };
 
         function showSalesReportByMonthView()
@@ -60,6 +62,21 @@
                 self.poCount = data.length;
 
                 //console.log(self.results[0]);
+            },
+            function()
+            {
+                // Error
+            });
+        };
+
+        function getOverduePurchaseOrders(scope)
+        {
+            Restangular.one('reports/getOverduePurchaseOrders').get().then(function(data)
+            {
+                self.overduePurchaseOrders = data;
+                //self.poCount = data.length;
+
+                console.log(data);
             },
             function()
             {

@@ -97,4 +97,17 @@ class ReportController extends Controller
 
         return $dataPoints;
     }
+
+    public function getOverduePurchaseOrders()
+    {
+        $results = DB::table('purchase_orders')
+                ->join('customers', 'purchase_orders.customer_id', '=', 'customers.id')
+                ->select('purchase_orders.id', 'purchase_orders.pickup_date', 'purchase_orders.total', 'purchase_orders.customer_id', 'customers.first_name', 'customers.last_name')
+                ->where('purchase_orders.paid', 0)
+                ->whereRaw('DATE(purchase_orders.pickup_date) <= CURDATE()')
+                ->orderBy('purchase_orders.pickup_date')
+                ->get();
+
+        return response()->json($results);
+    }
 }

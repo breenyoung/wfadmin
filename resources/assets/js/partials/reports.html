@@ -6,20 +6,74 @@
 </head>
 <body>
 
-    <div layout="row">
-        <ul>
-            <li><a href="#/reports/currentstock">Stock Report</a></li>
-            <li><a href="#/reports/sales">Sales Report</a></li>
-            <li><a href="#/reports/salesbymonth">Sales by Month</a></li>
-        </ul>
-    </div>
+    <md-content class="md-padding" layout-xs="column" layout="row">
+        <div flex-xs flex-gt-xs="50" layout="column">
+            <md-card>
+                <md-card-title>
+                    <md-card-title-text>Overdue P.O's</md-card-title-text>
+                </md-card-title>
+                <md-card-content>
+                    <md-table-container>
+                        <table md-table>
+                            <thead md-head>
+                            <tr md-row>
+                                <th md-column></th>
+                                <th md-column>Customer</th>
+                                <th md-column>Total</th>
+                                <th md-column>Pickup Date</th>
+                            </tr>
+                            </thead>
+                            <tbody md-body>
+                            <tr md-row ng-repeat="o in ctrlReport.overduePurchaseOrders">
+                                <td md-cell><a ui-sref="app.purchaseorders.detail({purchaseOrderId: o.id})" class="nounderline">P.O #{{o.id}}</a></td>
+                                <td md-cell><a ui-sref="app.customers.detail({customerId: o.customer_id})" class="nounderline">{{o.first_name}} {{o.last_name}}</a></td>
+                                <td md-cell>${{o.total}}</td>
+                                <td md-cell>{{o.pickup_date | amDateFormat:'MM-DD-YYYY'}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </md-table-container>
+                </md-card-content>
+            </md-card>
+
+            <md-card>
+                <md-card-title>
+                    <md-card-title-text>Other Reports</md-card-title-text>
+                </md-card-title>
+                <md-card-content>
+                    <ul>
+                        <li><a href="#/reports/currentstock">Stock Report</a></li>
+                        <li><a href="#/reports/sales">Sales Report</a></li>
+                        <li><a href="#/reports/salesbymonth">Sales by Month</a></li>
+                    </ul>
+                </md-card-content>
+            </md-card>
+
+
+
+        </div>
+        <div flex-xs flex-gt-xs="50" layout="column">
+
+            <md-card>
+                <md-content>
+                    <highchart id="topSelling" config="ctrlReport.topSellingChartConfig" class="span10"></highchart>
+                </md-content>
+            </md-card>
+
+            <md-card>
+                <md-content>
+                    <highchart id="worstSelling" config="ctrlReport.worstSellingChartConfig" class="span10"></highchart>
+                </md-content>
+            </md-card>
+        </div>
+    </md-content>
+
+
 
     <div layout="row" layout-xs="column">
+
         <div flex="50" layout="column">
-            <highchart id="topSelling" config="ctrlReport.topSellingChartConfig" class="span10"></highchart>
-        </div>
-        <div flex="50" layout="column">
-            <highchart id="worstSelling" config="ctrlReport.worstSellingChartConfig" class="span10"></highchart>
+
         </div>
     </div>
 

@@ -52,6 +52,8 @@ Route::group(['prefix' => 'api'], function()
     Route::post('reports/getMonthlySalesReport', 'ReportController@getSalesByMonth');
     Route::get('reports/getTopSellingProducts', 'ReportController@getTopSellingProducts');
     Route::get('reports/getWorstSellingProducts', 'ReportController@getWorstSellingProducts');
+    Route::get('reports/getOverduePurchaseOrders', 'ReportController@getOverduePurchaseOrders');
+
 });
 
 /*
