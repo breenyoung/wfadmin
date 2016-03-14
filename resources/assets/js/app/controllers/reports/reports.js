@@ -29,25 +29,25 @@
         function generateCurrentStockReport()
         {
             console.log("Generate stock rerport");
-        };
+        }
 
         function showSalesReportView()
         {
             RestService.getAllCustomers(self);
             RestService.getAllProducts(self);
-        };
+        }
 
         function showDashboardWidgets()
         {
             ChartService.getTopSellingProducts(self, 'Top Selling All Time');
             getWorstSellingProducts(self);
             getOverduePurchaseOrders(self);
-        };
+        }
 
         function showSalesReportByMonthView()
         {
             ChartService.getMonthlySalesReport(self);
-        };
+        }
 
         self.getSalesReport = function()
         {
@@ -78,7 +78,7 @@
             {
                 // Error
             });
-        };
+        }
 
         function getOverduePurchaseOrders(scope)
         {
@@ -93,7 +93,7 @@
             {
                 // Error
             });
-        };
+        }
 
         self.setPoTotal = function(item)
         {
