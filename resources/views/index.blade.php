@@ -171,6 +171,9 @@
 
         <div layout="column" flex id="content">
 
+            <md-button class="md-fab md-fab-bottom-right" aria-label=”Add” ng-click="addFabNavigate()" ng-show="determineFabVisibility()">
+                <ng-md-icon icon="add"></ng-md-icon>
+            </md-button>
 
             <md-content layout="column" flex class="md-padding">
                 <!-- START MAIN PAGE CONTENT -->
