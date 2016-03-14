@@ -1,7 +1,7 @@
 (function(){
     "use strict";
 
-    function CoreController($scope, $auth, $state, $moment, $mdSidenav, $mdMedia)
+    function CoreController($scope, $state, $moment, $mdSidenav, $mdMedia, AuthService)
     {
         var self = this;
 
@@ -90,8 +90,19 @@
             $state.go(url);
         };
 
+        $scope.isAuthenticated = function()
+        {
+            return AuthService.isAuthenticated();
+        };
+
+        $scope.logout = function()
+        {
+            AuthService.logout();
+            $state.go('app.login');
+        };
+
     }
 
-    angular.module('app.controllers').controller('CoreController', ['$scope', '$auth', '$state', '$moment', '$mdSidenav', '$mdMedia', CoreController]);
+    angular.module('app.controllers').controller('CoreController', ['$scope', '$state', '$moment', '$mdSidenav', '$mdMedia', 'AuthService', CoreController]);
 
 })();
