@@ -61,22 +61,30 @@
             </md-card>
 
             <md-card>
+                <md-card-title>
+                    <md-card-title-text>Worst Selling Products</md-card-title-text>
+                </md-card-title>
                 <md-content>
-                    <highchart id="worstSelling" config="ctrlReport.worstSellingChartConfig" class="span10"></highchart>
+                    <md-table-container>
+                        <table md-table>
+                            <thead md-head>
+                            <tr md-row>
+                                <th md-column>Product</th>
+                                <th md-column>Sold</th>
+                            </tr>
+                            </thead>
+                            <tbody md-body>
+                            <tr md-row ng-repeat="p in ctrlReport.worstSellingProducts">
+                                <td md-cell><a ui-sref="app.products.detail({productId: p.product_id})" class="nounderline">{{p.name}}</a></td>
+                                <td md-cell>{{p.pcount}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </md-table-container>
                 </md-content>
             </md-card>
         </div>
     </md-content>
-
-
-
-    <div layout="row" layout-xs="column">
-
-        <div flex="50" layout="column">
-
-        </div>
-    </div>
-
 
 
 </body>

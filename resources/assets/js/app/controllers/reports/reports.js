@@ -40,8 +40,7 @@
         function showDashboardWidgets()
         {
             ChartService.getTopSellingProducts(self, 'Top Selling All Time');
-            ChartService.getWorstSellingProducts(self, 'Worst Selling All Time');
-
+            getWorstSellingProducts(self);
             getOverduePurchaseOrders(self);
         };
 
@@ -62,6 +61,18 @@
                 self.poCount = data.length;
 
                 //console.log(self.results[0]);
+            },
+            function()
+            {
+                // Error
+            });
+        };
+
+        function getWorstSellingProducts(scope)
+        {
+            Restangular.one('reports/getWorstSellingProducts').get().then(function(data)
+            {
+                self.worstSellingProducts = data;
             },
             function()
             {

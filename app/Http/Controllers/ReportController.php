@@ -86,11 +86,11 @@ class ReportController extends Controller
 
     public function getWorstSellingProducts()
     {
-        $dataPoints = DB::table('purchase_order_products')
-            ->join('products', 'purchase_order_products.product_id', '=', 'products.id')
-            ->select('purchase_order_products.product_id', 'products.name', DB::Raw('count(purchase_order_products.product_id) as pcount'))
+        $dataPoints = DB::table('products')
+            ->join('purchase_order_products', 'products.id', '=', 'purchase_order_products.product_id', 'left outer')
+            ->select('products.id as product_id', 'products.name', DB::Raw('count(purchase_order_products.product_id) as pcount'))
             ->where('products.is_custom', 0)
-            ->groupBy('purchase_order_products.product_id')
+            ->groupBy('products.id')
             ->orderBy('pcount', 'asc')
             ->take(5)
             ->get();

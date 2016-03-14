@@ -135,38 +135,8 @@
                 {
                     // Error
                 });
-            },
-
-            getWorstSellingProducts: function(scope, chartTitle)
-            {
-                scope.worstSellingChartConfig = jQuery.extend(true, {}, pieConfig);
-
-
-                Restangular.one('reports/getWorstSellingProducts').get().then(function(data)
-                {
-                    var dataSet = [];
-                    for(var i = 0; i < data.length; i++)
-                    {
-                        var oneDataPoint = data[i];
-                        //console.log(oneDataPoint);
-                        dataSet.push({
-                            name: oneDataPoint.name,
-                            selected: (i === 0) ? true : false,
-                            sliced: (i === 0) ? true : false,
-                            y: parseInt(oneDataPoint.pcount)
-                        });
-                    }
-
-                    scope.worstSellingChartConfig.series = [{name: 'Sold', data: dataSet }];
-                    scope.worstSellingChartConfig.title.text = chartTitle;
-                    scope.worstSellingChartConfig.loading = false;
-
-                },
-                function()
-                {
-                    // Error
-                });
             }
+
         };
     }]);
 })();
