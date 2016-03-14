@@ -53,6 +53,13 @@
     </md-input-container>
 </div>
 
+
+    <md-chips ng-repeat="pop in ctrlPurchaseOrderCreate.purchaseorder.purchase_order_products">
+        <md-chip-template>
+            {{pop.product.name}}
+        </md-chip-template>
+    </md-chips>
+
     <div layout="row" ng-repeat="pop in ctrlPurchaseOrderCreate.purchaseorder.purchase_order_products">
         <div flex>
             {{pop.product.name}} x {{pop.quantity}} (@{{pop.product.price}} each = ${{pop.product.price * pop.quantity }} )
