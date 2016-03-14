@@ -13,6 +13,16 @@ use App\EventProduct;
 class EventController extends Controller
 {
     /**
+     * EventController constructor.
+     */
+    public function __construct()
+    {
+        // Apply the jwt.auth middleware to all methods in this controller
+        $this->middleware('jwt.auth');
+    }
+
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

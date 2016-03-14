@@ -15,6 +15,17 @@ use App\PurchaseOrder;
 
 class ReportController extends Controller
 {
+
+
+    /**
+     * ReportController constructor.
+     */
+    public function __construct()
+    {
+        // Apply the jwt.auth middleware to all methods in this controller
+        $this->middleware('jwt.auth');
+    }
+
     public function currentStock()
     {
         $productStock = Product::select('id', 'name', 'current_stock');

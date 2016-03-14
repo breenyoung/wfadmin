@@ -24,7 +24,7 @@ class PurchaseOrderController extends Controller
     public function __construct()
     {
         // Apply the jwt.auth middleware to all methods in this controller
-        //$this->middleware('jwt.auth');
+        $this->middleware('jwt.auth');
 
         $this->daysLeadTimeFromPickup = config('app.scheduler_days_lead_time_from_pickup_date');
     }

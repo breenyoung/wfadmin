@@ -20,7 +20,7 @@ class WorkOrderController extends Controller
     public function __construct()
     {
         // Apply the jwt.auth middleware to all methods in this controller
-        //$this->middleware('jwt.auth');
+        $this->middleware('jwt.auth');
     }
 
 
