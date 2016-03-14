@@ -1,7 +1,7 @@
 (function(){
     "use strict";
 
-    function ReportController($auth, $state, Restangular, RestService)
+    function ReportController($auth, $state, Restangular, RestService, ChartService)
     {
         var self = this;
 
@@ -35,140 +35,18 @@
         {
             RestService.getAllCustomers(self);
             RestService.getAllProducts(self);
-
         };
 
         function showDashboardWidgets()
         {
-            self.topSellingChartConfig = {
-                options: {
-                    chart: {
-                        type: 'pie'
-                    },
-                    plotOptions:
-                    {
-                        pie:
-                        {
-                            allowPointSelect: true,
-                            cursor: 'pointer',
-                            dataLabels:
-                            {
-                                enabled: true
-                            }
-                        }
-                    }
-                },
-
-                title: {
-                    text: 'Top selling products all time'
-                },
-
-                loading: true
-            };
-
-            Restangular.one('reports/getTopSellingProducts').get().then(function(data)
-            {
-                var dataSet = [];
-                for(var i = 0; i < data.length; i++)
-                {
-                    var oneDataPoint = data[i];
-                    console.log(oneDataPoint);
-                        dataSet.push({
-                            name: oneDataPoint.name,
-                            selected: (i === 0) ? true : false,
-                            sliced: (i === 0) ? true : false,
-                            y: parseInt(oneDataPoint.pcount)
-                        });
-                }
-
-                self.topSellingChartConfig.series = [{name: 'Sold', data: dataSet }];
-
-                self.topSellingChartConfig.loading = false;
-
-            },
-            function()
-            {
-                // Error
-            });
-
+            ChartService.getTopSellingProducts(self, 'Top Selling All Time');
+            ChartService.getWorstSellingProducts(self, 'Worst Selling All Time');
         };
 
         function showSalesReportByMonthView()
         {
-
-            self.chartConfig = {
-                options: {
-                    chart: {
-                        type: 'column'
-                    },
-                    yAxis:
-                    {
-                        min: 0,
-                        title:
-                        {
-                            text: '# of sales'
-                        }
-                    },
-                    xAxis:
-                    {
-                        type: 'datetime',
-                        dateTimeLabelFormats:
-                        {
-                            month: '%b',
-                            year: '%b'
-                        },
-                        title:
-                        {
-                            text: 'Date'
-                        }
-                    },
-                    tooltip:
-                    {
-
-                    }
-                },
-
-                title: {
-                    text: 'Sales per month'
-                },
-
-                loading: true
-            };
-
-            Restangular.all('reports/getMonthlySalesReport').post({ 'reportParams': {}}).then(function(data)
-            {
-                    var dataSet = [];
-                    for(var i = 0; i < data.length; i++)
-                    {
-                        var oneDataPoint = data[i];
-                        console.log(oneDataPoint);
-                        dataSet.push([Date.UTC(parseInt(oneDataPoint.year), parseInt(oneDataPoint.month) - 1), parseInt(oneDataPoint.pocount)]);
-                    }
-
-                    self.chartConfig.series = [{name: 'Sales this month', data: dataSet }];
-
-                    self.chartConfig.loading = false;
-
-            },
-            function()
-            {
-                // Error
-            });
+            ChartService.getMonthlySalesReport(self);
         };
-
-        self.swapChartType = function ()
-        {
-            if (self.chartConfig.options.chart.type === 'line')
-            {
-                self.chartConfig.options.chart.type = 'bar';
-            }
-            else
-            {
-                self.chartConfig.options.chart.type = 'line';
-                self.chartConfig.options.chart.zoomType = 'x';
-            }
-        }
-
 
         self.getSalesReport = function()
         {
@@ -201,6 +79,6 @@
 
     }
 
-    angular.module('app.controllers').controller('ReportController', ['$auth', '$state', 'Restangular', 'RestService', ReportController]);
+    angular.module('app.controllers').controller('ReportController', ['$auth', '$state', 'Restangular', 'RestService', 'ChartService', ReportController]);
 
 })();

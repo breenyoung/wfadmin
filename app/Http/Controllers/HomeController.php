@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\WorkOrder;
+use App\WorkOrderSchedulerService;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Mail;
@@ -28,6 +29,14 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function scheduleTest()
+    {
+        $woss = new WorkOrderSchedulerService();
+        $woss->sendWorkOrderReport();
+
+        echo 'done';
     }
 
     public function testMethod()

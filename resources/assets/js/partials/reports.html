@@ -5,15 +5,21 @@
     <title>Reports</title>
 </head>
 <body>
-    <ul>
-        <li><a href="#/reports/currentstock">Stock Report</a></li>
-        <li><a href="#/reports/sales">Sales Report</a></li>
-        <li><a href="#/reports/salesbymonth">Sales by Month</a></li>
-    </ul>
 
     <div layout="row">
-        <div flex>
+        <ul>
+            <li><a href="#/reports/currentstock">Stock Report</a></li>
+            <li><a href="#/reports/sales">Sales Report</a></li>
+            <li><a href="#/reports/salesbymonth">Sales by Month</a></li>
+        </ul>
+    </div>
+
+    <div layout="row" layout-xs="column">
+        <div flex="50" layout="column">
             <highchart id="topSelling" config="ctrlReport.topSellingChartConfig" class="span10"></highchart>
+        </div>
+        <div flex="50" layout="column">
+            <highchart id="worstSelling" config="ctrlReport.worstSellingChartConfig" class="span10"></highchart>
         </div>
     </div>
 
