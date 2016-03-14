@@ -10,6 +10,15 @@ use \DB;
 
 class SearchController extends Controller
 {
+    /**
+     * SearchController constructor.
+     */
+    public function __construct()
+    {
+        // Apply the jwt.auth middleware to all methods in this controller
+        $this->middleware('jwt.auth');
+    }
+
     public function index($query)
     {
         $searchType = '';
