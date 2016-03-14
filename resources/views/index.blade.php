@@ -169,7 +169,7 @@
                     <a ng-click="logout()" class="nounderline">
                         <md-item-content md-ink-ripple layout="row" layout-align="start center">
                             <div class="inset">
-                                <ng-md-icon icon="user"></ng-md-icon>
+                                <ng-md-icon icon="logout"></ng-md-icon>
                             </div>
                             <div class="inset">Logout</div>
                         </md-item-content>
