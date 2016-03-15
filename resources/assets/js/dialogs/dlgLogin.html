@@ -12,7 +12,7 @@
                 <input type="text" class="form-control" placeholder="Email" ng-model="ctrlLogin.email">
             </div>
             <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password" ng-model="ctrlLogin.password">
+                <input type="password" class="form-control" placeholder="Password" ng-model="ctrlLogin.password" ng-keydown="($event.keyCode === 13) ? confirmDialog() : angular.noop">
             </div>
         </div>
     </md-dialog-content>
