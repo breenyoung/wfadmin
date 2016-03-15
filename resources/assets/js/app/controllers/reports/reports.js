@@ -46,6 +46,7 @@
             ChartService.getTopSellingProducts(self, 'Top Selling All Time');
             getWorstSellingProducts(self);
             getOverduePurchaseOrders(self);
+            getMonthlyIncome(self);
         }
 
         function showSalesReportByMonthView()
@@ -103,6 +104,49 @@
                 // Error
             });
         }
+
+        function getMonthlyIncome(scope)
+        {
+            Restangular.all('reports/getMonthlySalesReport').post({ 'reportParams': {}}).then(function(data)
+                {
+                    scope.monthlyIncomes = data;
+                    if(scope.monthlyIncomes.length > 0)
+                    {
+                        var l = scope.monthlyIncomes.length;
+                        var d = new Date(scope.monthlyIncomes[l-1].year, scope.monthlyIncomes[l-1].month - 1, 1);
+                        scope.curMonthlyIncomeMonth = d;
+                        scope.curMonthlyIncomeTotal = scope.monthlyIncomes[l-1].monthtotal;
+                        scope.curMonthlyIncomePos = l - 1;
+                    }
+                },
+                function()
+                {
+                    // Error
+                });
+
+        }
+
+        self.changeMonthlyIncome = function(increment)
+        {
+            //console.log('Len:' + self.monthlyIncomes.length);
+
+            //console.log(self.curMonthlyIncomePos);
+            self.curMonthlyIncomePos += increment;
+
+            if((self.curMonthlyIncomePos < 0)) { self.curMonthlyIncomePos = 0; }
+            else if((self.curMonthlyIncomePos + 1) > self.monthlyIncomes.length) { self.curMonthlyIncomePos = self.monthlyIncomes.length - 1; }
+
+            //console.log(self.curMonthlyIncomePos);
+
+            if(self.curMonthlyIncomePos >= 0 && (self.curMonthlyIncomePos + 1) <= self.monthlyIncomes.length)
+            {
+                var d = new Date(self.monthlyIncomes[self.curMonthlyIncomePos].year, self.monthlyIncomes[self.curMonthlyIncomePos].month - 1, 1);
+
+                self.curMonthlyIncomeMonth = d;
+                self.curMonthlyIncomeTotal = self.monthlyIncomes[self.curMonthlyIncomePos].monthtotal;
+            }
+
+        };
 
         self.setPoTotal = function(item)
         {

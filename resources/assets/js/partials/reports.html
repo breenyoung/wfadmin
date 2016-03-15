@@ -37,6 +37,25 @@
             </md-card>
 
             <md-card>
+                <md-card-title>Monthly Income</md-card-title>
+                <md-card-content>
+
+                    <div>
+                        {{ctrlReport.curMonthlyIncomeMonth | amDateFormat:'MMM YYYY'}} - ${{ctrlReport.curMonthlyIncomeTotal}}
+                    </div>
+
+                    <div>
+                        <md-button class="md-fab md-mini md-primary" ng-disabled="ctrlReport.curMonthlyIncomePos === 0" ng-click="ctrlReport.changeMonthlyIncome(-1)" aria-label="Prev">
+                            <ng-md-icon icon="chevron_left"></ng-md-icon>
+                        </md-button>
+                        <md-button class="md-fab md-mini md-primary" ng-disabled="ctrlReport.curMonthlyIncomePos === ctrlReport.monthlyIncomes.length - 1" ng-click="ctrlReport.changeMonthlyIncome(1)" aria-label="Next">
+                            <ng-md-icon icon="chevron_right"></ng-md-icon>
+                        </md-button>
+                    </div>
+                </md-card-content>
+            </md-card>
+
+            <md-card>
                 <md-card-title>
                     <md-card-title-text>Other Reports</md-card-title-text>
                 </md-card-title>
