@@ -1,33 +1,46 @@
 (function(){
     "use strict";
 
-    function ProductCreateController($auth, $state, Restangular, ToastService, RestService, $stateParams)
+    function ProductCreateController($auth, $state, Restangular, ToastService, RestService, ValidationService, $stateParams)
     {
         var self = this;
 
+
         RestService.getAllMaterials(self);
 
+        self.decimalRegex = ValidationService.decimalRegex();
+        console.log(self.decimalRegex);
         self.product = {};
-        self.product.cost = 0;
+        self.product.minimum_stock = 0;
+        self.product.current_stock = 0;
 
         self.createProduct = function()
         {
-            console.log(self.product);
+            self.form1.$setSubmitted();
 
-            var p = self.product;
+            var isValid = self.form1.$valid;
+            //console.log(isValid);
 
-            //console.log($error);
-
-            Restangular.all('product').post(p).then(function(d)
+            if(isValid)
             {
-                //console.log(d);
-                //$state.go('app.products.detail', {'productId': d.newId});
-                ToastService.show("Successfully created");
-                $state.go('app.products');
-            }, function()
-            {
-                ToastService.show("Error creating");
-            });
+                console.log(self.product);
+
+                var p = self.product;
+
+                 //console.log($error);
+
+                 Restangular.all('product').post(p).then(function(d)
+                 {
+                    //console.log(d);
+                    //$state.go('app.products.detail', {'productId': d.newId});
+                    ToastService.show("Successfully created");
+                    $state.go('app.products');
+                 }, function()
+                 {
+                    ToastService.show("Error creating");
+                 });
+
+            }
         };
 
         self.addMaterial = function()
@@ -80,6 +93,6 @@
 
     }
 
-    angular.module('app.controllers').controller('ProductCreateController', ['$auth', '$state', 'Restangular', 'ToastService', 'RestService', '$stateParams', ProductCreateController]);
+    angular.module('app.controllers').controller('ProductCreateController', ['$auth', '$state', 'Restangular', 'ToastService', 'RestService', 'ValidationService', '$stateParams', ProductCreateController]);
 
 })();

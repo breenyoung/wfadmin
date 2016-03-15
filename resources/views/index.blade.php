@@ -199,9 +199,11 @@
     </div>
 
 <script type="text/ng-template" id="error-messages">
-    <div ng-message="required">This field is required</div>
-    <div ng-message="minlength">This field is too short</div>
-    <div ng-message="maxlength">This field is too long</div>
+    <div class="errorMessage" ng-message="required">This field is required</div>
+    <div class="errorMessage" ng-message="minlength">This field is too short</div>
+    <div class="errorMessage" ng-message="maxlength">This field is too long</div>
+    <div class="errorMessage" ng-message="nan">This field is not a number</div>
+    <div class="errorMessage" ng-message="email">This field is not a email</div>
 </script>
 
 <script src="{{url('/js/vendor.js')}}"></script>
