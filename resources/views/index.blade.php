@@ -41,6 +41,7 @@
 
             <span ng-controller="SearchController as ctrlSearch" flex>
                 <md-autocomplete
+                                 md-input-id="superSearch"
                                  md-input-name="autocompleteField"
                                  md-no-cache="ctrlSearch.noCache"
                                  md-selected-item="ctrlSearch.selectedResult"
