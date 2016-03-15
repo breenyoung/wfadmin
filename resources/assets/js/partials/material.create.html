@@ -5,11 +5,19 @@
     <title>Material Create</title>
 </head>
 <body>
+
+<form name="ctrlMaterialCreate.form1" novalidate>
+
 <h2>Material create</h2>
 
 <md-input-container class="md-block" flex-gt-sm>
     <label>Name</label>
-    <input type="text" ng-model="ctrlMaterialCreate.material.name"/>
+    <input type="text" name="materialname" ng-model="ctrlMaterialCreate.material.name" required ng-maxlength="200"/>
+
+    <div ng-messages="ctrlMaterialCreate.form1.materialname.$error" role="alert" ng-show="ctrlMaterialCreate.form1.materialname.$touched || ctrlMaterialCreate.form1.$submitted">
+        <div ng-messages-include="error-messages"></div>
+    </div>
+
 </md-input-container>
 
 <div layout="row">
@@ -17,18 +25,29 @@
     <div flex>
         <md-input-container class="md-block" flex-gt-sm>
             <label>Unit Cost</label>
-            <input type="text" ng-model="ctrlMaterialCreate.material.unit_cost"/>
+            <input type="text" name="unit_cost" ng-model="ctrlMaterialCreate.material.unit_cost" required ng-pattern="ctrlMaterialCreate.decimalRegex"/>
+
+            <div ng-messages="ctrlMaterialCreate.form1.unit_cost.$error" role="alert" ng-show="ctrlMaterialCreate.form1.unit_cost.$touched || ctrlMaterialCreate.form1.$submitted">
+                <div class="errorMessage" ng-message="pattern">This field must be a number</div>
+                <div ng-messages-include="error-messages"></div>
+            </div>
+
         </md-input-container>
     </div>
 
     <div flex>
         <md-input-container class="md-block" flex-gt-sm>
             <label>Unit</label>
-            <md-select ng-model="ctrlMaterialCreate.material.unit_id">
+            <md-select name="unit_id" ng-model="ctrlMaterialCreate.material.unit_id" required>
                 <md-option ng-repeat="u in ctrlMaterialCreate.units" value="{{u.id}}">
                     {{u.name}}
                 </md-option>
             </md-select>
+
+            <div ng-messages="ctrlMaterialCreate.form1.unit_id.$error" role="alert" ng-show="ctrlMaterialCreate.form1.unit_id.$touched || ctrlMaterialCreate.form1.$submitted">
+                <div ng-messages-include="error-messages"></div>
+            </div>
+
         </md-input-container>
     </div>
 </div>
@@ -37,11 +56,16 @@
     <div flex>
         <md-input-container class="md-block" flex-gt-sm>
             <label>Type</label>
-            <md-select ng-model="ctrlMaterialCreate.material.material_type_id">
+            <md-select name="material_type_id" ng-model="ctrlMaterialCreate.material.material_type_id" required>
                 <md-option ng-repeat="mt in ctrlMaterialCreate.materialtypes" value="{{mt.id}}">
                     {{mt.name}}
                 </md-option>
             </md-select>
+
+            <div ng-messages="ctrlMaterialCreate.form1.material_type_id.$error" role="alert" ng-show="ctrlMaterialCreate.form1.material_type_id.$touched || ctrlMaterialCreate.form1.$submitted">
+                <div ng-messages-include="error-messages"></div>
+            </div>
+
         </md-input-container>
     </div>
 </div>
@@ -54,6 +78,8 @@
         <md-button class="md-raised" ui-sref="app.materials">Cancel</md-button>
     </div>
 </div>
+
+</form>
 
 </body>
 </html>

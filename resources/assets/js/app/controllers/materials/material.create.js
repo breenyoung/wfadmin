@@ -1,35 +1,45 @@
 (function(){
     "use strict";
 
-    function MaterialCreateController($auth, $state, ToastService, Restangular, RestService, $stateParams)
+    function MaterialCreateController($auth, $state, ToastService, Restangular, RestService, ValidationService, $stateParams)
     {
         var self = this;
 
         RestService.getAllUnits(self);
         RestService.getMaterialAllTypes(self);
 
+        self.decimalRegex = ValidationService.decimalRegex();
+
         self.createMaterial = function()
         {
-            console.log(self.material);
+            self.form1.$setSubmitted();
 
-            var m = self.material;
+            var isValid = self.form1.$valid;
+            //console.log(isValid);
 
-            Restangular.all('material').post(m).then(function(d)
+            if(isValid)
             {
-                console.log(d);
-                //$state.go('app.customers.detail', {'customerId': d.newId});
-                ToastService.show("Successfully created");
-                $state.go('app.materials');
+                //console.log(self.material);
 
-            }, function()
-            {
-                ToastService.show("Error creating");
-            });
+                var m = self.material;
 
+                Restangular.all('material').post(m).then(function(d)
+                {
+                    console.log(d);
+                    //$state.go('app.customers.detail', {'customerId': d.newId});
+                    ToastService.show("Successfully created");
+                    $state.go('app.materials');
+
+                }, function()
+                {
+                    ToastService.show("Error creating");
+                });
+
+            }
         };
 
     }
 
-    angular.module('app.controllers').controller('MaterialCreateController', ['$auth', '$state', 'ToastService', 'Restangular', 'RestService', '$stateParams', MaterialCreateController]);
+    angular.module('app.controllers').controller('MaterialCreateController', ['$auth', '$state', 'ToastService', 'Restangular', 'RestService', 'ValidationService', '$stateParams', MaterialCreateController]);
 
 })();

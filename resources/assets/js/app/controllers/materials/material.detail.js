@@ -1,7 +1,7 @@
 (function(){
     "use strict";
 
-    function MaterialDetailController($auth, $state, ToastService, Restangular, RestService, DialogService, $stateParams)
+    function MaterialDetailController($auth, $state, ToastService, Restangular, RestService, DialogService, ValidationService, $stateParams)
     {
         var self = this;
 
@@ -11,18 +11,27 @@
         //console.log($stateParams);
         RestService.getMaterial(self, $stateParams.materialId);
 
+        self.decimalRegex = ValidationService.decimalRegex();
+
         self.updateMaterial = function()
         {
-            self.material.put().then(function()
-            {
-                ToastService.show("Successfully updated");
-                $state.go("app.materials");
+            self.form1.$setSubmitted();
 
-            }, function()
+            var isValid = self.form1.$valid;
+
+            if(isValid)
             {
-                ToastService.show("Error updating");
-                console.log("error updating");
-            });
+                self.material.put().then(function()
+                {
+                    ToastService.show("Successfully updated");
+                    $state.go("app.materials");
+
+                }, function()
+                {
+                    ToastService.show("Error updating");
+                    console.log("error updating");
+                });
+            }
         };
 
         self.deleteMaterial = function()
@@ -51,6 +60,6 @@
 
     }
 
-    angular.module('app.controllers').controller('MaterialDetailController', ['$auth', '$state', 'ToastService', 'Restangular', 'RestService', 'DialogService', '$stateParams', MaterialDetailController]);
+    angular.module('app.controllers').controller('MaterialDetailController', ['$auth', '$state', 'ToastService', 'Restangular', 'RestService', 'DialogService', 'ValidationService', '$stateParams', MaterialDetailController]);
 
 })();
