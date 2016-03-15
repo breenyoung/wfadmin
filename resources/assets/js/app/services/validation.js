@@ -10,7 +10,12 @@
 
             decimalRegex: function()
             {
-                return '/^\\d*\\.?\\d*$/';
+                return '^\\d*\\.?\\d*$';
+            },
+
+            numericRegex: function()
+            {
+                return '^\\d*$';
             }
         };
 

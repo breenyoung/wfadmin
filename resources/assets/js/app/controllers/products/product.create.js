@@ -9,7 +9,8 @@
         RestService.getAllMaterials(self);
 
         self.decimalRegex = ValidationService.decimalRegex();
-        console.log(self.decimalRegex);
+        self.numericRegex = ValidationService.numericRegex();
+
         self.product = {};
         self.product.minimum_stock = 0;
         self.product.current_stock = 0;
