@@ -7,22 +7,28 @@
 
         self.createUnit = function()
         {
-            console.log(self.unit);
+            self.form1.$setSubmitted();
 
-            var c = self.unit;
+            var isValid = self.form1.$valid;
+            //console.log(isValid);
 
-            Restangular.all('unit').post(c).then(function(d)
+            if(isValid)
             {
-                console.log(d);
-                //$state.go('app.customers.detail', {'customerId': d.newId});
-                ToastService.show("Successfully created");
-                $state.go('app.units');
+                //console.log(self.unit);
+                var c = self.unit;
 
-            }, function()
-            {
-                ToastService.show("Error creating");
-            });
+                Restangular.all('unit').post(c).then(function(d)
+                {
+                    console.log(d);
+                    //$state.go('app.customers.detail', {'customerId': d.newId});
+                    ToastService.show("Successfully created");
+                    $state.go('app.units');
 
+                }, function()
+                {
+                    ToastService.show("Error creating");
+                });
+            }
         };
 
     }

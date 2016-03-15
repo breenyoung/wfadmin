@@ -10,16 +10,24 @@
 
         self.updateUnit = function()
         {
-            self.unit.put().then(function()
-            {
-                ToastService.show("Successfully updated");
-                $state.go("app.units");
+            self.form1.$setSubmitted();
 
-            }, function()
+            var isValid = self.form1.$valid;
+            //console.log(isValid);
+
+            if(isValid)
             {
-                ToastService.show("Error updating");
-                console.log("error updating");
-            });
+                self.unit.put().then(function()
+                {
+                    ToastService.show("Successfully updated");
+                    $state.go("app.units");
+
+                }, function()
+                {
+                    ToastService.show("Error updating");
+                    console.log("error updating");
+                });
+            }
         };
 
         self.deleteUnit = function()

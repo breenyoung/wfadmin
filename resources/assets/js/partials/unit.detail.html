@@ -5,11 +5,19 @@
     <title>Unit Detail</title>
 </head>
 <body>
+
+<form name="ctrlUnitDetail.form1" novalidate>
+
 <h2>Unit details</h2>
 
 <md-input-container class="md-block" flex-gt-sm>
     <label>Name</label>
-    <input type="text" ng-model="ctrlUnitDetail.unit.name"/>
+    <input type="text" name="unitname" ng-model="ctrlUnitDetail.unit.name" required ng-maxlength="200"/>
+
+    <div ng-messages="ctrlUnitDetail.form1.unitname.$error" role="alert" ng-show="ctrlUnitDetail.form1.unitname.$touched || ctrlUnitDetail.form1.$submitted">
+        <div ng-messages-include="error-messages"></div>
+    </div>
+
 </md-input-container>
 
 <div layout="row" layout-xs="column">
@@ -24,6 +32,7 @@
     </div>
 </div>
 
+</form>
 
 </body>
 </html>
