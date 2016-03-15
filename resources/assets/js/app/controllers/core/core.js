@@ -34,6 +34,7 @@
         $scope.toggleSearch = function()
         {
             $scope.showSearch = !$scope.showSearch;
+            //if($scope.showSearch) { console.log(angular.element('#superSearch')); }
         };
 
         // Listen for toggleSearch events

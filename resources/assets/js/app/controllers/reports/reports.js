@@ -19,6 +19,10 @@
         {
             showSalesReportByMonthView();
         }
+        else if($state.is('app.reports.incomebymonth'))
+        {
+            showIncomeReportByMonthView();
+        }
         else
         {
             // Report home
@@ -47,6 +51,11 @@
         function showSalesReportByMonthView()
         {
             ChartService.getMonthlySalesReport(self);
+        }
+
+        function showIncomeReportByMonthView()
+        {
+            ChartService.getMonthlyIncomeReport(self);
         }
 
         self.getSalesReport = function()

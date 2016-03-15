@@ -207,6 +207,16 @@
                     }
                 }
             })
+            .state('app.reports.incomebymonth', {
+                url: '/incomebymonth',
+                views: {
+                    'main@': {
+                        templateUrl: getView('report.incomebymonth'),
+                        controller: 'ReportController',
+                        controllerAs: 'ctrlReport'
+                    }
+                }
+            })
             .state('app.units', {
                 url: '/units',
                 views: {

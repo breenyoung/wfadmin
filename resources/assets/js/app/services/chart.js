@@ -104,6 +104,69 @@
                 });
             },
 
+            getMonthlyIncomeReport: function(scope)
+            {
+
+                scope.chartConfig = {
+                    options: {
+                        chart: {
+                            type: 'column'
+                        },
+                        yAxis:
+                        {
+                            min: 0,
+                            title:
+                            {
+                                text: '$ amount'
+                            }
+                        },
+                        xAxis:
+                        {
+                            type: 'datetime',
+                            dateTimeLabelFormats:
+                            {
+                                month: '%b',
+                                year: '%b'
+                            },
+                            title:
+                            {
+                                text: 'Date'
+                            }
+                        },
+                        tooltip:
+                        {
+
+                        }
+                    },
+
+                    title: {
+                        text: 'Income per month'
+                    },
+
+                    loading: true
+                };
+
+                Restangular.all('reports/getMonthlySalesReport').post({ 'reportParams': {}}).then(function(data)
+                    {
+                        var dataSet = [];
+                        for(var i = 0; i < data.length; i++)
+                        {
+                            var oneDataPoint = data[i];
+                            //console.log(oneDataPoint);
+                            dataSet.push([Date.UTC(parseInt(oneDataPoint.year), parseInt(oneDataPoint.month) - 1), parseFloat(oneDataPoint.monthtotal)]);
+                        }
+
+                        scope.chartConfig.series = [{name: 'Income this month', data: dataSet }];
+
+                        scope.chartConfig.loading = false;
+
+                    },
+                    function()
+                    {
+                        // Error
+                    });
+            },
+
             getTopSellingProducts: function(scope, chartTitle)
             {
                 console.log(chartTitle);
