@@ -19,15 +19,24 @@
 
         var originalTotal = 0;
 
+
         self.onlyOpenDays = function(date)
         {
             var result = true;
-            for(var i = 0; i < self.bookedDays.length; i++)
+
+            if(!$moment(date).isBefore())
             {
-                //console.log(self.bookedDays[i].start_date);
-                //console.log($moment(self.bookedDays[i].start_date));
-                result = !$moment(date).isSame(self.bookedDays[i].start_date);
-                break;
+                //console.log(date);
+                for(var i = 0; i < self.bookedDays.length; i++)
+                {
+                    console.log(self.bookedDays[i].start_date);
+                    //console.log($moment(self.bookedDays[i].start_date));
+                    if(moment(date).isSame(self.bookedDays[i].start_date))
+                    {
+                        result = false;
+                        break;
+                    }
+                }
             }
 
             return result;

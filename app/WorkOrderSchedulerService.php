@@ -181,7 +181,7 @@ class WorkOrderSchedulerService
         $bookedDays = \DB::table('work_orders')->select(\DB::raw('start_date, count(start_date) as wocount'))
                             ->groupBy('start_date')
                             ->having('wocount', '>=', $this->maxWorkOrdersPerDay)
-                            ->orderBy('wocount', 'desc')
+                            ->orderBy('start_date', 'asc')
                             ->get();
 
         return $bookedDays;
