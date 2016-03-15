@@ -5,11 +5,18 @@
     <title>Unit Create</title>
 </head>
 <body>
+<form name="ctrlUnitCreate.form1" novalidate>
+
 <h2>Unit create</h2>
 
 <md-input-container class="md-block" flex-gt-sm>
     <label>Name</label>
-    <input type="text" ng-model="ctrlUnitCreate.unit.name"/>
+    <input type="text" name="unitname" ng-model="ctrlUnitCreate.unit.name" required ng-maxlength="200"/>
+
+    <div ng-messages="ctrlUnitCreate.form1.unitname.$error" role="alert" ng-show="ctrlUnitCreate.form1.unitname.$touched || ctrlUnitCreate.form1.$submitted">
+        <div ng-messages-include="error-messages"></div>
+    </div>
+
 </md-input-container>
 
 <div layout="row" layout-xs="column">
@@ -20,6 +27,7 @@
         <md-button class="md-raised" ui-sref="app.units">Cancel</md-button>
     </div>
 </div>
+</form>
 
 
 </body>
