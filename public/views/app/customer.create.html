@@ -5,31 +5,59 @@
     <title>Customer Create</title>
 </head>
 <body>
+
+<form name="ctrlCustomerCreate.form1" novalidate>
+
 <h2>Customer create</h2>
 
 <md-input-container class="md-block" flex-gt-sm>
     <label>First Name</label>
-    <input type="text" ng-model="ctrlCustomerCreate.customer.first_name"/>
+    <input type="text" name="first_name" ng-model="ctrlCustomerCreate.customer.first_name" required ng-maxlength="100"/>
+
+    <div ng-messages="ctrlCustomerCreate.form1.first_name.$error" role="alert" ng-show="ctrlCustomerCreate.form1.first_name.$touched || ctrlCustomerCreate.form1.$submitted">
+        <div ng-messages-include="error-messages"></div>
+    </div>
+
 </md-input-container>
 
 <md-input-container class="md-block" flex-gt-sm>
     <label>Last Name</label>
-    <input type="text" ng-model="ctrlCustomerCreate.customer.last_name"/>
+    <input type="text" name="last_name" ng-model="ctrlCustomerCreate.customer.last_name" required ng-maxlength="100"/>
+
+    <div ng-messages="ctrlCustomerCreate.form1.last_name.$error" role="alert" ng-show="ctrlCustomerCreate.form1.last_name.$touched || ctrlCustomerCreate.form1.$submitted">
+        <div ng-messages-include="error-messages"></div>
+    </div>
+
 </md-input-container>
 
 <md-input-container class="md-block" flex-gt-sm>
     <label>Email</label>
-    <input type="text" ng-model="ctrlCustomerCreate.customer.email"/>
+    <input type="email" name="email" ng-model="ctrlCustomerCreate.customer.email" ng-maxlength="100"/>
+
+    <div ng-messages="ctrlCustomerCreate.form1.email.$error" role="alert" ng-show="ctrlCustomerCreate.form1.email.$touched || ctrlCustomerCreate.form1.$submitted">
+        <div ng-messages-include="error-messages"></div>
+    </div>
+
 </md-input-container>
 
 <md-input-container class="md-block" flex-gt-sm>
     <label>Phone</label>
-    <input type="text" ng-model="ctrlCustomerCreate.customer.phone"/>
+    <input type="text" name="phone" ng-model="ctrlCustomerCreate.customer.phone" ng-maxlength="25"/>
+
+    <div ng-messages="ctrlCustomerCreate.form1.phone.$error" role="alert" ng-show="ctrlCustomerCreate.form1.phone.$touched || ctrlCustomerCreate.form1.$submitted">
+        <div ng-messages-include="error-messages"></div>
+    </div>
+
 </md-input-container>
 
 <md-input-container class="md-block" flex-gt-sm>
     <label>Facebook Url</label>
-    <input type="text" ng-model="ctrlCustomerCreate.customer.facebook_url"/>
+    <input type="text" name="facebook_url" ng-model="ctrlCustomerCreate.customer.facebook_url" ng-maxlength="100"/>
+
+    <div ng-messages="ctrlCustomerCreate.form1.facebook_url.$error" role="alert" ng-show="ctrlCustomerCreate.form1.facebook_url.$touched || ctrlCustomerCreate.form1.$submitted">
+        <div ng-messages-include="error-messages"></div>
+    </div>
+
 </md-input-container>
 
 <md-input-container class="md-block" flex-gt-sm>
@@ -52,7 +80,7 @@
 </div>
 
 
-
+</form>
 
 </body>
 </html>
