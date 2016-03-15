@@ -11,33 +11,33 @@
 </div>
 
 <md-list>
-    <md-list-item class="md-3-line" ng-repeat="c in ctrlCustomer.customers">
-        <div class="md-list-item-text" layout="column">
-            <h3><a ui-sref="app.customers.detail({customerId: c.id})" class="nounderline">{{c.first_name}} {{c.last_name}}</a></h3>
 
-            <div layout="row">
-            <md-button class="md-icon-button" aria-label="Favorite" ng-show="c.facebook_url">
-                <a href="{{c.facebook_url}}" target="_blank">
-                <ng-md-icon icon="facebook-box"></ng-md-icon>
-                </a>
-            </md-button>
+    <md-list-item ng-repeat="c in ctrlCustomer.customers">
 
-            <md-button class="md-icon-button" aria-label="Favorite" ng-show="c.email">
-                <a href="mailto:{{c.email}}">
-                    <ng-md-icon icon="email"></ng-md-icon>
-                </a>
-            </md-button>
+        <p><a ui-sref="app.customers.detail({customerId: c.id})" class="nounderline">{{c.first_name}} {{c.last_name}}</a></p>
 
-            <md-button class="md-icon-button" aria-label="Favorite" ng-show="c.phone">
-                <a href="tel:+1-{{c.phone}}">
-                    <ng-md-icon icon="phone"></ng-md-icon>
-                </a>
-            </md-button>
+        <md-button class="md-icon-button" aria-label="Favorite" ng-show="c.facebook_url">
+            <a href="{{c.facebook_url}}" target="_blank">
+            <ng-md-icon icon="facebook-box"></ng-md-icon>
+            </a>
+        </md-button>
 
-            </div>
-        </div>
+        <md-button class="md-icon-button" aria-label="Favorite" ng-show="c.email">
+            <a href="mailto:{{c.email}}">
+                <ng-md-icon icon="email"></ng-md-icon>
+            </a>
+        </md-button>
+
+        <md-button class="md-icon-button" aria-label="Favorite" ng-show="c.phone">
+            <a href="tel:+1-{{c.phone}}">
+                <ng-md-icon icon="phone"></ng-md-icon>
+            </a>
+        </md-button>
+
         <md-divider ng-if="!$last"></md-divider>
+
     </md-list-item>
+
 </md-list>
 
 </body>
