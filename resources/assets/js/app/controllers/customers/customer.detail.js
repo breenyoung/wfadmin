@@ -10,16 +10,23 @@
 
         self.updateCustomer = function()
         {
-            self.customer.put().then(function()
-            {
-                ToastService.show("Successfully updated");
-                $state.go("app.customers");
+            self.form1.$setSubmitted();
 
-            }, function()
+            var isValid = self.form1.$valid;
+
+            if(isValid)
             {
-                ToastService.show("Error updating");
-                console.log("error updating");
-            });
+                self.customer.put().then(function()
+                {
+                    ToastService.show("Successfully updated");
+                    $state.go("app.customers");
+
+                }, function()
+                {
+                    ToastService.show("Error updating");
+                    console.log("error updating");
+                });
+            }
         };
 
         self.deleteCustomer = function()

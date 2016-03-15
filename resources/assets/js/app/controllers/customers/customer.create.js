@@ -7,22 +7,28 @@
 
         self.createCustomer = function()
         {
-            console.log(self.customer);
+            self.form1.$setSubmitted();
 
-            var c = self.customer;
+            var isValid = self.form1.$valid;
 
-            Restangular.all('customer').post(c).then(function(d)
+            if(isValid)
             {
-                console.log(d);
-                //$state.go('app.customers.detail', {'customerId': d.newId});
-                ToastService.show("Successfully created");
-                $state.go('app.customers');
+                //console.log(self.customer);
 
-            }, function()
-            {
-                ToastService.show("Error creating");
-            });
+                var c = self.customer;
 
+                Restangular.all('customer').post(c).then(function(d)
+                {
+                    console.log(d);
+                    //$state.go('app.customers.detail', {'customerId': d.newId});
+                    ToastService.show("Successfully created");
+                    $state.go('app.customers');
+
+                }, function()
+                {
+                    ToastService.show("Error creating");
+                });
+            }
         };
 
     }
