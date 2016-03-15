@@ -1,55 +1,42 @@
 (function(){
     "use strict";
 
-    function LoginController($auth, $state, DialogService)
+    function LoginController($state, $scope, DialogService, AuthService)
     {
         var self = this;
+        self.email = '';
+        self.password = '';
 
-        self.title = 'Login';
+        var dialogOptions = {
+            templateUrl: '/views/dialogs/dlgLogin.html',
+            escapeToClose: false,
+            controller: function DialogController($scope, $mdDialog)
+            {
+                $scope.confirmDialog = function () {
 
-
-        DialogService.fromTemplate(null, 'dlgLogin').then(
-            function () {
-
-                //console.log('confirmed');
-                self.createPurchaseOrder();
+                    //console.log(self.email);
+                    if(self.email !== '' && self.password !== '')
+                    {
+                        AuthService.login(self.email, self.password).then(function()
+                        {
+                            console.log('Login success');
+                            $mdDialog.hide();
+                            $state.go('app.products');
+                        },
+                        function()
+                        {
+                            alert('Error logging in');
+                        });
+                    }
+                };
             },
-            function () {
-                //console.log('cancelled');
-            }
-        );
-
-
-
-        self.requestToken = function()
-        {
-            var credentials = { email: self.email, password: self.password };
-
-            //console.log(credentials);
-
-            // Use Satellizer's $auth service to login because it'll automatically save the JWT in localStorage
-            $auth.login(credentials).then(function (data)
-            {
-                // If login is successful, redirect to the users state
-                $state.go('app.landing');
-            }).catch(function(data)
-            {
-                alert('Error logging in');
-            });
+            scope: $scope.$new()
         };
 
-        // This request will hit the getData method in the AuthenticateController
-        // on the Laravel side and will return your data that require authentication
-        /*
-         $scope.getData = function()
-         {
-         Restangular.all('authenticate/data').get().then(function (response){
+        DialogService.fromCustom(dialogOptions);
 
-         }, function (error){});
-         };
-         */
     }
 
-    angular.module('app.controllers').controller('LoginController', ['$auth', '$state', 'DialogService', LoginController]);
+    angular.module('app.controllers').controller('LoginController', ['$state', '$scope', 'DialogService', 'AuthService', LoginController]);
 
 })();

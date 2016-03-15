@@ -77,19 +77,16 @@
         };
     });
 
-
+    // Check for authenticated user on every request
     app.run(['$rootScope', '$location', '$state', 'AuthService', function ($rootScope, $location, $state, AuthService) {
 
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams, options)
         {
-            console.log('Attempting to get url: [' + toState.name + ']');
+            //console.log('Attempting to get url: [' + toState.name + ']');
+            // Let anyone go to the login page, check auth on all other pages
             if(toState.name !== 'app.login')
             {
-                if(AuthService.isAuthenticated())
-                {
-                    console.log("user is logged in");
-                }
-                else
+                if(!AuthService.isAuthenticated())
                 {
                     console.log("user not logged in, redirect to login page");
                     event.preventDefault();
