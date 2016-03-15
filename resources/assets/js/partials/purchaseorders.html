@@ -17,8 +17,8 @@
                 <th md-column>Customer</th>
                 <th md-column>Creation Date</th>
                 <th md-column>Pickup Date</th>
-                <th md-column>Fulfilled</th>
                 <th md-column>Paid</th>
+                <th md-column>Outstanding</th>
             </tr>
             </thead>
             <tbody md-body>
@@ -27,8 +27,8 @@
                 <td md-cell><a ui-sref="app.customers.detail({customerId: p.customer_id})" class="nounderline">{{p.customer.first_name}} {{p.customer.last_name}}</a></td>
                 <td md-cell>{{p.created_at | amDateFormat:'MM-DD-YYYY'}}</td>
                 <td md-cell>{{p.pickup_date | amDateFormat:'MM-DD-YYYY'}}</td>
-                <td md-cell>{{p.fulfilled == 1 ? 'Yes' : 'No'}}</td>
-                <td md-cell>{{p.paid == 1 ? 'Yes' : 'No'}}</td>
+                <td md-cell>{{p.amount_paid}}</td>
+                <td md-cell>{{p.total - p.amount_paid | currency}}</td>
             </tr>
             </tbody>
         </table>
