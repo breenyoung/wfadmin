@@ -29,7 +29,8 @@
                 //console.log(date);
                 for(var i = 0; i < self.bookedDays.length; i++)
                 {
-                    console.log(self.bookedDays[i].start_date);
+                    //console.log(self.bookedDays[i].start_date);
+                    //console.log(self.bookedDays[i].start_date);
                     //console.log($moment(self.bookedDays[i].start_date));
                     if(moment(date).isSame(self.bookedDays[i].start_date))
                     {
