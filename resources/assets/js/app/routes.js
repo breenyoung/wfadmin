@@ -7,7 +7,7 @@
             return '/views/app/' + viewName + '.html';
         };
 
-        $urlRouterProvider.otherwise('/login');
+        $urlRouterProvider.otherwise('/products');
 
 
         $stateProvider
