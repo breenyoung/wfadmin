@@ -5,13 +5,22 @@
     <title>Event Create</title>
 </head>
 <body>
+
+<form name="ctrlEventCreate.form1" novalidate>
+
 <h2>Event create</h2>
 
 <div layout="row">
+
     <div flex>
         <md-input-container class="md-block" flex-gt-sm>
             <label>Event Name</label>
-            <input type="text" ng-model="ctrlEventCreate.event.name"/>
+            <input type="text" name="eventname" ng-model="ctrlEventCreate.event.name" required ng-maxlength="200"/>
+
+            <div ng-messages="ctrlEventCreate.form1.eventname.$error" role="alert" ng-show="ctrlEventCreate.form1.eventname.$touched || ctrlEventCreate.form1.$submitted">
+                <div ng-messages-include="error-messages"></div>
+            </div>
+
         </md-input-container>
     </div>
 
@@ -20,11 +29,20 @@
 <div layout="row">
 
     <div flex>
-            <md-datepicker ng-model="ctrlEventCreate.event.start_date" md-placeholder="Start Date"></md-datepicker>
+        <md-datepicker name="startdate" ng-model="ctrlEventCreate.event.start_date" md-placeholder="Start Date" required></md-datepicker>
+
+        <div ng-messages="ctrlEventCreate.form1.startdate.$error" role="alert" ng-show="ctrlEventCreate.form1.startdate.$touched || ctrlEventCreate.form1.$submitted">
+            <div ng-messages-include="error-messages"></div>
+        </div>
     </div>
 
     <div flex>
-            <md-datepicker ng-model="ctrlEventCreate.event.end_date" md-placeholder="End Date"></md-datepicker>
+
+        <md-datepicker name="enddate" ng-model="ctrlEventCreate.event.end_date" md-placeholder="End Date" required></md-datepicker>
+
+        <div ng-messages="ctrlEventCreate.form1.enddate.$error" role="alert" ng-show="ctrlEventCreate.form1.enddate.$touched || ctrlEventCreate.form1.$submitted">
+            <div ng-messages-include="error-messages"></div>
+        </div>
     </div>
 
 </div>
@@ -45,5 +63,8 @@
         <md-button class="md-raised" ui-sref="app.events">Cancel</md-button>
     </div>
 </div>
+
+</form>
+
 </body>
 </html>

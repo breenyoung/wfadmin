@@ -5,22 +5,41 @@
     <title>Event Detail</title>
 </head>
 <body>
+
+<form name="ctrlEventDetail.form1" novalidate>
+
 <h2>Event details</h2>
 
 <div layout="row">
     <div flex>
         <md-input-container class="md-block" flex-gt-sm>
             <label>Event Name</label>
-            <input type="text" ng-model="ctrlEventDetail.event.name"/>
+            <input name="eventname" type="text" ng-model="ctrlEventDetail.event.name" required/>
+
+            <div ng-messages="ctrlEventDetail.form1.eventname.$error" role="alert" ng-show="ctrlEventDetail.form1.eventname.$touched || ctrlEventDetail.form1.$submitted">
+                <div ng-messages-include="error-messages"></div>
+            </div>
+
         </md-input-container>
     </div>
 
 </div>
 
-<md-datepicker ng-model="ctrlEventDetail.event.start_date" md-placeholder="Start Date" utc-Parser></md-datepicker>
+<div layout="row">
+    <div flex>
+        <md-datepicker name="startdate" ng-model="ctrlEventDetail.event.start_date" md-placeholder="Start Date" required utc-Parser></md-datepicker>
+        <div ng-messages="ctrlEventDetail.form1.startdate.$error" role="alert" ng-show="ctrlEventDetail.form1.startdate.$touched || ctrlEventDetail.form1.$submitted">
+            <div ng-messages-include="error-messages"></div>
+        </div>
+    </div>
 
-<md-datepicker ng-model="ctrlEventDetail.event.end_date" md-placeholder="End Date" utc-Parser></md-datepicker>
-
+    <div flex>
+        <md-datepicker name="enddate" ng-model="ctrlEventDetail.event.end_date" md-placeholder="End Date" required utc-Parser></md-datepicker>
+        <div ng-messages="ctrlEventDetail.form1.enddate.$error" role="alert" ng-show="ctrlEventDetail.form1.enddate.$touched || ctrlEventDetail.form1.$submitted">
+            <div ng-messages-include="error-messages"></div>
+        </div>
+    </div>
+</div>
 
 <div layout="row">
     <md-input-container class="md-block" flex-gt-sm>
@@ -60,5 +79,8 @@
         <md-button class="md-raised" ui-sref="app.events">Cancel</md-button>
     </div>
 </div>
+
+</form>
+
 </body>
 </html>

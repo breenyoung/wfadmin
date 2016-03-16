@@ -12,20 +12,27 @@
         RestService.getEvent(self, $stateParams.eventId);
         RestService.getAllProducts(self);
 
-
         self.updateEvent = function()
         {
-            //RestService.updateProduct(self, self.product.id);
-            self.event.put().then(function()
+            self.form1.$setSubmitted();
+
+            var isValid = self.form1.$valid;
+            //console.log(isValid);
+
+            if(isValid)
             {
-                //console.log("updated");
-                ToastService.show("Successfully updated");
-                $state.go("app.events");
-            }, function()
-            {
-                ToastService.show("Error updating");
-                console.log("error updating");
-            });
+                //RestService.updateProduct(self, self.product.id);
+                self.event.put().then(function()
+                {
+                    //console.log("updated");
+                    ToastService.show("Successfully updated");
+                    $state.go("app.events");
+                }, function()
+                {
+                    ToastService.show("Error updating");
+                    console.log("error updating");
+                });
+            }
         };
 
         self.addProduct = function()

@@ -9,20 +9,27 @@
 
         self.createEvent = function()
         {
-            console.log(self.event);
+            self.form1.$setSubmitted();
 
-            var e = self.event;
+            var isValid = self.form1.$valid;
+            //console.log(isValid);
 
-            //console.log($error);
-
-            Restangular.all('event').post(e).then(function(e)
+            if(isValid)
             {
-                console.log(e);
-                ToastService.show("Successfully created");
-                $state.go('app.events');
+                //console.log(self.event);
 
-            });
+                var e = self.event;
 
+                //console.log($error);
+
+                Restangular.all('event').post(e).then(function(e)
+                {
+                    console.log(e);
+                    ToastService.show("Successfully created");
+                    $state.go('app.events');
+
+                });
+            }
         };
 
     }
