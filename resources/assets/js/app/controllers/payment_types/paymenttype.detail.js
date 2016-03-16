@@ -10,16 +10,25 @@
 
         self.updatePaymentType = function()
         {
-            self.paymenttype.put().then(function()
-            {
-                ToastService.show("Successfully updated");
-                $state.go("app.paymenttypes");
+            self.form1.$setSubmitted();
 
-            }, function()
+            var isValid = self.form1.$valid;
+            //console.log(isValid);
+
+            if(isValid)
             {
-                ToastService.show("Error updating");
-                console.log("error updating");
-            });
+                self.paymenttype.put().then(function()
+                {
+                    ToastService.show("Successfully updated");
+                    $state.go("app.paymenttypes");
+
+                }, function()
+                {
+                    ToastService.show("Error updating");
+                    console.log("error updating");
+                });
+            }
+
         };
 
         self.deletePaymentType = function()

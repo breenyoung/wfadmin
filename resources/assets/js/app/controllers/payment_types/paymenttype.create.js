@@ -7,21 +7,28 @@
 
         self.createPaymentType = function()
         {
-            console.log(self.paymenttype);
+            self.form1.$setSubmitted();
 
-            var c = self.paymenttype;
+            var isValid = self.form1.$valid;
+            //console.log(isValid);
 
-            Restangular.all('paymenttype').post(c).then(function(d)
+            if(isValid)
             {
-                console.log(d);
-                ToastService.show("Successfully created");
-                $state.go('app.paymenttypes');
+                //console.log(self.paymenttype);
 
-            }, function()
-            {
-                ToastService.show("Error creating");
-            });
+                var c = self.paymenttype;
 
+                Restangular.all('paymenttype').post(c).then(function(d)
+                {
+                    console.log(d);
+                    ToastService.show("Successfully created");
+                    $state.go('app.paymenttypes');
+
+                }, function()
+                {
+                    ToastService.show("Error creating");
+                });
+            }
         };
 
     }
