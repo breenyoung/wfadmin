@@ -1,7 +1,7 @@
 (function(){
     "use strict";
 
-    function WorkOrderDetailController($auth, $state, ToastService, Restangular, RestService, DialogService, $moment, $stateParams)
+    function WorkOrderDetailController($auth, $state, ToastService, Restangular, RestService, DialogService, ValidationService, $moment, $stateParams)
     {
         var self = this;
 
@@ -10,6 +10,7 @@
         RestService.getAllCustomers(self);
         RestService.getAllProducts(self);
 
+        self.numericRegex = ValidationService.numericRegex();
 
         self.toggleComplete = function(cbState)
         {
@@ -20,14 +21,22 @@
 
         self.updateWorkOrder = function()
         {
-            self.workorder.put().then(function()
+            self.form1.$setSubmitted();
+
+            var isValid = self.form1.$valid;
+            //console.log(isValid);
+
+            if(isValid)
             {
-                ToastService.show("Successfully updated");
-                $state.go("app.workorders");
-            }, function()
-            {
-                ToastService.show("Error updating");
-            });
+                self.workorder.put().then(function()
+                {
+                    ToastService.show("Successfully updated");
+                    $state.go("app.workorders");
+                }, function()
+                {
+                    ToastService.show("Error updating");
+                });
+            }
         };
 
         self.deleteWorkOrder = function()
@@ -56,6 +65,6 @@
 
     }
 
-    angular.module('app.controllers').controller('WorkOrderDetailController', ['$auth', '$state', 'ToastService', 'Restangular', 'RestService', 'DialogService', '$moment', '$stateParams', WorkOrderDetailController]);
+    angular.module('app.controllers').controller('WorkOrderDetailController', ['$auth', '$state', 'ToastService', 'Restangular', 'RestService', 'DialogService', 'ValidationService', '$moment', '$stateParams', WorkOrderDetailController]);
 
 })();
