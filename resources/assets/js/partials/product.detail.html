@@ -5,20 +5,33 @@
     <title>Product Detail</title>
 </head>
 <body>
+
+<form name="ctrlProductDetail.form1" novalidate>
+
 <h2>Product details</h2>
 
 <div layout="row">
     <div flex>
         <md-input-container class="md-block" flex-gt-sm>
             <label>Product Name</label>
-            <input type="text" ng-model="ctrlProductDetail.product.name"/>
+            <input type="text" name="productname" ng-model="ctrlProductDetail.product.name" required ng-minlength="5" ng-maxlength="200"/>
+
+            <div ng-messages="ctrlProductDetail.form1.productname.$error" role="alert" ng-show="ctrlProductDetail.form1.productname.$touched || ctrlProductDetail.form1.$submitted">
+                <div ng-messages-include="error-messages"></div>
+            </div>
+
         </md-input-container>
     </div>
 
     <div flex>
         <md-input-container class="md-block" flex-gt-sm>
             <label>SKU</label>
-            <input type="text" ng-model="ctrlProductDetail.product.sku"/>
+            <input type="text" name="sku" ng-model="ctrlProductDetail.product.sku" required ng-minlength="1" ng-maxlength="100"/>
+
+            <div ng-messages="ctrlProductDetail.form1.sku.$error" role="alert" ng-show="ctrlProductDetail.form1.sku.$touched || ctrlProductDetail.form1.$submitted">
+                <div ng-messages-include="error-messages"></div>
+            </div>
+
         </md-input-container>
     </div>
 </div>
@@ -27,14 +40,26 @@
     <div flex>
         <md-input-container class="md-block" flex-gt-sm>
             <label>Price</label>
-            <input type="text" ng-model="ctrlProductDetail.product.price"/>
+            <input type="text" name="price" ng-model="ctrlProductDetail.product.price" required ng-pattern="ctrlProductDetail.decimalRegex"/>
+
+            <div ng-messages="ctrlProductDetail.form1.price.$error" role="alert" ng-show="ctrlProductDetail.form1.price.$touched || ctrlProductDetail.form1.$submitted">
+                <div class="errorMessage" ng-message="pattern">This field must be a number</div>
+                <div ng-messages-include="error-messages"></div>
+            </div>
+
         </md-input-container>
     </div>
 
     <div flex>
         <md-input-container class="md-block" flex-gt-sm>
             <label>Cost</label>
-            <input type="text" ng-model="ctrlProductDetail.product.cost"/>
+            <input type="text" name="cost" ng-model="ctrlProductDetail.product.cost" required ng-pattern="ctrlProductDetail.decimalRegex"/>
+
+            <div ng-messages="ctrlProductDetail.form1.cost.$error" role="alert" ng-show="ctrlProductDetail.form1.cost.$touched || ctrlProductDetail.form1.$submitted">
+                <div class="errorMessage" ng-message="pattern">This field must be a number</div>
+                <div ng-messages-include="error-messages"></div>
+            </div>
+
         </md-input-container>
     </div>
 </div>
@@ -43,14 +68,26 @@
     <div flex>
         <md-input-container class="md-block" flex-gt-sm>
             <label>Minimum Stock</label>
-            <input type="text" ng-model="ctrlProductDetail.product.minimum_stock"/>
+            <input type="text" name="minimum_stock" ng-model="ctrlProductDetail.product.minimum_stock" ng-pattern="ctrlProductDetail.numericRegex"/>
+
+            <div ng-messages="ctrlProductDetail.form1.minimum_stock.$error" role="alert" ng-show="ctrlProductDetail.form1.minimum_stock.$touched || ctrlProductDetail.form1.$submitted">
+                <div class="errorMessage" ng-message="pattern">This field must be a number</div>
+                <div ng-messages-include="error-messages"></div>
+            </div>
+
         </md-input-container>
     </div>
 
     <div flex>
         <md-input-container class="md-block" flex-gt-sm>
             <label>Current Stock</label>
-            <input type="text" ng-model="ctrlProductDetail.product.current_stock"/>
+            <input type="text" name="current_stock" ng-model="ctrlProductDetail.product.current_stock" ng-pattern="ctrlProductDetail.numericRegex"/>
+
+            <div ng-messages="ctrlProductDetail.form1.current_stock.$error" role="alert" ng-show="ctrlProductDetail.form1.current_stock.$touched || ctrlProductDetail.form1.$submitted">
+                <div class="errorMessage" ng-message="pattern">This field must be a number</div>
+                <div ng-messages-include="error-messages"></div>
+            </div>
+
         </md-input-container>
     </div>
 </div>
@@ -100,6 +137,7 @@
     </div>
 </div>
 
+</form>
 
 </body>
 </html>
