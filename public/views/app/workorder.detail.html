@@ -5,25 +5,38 @@
     <title>Work Order Details</title>
 </head>
 <body>
+
+<form name="ctrlWorkOrderDetail.form1" novalidate>
+
 <h2>Work Order #{{ctrlWorkOrderDetail.workorder.id}}</h2>
 
 <md-input-container>
     <label>Customer</label>
-    <md-select ng-model="ctrlWorkOrderDetail.workorder.customer_id">
+    <md-select name="customer_id" ng-model="ctrlWorkOrderDetail.workorder.customer_id" required>
         <md-option ng-repeat="c in ctrlWorkOrderDetail.customers" value="{{c.id}}">
             {{c.first_name}} {{c.last_name}}
         </md-option>
     </md-select>
+
+    <div ng-messages="ctrlWorkOrderDetail.form1.customer_id.$error" role="alert" ng-show="ctrlWorkOrderDetail.form1.customer_id.$touched || ctrlWorkOrderDetail.form1.$submitted">
+        <div ng-messages-include="error-messages"></div>
+    </div>
+
 </md-input-container>
 <br/>
 <md-input-container>
     <label>Product</label>
 
-    <md-select ng-model="ctrlWorkOrderDetail.workorder.product_id">
+    <md-select name="product_id" ng-model="ctrlWorkOrderDetail.workorder.product_id" required>
         <md-option ng-repeat="p in ctrlWorkOrderDetail.products" value="{{p.id}}">
             {{p.name}}
         </md-option>
     </md-select>
+
+    <div ng-messages="ctrlWorkOrderDetail.form1.product_id.$error" role="alert" ng-show="ctrlWorkOrderDetail.form1.product_id.$touched || ctrlWorkOrderDetail.form1.$submitted">
+        <div ng-messages-include="error-messages"></div>
+    </div>
+
 </md-input-container>
 <br/>
 
@@ -31,15 +44,27 @@
     <div flex>
         <md-input-container class="md-block" flex-gt-sm>
             <label>Quantity</label>
-            <input type="text" ng-model="ctrlWorkOrderDetail.workorder.quantity"/>
+            <input type="text" name="quantity" ng-model="ctrlWorkOrderDetail.workorder.quantity" required ng-pattern="ctrlWorkOrderDetail.numericRegex"/>
+
+            <div ng-messages="ctrlWorkOrderDetail.form1.quantity.$error" role="alert" ng-show="ctrlWorkOrderDetail.form1.quantity.$touched || ctrlWorkOrderDetail.form1.$submitted">
+                <div class="errorMessage" ng-message="pattern">This field must be a number</div>
+                <div ng-messages-include="error-messages"></div>
+            </div>
+
         </md-input-container>
     </div>
 </div>
 
 
-<md-datepicker ng-model="ctrlWorkOrderDetail.workorder.start_date" md-placeholder="Start Date" utc-Parser></md-datepicker>
+<md-datepicker name="startdate" ng-model="ctrlWorkOrderDetail.workorder.start_date" md-placeholder="Start Date" utc-Parser required></md-datepicker>
+<div ng-messages="ctrlWorkOrderCreate.form1.startdate.$error" role="alert" ng-show="ctrlWorkOrderCreate.form1.startdate.$touched || ctrlWorkOrderCreate.form1.$submitted">
+    <div ng-messages-include="error-messages"></div>
+</div>
 
-<md-datepicker ng-model="ctrlWorkOrderDetail.workorder.end_date" md-placeholder="End Date" utc-Parser></md-datepicker>
+<md-datepicker name="enddate" ng-model="ctrlWorkOrderDetail.workorder.end_date" md-placeholder="End Date" utc-Parser required></md-datepicker>
+<div ng-messages="ctrlWorkOrderDetail.form1.enddate.$error" role="alert" ng-show="ctrlWorkOrderDetail.form1.enddate.$touched || ctrlWorkOrderDetail.form1.$submitted">
+    <div ng-messages-include="error-messages"></div>
+</div>
 
 <md-switch class="md-primary" ng-true-value="1" ng-false-value="0" ng-model="ctrlWorkOrderDetail.workorder.completed"  aria-label="Completed">
     Completed:
@@ -64,7 +89,7 @@
     </div>
 </div>
 
-
+</form>
 
 </body>
 </html>

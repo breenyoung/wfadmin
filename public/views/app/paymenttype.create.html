@@ -5,11 +5,19 @@
     <title>Payment Type Create</title>
 </head>
 <body>
+
+<form name="ctrlPaymentTypeCreate.form1" novalidate>
+
 <h2>Payment Type create</h2>
 
 <md-input-container class="md-block" flex-gt-sm>
     <label>Name</label>
-    <input type="text" ng-model="ctrlPaymentTypeCreate.paymenttype.name"/>
+    <input type="text" name="paymenttypename" ng-model="ctrlPaymentTypeCreate.paymenttype.name" required ng-maxlength="200"/>
+
+    <div ng-messages="ctrlPaymentTypeCreate.form1.paymenttypename.$error" role="alert" ng-show="ctrlPaymentTypeCreate.form1.paymenttypename.$touched || ctrlPaymentTypeCreate.form1.$submitted">
+        <div ng-messages-include="error-messages"></div>
+    </div>
+
 </md-input-container>
 
 <div layout="row" layout-xs="column">
@@ -21,7 +29,7 @@
     </div>
 </div>
 
-
+</form>
 
 </body>
 </html>
