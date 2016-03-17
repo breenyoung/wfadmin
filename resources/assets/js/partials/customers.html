@@ -10,9 +10,13 @@
     <md-subheader class="md-primary">Customers</md-subheader>
 </div>
 
+<div layout="row">
+    <input type="search" ng-model="q" placeholder="filter customers..." aria-label="filter customers" />
+</div>
+
 <md-list>
 
-    <md-list-item ng-repeat="c in ctrlCustomer.customers">
+    <md-list-item ng-repeat="c in ctrlCustomer.customers | filter:q as results">
 
         <p><a ui-sref="app.customers.detail({customerId: c.id})" class="nounderline">{{c.first_name}} {{c.last_name}}</a></p>
 

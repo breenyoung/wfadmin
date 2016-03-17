@@ -6,23 +6,27 @@
 </head>
 <body>
     <div layout="row">
-    <md-subheader class="md-primary">Purchase Orders</md-subheader>
+        <md-subheader class="md-primary">Purchase Orders</md-subheader>
+    </div>
+
+    <div layout="row">
+        <input type="search" ng-model="q" placeholder="filter PO's..." aria-label="filter PO's" />
     </div>
 
     <md-table-container>
         <table md-table>
-            <thead md-head>
+            <thead md-head md-order="poOrder">
             <tr md-row>
                 <th md-column></th>
-                <th md-column>Customer</th>
-                <th md-column>Creation Date</th>
-                <th md-column>Pickup Date</th>
-                <th md-column>Paid</th>
-                <th md-column>Outstanding</th>
+                <th md-column md-order-by="customer.first_name">Customer</th>
+                <th md-column md-order-by="created_at">Creation Date</th>
+                <th md-column md-order-by="pickup_date">Pickup Date</th>
+                <th md-column md-order-by="amount_paid">Paid</th>
+                <th md-column md-order-by="(total - amount_paid)">Outstanding</th>
             </tr>
             </thead>
             <tbody md-body>
-            <tr md-row ng-repeat="p in ctrlPurchaseOrder.purchaseorders">
+            <tr md-row ng-repeat="p in ctrlPurchaseOrder.purchaseorders | orderBy: poOrder | filter:q as results">
                 <td md-cell><a ui-sref="app.purchaseorders.detail({purchaseOrderId: p.id})" class="nounderline">PO #{{p.id}}</a></td>
                 <td md-cell><a ui-sref="app.customers.detail({customerId: p.customer_id})" class="nounderline">{{p.customer.first_name}} {{p.customer.last_name}}</a></td>
                 <td md-cell>{{p.created_at | amDateFormat:'MM-DD-YYYY'}}</td>

@@ -10,44 +10,21 @@
     </div>
 
     <div layout="row">
-        <md-input-container>
-            <label>Show</label>
-            <md-select ng-model="ctrlProduct.filterType">
-                <md-option value=""></md-option>
-                <md-option value="stock">Current Stock</md-option>
-                <md-option value="price">Price</md-option>
-                <md-option value="cost">Cost</md-option>
-            </md-select>
-        </md-input-container>
-        <md-input-container>
-            <label>Operator</label>
-            <md-select ng-model="ctrlProduct.filterOperator">
-                <md-option value=""></md-option>
-                <md-option value="=">=</md-option>
-                <md-option value=">">&gt;</md-option>
-                <md-option value=">=">&gt;=</md-option>
-                <md-option value="<">&lt;</md-option>
-                <md-option value="<=">&lt;=</md-option>
-            </md-select>
-        </md-input-container>
-        <md-input-container>
-            <label></label>
-            <input type="text" name="filterValue" placeholder="Value" ng-model="ctrlProduct.filterValue"/>
-        </md-input-container>
+        <input type="search" ng-model="q" placeholder="filter products..." aria-label="filter products" />
     </div>
 
     <md-table-container>
         <table md-table>
-            <thead md-head>
+            <thead md-head md-order="productOrder">
             <tr md-row>
-                <th md-column>Product</th>
-                <th md-column>Price</th>
-                <th md-column>Cost</th>
-                <th md-column>Current Stock</th>
+                <th md-column md-order-by="name">Product</th>
+                <th md-column md-order-by="price">Price</th>
+                <th md-column md-order-by="cost">Cost</th>
+                <th md-column md-order-by="current_stock">Current Stock</th>
             </tr>
             </thead>
             <tbody md-body>
-            <tr md-row ng-repeat="p in ctrlProduct.products" ng-show="ctrlProduct.applyProductFilter(p)">
+            <tr md-row ng-repeat="p in ctrlProduct.products | orderBy: productOrder | filter:q as results">
                 <td md-cell><a ui-sref="app.products.detail({productId: p.id})" class="nounderline">{{p.name | truncateName:25}}</a></td>
                 <td md-cell>{{p.price}}</td>
                 <td md-cell>{{p.cost}}</td>
