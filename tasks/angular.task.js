@@ -21,7 +21,7 @@ Elixir.extend('angular', function(src, output, outputFilename) {
 console.log(baseDir);
     new Task('angular', function() {
         // Main file has to be included first.
-        return gulp.src([baseDir + "main.js", baseDir + "**/*.js"])
+        return gulp.src([baseDir + "app.js", baseDir + "**/*.js"])
             .pipe(jshint())
             .pipe(jshint.reporter(stylish))
             //.pipe(jshint.reporter('fail')).on('error', onError) //enable this if you want to force jshint to validate
