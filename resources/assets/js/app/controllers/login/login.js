@@ -1,11 +1,16 @@
 (function(){
     "use strict";
 
-    function LoginController($state, $scope, DialogService, AuthService)
+    function LoginController($state, $scope, $cookies, DialogService, AuthService, FocusService)
     {
         var self = this;
         self.email = '';
         self.password = '';
+
+        if($cookies.get('loginName'))
+        {
+            self.email = $cookies.get('loginName');
+        }
 
         var dialogOptions = {
             templateUrl: '/views/dialogs/dlgLogin.html',
@@ -20,6 +25,12 @@
                         AuthService.login(self.email, self.password).then(function()
                         {
                             console.log('Login success');
+
+                            var today = new Date();
+                            var cookieExpiry = new Date(today.getYear() + 1, today.getMonth(), today.getDay());
+                            $cookies.put('loginName', self.email, { expires: cookieExpiry });
+
+
                             $mdDialog.hide();
                             $state.go('app.products');
                         },
@@ -35,8 +46,10 @@
 
         DialogService.fromCustom(dialogOptions);
 
+        FocusService('focusMe');
+
     }
 
-    angular.module('app.controllers').controller('LoginController', ['$state', '$scope', 'DialogService', 'AuthService', LoginController]);
+    angular.module('app.controllers').controller('LoginController', ['$state', '$scope', '$cookies', 'DialogService', 'AuthService', 'FocusService', LoginController]);
 
 })();
