@@ -15,10 +15,17 @@
         self.purchaseorder.discount = 0;
         self.purchaseorder.total = 0;
 
+        self.purchaseorder.delivery = 0;
+        self.delivery_charge = 0;
+
+        self.purchaseorder.shipping = 0;
+        self.shipping_charge = 0;
+
+
         self.purchaseorder.suppressworkorder = 0;
 
         var originalTotal = 0;
-
+        var originalShippingCharge = 0;
 
         self.onlyOpenDays = function(date)
         {
@@ -81,6 +88,43 @@
             }
         };
 
+        self.applyDelivery = function()
+        {
+            if(self.delivery_charge === 1)
+            {
+                self.purchaseorder.delivery = deliveryFee;
+                self.purchaseorder.total += deliveryFee;
+            }
+            else
+            {
+                self.purchaseorder.delivery = 0;
+                self.purchaseorder.total -= deliveryFee;
+            }
+        };
+
+        self.applyShipping = function()
+        {
+            var costOfShipping = 0;
+            if(self.shipping_charge === 'CDN')
+            {
+                costOfShipping = shippingCanada;
+            }
+            else if(self.shipping_charge === 'USA')
+            {
+                costOfShipping = shippingUsa;
+            }
+
+            self.purchaseorder.shipping = costOfShipping;
+
+            if(self.shipping_charge !== originalShippingCharge)
+            {
+                self.purchaseorder.total -= originalShippingCharge;
+                self.purchaseorder.total += costOfShipping;
+            }
+
+            originalShippingCharge = costOfShipping;
+        };
+        
         self.addProduct = function()
         {
             console.log(self.selectedProduct);

@@ -206,6 +206,12 @@
     <div class="errorMessage" ng-message="email">This field is not a email</div>
 </script>
 
+<script>
+    var deliveryFee = {{config('app.delivery_charge')}};
+    var shippingCanada = {{config('app.shipping_charge_canada')}};
+    var shippingUsa = {{config('app.shipping_charge_usa')}};
+
+</script>
 <script src="{{url('/js/vendor.js')}}"></script>
 <script src="{{url('/js/app.js')}}"></script>
 </body>

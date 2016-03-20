@@ -97,10 +97,24 @@
         <md-checkbox ng-model="ctrlPurchaseOrderCreate.purchaseorder.suppressworkorder" ng-true-value="1" ng-false-value="0" aria-label="Supress work order creation">
             Suppress work orders
         </md-checkbox>
-    </div>
 
+    </div>
 </div>
 
+<div layout="row">
+    <div flex>
+        <md-checkbox ng-model="ctrlPurchaseOrderCreate.delivery_charge" ng-true-value="1" ng-false-value="0" ng-change="ctrlPurchaseOrderCreate.applyDelivery()" aria-label="Requires delivery">
+            Delivery?
+        </md-checkbox>
+
+        <select ng-model="ctrlPurchaseOrderCreate.shipping_charge" ng-change="ctrlPurchaseOrderCreate.applyShipping()">
+            <option value="0" ng-selected="true">No Shipping</option>
+            <option value="CDN">Canadian</option>
+            <option value="USA">USA</option>
+        </select>
+
+    </div>
+</div>
 
 
 <div layout="row">

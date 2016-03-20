@@ -60,6 +60,8 @@ class PurchaseOrderController extends Controller
             $purchaseOrder->customer_id = $request->input('customer_id');
             $purchaseOrder->fulfilled = ($request->input('fulfilled') ? 1 : 0);
             $purchaseOrder->paid = ($request->input('paid') ? 1 : 0);
+            $purchaseOrder->delivery = $request->input('delivery');
+            $purchaseOrder->shipping = $request->input('shipping');
             $purchaseOrder->payment_type_id = $request->input('payment_type_id');
             $purchaseOrder->amount_paid = $request->input('amount_paid');
             $purchaseOrder->discount = $request->input('discount');
