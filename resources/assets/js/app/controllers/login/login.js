@@ -27,7 +27,10 @@
                             console.log('Login success');
 
                             var today = new Date();
-                            var cookieExpiry = new Date(today.getYear() + 1, today.getMonth(), today.getDay());
+                            //var cookieExpiry = new Date(today.getYear() + 1, today.getMonth(), today.getDay(), 0, 0, 0, 0);
+                            var cookieExpiry = new Date();
+                            cookieExpiry.setFullYear(cookieExpiry.getFullYear() + 1);
+
                             $cookies.put('loginName', self.email, { expires: cookieExpiry });
 
 
