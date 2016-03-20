@@ -8,6 +8,7 @@ use App\WorkOrderSchedulerService;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Mail;
+use App\ShopifyService;
 
 class HomeController extends Controller
 {
@@ -29,6 +30,12 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function shopifyTest()
+    {
+        $shopify = new ShopifyService();
+        $shopify->getProducts();
     }
 
     public function scheduleTest()
