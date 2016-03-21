@@ -337,7 +337,24 @@
                     }
                 }
             })
-
+            .state('app.lookups', {
+                url: '/lookups',
+                views: {
+                    'main@': {
+                        templateUrl: getView('lookups')
+                    }
+                }
+            })
+            .state('app.materialsets', {
+                url: '/materialsets',
+                views: {
+                    'main@': {
+                        templateUrl: getView('materialsets'),
+                        controller: 'MaterialSetController',
+                        controllerAs: 'ctrlMaterialSet'
+                    }
+                }
+            })
 
             ;
 

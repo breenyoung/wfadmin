@@ -1,0 +1,39 @@
+<p>Existing Sets</p>
+<md-list>
+    <md-list-item ng-repeat="s in ctrlMaterialSet.existingSets">
+        <p>{{s.name}}</p>
+    </md-list-item>
+</md-list>
+
+<md-divider></md-divider>
+
+<p>Add New Set</p>
+<md-input-container>
+    <label>Set Name</label>
+    <input ng-model="ctrlMaterialSet.set.name" type="text"/>
+</md-input-container>
+
+<div layout="row">
+    <div flex>
+
+        <select ng-model="ctrlMaterialSet.selectedMaterial" ng-options="p as p.name for p in ctrlMaterialSet.materials"></select>
+
+        <input type="text" name="quantity" placeholder="Quantity" ng-model="ctrlMaterialSet.selectedQuantity"/>
+
+        <md-button class="md-raised md-primary" ng-click="ctrlMaterialSet.addMaterial()">Add</md-button>
+    </div>
+</div>
+
+<div layout="row" ng-repeat="pm in ctrlMaterialSet.set.product_materials">
+    <div flex>
+        {{pm.material.name}} x {{pm.quantity}}
+        (<a href="#" ng-click="ctrlMaterialSet.deleteMaterial($event, pm.material_id)">Delete</a>)
+    </div>
+
+</div>
+
+<div layout="row" layout-xs="column">
+    <div flex layout="column">
+        <md-button class="md-raised md-primary" ng-click="ctrlMaterialSet.createSet()">Create Set</md-button>
+    </div>
+</div>

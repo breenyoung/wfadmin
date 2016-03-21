@@ -101,17 +101,6 @@
                 </md-list-item>
                 <md-divider></md-divider>
                 <md-list-item>
-                    <a href="#/paymenttypes" ng-click="hideSideNav('left')" class="nounderline">
-                        <md-item-content md-ink-ripple layout="row" layout-align="start center">
-                            <div class="inset">
-                                <ng-md-icon icon="attach_money"></ng-md-icon>
-                            </div>
-                            <div class="inset">Payment Types</div>
-                        </md-item-content>
-                    </a>
-                </md-list-item>
-                <md-divider></md-divider>
-                <md-list-item>
                     <a href="#/workorders" ng-click="hideSideNav('left')" class="nounderline">
                         <md-item-content md-ink-ripple layout="row" layout-align="start center">
                             <div class="inset">
@@ -134,28 +123,6 @@
                 </md-list-item>
                 <md-divider></md-divider>
                 <md-list-item>
-                    <a href="#/units" ng-click="hideSideNav('left')" class="nounderline">
-                        <md-item-content md-ink-ripple layout="row" layout-align="start center">
-                            <div class="inset">
-                                <ng-md-icon icon="sync"></ng-md-icon>
-                            </div>
-                            <div class="inset">Units</div>
-                        </md-item-content>
-                    </a>
-                </md-list-item>
-                <md-divider></md-divider>
-                <md-list-item>
-                    <a href="#/materials" ng-click="hideSideNav('left')" class="nounderline">
-                        <md-item-content md-ink-ripple layout="row" layout-align="start center">
-                            <div class="inset">
-                                <ng-md-icon icon="work"></ng-md-icon>
-                            </div>
-                            <div class="inset">Materials</div>
-                        </md-item-content>
-                    </a>
-                </md-list-item>
-                <md-divider></md-divider>
-                <md-list-item>
                     <a href="#/reports" ng-click="hideSideNav('left')" class="nounderline">
                         <md-item-content md-ink-ripple layout="row" layout-align="start center">
                             <div class="inset">
@@ -165,6 +132,19 @@
                         </md-item-content>
                     </a>
                 </md-list-item>
+                <md-divider></md-divider>
+
+                <md-list-item>
+                    <a href="#/lookups" ng-click="hideSideNav('left')" class="nounderline">
+                        <md-item-content md-ink-ripple layout="row" layout-align="start center">
+                            <div class="inset">
+                                <ng-md-icon icon="book"></ng-md-icon>
+                            </div>
+                            <div class="inset">Other</div>
+                        </md-item-content>
+                    </a>
+                </md-list-item>
+
 
                 <md-list-item ng-show="isAuthenticated()">
                     <a ng-click="logout()" class="nounderline">
