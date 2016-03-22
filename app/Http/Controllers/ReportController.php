@@ -33,7 +33,7 @@ class ReportController extends Controller
 
     public function getSalesReport(Request $request)
     {
-        \DB::enableQueryLog();
+        //\DB::enableQueryLog();
 
         $reportParams = $request->input('reportParams');
 
