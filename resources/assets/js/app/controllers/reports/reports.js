@@ -23,6 +23,10 @@
         {
             showIncomeReportByMonthView();
         }
+        else if($state.is('app.productprofitpercents'))
+        {
+            alert('show productprofitpercents');
+        }
         else
         {
             // Report home

@@ -54,6 +54,7 @@ Route::group(['prefix' => 'api'], function()
     Route::get('reports/getTopSellingProducts', 'ReportController@getTopSellingProducts');
     Route::get('reports/getWorstSellingProducts', 'ReportController@getWorstSellingProducts');
     Route::get('reports/getOverduePurchaseOrders', 'ReportController@getOverduePurchaseOrders');
+    Route::get('reports/getProductProfitPercents', 'ReportController@getProductProfitPercents');
 
 });
 

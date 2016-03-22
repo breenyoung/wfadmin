@@ -217,6 +217,16 @@
                     }
                 }
             })
+            .state('app.reports.productprofitpercents', {
+                url: '/productprofitpercents',
+                views: {
+                    'main@': {
+                        templateUrl: getView('report.productprofitpercents'),
+                        controller: 'ReportController',
+                        controllerAs: 'ctrlReport'
+                    }
+                }
+            })
             .state('app.units', {
                 url: '/units',
                 views: {

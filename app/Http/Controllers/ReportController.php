@@ -121,4 +121,13 @@ class ReportController extends Controller
 
         return response()->json($results);
     }
+
+    public function getProductProfitPercents()
+    {
+        $results = DB::table('products')
+                    ->select('id', 'name', 'price', 'cost')
+                    ->get();
+
+        return $results;
+    }
 }

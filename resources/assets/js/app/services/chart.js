@@ -198,6 +198,24 @@
                 {
                     // Error
                 });
+            },
+
+            getProductProfitPercents: function(scope)
+            {
+                Restangular.one('reports/getProductProfitPercents').get().then(function(data)
+                    {
+                        var dataSet = [];
+                        for(var i = 0; i < data.length; i++)
+                        {
+                            var oneDataPoint = data[i];
+                            console.log(oneDataPoint);
+
+                        }
+                    },
+                    function()
+                    {
+                        // Error
+                    });
             }
 
         };
