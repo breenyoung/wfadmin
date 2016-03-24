@@ -1,7 +1,7 @@
 (function(){
     "use strict";
 
-    function PurchaseOrderDetailController($auth, $state, $scope, $moment, Restangular, RestService, $stateParams, ToastService, DialogService)
+    function PurchaseOrderDetailController($auth, $state, $scope, $moment, Restangular, UploadService, RestService, $stateParams, ToastService, DialogService)
     {
         var self = this;
 
@@ -17,9 +17,16 @@
         {
             self.purchaseorder.put().then(function()
             {
+
+                if (self.poImage)
+                {
+                    console.log('here');
+                    UploadService.uploadFile(1, 'PO', self.poImage);
+                }
+
                 //console.log("updated");
                 ToastService.show("Successfully updated");
-                $state.go("app.purchaseorders");
+                //$state.go("app.purchaseorders");
             }, function()
             {
                 ToastService.show("Error updating");
@@ -153,6 +160,6 @@
         };
     }
 
-    angular.module('app.controllers').controller('PurchaseOrderDetailController', ['$auth', '$state', '$scope', '$moment', 'Restangular', 'RestService', '$stateParams', 'ToastService', 'DialogService', PurchaseOrderDetailController]);
+    angular.module('app.controllers').controller('PurchaseOrderDetailController', ['$auth', '$state', '$scope', '$moment', 'Restangular', 'UploadService', 'RestService', '$stateParams', 'ToastService', 'DialogService', PurchaseOrderDetailController]);
 
 })();

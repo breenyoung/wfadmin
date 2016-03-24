@@ -6,7 +6,7 @@
 </head>
 <body>
 <h2>Purchase Order create</h2>
-<form name="form1">
+<form name="ctrlPurchaseOrderCreate.form1">
 
 <div layout="row">
 
@@ -84,6 +84,13 @@
         <label>Notes</label>
         <textarea ng-model="ctrlPurchaseOrderCreate.purchaseorder.notes"></textarea>
     </md-input-container>
+</div>
+
+<div layout="row">
+
+    <input type="file" ng-model="ctrlPurchaseOrderCreate.poImage" name="poImage" accept="image/*" ngf-max-size="2MB"/>
+    <img ngf-thumbnail="poImage" class="thumb"> <button ng-click="poImage = null" ng-show="poImage">Remove</button>
+    <br/>
 </div>
 
 <div layout="row">

@@ -1,7 +1,7 @@
 (function(){
     "use strict";
 
-    function PurchaseOrderCreateController($auth, $state, $scope, $moment, Restangular, ToastService, RestService, DialogService, $stateParams)
+    function PurchaseOrderCreateController($auth, $state, $scope, $moment, Restangular, UploadService, ToastService, RestService, DialogService, $stateParams)
     {
         var self = this;
 
@@ -23,6 +23,8 @@
 
 
         self.purchaseorder.suppressworkorder = 0;
+
+        self.poImage = null;
 
         var originalTotal = 0;
         var originalShippingCharge = 0;
@@ -60,6 +62,11 @@
 
             Restangular.all('purchaseorder').post(p).then(function(d)
             {
+                if (self.poImage)
+                {
+                    UploadService.uploadFile(1, 'PO', self.poImage);
+                }
+
                 //console.log(d);
                 //$state.go('app.products.detail', {'productId': d.newId});
                 ToastService.show("Successfully created");
@@ -224,6 +231,6 @@
 
     }
 
-    angular.module('app.controllers').controller('PurchaseOrderCreateController', ['$auth', '$state', '$scope', '$moment', 'Restangular', 'ToastService', 'RestService', 'DialogService', '$stateParams', PurchaseOrderCreateController]);
+    angular.module('app.controllers').controller('PurchaseOrderCreateController', ['$auth', '$state', '$scope', '$moment', 'Restangular', 'UploadService', 'ToastService', 'RestService', 'DialogService', '$stateParams', PurchaseOrderCreateController]);
 
 })();
