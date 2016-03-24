@@ -202,15 +202,63 @@
 
             getProductProfitPercents: function(scope)
             {
+                scope.productProfitPercentChartConfig = {
+                    options: {
+                        chart: {
+                            type: 'column'
+                        },
+                        legend: {
+                            enabled: false
+                        },
+                        xAxis:
+                        {
+                            type: 'category'
+                        },
+                        yAxis:
+                        {
+                            min: 0,
+                            title: {
+                                text: 'Profit %'
+                            }
+                        }
+                    },
+
+                    title: {
+                        text: 'Product Profit %'
+                    },
+
+                    loading: true
+                };
+
+
                 Restangular.one('reports/getProductProfitPercents').get().then(function(data)
                     {
                         var dataSet = [];
                         for(var i = 0; i < data.length; i++)
                         {
                             var oneDataPoint = data[i];
-                            console.log(oneDataPoint);
 
+                            if(oneDataPoint.cost > 0)
+                            {
+                                var profit = oneDataPoint.price - oneDataPoint.cost;
+                                var profitPercent = (profit / oneDataPoint.cost * 100);
+
+                                //console.log('Price:' + oneDataPoint.price + ' Cost:' + oneDataPoint.cost + ' Profit:' + Math.round(profitPercent * 100) / 100);
+                                //console.log('Price:' + oneDataPoint.price + ' Cost:' + oneDataPoint.cost + ' Profit:' + profitPercent.toFixed(0));
+
+                                dataSet.push([oneDataPoint.name, parseInt(profitPercent.toFixed(0))]);
+                            }
                         }
+
+                        dataSet.sort(function(a, b) {
+                            return parseInt(b[1]) - parseInt(a[1]);
+                        });
+
+                        console.log(dataSet);
+
+                        scope.productProfitPercentChartConfig.series = [{name: 'Profit %', data: dataSet }];
+                        scope.productProfitPercentChartConfig.loading = false;
+
                     },
                     function()
                     {

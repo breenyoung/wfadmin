@@ -25,7 +25,7 @@
         }
         else if($state.is('app.reports.productprofitpercents'))
         {
-            alert('show productprofitpercents');
+            showProductProfitPercents();
         }
         else if($state.is('app.reports.weekworkorders'))
         {
@@ -36,6 +36,12 @@
             // Report home
             //console.log($state.is('app.reports'));
             showDashboardWidgets();
+        }
+
+
+        function showProductProfitPercents()
+        {
+            ChartService.getProductProfitPercents(self);
         }
 
         function showWeeklyWorkOrders()
