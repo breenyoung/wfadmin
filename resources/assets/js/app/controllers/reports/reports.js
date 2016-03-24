@@ -1,7 +1,7 @@
 (function(){
     "use strict";
 
-    function ReportController($auth, $state, Restangular, RestService, ChartService)
+    function ReportController($scope, $auth, $state, Restangular, RestService, ChartService)
     {
         var self = this;
 
@@ -23,15 +23,33 @@
         {
             showIncomeReportByMonthView();
         }
-        else if($state.is('app.productprofitpercents'))
+        else if($state.is('app.reports.productprofitpercents'))
         {
             alert('show productprofitpercents');
+        }
+        else if($state.is('app.reports.weekworkorders'))
+        {
+            showWeeklyWorkOrders();
         }
         else
         {
             // Report home
             //console.log($state.is('app.reports'));
             showDashboardWidgets();
+        }
+
+        function showWeeklyWorkOrders()
+        {
+
+            Restangular.one('reports/getWeekWorkOrderReport').get().then(function(data)
+                {
+                    console.log(data);
+                    self.weekworkorders = data;
+                },
+                function()
+                {
+                    // Error
+                });
         }
 
         function generateCurrentStockReport()
@@ -164,6 +182,6 @@
 
     }
 
-    angular.module('app.controllers').controller('ReportController', ['$auth', '$state', 'Restangular', 'RestService', 'ChartService', ReportController]);
+    angular.module('app.controllers').controller('ReportController', ['$scope', '$auth', '$state', 'Restangular', 'RestService', 'ChartService', ReportController]);
 
 })();

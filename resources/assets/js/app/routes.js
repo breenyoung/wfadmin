@@ -227,6 +227,16 @@
                     }
                 }
             })
+            .state('app.reports.weekworkorders', {
+                url: '/weekworkorders',
+                views: {
+                    'main@': {
+                        templateUrl: getView('report.weekworkorders'),
+                        controller: 'ReportController',
+                        controllerAs: 'ctrlReport'
+                    }
+                }
+            })
             .state('app.units', {
                 url: '/units',
                 views: {
