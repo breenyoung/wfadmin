@@ -138,6 +138,7 @@ class ReportController extends Controller
 
         $results = WorkOrder::whereDate('start_date', '>=', $startOfWeek)
                                 ->whereDate('start_date', '<=', $endOfWeek)
+                                ->where('completed', 0)
                                 ->with(['product', 'customer'])
                                 ->orderBy('start_date', 'asc')
                                 ->get();
