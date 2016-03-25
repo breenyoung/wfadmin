@@ -56,7 +56,7 @@ Route::group(['prefix' => 'api'], function()
     Route::get('reports/getOverduePurchaseOrders', 'ReportController@getOverduePurchaseOrders');
     Route::get('reports/getProductProfitPercents', 'ReportController@getProductProfitPercents');
     Route::get('reports/getWeekWorkOrderReport', 'ReportController@getWeekWorkOrderReport');
-
+    Route::get('reports/getOutstandingPayments', 'ReportController@getOutstandingPayments');
 
     Route::post('uploader/uploadFile', 'UploadController@uploadFile');
 });

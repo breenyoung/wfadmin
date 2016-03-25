@@ -75,6 +75,7 @@
             getWorstSellingProducts(self);
             getOverduePurchaseOrders(self);
             getMonthlyIncome(self);
+            getOutstandingPayments(self);
         }
 
         function showSalesReportByMonthView()
@@ -151,8 +152,43 @@
                 {
                     // Error
                 });
-
         }
+
+        function getOutstandingPayments(scope)
+        {
+            Restangular.one('reports/getOutstandingPayments').get().then(function(data)
+                {
+                    //console.log(data);
+                    scope.outstandingPayments = data;
+                    if(scope.outstandingPayments.length > 0)
+                    {
+                        var d = new Date(scope.outstandingPayments[0].year, scope.outstandingPayments[0].month - 1, 1);
+                        scope.curMonthlyOutstandingMonth = d;
+                        scope.curMonthlyOustandingTotal = scope.outstandingPayments[0].outstanding;
+                        scope.curMonthlyOutstandingPos = 0;
+                    }
+                },
+                function()
+                {
+                    // Error
+                });
+        }
+
+        self.changeMonthlyOutstanding = function(increment)
+        {
+            self.curMonthlyOutstandingPos += increment;
+
+            if((self.curMonthlyOutstandingPos < 0)) { self.curMonthlyOutstandingPos = 0; }
+            else if((self.curMonthlyOutstandingPos + 1) > self.outstandingPayments.length) { self.curMonthlyOutstandingPos = self.outstandingPayments.length - 1; }
+
+            if(self.curMonthlyOutstandingPos >= 0 && (self.curMonthlyOutstandingPos + 1) <= self.outstandingPayments.length)
+            {
+                var d = new Date(self.outstandingPayments[self.curMonthlyOutstandingPos].year, self.outstandingPayments[self.curMonthlyOutstandingPos].month - 1, 1);
+
+                self.curMonthlyOutstandingMonth = d;
+                self.curMonthlyOustandingTotal = self.outstandingPayments[self.curMonthlyOutstandingPos].outstanding;
+            }
+        };
 
         self.changeMonthlyIncome = function(increment)
         {

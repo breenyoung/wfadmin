@@ -144,4 +144,12 @@ class ReportController extends Controller
 
         return response()->json($results);
     }
+
+    public function getOutstandingPayments()
+    {
+        $dataPoints = DB::select('select date_format(purchase_orders.pickup_date, \'%Y\') as year, date_format(purchase_orders.pickup_date, \'%m\') as month, sum(purchase_orders.total - purchase_orders.amount_paid) as outstanding from purchase_orders where purchase_orders.paid = 0 group by date_format(pickup_date, \'%Y-%m\') order by purchase_orders.pickup_date');
+
+        return response()->json($dataPoints);
+
+    }
 }
