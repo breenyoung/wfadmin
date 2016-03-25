@@ -12,11 +12,9 @@
     </div>
 
     <div layout="row">
-        <md-switch class="md-primary" ng-model="ctrlWorkOrder.showComplete" ng-change="ctrlWorkOrder.toggleCompleteOnly(ctrlWorkOrder.showComplete)" aria-label="Show Complete">
-            Show Complete: {{ctrlWorkOrder.showComplete ? 'Yes' : 'No'}}
-        </md-switch>
+        <input type="search" ng-model="q" placeholder="filter WO's..." aria-label="filter WO's" />
+        <input id="cbShowComplete" ng-model="ctrlWorkOrder.showComplete" type="checkbox" ng-change="ctrlWorkOrder.toggleCompleteOnly(ctrlWorkOrder.showComplete)"/><label for="cbShowComplete">Show Complete</label>
     </div>
-
 
     <md-table-container>
         <table md-table>
@@ -31,7 +29,7 @@
                 </tr>
             </thead>
             <tbody md-body>
-                <tr md-row ng-repeat="w in ctrlWorkOrder.workorders" ng-show="ctrlWorkOrder.showComplete ? w.completed == 1 || w.completed == 0 : w.completed == 0">
+                <tr md-row ng-repeat="w in ctrlWorkOrder.workorders | filter:q as results" ng-show="ctrlWorkOrder.showComplete ? w.completed == 1 || w.completed == 0 : w.completed == 0">
                     <td md-cell><a ui-sref="app.workorders.detail({workOrderId: w.id})" class="nounderline">W.O #{{w.id}}</a></td>
                     <td md-cell><a ui-sref="app.products.detail({productId: w.product.id})" class="nounderline">{{w.product.name}}</a></td>
                     <td md-cell><a ui-sref="app.customers.detail({customerId: w.customer.id})" class="nounderline">{{w.customer.first_name}} {{w.customer.last_name}}</a></td>
