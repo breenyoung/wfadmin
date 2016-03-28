@@ -117,6 +117,16 @@
 </div>
 
 <div layout="row">
+
+    Add materials by:&nbsp;
+    <md-radio-group layout="row" ng-model="ctrlProductCreate.cbAddMaterialsBy">
+        <md-radio-button value="1">Item</md-radio-button>
+        <md-radio-button value="2">Set</md-radio-button>
+    </md-radio-group>
+
+</div>
+
+<div layout="row" ng-show="ctrlProductCreate.cbAddMaterialsBy == 1">
     <div flex>
 
         <select ng-model="ctrlProductCreate.selectedMaterial" ng-options="p as p.name for p in ctrlProductCreate.materials"></select>
@@ -125,15 +135,27 @@
 
         <md-button class="md-raised md-primary" ng-click="ctrlProductCreate.addMaterial()">Add</md-button>
     </div>
+
+</div>
+
+<div layout="row" ng-show="ctrlProductCreate.cbAddMaterialsBy == 2">
+    <div flex>
+        <select ng-model="ctrlProductCreate.selectedMaterialSet" ng-options="s as s.name for s in ctrlProductCreate.materialSets"></select>
+
+        <md-button class="md-raised md-primary" ng-click="ctrlProductCreate.addMaterialSet()">Add</md-button>
+    </div>
 </div>
 
 
-<div layout="row" ng-repeat="pm in ctrlProductCreate.product.product_materials">
+<div layout="row">
     <div flex>
-        {{pm.material.name}} x {{pm.quantity}} (@{{pm.material.unit_cost}} each = ${{pm.material.unit_cost * pm.quantity }} )
-        (<a href="#" ng-click="ctrlProductCreate.deleteMaterial($event, pm.material_id)">Delete</a>)
+        <md-list>
+            <md-list-item ng-repeat="pm in ctrlProductCreate.product.product_materials">
+                {{pm.material.name}} x {{pm.quantity}} (@{{pm.material.unit_cost}} each = ${{pm.material.unit_cost * pm.quantity }} )
+                <md-button ng-click="ctrlProductCreate.deleteMaterial($event, pm.material_id)" aria-label="Delete Material"><ng-md-icon icon="delete"></ng-md-icon></md-button>
+            </md-list-item>
+        </md-list>
     </div>
-
 </div>
 
 

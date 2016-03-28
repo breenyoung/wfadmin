@@ -1,22 +1,22 @@
 (function(){
     "use strict";
 
-    function MaterialSetController($auth, $state, RestService, GuidService, DialogService)
+    function MaterialSetController($state, RestService, GuidService, DialogService, myConfig)
     {
-        var localStorageKey = 'materialSets';
-
         var self = this;
         self.selectedMaterial = '';
         //self.selectedQuantity = 0;
 
-        if(localStorage.getItem(localStorageKey) !== null && localStorage.getItem(localStorageKey) !== '')
+        console.log(myConfig.materialSetsLSKey);
+
+        if(localStorage.getItem(myConfig.materialSetsLSKey) !== null && localStorage.getItem(myConfig.materialSetsLSKey) !== '')
         {
-            self.existingSets = JSON.parse(localStorage.getItem(localStorageKey));
+            self.existingSets = JSON.parse(localStorage.getItem(myConfig.materialSetsLSKey));
         }
         else
         {
             self.existingSets = [];
-            localStorage.setItem(localStorageKey, JSON.stringify(self.existingSets));
+            localStorage.setItem(myConfig.materialSetsLSKey, JSON.stringify(self.existingSets));
         }
 
         initSetObject();
@@ -29,7 +29,7 @@
             self.existingSets.push(self.set);
             console.log(self.set);
 
-            localStorage.setItem('materialSets', JSON.stringify(self.existingSets));
+            localStorage.setItem(myConfig.materialSetsLSKey, JSON.stringify(self.existingSets));
 
             initSetObject();
         };
@@ -50,9 +50,9 @@
                 }
 
                 self.existingSets.splice(indexToRemove, 1);
-                if(self.existingSets.length === 0) { localStorage.removeItem(localStorageKey); }
+                if(self.existingSets.length === 0) { localStorage.removeItem(myConfig.materialSetsLSKey); }
 
-                localStorage.setItem('materialSets', self.existingSets);
+                localStorage.setItem(myConfig.materialSetsLSKey, self.existingSets);
             },
             function()
             {
@@ -102,6 +102,6 @@
 
     }
 
-    angular.module('app.controllers').controller('MaterialSetController', ['$auth', '$state', 'RestService', 'GuidService', 'DialogService', MaterialSetController]);
+    angular.module('app.controllers').controller('MaterialSetController', ['$state', 'RestService', 'GuidService', 'DialogService', 'myConfig', MaterialSetController]);
 
 })();

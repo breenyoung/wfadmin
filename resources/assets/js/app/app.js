@@ -9,7 +9,10 @@
             'app.directives',
             'app.routes',
             'app.config'
-        ]);
+        ]).constant('myConfig',
+        {
+            'materialSetsLSKey': 'materialSets'
+        });
 
     angular.module('app.services', ['ui.router', 'satellizer', 'restangular', 'angular-momentjs', 'ngMaterial', 'ngFileUpload']);
     angular.module('app.routes', ['ui.router', 'satellizer']);

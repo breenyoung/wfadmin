@@ -1,7 +1,7 @@
 (function(){
     "use strict";
 
-    function ProductDetailController($auth, $state, Restangular, RestService, $stateParams, ToastService, DialogService, ValidationService)
+    function ProductDetailController($auth, $state, Restangular, RestService, $stateParams, ToastService, DialogService, ValidationService, myConfig)
     {
         var self = this;
 
@@ -11,6 +11,12 @@
 
         self.decimalRegex = ValidationService.decimalRegex();
         self.numericRegex = ValidationService.numericRegex();
+        self.cbAddMaterialsBy = 2;
+
+        if(localStorage.getItem(myConfig.materialSetsLSKey) !== null && localStorage.getItem(myConfig.materialSetsLSKey) !== '')
+        {
+            self.materialSets = JSON.parse(localStorage.getItem(myConfig.materialSetsLSKey));
+        }
 
 
         self.updateProduct = function()
@@ -67,24 +73,23 @@
         {
             console.log(self.selectedMaterial);
 
-            if(self.product.product_materials === undefined) { self.product.product_materials = []; }
-
-            self.product.product_materials.push({
-                product_id: self.product.id,
-                material_id: self.selectedMaterial.id,
-                quantity: self.selectedQuantity,
-                material: self.selectedMaterial
-            });
-
-            var currentCost = parseFloat(self.product.cost);
-            var btest = (parseFloat(self.selectedMaterial.unit_cost) * parseInt(self.selectedQuantity));
-            currentCost += btest;
-            self.product.cost = currentCost;
-
+            addMaterial(self.selectedMaterial.id, self.selectedQuantity, self.selectedMaterial);
 
             self.selectedMaterial = "";
             self.selectedQuantity = 0;
 
+        };
+
+        self.addMaterialSet = function()
+        {
+            //console.log(self.selectedMaterialSet);
+
+            for(var i = 0; i < self.selectedMaterialSet.product_materials.length; i++)
+            {
+                var pm = self.selectedMaterialSet.product_materials[i];
+                //console.log(pm);
+                addMaterial(pm.material_id, pm.quantity, pm.material);
+            }
         };
 
         self.deleteMaterial = function(e, materialId)
@@ -111,8 +116,26 @@
 
             e.preventDefault();
         };
+
+        function addMaterial(materialId, quantity, material)
+        {
+            if(self.product.product_materials === undefined) { self.product.product_materials = []; }
+
+            self.product.product_materials.push({
+                product_id: self.product.id,
+                material_id: materialId,
+                quantity: quantity,
+                material: material
+            });
+
+            if(self.product.cost === undefined || self.product.cost === null) { self.product.cost = 0; }
+            var currentCost = parseFloat(self.product.cost);
+            var btest = (parseFloat(material.unit_cost) * parseInt(quantity));
+            currentCost += btest;
+            self.product.cost = currentCost;
+        }
     }
 
-    angular.module('app.controllers').controller('ProductDetailController', ['$auth', '$state', 'Restangular', 'RestService', '$stateParams', 'ToastService', 'DialogService', 'ValidationService', ProductDetailController]);
+    angular.module('app.controllers').controller('ProductDetailController', ['$auth', '$state', 'Restangular', 'RestService', '$stateParams', 'ToastService', 'DialogService', 'ValidationService', 'myConfig', ProductDetailController]);
 
 })();
