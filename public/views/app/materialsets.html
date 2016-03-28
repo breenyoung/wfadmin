@@ -1,7 +1,10 @@
 <p>Existing Sets</p>
 <md-list>
     <md-list-item ng-repeat="s in ctrlMaterialSet.existingSets">
-        <p>{{s.name}}</p>
+        <md-item-content>
+            <p>{{s.name}} <md-button ng-click="ctrlMaterialSet.deleteSet($event, s.id)" aria-label="Delete Set"><ng-md-icon icon="delete"></ng-md-icon></md-button></p>
+        </md-item-content>
+
     </md-list-item>
 </md-list>
 
