@@ -111,7 +111,7 @@
 
             if(self.product.cost === undefined || self.product.cost === null) { self.product.cost = 0; }
             var currentCost = parseFloat(self.product.cost);
-            var btest = (parseFloat(material.unit_cost) * parseInt(quantity));
+            var btest = (parseFloat(material.unit_cost) * parseFloat(quantity));
             currentCost += btest;
             self.product.cost = currentCost;
         }
