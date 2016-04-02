@@ -10,18 +10,22 @@
     <md-subheader class="md-primary">Materials</md-subheader>
 </div>
 
-<md-list>
-    <md-list-item class="md-3-line" ng-repeat="m in ctrlMaterial.materials">
-        <div class="md-list-item-text" layout="column">
-            <h3><a ui-sref="app.materials.detail({materialId: m.id})" class="nounderline">{{m.name}}</a></h3>
-            <h4>
-                <ng-md-icon icon="attach_money" aria-label="Unit Cost"></ng-md-icon>&nbsp;{{m.unit_cost}} per <strong>{{m.unit.name}}</strong>
-            </h4>
-        </div>
-        <md-divider ng-if="!$last"></md-divider>
-    </md-list-item>
-</md-list>
-
+<md-table-container>
+    <table md-table>
+        <thead md-head md-order="materialOrder">
+        <tr md-row>
+            <th md-column md-order-by="name">Name</th>
+            <th md-column md-order-by="unit_cost">Unit Cost</th>
+        </tr>
+        </thead>
+        <tbody md-body>
+        <tr md-row ng-repeat="m in ctrlMaterial.materials | orderBy: materialOrder">
+            <td md-cell><a ui-sref="app.materials.detail({materialId: m.id})" class="nounderline">{{m.name}}</a></td>
+            <td md-cell>{{m.unit_cost}} / <strong>{{m.unit.name}}</strong></td>
+        </tr>
+        </tbody>
+    </table>
+</md-table-container>
 
 </body>
 </html>
