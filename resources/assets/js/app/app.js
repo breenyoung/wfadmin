@@ -19,7 +19,7 @@
     angular.module('app.controllers', ['ui.router', 'ngMaterial', 'restangular', 'angular-momentjs', 'app.services', 'ngMessages', 'ngMdIcons', 'md.data.table', 'highcharts-ng', 'ngCookies']);
     angular.module('app.filters', []);
 
-    angular.module('app.directives', ['angular-momentjs']);
+    angular.module('app.directives', ['angular-momentjs', 'ngAnimate']);
     angular.module('app.config', []);
 
     //-------------------------------------------------------
