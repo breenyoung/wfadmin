@@ -171,82 +171,72 @@
     <div layout="row" flex>
         <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" md-swipe-left="hideSideNav('left')">
             <md-list>
-                <md-list-item>
-                    <a href="#/purchaseorders" ng-click="hideSideNav('left')" class="nounderline">
+                <md-list-item ng-click="hideSideNav('left')" ng-href="#/purchaseorders">
+
                         <md-item-content md-ink-ripple layout="row" layout-align="start center">
-                            <div class="inset">
+                            <div>
                                 <ng-md-icon icon="assignment"></ng-md-icon>
                             </div>
                             <div class="inset">Purchase Orders</div>
                         </md-item-content>
-                    </a>
+
                 </md-list-item>
                 <md-divider></md-divider>
-                <md-list-item>
-                    <a href="#/workorders" ng-click="hideSideNav('left')" class="nounderline">
-                        <md-item-content md-ink-ripple layout="row" layout-align="start center">
-                            <div class="inset">
-                                <ng-md-icon icon="my_library_books"></ng-md-icon>
-                            </div>
-                            <div class="inset">Work Orders</div>
-                        </md-item-content>
-                    </a>
+                <md-list-item ng-click="hideSideNav('left')" ng-href="#/workorders">
+
+                    <md-item-content md-ink-ripple layout="row" layout-align="start center">
+                        <div>
+                            <ng-md-icon icon="my_library_books"></ng-md-icon>
+                        </div>
+                        <div class="inset">Work Orders</div>
+                    </md-item-content>
+
                 </md-list-item>
                 <md-divider></md-divider>
-                <md-list-item >
-                    <a href="#/products" ng-click="hideSideNav('left')" class="nounderline">
-                        <md-item-content md-ink-ripple layout="row" layout-align="start center">
-                            <div class="inset">
-                                <ng-md-icon icon="shopping_cart"></ng-md-icon>
-                            </div>
-                            <div class="inset">Products</div>
-                        </md-item-content>
-                    </a>
+                <md-list-item ng-click="hideSideNav('left')" ng-href="#/products">
+                    <md-item-content md-ink-ripple layout="row" layout-align="start center">
+                        <div>
+                            <ng-md-icon icon="shopping_cart"></ng-md-icon>
+                        </div>
+                        <div class="inset">Products</div>
+                    </md-item-content>
                 </md-list-item>
                 <md-divider></md-divider>
-                <md-list-item>
-                    <a href="#/customers" ng-click="hideSideNav('left')" class="nounderline">
-                        <md-item-content md-ink-ripple layout="row" layout-align="start center">
-                            <div class="inset">
-                                <ng-md-icon icon="people"></ng-md-icon>
-                            </div>
-                            <div class="inset">Customers</div>
-                        </md-item-content>
-                    </a>
+                <md-list-item ng-click="hideSideNav('left')" ng-href="#/customers">
+                    <md-item-content md-ink-ripple layout="row" layout-align="start center">
+                        <div>
+                            <ng-md-icon icon="people"></ng-md-icon>
+                        </div>
+                        <div class="inset">Customers</div>
+                    </md-item-content>
                 </md-list-item>
                 <md-divider></md-divider>
-                <md-list-item>
-                    <a href="#/events" ng-click="hideSideNav('left')" class="nounderline">
-                        <md-item-content md-ink-ripple layout="row" layout-align="start center">
-                            <div class="inset">
-                                <ng-md-icon icon="event_available"></ng-md-icon>
-                            </div>
-                            <div class="inset">Events</div>
-                        </md-item-content>
-                    </a>
+                <md-list-item ng-click="hideSideNav('left')" ng-href="#/events">
+                    <md-item-content md-ink-ripple layout="row" layout-align="start center">
+                        <div>
+                            <ng-md-icon icon="event_available"></ng-md-icon>
+                        </div>
+                        <div class="inset">Events</div>
+                    </md-item-content>
                 </md-list-item>
                 <md-divider></md-divider>
-                <md-list-item>
-                    <a href="#/reports" ng-click="hideSideNav('left')" class="nounderline">
-                        <md-item-content md-ink-ripple layout="row" layout-align="start center">
-                            <div class="inset">
-                                <ng-md-icon icon="poll"></ng-md-icon>
-                            </div>
-                            <div class="inset">Reports</div>
-                        </md-item-content>
-                    </a>
+                <md-list-item ng-click="hideSideNav('left')" ng-href="#/reports">
+                    <md-item-content md-ink-ripple layout="row" layout-align="start center">
+                        <div>
+                            <ng-md-icon icon="poll"></ng-md-icon>
+                        </div>
+                        <div class="inset">Reports</div>
+                    </md-item-content>
                 </md-list-item>
                 <md-divider></md-divider>
 
-                <md-list-item>
-                    <a href="#/lookups" ng-click="hideSideNav('left')" class="nounderline">
-                        <md-item-content md-ink-ripple layout="row" layout-align="start center">
-                            <div class="inset">
-                                <ng-md-icon icon="book"></ng-md-icon>
-                            </div>
-                            <div class="inset">Other</div>
-                        </md-item-content>
-                    </a>
+                <md-list-item ng-click="hideSideNav('left')" ng-href="#/lookups">
+                    <md-item-content md-ink-ripple layout="row" layout-align="start center">
+                        <div>
+                            <ng-md-icon icon="book"></ng-md-icon>
+                        </div>
+                        <div class="inset">Other</div>
+                    </md-item-content>
                 </md-list-item>
 
 
