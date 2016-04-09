@@ -59,6 +59,7 @@ Route::group(['prefix' => 'api'], function()
     Route::get('reports/getOutstandingPayments', 'ReportController@getOutstandingPayments');
 
     Route::post('uploader/uploadFile', 'UploadController@uploadFile');
+    Route::post('uploader/deleteFile', 'UploadController@deleteFile');
 });
 
 /*
