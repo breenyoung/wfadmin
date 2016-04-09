@@ -5,25 +5,27 @@
 
         return {
 
-            uploadFile: function (id, uploadType, file)
+            uploadFile: function (filename, file)
             {
-                console.log('in upload');
+                var dataObj = {file: file };
+                if(filename !== '') { dataObj.filename = filename; }
 
-                Upload.upload({
+                return Upload.upload({
                     url: 'api/uploader/uploadFile',
-                    data: {file: file, id: id, uploadType: uploadType}
-                }).then(function (resp)
-                {
-                    //console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-                }, function (resp)
-                {
-                    console.log('Error status: ' + resp.status);
-                }, function (evt)
-                {
-                    //var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                    //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+                    data: dataObj
+                });
+            },
+
+            deleteFile: function(filename)
+            {
+                var dataObj = {filename: filename };
+
+                return Upload.upload({
+                    url: 'api/uploader/deleteFile',
+                    data: dataObj
                 });
             }
+
 
         };
 
