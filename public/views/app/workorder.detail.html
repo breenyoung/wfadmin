@@ -80,6 +80,20 @@
     <textarea ng-model="ctrlWorkOrderDetail.workorder.notes"></textarea>
 </md-input-container>
 
+<div layout="row" ng-show="ctrlWorkOrderDetail.workorder.image_filename !== null">
+    <md-button aria-label="View Current Image" ng-click="ctrlWorkOrderDetail.viewAttachment($event, ctrlWorkOrderDetail.workorder.image_filename)"><ng-md-icon icon="camera_alt"></ng-md-icon>&nbsp;View Current Image</md-button>
+    <md-button aria-label="Delete Current Image" ng-click="ctrlWorkOrderDetail.deleteAttachment($event, ctrlWorkOrderDetail.workorder.image_filename)"><ng-md-icon icon="delete"></ng-md-icon>&nbsp;Delete Current Image</md-button>
+</div>
+
+<div layout="row" ng-show="ctrlWorkOrderDetail.workorder.image_filename === null">
+    <button type="file" ngf-select="ctrlWorkOrderDetail.uploadFile($file, $invalidFiles)" accept="image/*" ngf-max-size="2MB">Select File</button>
+    <div style="font-size: smaller;">{{ctrlWorkOrderDetail.f.name}} {{ctrlWorkOrderDetail.errFile.name}} {{ctrlWorkOrderDetail.errFile.$error}} {{ctrlWorkOrderDetail.errFile.$errorParam}}
+<span class="progress" ng-show="ctrlWorkOrderDetail.f.progress >= 0">
+    <div style="width:{{ctrlWorkOrderDetail.f.progress}}%" ng-bind="ctrlWorkOrderDetail.f.progress + '%'"></div>
+</span>
+    </div>
+    <br/>
+</div>
 
 
 <div layout="row" layout-xs="column">
