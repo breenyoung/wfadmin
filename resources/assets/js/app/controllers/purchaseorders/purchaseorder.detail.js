@@ -19,7 +19,7 @@
             {
                 //console.log("updated");
                 ToastService.show("Successfully updated");
-                //$state.go("app.purchaseorders");
+                $state.go("app.purchaseorders");
             }, function()
             {
                 ToastService.show("Error updating");
