@@ -73,6 +73,16 @@
     <textarea ng-model="ctrlWorkOrderCreate.workorder.notes"></textarea>
 </md-input-container>
 
+<div layout="row">
+    <button type="file" ngf-select="ctrlWorkOrderCreate.uploadFile($file, $invalidFiles)" accept="image/*" ngf-max-size="2MB">Select File</button>
+    <div style="font-size: smaller;">{{ctrlWorkOrderCreate.f.name}} {{ctrlWorkOrderCreate.errFile.name}} {{ctrlWorkOrderCreate.errFile.$error}} {{ctrlWorkOrderCreate.errFile.$errorParam}}
+    <span class="progress" ng-show="ctrlWorkOrderCreate.f.progress >= 0">
+        <div style="width:{{ctrlPurchaseOrderCreate.f.progress}}%" ng-bind="ctrlWorkOrderCreate.f.progress + '%'"></div>
+    </span>
+    </div>
+    <br/>
+</div>
+
 
 <div layout="row" layout-xs="column">
     <div flex layout="column">

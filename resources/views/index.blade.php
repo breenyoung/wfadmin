@@ -239,7 +239,7 @@
                     </md-item-content>
                 </md-list-item>
 
-
+                <!--
                 <md-list-item ng-show="isAuthenticated()">
                     <a ng-click="logout()" class="nounderline">
                         <md-item-content md-ink-ripple layout="row" layout-align="start center">
@@ -250,7 +250,7 @@
                         </md-item-content>
                     </a>
                 </md-list-item>
-
+                -->
 
             </md-list>
         </md-sidenav>
@@ -284,9 +284,11 @@
     var deliveryFee = {{config('app.delivery_charge')}};
     var shippingCanada = {{config('app.shipping_charge_canada')}};
     var shippingUsa = {{config('app.shipping_charge_usa')}};
+    var attachmentPath = "{{url(config('app.upload_path'))}}";
 
 </script>
 <script src="{{url('/js/vendor.js')}}"></script>
 <script src="{{url('/js/app.js')}}"></script>
+
 </body>
 </html>

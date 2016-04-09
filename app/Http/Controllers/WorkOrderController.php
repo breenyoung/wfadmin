@@ -8,19 +8,24 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\WorkOrder;
 use Carbon\Carbon;
+use App\UploadHandler;
 
 use \Illuminate\Support\Facades\DB;
 
 
 class WorkOrderController extends Controller
 {
+
+    protected $uploadHandler;
+
     /**
      * WorkOrderController constructor.
      */
-    public function __construct()
+    public function __construct(UploadHandler $uploadHandler)
     {
         // Apply the jwt.auth middleware to all methods in this controller
         $this->middleware('jwt.auth');
+        $this->uploadHandler = $uploadHandler;
     }
 
 
@@ -66,6 +71,7 @@ class WorkOrderController extends Controller
 
         $workOrder->completed = $request->input('completed') ? 1 : 0;
         $workOrder->notes = $request->input('notes');
+        $workOrder->image_filename = $request->input('image_filename');
 
         $workOrder->save();
     }
@@ -116,6 +122,7 @@ class WorkOrderController extends Controller
             //$workOrder->completed = $request->input('completed') ? 1 : 0;
             $workOrder->completed = (int)$request->input('completed');
             $workOrder->notes = $request->input('notes');
+            $workOrder->image_filename = $request->input('image_filename');
 
             $workOrder->save();
         }
@@ -132,7 +139,12 @@ class WorkOrderController extends Controller
         $workOrder = WorkOrder::find($id);
         if(isset($workOrder))
         {
+            // Delete image (if any)
+            $this->uploadHandler->removeFile(public_path(config('app.upload_path')), $workOrder->image_filename);
+
             $workOrder->delete();
+
+
         }
     }
 }

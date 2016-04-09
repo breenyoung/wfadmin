@@ -55,7 +55,7 @@ class UploadController extends Controller
     {
         if(!is_null($request->input('filename')))
         {
-            $this->uploadHandler->removeFile(public_path(config('app.upload_path')), $request->input('filename'));
+            $this->uploadHandler->removeFile(public_path(config('app.upload_path')), $request->input('filename'), false);
         }
     }
 }
