@@ -1,0 +1,81 @@
+<md-dialog aria-label="Create Customer" ng-cloak>
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Create Customer</h2>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+
+        <div class="md-dialog-content">
+
+            <form name="form1" novalidate>
+
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>First Name</label>
+                    <input type="text" name="first_name" ng-model="ctrlCustomerCreateInline.customer.first_name" required ng-maxlength="100"/>
+
+                    <div ng-messages="form1.first_name.$error" role="alert" ng-show="form1.first_name.$touched || form1.$submitted">
+                        <div ng-messages-include="error-messages"></div>
+                    </div>
+
+                </md-input-container>
+
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Last Name</label>
+                    <input type="text" name="last_name" ng-model="ctrlCustomerCreateInline.customer.last_name" required ng-maxlength="100"/>
+
+                    <div ng-messages="form1.last_name.$error" role="alert" ng-show="form1.last_name.$touched || form1.$submitted">
+                        <div ng-messages-include="error-messages"></div>
+                    </div>
+
+                </md-input-container>
+
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Email</label>
+                    <input type="email" name="email" ng-model="ctrlCustomerCreateInline.customer.email" ng-maxlength="100"/>
+
+                    <div ng-messages="form1.email.$error" role="alert" ng-show="form1.email.$touched || form1.$submitted">
+                        <div ng-messages-include="error-messages"></div>
+                    </div>
+
+                </md-input-container>
+
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Phone</label>
+                    <input type="text" name="phone" ng-model="ctrlCustomerCreateInline.customer.phone" ng-maxlength="25"/>
+
+                    <div ng-messages="form1.phone.$error" role="alert" ng-show="form1.phone.$touched || form1.$submitted">
+                        <div ng-messages-include="error-messages"></div>
+                    </div>
+
+                </md-input-container>
+
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Facebook Url</label>
+                    <input type="text" name="facebook_url" ng-model="ctrlCustomerCreateInline.customer.facebook_url" ng-maxlength="100"/>
+
+                    <div ng-messages="form1.facebook_url.$error" role="alert" ng-show="form1.facebook_url.$touched || form1.$submitted">
+                        <div ng-messages-include="error-messages"></div>
+                    </div>
+
+                </md-input-container>
+
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Description</label>
+                    <textarea ng-model="ctrlCustomerCreateInline.customer.notes"></textarea>
+                </md-input-container>
+
+            </form>
+
+        </div>
+
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+        <md-button style="margin-right:20px;" ng-click="confirmDialog()">Submit</md-button>
+        <md-button ng-click="cancelDialog()">Cancel</md-button>
+    </md-dialog-actions>
+
+</md-dialog>

@@ -1,0 +1,67 @@
+<md-dialog aria-label="Create Product" ng-cloak>
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Create Product</h2>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+
+        <div class="md-dialog-content">
+
+            <form name="form1" novalidate>
+
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Product Name</label>
+                    <input type="text" name="productname" ng-model="ctrlProductCreateInline.product.name" required ng-minlength="5" ng-maxlength="200"/>
+
+                    <div ng-messages="form1.productname.$error" role="alert" ng-show="form1.productname.$touched || form1.$submitted">
+                        <div ng-messages-include="error-messages"></div>
+                    </div>
+
+                </md-input-container>
+
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>SKU</label>
+                    <input type="text" ng-model="ctrlProductCreateInline.product.sku" name="sku" required ng-minlength="1" ng-maxlength="100"/>
+
+                    <div ng-messages="form1.sku.$error" role="alert" ng-show="form1.sku.$touched || form1.$submitted">
+                        <div ng-messages-include="error-messages"></div>
+                    </div>
+
+                </md-input-container>
+
+
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Price</label>
+                    <input type="text" ng-model="ctrlProductCreateInline.product.price" name="price" required ng-pattern="decimalRegex"/>
+
+                    <div ng-messages="form1.price.$error" role="alert" ng-show="form1.price.$touched || form1.$submitted">
+                        <div class="errorMessage" ng-message="pattern">This field must be a number</div>
+                        <div ng-messages-include="error-messages"></div>
+                    </div>
+
+                </md-input-container>
+
+                <md-checkbox ng-model="ctrlProductCreateInline.product.is_custom" aria-label="Custom Product">
+                    Custom Product
+                </md-checkbox>
+
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Description</label>
+                    <textarea ng-model="ctrlProductCreateInline.product.description"></textarea>
+                </md-input-container>
+
+            </form>
+
+        </div>
+
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+        <md-button style="margin-right:20px;" ng-click="confirmDialog()">Submit</md-button>
+        <md-button ng-click="cancelDialog()">Cancel</md-button>
+    </md-dialog-actions>
+
+</md-dialog>
