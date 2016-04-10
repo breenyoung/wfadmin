@@ -205,6 +205,16 @@
                     scope.bookedDays = data;
                     //console.log(data);
                 });
+            },
+
+            addCustomer: function(obj)
+            {
+                return Restangular.all('customer').post(obj);
+            },
+
+            addProduct: function(obj)
+            {
+                return Restangular.all('product').post(obj);
             }
 
         };

@@ -18,6 +18,7 @@
             </md-option>
         </md-select>
     </md-input-container>
+    <md-button ng-click="ctrlPurchaseOrderCreate.addCustomerInline($event)"><ng-md-icon icon="add_box"></ng-md-icon></md-button>
 
 </div>
 
@@ -73,7 +74,9 @@
 
             <select ng-model="ctrlPurchaseOrderCreate.selectedProduct" ng-options="p as p.name for p in ctrlPurchaseOrderCreate.products"></select>
 
-            <input type="text" name="quantity" placeholder="Quantity" ng-model="ctrlPurchaseOrderCreate.selectedQuantity"/>
+            <md-button ng-click="ctrlPurchaseOrderCreate.addProductInline($event)"><ng-md-icon icon="add_box"></ng-md-icon></md-button>
+
+            <input type="text" size="4" maxlength="3" name="quantity" placeholder="Quantity" ng-model="ctrlPurchaseOrderCreate.selectedQuantity"/>
 
             <md-button class="md-raised md-primary" ng-click="ctrlPurchaseOrderCreate.addProduct()">Add</md-button>
         </div>

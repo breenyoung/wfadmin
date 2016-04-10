@@ -1,7 +1,7 @@
 (function(){
     "use strict";
 
-    function PurchaseOrderCreateController($auth, $state, $scope, $moment, Restangular, ToastService, RestService, DialogService, $stateParams)
+    function PurchaseOrderCreateController($auth, $state, $scope, $moment, Restangular, ToastService, RestService, DialogService, ValidationService, $stateParams)
     {
         var self = this;
 
@@ -21,11 +21,111 @@
         self.purchaseorder.shipping = 0;
         self.shipping_charge = 0;
 
-
         self.purchaseorder.suppressworkorder = 0;
 
         var originalTotal = 0;
         var originalShippingCharge = 0;
+
+        self.addProductInline = function(ev)
+        {
+            var dialogOptions = {
+                templateUrl: '/views/dialogs/dlgCreateProductInline.html',
+                escapeToClose: true,
+                targetEvent: ev,
+                controller: function DialogController($scope, $mdDialog)
+                {
+                    $scope.decimalRegex = ValidationService.decimalRegex();
+
+                    $scope.confirmDialog = function ()
+                    {
+                        //console.log('accepted');
+
+                        $scope.form1.$setSubmitted();
+
+                        var isValid = $scope.form1.$valid;
+                        if(isValid)
+                        {
+                            var p = $scope.ctrlProductCreateInline.product;
+                            p.cost = 0;
+                            p.minimum_stock = 0;
+                            p.current_stock = 0;
+                            //console.log(p);
+
+                            RestService.addProduct(p).then(function(d)
+                            {
+                                //console.log(d.newId);
+                                var pop = {id: d.newId, name: p.name, price: p.price};
+                                self.products.push(pop);
+                                self.selectedProduct = pop;
+                                ToastService.show("Product Successfully created");
+                            }, function()
+                            {
+                                ToastService.show("Error creating product");
+                            });
+
+                            $mdDialog.hide();
+                        }
+                    };
+
+                    $scope.cancelDialog = function()
+                    {
+                        //console.log('cancelled');
+                        $mdDialog.hide();
+                    };
+                },
+                scope: $scope.$new()
+            };
+
+            DialogService.fromCustom(dialogOptions);
+
+        };
+
+        self.addCustomerInline = function(ev)
+        {
+            var dialogOptions = {
+                templateUrl: '/views/dialogs/dlgCreateCustomerInline.html',
+                escapeToClose: true,
+                targetEvent: ev,
+                controller: function DialogController($scope, $mdDialog)
+                {
+                    $scope.confirmDialog = function ()
+                    {
+                        //console.log('accepted');
+
+                        $scope.form1.$setSubmitted();
+
+                        var isValid = $scope.form1.$valid;
+                        if(isValid)
+                        {
+                            var c = $scope.ctrlCustomerCreateInline.customer;
+                            console.log(c);
+
+                            RestService.addCustomer(c).then(function(d)
+                            {
+                                console.log(d.newId);
+                                self.customers.push({id: d.newId, first_name: c.first_name, last_name: c.last_name });
+                                self.purchaseorder.customer_id = d.newId;
+                                ToastService.show("Customer Successfully created");
+                            }, function()
+                            {
+                                ToastService.show("Error creating customer");
+                            });
+
+                            $mdDialog.hide();
+                        }
+                    };
+
+                    $scope.cancelDialog = function()
+                    {
+                        //console.log('cancelled');
+                        $mdDialog.hide();
+                    };
+                },
+                scope: $scope.$new()
+            };
+
+            DialogService.fromCustom(dialogOptions);
+        };
 
         self.onlyOpenDays = function(date)
         {
@@ -227,6 +327,6 @@
 
     }
 
-    angular.module('app.controllers').controller('PurchaseOrderCreateController', ['$auth', '$state', '$scope', '$moment', 'Restangular', 'ToastService', 'RestService', 'DialogService', '$stateParams', PurchaseOrderCreateController]);
+    angular.module('app.controllers').controller('PurchaseOrderCreateController', ['$auth', '$state', '$scope', '$moment', 'Restangular', 'ToastService', 'RestService', 'DialogService', 'ValidationService', '$stateParams', PurchaseOrderCreateController]);
 
 })();
