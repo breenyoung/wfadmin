@@ -375,6 +375,16 @@
                     }
                 }
             })
+            .state('app.bookeddates', {
+                url: '/bookeddates',
+                views: {
+                    'main@': {
+                        templateUrl: getView('bookeddates'),
+                        controller: 'BookedDateController',
+                        controllerAs: 'ctrlBookedDate'
+                    }
+                }
+            })
 
             ;
 
