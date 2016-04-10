@@ -17,7 +17,8 @@ class CreateTableBookedDates extends Migration
             $table->engine = 'InnoDB';
 
             $table->increments('id');
-            $table->date('booked_date');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->integer('work_order_id')->unsigned()->nullable();
             $table->boolean('work_order_generated')->default('0');
             $table->string('notes', 255)->nullable();

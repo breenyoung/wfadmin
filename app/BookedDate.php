@@ -16,6 +16,6 @@ class BookedDate extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['booked_date', 'work_order_id', 'work_order_generated', 'notes'];
+    protected $fillable = ['start_date', 'end_date', 'work_order_id', 'work_order_generated', 'notes'];
 
 }

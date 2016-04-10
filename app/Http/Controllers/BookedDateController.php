@@ -37,7 +37,8 @@ class BookedDateController extends Controller
     public function store(Request $request)
     {
         $bookedDate = new BookedDate();
-        $bookedDate->booked_date = $request->input('booked_date');
+        $bookedDate->start_date = $request->input('start_date');
+        $bookedDate->end_date = $request->input('end_date');
         $bookedDate->work_order_id = $request->input('work_order_id');
         $bookedDate->work_order_generated = $request->input('work_order_generated');
         $bookedDate->notes = $request->input('notes');
@@ -72,7 +73,8 @@ class BookedDateController extends Controller
         $bookedDate = BookedDate::find($id);
         if(isset($bookedDate))
         {
-            $bookedDate->booked_date = $request->input('booked_date');
+            $bookedDate->start_date = $request->input('start_date');
+            $bookedDate->end_date = $request->input('end_date');
             $bookedDate->work_order_id = $request->input('work_order_id');
             $bookedDate->work_order_generated = $request->input('work_order_generated');
             $bookedDate->notes = $request->input('notes');
