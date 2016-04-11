@@ -1,15 +1,15 @@
-<md-dialog aria-label="Details" ng-cloak>
+<md-dialog aria-label="Work Order Details" ng-cloak>
 
     <md-toolbar>
         <div class="md-toolbar-tools">
-            <h2>Details</h2>
+            <h2>Work Order Details</h2>
         </div>
     </md-toolbar>
 
     <md-dialog-content>
         <div class="md-dialog-content">
-            <div>Customer: {{woObj.customer.first_name}} {{woObj.customer.last_name}}</div>
-            <div>Product: {{woObj.product.name}} x {{woObj.quantity}}</div>
+            <div>Customer: <a ui-sref="app.customers.detail({customerId: woObj.customer_id})" class="nounderline">{{woObj.customer.first_name}} {{woObj.customer.last_name}}</a></div>
+            <div>Product: <a ui-sref="app.products.detail({productId: woObj.product_id})" class="nounderline">{{woObj.product.name}}</a> x {{woObj.quantity}}</div>
             <div>Start Date: {{woObj.start_date | amDateFormat:'MM-DD-YYYY'}}</div>
             <div>End Date: {{woObj.end_date | amDateFormat:'MM-DD-YYYY'}}</div>
             <div>Generated for <a ui-sref="app.purchaseorders.detail({purchaseOrderId: woObj.purchase_order_id})" class="nounderline">PO# {{woObj.purchase_order_id}}</a></div>

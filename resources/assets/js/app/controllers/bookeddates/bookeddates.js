@@ -5,14 +5,16 @@
     {
         var self = this;
 
+        var eventSources = [];
+        var workOrderEventSrc = { events: [], backgroundColor: 'blue', allDayDefault: true, editable: false };
+
+        var bookedDateEvents = [];
+        var bookedDateSrc = {events: bookedDateEvents, backgroundColor: 'orange', allDayDefault: true, editable: true };
+
         RestService.getFutureWorkOrders().then(function(data)
         {
-            var eventSources = [];
-
             //console.log(data);
 
-            var workOrderEventSrc = {};
-            workOrderEventSrc.events = [];
             for(var i = 0; i < data.length; i++)
             {
                 //console.log(data[i]);
@@ -25,11 +27,10 @@
                     bookingType: 'workorder'
                 });
             }
-            workOrderEventSrc.backgroundColor = 'blue';
-            workOrderEventSrc.allDayDefault = true;
-            workOrderEventSrc.editable = false;
-
             eventSources.push(workOrderEventSrc);
+
+            bookedDateEvents.push({ title: 'test BOzzz', bookingType: 'bookedDate', start: $moment().format()});
+            eventSources.push(bookedDateSrc);
 
             $('#calendar').fullCalendar({
 
@@ -39,7 +40,7 @@
                 {
                     $scope.woObj = calEvent.woObj;
 
-                    console.log(calEvent);
+                    //console.log(calEvent);
 
                     if(calEvent.bookingType === 'workorder')
                     {
@@ -52,11 +53,41 @@
                         );
                         //$state.go('app.workorders.detail', {'workOrderId': calEvent.work_order_id});
                     }
+                    else
+                    {
+                        // Booking Date (allow edit)
+                        DialogService.fromTemplate(null, 'dlgAddBookingDate', $scope).then(
+                            function ()
+                            {
+                                console.log('confirmed');
+                            }
+                        );
+                    }
 
                 },
                 eventMouseover: function(event, jsEvent, view)
                 {
                     $(this).css('cursor', 'pointer');
+                },
+                dayClick: function(date, jsEvent, view, resourceObj)
+                {
+                    DialogService.fromTemplate(null, 'dlgAddBookingDate', $scope).then(
+                        function ()
+                        {
+                            //$('#calendar').fullCalendar('renderEvent', eventObj, true);
+                            $('#calendar').fullCalendar('removeEventSource', bookedDateSrc);
+alert($scope.ctrlBookingCreate.notes);
+                            var eventObj = { title: 'From Dialog', bookingType: 'bookedDate', start: $moment().format()};
+                            bookedDateSrc.events.push(eventObj);
+
+                            $('#calendar').fullCalendar('addEventSource', bookedDateSrc);
+                            console.log('confirmed');
+                        },
+                        function()
+                        {
+                            console.log('cancel');
+                        }
+                    );
                 }
             });
 

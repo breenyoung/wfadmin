@@ -1,0 +1,44 @@
+<md-dialog aria-label="Add/Edit Booked Date(s)" ng-cloak>
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Add/Edit Booked Date(s)</h2>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+
+        <div class="md-dialog-content">
+
+            <form name="form1" novalidate>
+
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Note</label>
+                    <input type="text" name="notes" ng-model="ctrlBookingCreate.notes" required ng-maxlength="255"/>
+
+                    <div ng-messages="form1.notes.$error" role="alert" ng-show="form1.notes.$touched || form1.$submitted">
+                        <div ng-messages-include="error-messages"></div>
+                    </div>
+
+                </md-input-container>
+
+                <div layout="row">
+                    <md-datepicker name="start_date" ng-model="ctrlBookingCreate.start_date"
+                                   md-placeholder="Start Date">
+                    </md-datepicker>
+
+                    <md-datepicker name="end_date" ng-model="ctrlBookingCreate.end_date"
+                                   md-placeholder="End Date">
+                    </md-datepicker>
+                </div>
+            </form>
+
+        </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+        <md-button style="margin-right:20px;" ng-click="confirmDialog()">Ok</md-button>
+        <md-button ng-click="cancelDialog()">Cancel</md-button>
+    </md-dialog-actions>
+
+</md-dialog>
