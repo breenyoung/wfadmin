@@ -1,0 +1,23 @@
+<md-dialog aria-label="Details" ng-cloak>
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Details</h2>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <div>Customer: {{woObj.customer.first_name}} {{woObj.customer.last_name}}</div>
+            <div>Product: {{woObj.product.name}} x {{woObj.quantity}}</div>
+            <div>Start Date: {{woObj.start_date | amDateFormat:'MM-DD-YYYY'}}</div>
+            <div>End Date: {{woObj.end_date | amDateFormat:'MM-DD-YYYY'}}</div>
+            <div>Generated for <a ui-sref="app.purchaseorders.detail({purchaseOrderId: woObj.purchase_order_id})" class="nounderline">PO# {{woObj.purchase_order_id}}</a></div>
+        </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+        <md-button style="margin-right:20px;" ng-click="confirmDialog()">Close</md-button>
+    </md-dialog-actions>
+
+</md-dialog>

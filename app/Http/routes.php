@@ -49,6 +49,7 @@ Route::group(['prefix' => 'api'], function()
     Route::post('scheduler/getWorkOrders', 'SchedulerController@determineWorkOrders');
     Route::post('scheduler/restoreStockForProduct', 'SchedulerController@restoreStockForProduct');
     Route::get('scheduler/getFullyBookedDays', 'SchedulerController@getFullyBookedDays');
+    Route::get('scheduler/getFutureWorkOrders', 'SchedulerController@getFutureWorkOrders');
 
     Route::post('reports/getSalesReport', 'ReportController@getSalesReport');
     Route::post('reports/getMonthlySalesReport', 'ReportController@getSalesByMonth');

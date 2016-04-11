@@ -207,6 +207,11 @@
                 });
             },
 
+            getFutureWorkOrders: function()
+            {
+                return Restangular.one('scheduler/getFutureWorkOrders').getList();
+            },
+
             addCustomer: function(obj)
             {
                 return Restangular.all('customer').post(obj);

@@ -111,4 +111,9 @@ class SchedulerController extends Controller
         return $this->workOrderSchedulerService->getFullyBookedDays();
     }
 
+    public function getFutureWorkOrders()
+    {
+        return $this->workOrderSchedulerService->getFutureWorkOrders();
+    }
+
 }

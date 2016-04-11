@@ -187,6 +187,28 @@ class WorkOrderSchedulerService
         return $bookedDays;
     }
 
+    public function getFutureWorkOrders()
+    {
+        $startOfWeek = Carbon::today('America/Halifax')->startOfWeek();
+
+        $results = WorkOrder::whereDate('start_date', '>=', $startOfWeek)
+            ->where('completed', 0)
+            ->with(['product' => function($query)
+                {
+                    $query->addSelect(array('id', 'name'));
+                },
+                'customer' => function($query)
+                {
+                    $query->addSelect(array('id', 'first_name', 'last_name'));
+                },])
+            ->select('id', 'customer_id', 'product_id', 'purchase_order_id', 'start_date', 'end_date', 'quantity')
+            ->orderBy('start_date', 'asc')
+            ->get();
+
+        return response()->json($results);
+    }
+
+
     public function sendWorkOrderReport()
     {
         Log::info('=============================================');
