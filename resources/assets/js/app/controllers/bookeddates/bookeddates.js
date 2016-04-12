@@ -9,7 +9,7 @@
         var workOrderEventSrc = { events: [], backgroundColor: 'blue', allDayDefault: true, editable: false };
 
         var bookedDateEvents = [];
-        var bookedDateSrc = {events: bookedDateEvents, backgroundColor: 'orange', allDayDefault: true, editable: true };
+        var bookedDateSrc = {events: bookedDateEvents, backgroundColor: 'orange', allDayDefault: true, editable: true, eventStartEditable: true };
 
         RestService.getFutureWorkOrders().then(function(data)
         {
@@ -56,12 +56,27 @@
                     else
                     {
                         // Booking Date (allow edit)
-                        DialogService.fromTemplate(null, 'dlgAddBookingDate', $scope).then(
-                            function ()
+                        var dialogOptions = {
+                            templateUrl: '/views/dialogs/dlgAddBookingDate.html',
+                            escapeToClose: true,
+                            targetEvent: null,
+                            controller: function DialogController($scope, $mdDialog)
                             {
-                                console.log('confirmed');
-                            }
-                        );
+                                $scope.confirmDialog = function ()
+                                {
+                                    console.log('accepted');
+                                    $mdDialog.hide();
+                                };
+
+                                $scope.cancelDialog = function()
+                                {
+                                    //console.log('cancelled');
+                                    $mdDialog.hide();
+                                };
+                            },
+                            scope: $scope.$new()
+                        };
+                        DialogService.fromCustom(dialogOptions);
                     }
 
                 },
@@ -71,23 +86,54 @@
                 },
                 dayClick: function(date, jsEvent, view, resourceObj)
                 {
-                    DialogService.fromTemplate(null, 'dlgAddBookingDate', $scope).then(
-                        function ()
-                        {
-                            //$('#calendar').fullCalendar('renderEvent', eventObj, true);
-                            $('#calendar').fullCalendar('removeEventSource', bookedDateSrc);
-alert($scope.ctrlBookingCreate.notes);
-                            var eventObj = { title: 'From Dialog', bookingType: 'bookedDate', start: $moment().format()};
-                            bookedDateSrc.events.push(eventObj);
+                    console.log(date);
 
-                            $('#calendar').fullCalendar('addEventSource', bookedDateSrc);
-                            console.log('confirmed');
-                        },
-                        function()
+                    var dialogOptions = {
+                        templateUrl: '/views/dialogs/dlgAddBookingDate.html',
+                        escapeToClose: true,
+                        targetEvent: null,
+                        controller: function DialogController($scope, $mdDialog)
                         {
-                            console.log('cancel');
-                        }
-                    );
+                            $scope.confirmDialog = function ()
+                            {
+                                console.log('accepted');
+
+                                //$('#calendar').fullCalendar('renderEvent', eventObj, true);
+                                $('#calendar').fullCalendar('removeEventSource', bookedDateSrc);
+                                $('#calendar').fullCalendar('refetchEvents');
+
+                                var eventObj = { title: $scope.ctrlBookingCreate.notes, bookingType: 'bookedDate', start: date.format()};
+                                bookedDateSrc.events.push(eventObj);
+
+                                $('#calendar').fullCalendar('addEventSource', bookedDateSrc);
+                                $('#calendar').fullCalendar('refetchEvents');
+
+                                $mdDialog.hide();
+                            };
+
+                            $scope.cancelDialog = function()
+                            {
+                                //console.log('cancelled');
+                                $mdDialog.hide();
+                            };
+                        },
+                        scope: $scope.$new()
+                    };
+                    DialogService.fromCustom(dialogOptions);
+
+
+                },
+                eventDrop: function(event, delta, revertFunc)
+                {
+                    console.log(event);
+                    console.log(delta);
+
+                    var e = $('#calendar').fullCalendar('clientEvents', event._id);
+                    //e[0].start = e[0].start.add(delta);
+                    $('#calendar').fullCalendar('updateEvent', e[0]);
+                    $('#calendar').fullCalendar('refetchEvents');
+                    console.log(e[0]);
+
                 }
             });
 
