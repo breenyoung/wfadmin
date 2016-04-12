@@ -9,12 +9,27 @@
         var workOrderEventSrc = { events: [], backgroundColor: 'blue', allDayDefault: true, editable: false };
 
         var bookedDateEvents = [];
-        var bookedDateSrc = {events: bookedDateEvents, backgroundColor: 'orange', allDayDefault: true, editable: true, eventStartEditable: true };
+        var bookedDateSrc = {
+            events: function(start, end, tz, callback)
+            {
+                RestService.getAllBookings(start, end).then(function(data)
+                {
+                    //console.log(data);
+                    var events = [];
+                    for(var i = 0; i < data.length; i++)
+                    {
+                        events.push({bId: data[i].id, title: data[i].notes, start: data[i].start_date, end: data[i].end_date});
+                    }
+
+                    callback(events);
+                });
+            }
+            , backgroundColor: 'orange', allDayDefault: true, editable: true, eventStartEditable: true
+        };
 
         RestService.getFutureWorkOrders().then(function(data)
         {
             //console.log(data);
-
             for(var i = 0; i < data.length; i++)
             {
                 //console.log(data[i]);
@@ -29,7 +44,7 @@
             }
             eventSources.push(workOrderEventSrc);
 
-            bookedDateEvents.push({ title: 'test BOzzz', bookingType: 'bookedDate', start: $moment().format()});
+            //bookedDateEvents.push({ title: 'test BOzzz', bookingType: 'bookedDate', start: $moment().format()});
             eventSources.push(bookedDateSrc);
 
             $('#calendar').fullCalendar({
@@ -98,15 +113,20 @@
                             {
                                 console.log('accepted');
 
+                                /*
+                                var eventObj = { notes: $scope.ctrlBookingCreate.notes, start: date.format()};
+                                RestService.addBooking(eventObj).then(function()
+                                {
+
+                                });
+                                */
+
                                 //$('#calendar').fullCalendar('renderEvent', eventObj, true);
-                                $('#calendar').fullCalendar('removeEventSource', bookedDateSrc);
-                                $('#calendar').fullCalendar('refetchEvents');
-
-                                var eventObj = { title: $scope.ctrlBookingCreate.notes, bookingType: 'bookedDate', start: date.format()};
-                                bookedDateSrc.events.push(eventObj);
-
-                                $('#calendar').fullCalendar('addEventSource', bookedDateSrc);
-                                $('#calendar').fullCalendar('refetchEvents');
+                                //$('#calendar').fullCalendar('removeEventSource', bookedDateSrc);
+                                //$('#calendar').fullCalendar('refetchEvents');
+                                //bookedDateSrc.events.push(eventObj);
+                                //$('#calendar').fullCalendar('addEventSource', bookedDateSrc);
+                                //$('#calendar').fullCalendar('refetchEvents');
 
                                 $mdDialog.hide();
                             };
@@ -120,8 +140,6 @@
                         scope: $scope.$new()
                     };
                     DialogService.fromCustom(dialogOptions);
-
-
                 },
                 eventDrop: function(event, delta, revertFunc)
                 {

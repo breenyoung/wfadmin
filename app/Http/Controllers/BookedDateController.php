@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use \Carbon\Carbon;
 
 use App\Http\Requests;
 use App\BookedDate;
@@ -23,9 +24,21 @@ class BookedDateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //TODO
+        $sdate = Carbon::createFromFormat('Y-m-d', str_replace('"', '', $request->input('start')));
+        $edate = Carbon::createFromFormat('Y-m-d', str_replace('"', '', $request->input('end')));
+
+        $bookingDates = BookedDate::whereDate('start_date', '>=', $sdate)->whereDate('end_date', '<=', $edate)->get();
+
+        /*
+        $returnObj = [];
+        foreach($bookingDates as $b)
+        {
+            array_push($returnObj, ['title' => $b->notes, 'start' => $b->start_date, 'end_date' => $b->end_date]);
+        }
+        */
+        return response()->json($bookingDates);
     }
 
     /**

@@ -220,6 +220,16 @@
             addProduct: function(obj)
             {
                 return Restangular.all('product').post(obj);
+            },
+
+            getAllBookings: function(start, end)
+            {
+                return Restangular.all('bookeddate').getList({ start: start, end: end});
+            },
+
+            addBooking: function(obj)
+            {
+                return Restangular.all('booking').post(obj);
             }
 
         };
