@@ -19,11 +19,7 @@ class CreateTableBookedDates extends Migration
             $table->increments('id');
             $table->date('start_date');
             $table->date('end_date');
-            $table->integer('work_order_id')->unsigned()->nullable();
-            $table->boolean('work_order_generated')->default('0');
             $table->string('notes', 255)->nullable();
-
-            $table->foreign('work_order_id')->references('id')->on('work_orders')->onDelete('cascade');
         });
     }
 
