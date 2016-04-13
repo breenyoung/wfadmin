@@ -229,8 +229,20 @@
 
             addBooking: function(obj)
             {
-                return Restangular.all('booking').post(obj);
+                return Restangular.all('bookeddate').post(obj);
+            },
+
+            updateBooking: function(obj)
+            {
+                return obj.put();
+            },
+
+            deleteBooking: function(obj)
+            {
+                return obj.remove();
             }
+
+
 
         };
     }]);

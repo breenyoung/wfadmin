@@ -50,10 +50,25 @@ class BookedDateController extends Controller
     public function store(Request $request)
     {
         $bookedDate = new BookedDate();
-        $bookedDate->start_date = $request->input('start_date');
-        $bookedDate->end_date = $request->input('end_date');
-        $bookedDate->work_order_id = $request->input('work_order_id');
-        $bookedDate->work_order_generated = $request->input('work_order_generated');
+
+        //$bookedDate->start_date = $request->input('start_date');
+        if($request->input('start_date'))
+        {
+            $strStartDate = substr($request->input('start_date'), 0, strpos($request->input('start_date'), 'T'));
+            $startDate = Carbon::createFromFormat('Y-m-d', $strStartDate);
+            $bookedDate->start_date = $startDate;
+        }
+
+        //$bookedDate->end_date = $request->input('end_date');
+        if($request->input('end_date'))
+        {
+            $strEndDate = substr($request->input('end_date'), 0, strpos($request->input('end_date'), 'T'));
+            $endDate = Carbon::createFromFormat('Y-m-d', $strEndDate);
+            $bookedDate->end_date = $endDate;
+        }
+
+        //$bookedDate->work_order_id = $request->input('work_order_id');
+        //$bookedDate->work_order_generated = $request->input('work_order_generated');
         $bookedDate->notes = $request->input('notes');
 
         $bookedDate->save();
@@ -87,7 +102,18 @@ class BookedDateController extends Controller
         if(isset($bookedDate))
         {
             $bookedDate->start_date = $request->input('start_date');
-            $bookedDate->end_date = $request->input('end_date');
+
+            if($request->input('end_date') && strpos($request->input('end_date'), 'T') !== false)
+            {
+                $strEndDate = substr($request->input('end_date'), 0, strpos($request->input('end_date'), 'T'));
+                $endDate = Carbon::createFromFormat('Y-m-d', $strEndDate);
+                $bookedDate->end_date = $endDate;
+            }
+            else
+            {
+                $bookedDate->end_date = $request->input('end_date');
+            }
+
             $bookedDate->work_order_id = $request->input('work_order_id');
             $bookedDate->work_order_generated = $request->input('work_order_generated');
             $bookedDate->notes = $request->input('notes');
