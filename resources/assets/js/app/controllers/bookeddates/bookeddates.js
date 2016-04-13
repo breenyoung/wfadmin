@@ -167,24 +167,28 @@
                 },
                 eventDrop: function(event, delta, revertFunc)
                 {
-                    //console.log(event);
-                    //console.log(delta);
-                    //console.log(delta.days());
+                    console.log(event);
+
+                    console.log(delta);
+                    console.log(delta.days());
+
+                    /*
                     if(delta.days() > 0)
                     {
                         event.start.add(delta.days());
-                        //event.end = moment(event.start).add(1, 'days');
+                        event.end = event.start; //$moment(event.start).add(1, 'days');
                     }
                     else if(delta.days < 0)
                     {
                         event.start.subtract(delta.days());
-                        //event.end = moment(event.start).add(1, 'days');
+                        event.end = event.start; //$moment(event.start).add(1, 'days');
                     }
-
+console.log(event);
+*/
                     event.bdObj.start_date = event.start;
-                    event.bdObj.end_date = event.end;
+                    event.bdObj.end_date = event.end === null ? event.start : event.end;
 
-                    //console.log(event.bdObj);
+                    console.log(event.bdObj);
 
                     RestService.updateBooking(event.bdObj).then(function()
                     {
@@ -196,6 +200,7 @@
                 {
                     //console.log(event);
                     //console.log(delta);
+                    /*
                     if(delta.days() > 0)
                     {
                         event.end.add(delta.days());
@@ -204,6 +209,7 @@
                     {
                         event.end.subtract(delta.days());
                     }
+*/
 
                     event.bdObj.end_date = event.end;
 
