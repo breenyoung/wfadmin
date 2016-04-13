@@ -14,7 +14,7 @@
 
                 <md-input-container class="md-block" flex-gt-sm>
                     <label>Note</label>
-                    <input type="text" name="notes" ng-model="ctrlBookingCreate.notes" required ng-maxlength="255"/>
+                    <input type="text" name="notes" ng-model="notes" required ng-maxlength="255"/>
 
                     <div ng-messages="form1.notes.$error" role="alert" ng-show="form1.notes.$touched || form1.$submitted">
                         <div ng-messages-include="error-messages"></div>
@@ -22,15 +22,6 @@
 
                 </md-input-container>
 
-                <div layout="row">
-                    <md-datepicker name="start_date" ng-model="ctrlBookingCreate.start_date"
-                                   md-placeholder="Start Date">
-                    </md-datepicker>
-
-                    <md-datepicker name="end_date" ng-model="ctrlBookingCreate.end_date"
-                                   md-placeholder="End Date">
-                    </md-datepicker>
-                </div>
             </form>
 
         </div>
@@ -38,6 +29,7 @@
 
     <md-dialog-actions layout="row">
         <md-button style="margin-right:20px;" ng-click="confirmDialog()">Ok</md-button>
+        <md-button ng-click="deleteBooking()" ng-show="isEdit">Delete</md-button>
         <md-button ng-click="cancelDialog()">Cancel</md-button>
     </md-dialog-actions>
 
