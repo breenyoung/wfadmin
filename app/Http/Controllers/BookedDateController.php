@@ -31,13 +31,6 @@ class BookedDateController extends Controller
 
         $bookingDates = BookedDate::whereDate('start_date', '>=', $sdate)->whereDate('end_date', '<=', $edate)->get();
 
-        /*
-        $returnObj = [];
-        foreach($bookingDates as $b)
-        {
-            array_push($returnObj, ['title' => $b->notes, 'start' => $b->start_date, 'end_date' => $b->end_date]);
-        }
-        */
         return response()->json($bookingDates);
     }
 
@@ -67,8 +60,6 @@ class BookedDateController extends Controller
             $bookedDate->end_date = $endDate;
         }
 
-        //$bookedDate->work_order_id = $request->input('work_order_id');
-        //$bookedDate->work_order_generated = $request->input('work_order_generated');
         $bookedDate->notes = $request->input('notes');
 
         $bookedDate->save();
@@ -114,8 +105,6 @@ class BookedDateController extends Controller
                 $bookedDate->end_date = $request->input('end_date');
             }
 
-            $bookedDate->work_order_id = $request->input('work_order_id');
-            $bookedDate->work_order_generated = $request->input('work_order_generated');
             $bookedDate->notes = $request->input('notes');
 
             $bookedDate->save();
