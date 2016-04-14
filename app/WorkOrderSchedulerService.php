@@ -176,15 +176,48 @@ class WorkOrderSchedulerService
         PurchaseOrderProduct::where('purchase_order_id', $purchaseOrderId)->where('product_id', $productId)->delete();
     }
 
-    public function getFullyBookedDays()
+    public function getFullyBookedDays($includeNonWorkOrderDates = false)
     {
+        $arrBookedDays = [];
+
         $bookedDays = \DB::table('work_orders')->select(\DB::raw('start_date, count(start_date) as wocount'))
                             ->groupBy('start_date')
                             ->having('wocount', '>=', $this->maxWorkOrdersPerDay)
-                            ->orderBy('start_date', 'asc')
-                            ->get();
+                            ->orderBy('start_date', 'asc')->get();
 
-        return $bookedDays;
+        foreach($bookedDays as $bd)
+        {
+            array_push($arrBookedDays, ['start_date' => $bd->start_date, 'wocount' => $bd->wocount]);
+        }
+
+        if($includeNonWorkOrderDates)
+        {
+            $nonWorkOrderDates = \DB::table('booked_dates')->select('start_date', 'end_date')->orderBy('start_date', 'asc')->get();
+            foreach($nonWorkOrderDates as $nwod)
+            {
+                $sDate = new Carbon($nwod->start_date);
+                //$sDate->timezone = 'America/Halifax';
+                $eDate = new Carbon($nwod->end_date);
+                //$eDate->timezone = 'America/Halifax';
+
+                if($sDate->isSameDay($eDate))
+                {
+                    // One day event only, just add the Start Date
+                    array_push($arrBookedDays, ['start_date' => $nwod->start_date, 'wocount' => $this->maxWorkOrdersPerDay]);
+                }
+                else
+                {
+                    // This is a date range, add each day in the range
+                    for($date = $sDate; $date->lt($eDate); $date->addDay())
+                    {
+                        array_push($arrBookedDays, ['start_date' => $date->format('Y-m-d'), 'wocount' => $this->maxWorkOrdersPerDay]);
+                    }
+                }
+            }
+        }
+
+        //return $bookedDays->get();
+        return $arrBookedDays;
     }
 
     public function getFutureWorkOrders()
