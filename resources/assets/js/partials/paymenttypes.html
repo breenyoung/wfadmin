@@ -11,10 +11,8 @@
 </div>
 
 <md-list>
-    <md-list-item class="md-3-line" ng-repeat="pt in ctrlPaymentType.paymenttypes">
-        <div class="md-list-item-text" layout="column">
-            <h3><a ui-sref="app.paymenttypes.detail({paymentTypeId: pt.id})" class="nounderline">{{pt.name}}</a></h3>
-        </div>
+    <md-list-item ng-repeat="pt in ctrlPaymentType.paymenttypes" ui-sref="app.paymenttypes.detail({paymentTypeId: pt.id})">
+            <p>{{pt.name}}</p>
         <md-divider ng-if="!$last"></md-divider>
     </md-list-item>
 </md-list>
