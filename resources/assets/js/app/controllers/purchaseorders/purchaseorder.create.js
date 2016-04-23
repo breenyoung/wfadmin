@@ -157,17 +157,35 @@
             var p = self.purchaseorder;
 
             //console.log($error);
-
             Restangular.all('purchaseorder').post(p).then(function(d)
             {
-                //console.log(d);
+                console.log(d);
                 //$state.go('app.products.detail', {'productId': d.newId});
                 ToastService.show("Successfully created");
-                $state.go('app.purchaseorders');
+                if(d.newWoIds && d.newWoIds.length > 0)
+                {
+                    var linkObj = [];
+                    linkObj.push({LinkText: 'View All POs', LinkUrl: $state.href('app.purchaseorders')});
+                    linkObj.push({LinkText: 'View Created PO', LinkUrl: $state.href('app.purchaseorders.detail', {purchaseOrderId: d.newId})});
+                    for(var i = 0; i < d.newWoIds.length; i++)
+                    {
+                        linkObj.push({LinkText: 'View WO #' + d.newWoIds[i], LinkUrl: $state.href('app.workorders.detail', {workOrderId: d.newWoIds[i]})});
+                    }
+
+                    $scope.linksToShow = linkObj;
+
+                    DialogService.fromTemplate(null, 'dlgLinkChooser', $scope);
+                }
+                else
+                {
+                    $state.go('app.purchaseorders');
+                }
+
             }, function()
             {
                 ToastService.show("Error creating");
             });
+
         };
 
         self.applyDiscount = function()

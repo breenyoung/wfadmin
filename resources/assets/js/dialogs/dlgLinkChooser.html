@@ -1,0 +1,17 @@
+<md-dialog aria-label="Choose Destination" ng-cloak>
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Choose Destination</h2>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <div ng-repeat="l in linksToShow">
+                <a href="{{l.LinkUrl}}" class="nounderline">{{l.LinkText}}</a>
+            </div>
+        </div>
+    </md-dialog-content>
+
+</md-dialog>
