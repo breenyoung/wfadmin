@@ -385,6 +385,16 @@
                     }
                 }
             })
+            .state('app.materialchecklist', {
+                url: '/materialchecklist',
+                views: {
+                    'main@': {
+                        templateUrl: getView('materialchecklist'),
+                        controller: 'MaterialChecklistController',
+                        controllerAs: 'ctrlMaterialChecklist'
+                    }
+                }
+            })
 
             ;
 

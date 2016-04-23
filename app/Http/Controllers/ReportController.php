@@ -153,4 +153,46 @@ class ReportController extends Controller
         return response()->json($dataPoints);
 
     }
+
+    public function getMaterialChecklist(Request $request)
+    {
+        $checklist = [];
+
+        $reportParams = $request->input('reportParams');
+
+        $mode = $reportParams['mode'];
+
+        if($mode === 'thisweek' || $mode === 'date')
+        {
+            if($mode === 'thisweek')
+            {
+                $startOfWeek = Carbon::today('America/Halifax')->startOfWeek();
+                $endOfWeek = Carbon::today('America/Halifax')->endOfWeek();
+            }
+            else
+            {
+                $startOfWeek = $reportParams['start_date'];
+                $endOfWeek = $reportParams['end_date'];
+            }
+
+            $workOrders = WorkOrder::select('product_materials.material_id', 'materials.name', DB::raw('sum(product_materials.quantity * work_orders.quantity) as material_quantity'), 'units.name as unit_name')
+                ->join('product_materials', 'work_orders.product_id', '=', 'product_materials.product_id')
+                ->join('materials', 'product_materials.material_id', '=', 'materials.id')
+                ->join('units', 'materials.unit_id', '=', 'units.id')
+                ->whereDate('work_orders.start_date', '>=', $startOfWeek)
+                ->whereDate('work_orders.start_date', '<=', $endOfWeek)
+                ->where('work_orders.completed', 0)
+                ->groupBy('product_materials.material_id')
+                ->orderBy('materials.name', 'asc')
+                ->get();
+
+        }
+        else if($mode === 'products')
+        {
+
+        }
+
+        return response()->json($workOrders );
+    }
+
 }
