@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Material Checklist</title>
+</head>
+<body>
+
+<div layout="row" layout-padding>
+    <md-content>
+    Generate material checklist for:
+    </md-content>
+</div>
+
+<div layout="row" layout-padding>
+    <md-radio-group ng-model="ctrlMaterialChecklist.checklistmode" layout="row">
+        <md-radio-button value="thisweek">This week's workorders</md-radio-button>
+        <md-radio-button value="date">Workorder date range</md-radio-button>
+        <md-radio-button value="products">Custom products</md-radio-button>
+    </md-radio-group>
+</div>
+
+
+<div layout="row" ng-show="ctrlMaterialChecklist.checklistmode === 'date'" layout-padding>
+    <md-datepicker ng-model="ctrlMaterialChecklist.start_date"
+                   md-placeholder="Start Date">
+    </md-datepicker>
+
+    <md-datepicker ng-model="ctrlMaterialChecklist.end_date"
+                   md-placeholder="End Date">
+    </md-datepicker>
+</div>
+
+
+<div layout="row" ng-repeat="pop in ctrlMaterialChecklist.checklist_products" ng-show="ctrlMaterialChecklist.checklistmode === 'products'">
+    <div flex>
+        {{pop.product.name}} x {{pop.quantity}}
+        (<a href="#" ng-click="ctrlMaterialChecklist.deleteProduct($event, pop.product_id)">Delete</a>)
+    </div>
+</div>
+
+<div layout="row" ng-show="ctrlMaterialChecklist.checklistmode === 'products'">
+    <div flex>
+        <select ng-model="ctrlMaterialChecklist.selectedProduct" ng-options="p as p.name for p in ctrlMaterialChecklist.products"></select>
+
+        <input type="text" size="4" maxlength="3" name="quantity" placeholder="Quantity" ng-model="ctrlMaterialChecklist.selectedQuantity"/>
+
+        <md-button class="md-raised md-primary" ng-click="ctrlMaterialChecklist.addProduct()">Add</md-button>
+    </div>
+</div>
+
+<div layout="row" layout-padding>
+    <md-button class="md-raised md-primary" ng-click="ctrlMaterialChecklist.generateChecklist()">Generate Checklist</md-button>
+</div>
+
+<div layout="row" ng-show="ctrlMaterialChecklist.report" layout-padding>
+    Materials Needed
+    <ul>
+        <li ng-repeat="r in ctrlMaterialChecklist.results">{{r.name}} x {{r.material_quantity}} ({{r.unit_name}})</li>
+    </ul>
+</div>
+
+</body>
+</html>
