@@ -11,6 +11,7 @@
 
     <div layout="row">
         <input type="search" ng-model="q" placeholder="filter PO's..." aria-label="filter PO's" />
+        <input id="cbShowPaid" ng-model="ctrlPurchaseOrder.showPaid" type="checkbox" ng-change="ctrlPurchaseOrder.togglePaidOnly(ctrlPurchaseOrder.showPaid)"/><label for="cbShowPaid">Show Paid</label>
     </div>
 
     <md-table-container>
@@ -26,7 +27,7 @@
             </tr>
             </thead>
             <tbody md-body>
-            <tr md-row ng-repeat="p in ctrlPurchaseOrder.purchaseorders | orderBy: poOrder | filter:q as results">
+            <tr md-row ng-repeat="p in ctrlPurchaseOrder.purchaseorders | orderBy: poOrder | filter:q as results" ng-show="ctrlPurchaseOrder.showPaid ? p.paid == 1 || p.paid == 0 : p.paid == 0">
                 <td md-cell><a ui-sref="app.purchaseorders.detail({purchaseOrderId: p.id})" class="nounderline">PO #{{p.id}}</a></td>
                 <td md-cell><a ui-sref="app.customers.detail({customerId: p.customer_id})" class="nounderline">{{p.customer.first_name}} {{p.customer.last_name}}</a></td>
                 <td md-cell>{{p.created_at | amDateFormat:'MM-DD-YYYY'}}</td>
