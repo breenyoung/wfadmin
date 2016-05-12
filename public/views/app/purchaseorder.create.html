@@ -45,6 +45,17 @@
 
 <div layout="row">
     <md-input-container>
+        <label>Sales Channel</label>
+        <md-select ng-model="ctrlPurchaseOrderCreate.purchaseorder.sales_channel_id">
+            <md-option ng-repeat="sc in ctrlPurchaseOrderCreate.saleschannels" value="{{sc.id}}">
+                {{sc.name}}
+            </md-option>
+        </md-select>
+    </md-input-container>
+</div>
+
+<div layout="row">
+    <md-input-container>
         <label>Payment Type</label>
         <md-select ng-model="ctrlPurchaseOrderCreate.purchaseorder.payment_type_id">
             <md-option ng-repeat="pt in ctrlPurchaseOrderCreate.paymenttypes" value="{{pt.id}}">
