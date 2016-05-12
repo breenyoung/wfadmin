@@ -11,6 +11,11 @@
         RestService.getAllPaymentTypes(self);
         RestService.getPurchaseOrder(self, $stateParams.purchaseOrderId);
 
+        RestService.getAllSalesChannels().then(function(data)
+        {
+            self.saleschannels = data;
+        });
+
         var originalTotal = 0;
 
         self.updatePurchaseOrder = function()

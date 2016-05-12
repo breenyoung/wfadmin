@@ -240,9 +240,12 @@
             deleteBooking: function(obj)
             {
                 return obj.remove();
+            },
+
+            getAllSalesChannels: function()
+            {
+                return Restangular.all('saleschannel').getList();
             }
-
-
 
         };
     }]);

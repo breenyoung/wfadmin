@@ -10,6 +10,11 @@
         RestService.getAllPaymentTypes(self);
         RestService.getFullyBookedDays(self);
 
+        RestService.getAllSalesChannels().then(function(data)
+        {
+            self.saleschannels = data;
+        });
+
         self.purchaseorder = {};
         self.purchaseorder.amount_paid = 0;
         self.purchaseorder.discount = 0;

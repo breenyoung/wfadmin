@@ -68,6 +68,7 @@ class PurchaseOrderController extends Controller
             $purchaseOrder->total = $request->input('total');
             $purchaseOrder->pickup_date = $request->input('pickup_date');
             $purchaseOrder->notes = $request->input('notes');
+            $purchaseOrder->sales_channel_id = $request->input('sales_channel_id');
 
             // TEMP StuFF TODO: REMOVE LATER
             if ($request->input('created_at')) {
@@ -151,6 +152,7 @@ class PurchaseOrderController extends Controller
                 $purchaseOrder->total = $request->input('total');
                 $purchaseOrder->pickup_date = $request->input('pickup_date');
                 $purchaseOrder->notes = $request->input('notes');
+                $purchaseOrder->sales_channel_id = $request->input('sales_channel_id');
 
                 /*
                 // Sync purchase order products now
