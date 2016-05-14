@@ -93,6 +93,7 @@ class PurchaseOrderController extends Controller
                 }
             }
 
+            $newWoIds = [];
             if($request->input('suppressworkorder') != "1")
             {
                 // If there are work orders needed for this PO, add them now
