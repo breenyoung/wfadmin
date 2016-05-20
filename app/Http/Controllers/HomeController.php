@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Mail;
 use App\ShopifyService;
+use App\EtsyService;
 
 class HomeController extends Controller
 {
@@ -36,6 +37,17 @@ class HomeController extends Controller
     {
         $shopify = new ShopifyService();
         $shopify->getProducts();
+    }
+
+    public function etsyTest()
+    {
+        $etsyService = new EtsyService();
+
+        $url = $etsyService->getRequestToken();
+        dd($url);
+
+        //$btest = $etsyService->getTokenCredentials();
+        //dd($btest);
     }
 
     public function scheduleTest()

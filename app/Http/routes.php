@@ -27,6 +27,7 @@ Route::get('/', 'AngularController@serveApp');
 //Route::get('/test', 'HomeController@testMethod');
 Route::get('/test', 'HomeController@scheduleTest');
 Route::get('/shopsy', 'HomeController@shopifyTest');
+Route::get('/etsy', 'HomeController@etsyTest');
 
 Route::group(['prefix' => 'api'], function()
 {
