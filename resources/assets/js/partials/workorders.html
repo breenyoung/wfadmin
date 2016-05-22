@@ -18,18 +18,18 @@
 
     <md-table-container>
         <table md-table>
-            <thead md-head>
+            <thead md-head md-order="woOrder">
                 <tr md-row>
-                    <th md-column></th>
-                    <th md-column>Product</th>
-                    <th md-column>Customer</th>
-                    <th md-column>Start Date</th>
-                    <th md-column>End Date</th>
-                    <th md-column>Complete</th>
+                    <th md-column md-order-by="id">WO #</th>
+                    <th md-column md-order-by="product.name">Product</th>
+                    <th md-column md-order-by="customer.first_name">Customer</th>
+                    <th md-column md-order-by="start_date">Start Date</th>
+                    <th md-column md-order-by="end_date">End Date</th>
+                    <th md-column md-order-by="completed">Complete</th>
                 </tr>
             </thead>
             <tbody md-body>
-                <tr md-row ng-repeat="w in ctrlWorkOrder.workorders | filter:q as results" ng-show="ctrlWorkOrder.showComplete ? w.completed == 1 || w.completed == 0 : w.completed == 0">
+                <tr md-row ng-repeat="w in ctrlWorkOrder.workorders | orderBy: woOrder | filter:q as results" ng-show="ctrlWorkOrder.showComplete ? w.completed == 1 || w.completed == 0 : w.completed == 0">
                     <td md-cell><a ui-sref="app.workorders.detail({workOrderId: w.id})" class="nounderline">W.O #{{w.id}}</a></td>
                     <td md-cell><a ui-sref="app.products.detail({productId: w.product.id})" class="nounderline">{{w.product.name}}</a></td>
                     <td md-cell><a ui-sref="app.customers.detail({customerId: w.customer.id})" class="nounderline">{{w.customer.first_name}} {{w.customer.last_name}}</a></td>
