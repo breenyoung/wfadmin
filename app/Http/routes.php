@@ -62,6 +62,7 @@ Route::group(['prefix' => 'api'], function()
     Route::get('reports/getWeekWorkOrderReport', 'ReportController@getWeekWorkOrderReport');
     Route::get('reports/getOutstandingPayments', 'ReportController@getOutstandingPayments');
     Route::post('reports/getMaterialChecklist', 'ReportController@getMaterialChecklist');
+    Route::post('reports/getDailySales', 'ReportController@getDailySales');
 
     Route::post('uploader/uploadFile', 'UploadController@uploadFile');
     Route::post('uploader/deleteFile', 'UploadController@deleteFile');

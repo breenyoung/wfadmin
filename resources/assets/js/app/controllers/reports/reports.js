@@ -72,7 +72,7 @@
         function showDashboardWidgets()
         {
             ChartService.getTopSellingProducts(self, 'Top Selling All Time');
-            getWorstSellingProducts(self);
+            //getWorstSellingProducts(self);
             getOverduePurchaseOrders(self);
             getMonthlyIncome(self);
             getOutstandingPayments(self);
@@ -221,6 +221,26 @@
             }
         };
 
+        self.getDailySalesCsv = function(e)
+        {
+            console.log(self.daily_sales_from_date);
+            console.log(self.daily_sales_to_date);
+
+            self.reportParams.daily_sales_from_date  = self.daily_sales_from_date;
+            self.reportParams.daily_sales_to_date  = self.daily_sales_to_date;
+
+            Restangular.all('reports/getDailySales').post({ 'reportParams': self.reportParams}).then(function(data)
+            {
+                console.log(data);
+                //console.log(self.results[0]);
+            },
+            function()
+            {
+                // Error
+            });
+
+
+        };
 
     }
 

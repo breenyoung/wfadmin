@@ -101,6 +101,7 @@
                 </md-content>
             </md-card>
 
+            <!--
             <md-card>
                 <md-card-title>
                     <md-card-title-text>Worst Selling Products</md-card-title-text>
@@ -124,6 +125,25 @@
                     </md-table-container>
                 </md-content>
             </md-card>
+            -->
+
+            <md-card>
+                <md-card-title>
+                    <md-card-title-text>Daily Sales Report</md-card-title-text>
+                </md-card-title>
+                <md-content>
+                    <md-datepicker ng-model="ctrlReport.daily_sales_from_date"
+                                   md-placeholder="From">
+                    </md-datepicker>
+
+                    <md-datepicker ng-model="ctrlReport.daily_sales_to_date"
+                                   md-placeholder="To">
+                    </md-datepicker>
+                    &nbsp;
+                    <md-button class="md-raised md-primary" ng-click="ctrlReport.getDailySalesCsv($event)">Export</md-button>
+                </md-content>
+            </md-card>
+
         </div>
     </md-content>
 

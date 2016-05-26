@@ -195,4 +195,33 @@ class ReportController extends Controller
         return response()->json($workOrders );
     }
 
+    public function getDailySales(Request $request)
+    {
+        $query = PurchaseOrder::select(DB::raw('date_format(created_at, \'%m/%d/%Y\') as podate'), DB::raw('count(id) as pocount'), DB::raw('sum(total) as daytotal'));
+
+        $reportParams = $request->input('reportParams');
+        if(isset($reportParams['daily_sales_from_date']) && $reportParams['daily_sales_from_date'] !== '')
+        {
+            $sDate = new Carbon($reportParams['daily_sales_from_date']);
+            $query->whereDate('purchase_orders.created_at', '>=', $sDate->toDateString());
+        }
+
+        if(isset($reportParams['daily_sales_to_date']) && $reportParams['daily_sales_to_date'] !== '')
+        {
+            $eDate = new Carbon($reportParams['daily_sales_to_date']);
+            $query->whereDate('purchase_orders.created_at', '<=', $eDate->toDateString());
+        }
+
+        $query->groupBy(DB::raw('date_format(purchase_orders.created_at, \'%d\')'));
+        $query->orderBy('purchase_orders.created_at', 'asc');
+
+        $dataPoints = $query->get();
+
+        //select date_format(created_at, '%d') as day, count(id) as salescount, sum(total) as total from purchase_orders group by date_format(created_at, '%d')
+        //$dataPoints = DB::select('SELECT date_format(created_at, \'%m/%d/%Y\') as podate, count(id) as pocount, sum(total) as daytotal from purchase_orders group by date_format(created_at, \'%d\') order by created_at');
+
+        return response()->json($dataPoints);
+
+    }
+
 }
