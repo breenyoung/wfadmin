@@ -237,6 +237,16 @@
                     }
                 }
             })
+            .state('app.reports.aos', {
+                url: '/aos',
+                views: {
+                    'main@': {
+                        templateUrl: getView('report.aos'),
+                        controller: 'ReportController',
+                        controllerAs: 'ctrlReport'
+                    }
+                }
+            })
             .state('app.units', {
                 url: '/units',
                 views: {

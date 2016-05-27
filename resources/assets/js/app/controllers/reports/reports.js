@@ -1,7 +1,7 @@
 (function(){
     "use strict";
 
-    function ReportController($scope, $auth, $state, Restangular, RestService, ChartService)
+    function ReportController($scope, $auth, $state, $moment, Restangular, RestService, ChartService)
     {
         var self = this;
 
@@ -30,6 +30,10 @@
         else if($state.is('app.reports.weekworkorders'))
         {
             showWeeklyWorkOrders();
+        }
+        else if($state.is('app.reports.aos'))
+        {
+            showAosReport();
         }
         else
         {
@@ -76,6 +80,10 @@
             getOverduePurchaseOrders(self);
             getMonthlyIncome(self);
             getOutstandingPayments(self);
+
+            self.dayreports = [];
+            self.daily_sales_from_date = moment().subtract(7, 'days').toDate();
+            self.daily_sales_to_date = moment().toDate();
         }
 
         function showSalesReportByMonthView()
@@ -86,6 +94,11 @@
         function showIncomeReportByMonthView()
         {
             ChartService.getMonthlyIncomeReport(self);
+        }
+
+        function showAosReport()
+        {
+
         }
 
         self.getSalesReport = function()
@@ -226,12 +239,14 @@
             console.log(self.daily_sales_from_date);
             console.log(self.daily_sales_to_date);
 
+
             self.reportParams.daily_sales_from_date  = self.daily_sales_from_date;
             self.reportParams.daily_sales_to_date  = self.daily_sales_to_date;
 
             Restangular.all('reports/getDailySales').post({ 'reportParams': self.reportParams}).then(function(data)
             {
                 console.log(data);
+                self.dayreports = data;
                 //console.log(self.results[0]);
             },
             function()
@@ -244,6 +259,6 @@
 
     }
 
-    angular.module('app.controllers').controller('ReportController', ['$scope', '$auth', '$state', 'Restangular', 'RestService', 'ChartService', ReportController]);
+    angular.module('app.controllers').controller('ReportController', ['$scope', '$auth', '$state', '$moment', 'Restangular', 'RestService', 'ChartService', ReportController]);
 
 })();
