@@ -5,7 +5,6 @@
     <title>Reports</title>
 </head>
 <body>
-
     <md-content class="md-padding" layout-xs="column" layout="row">
         <div flex-xs flex-gt-xs="50" layout="column">
             <md-card>
@@ -101,6 +100,7 @@
                 </md-content>
             </md-card>
 
+            <!--
             <md-card>
                 <md-card-title>
                     <md-card-title-text>Worst Selling Products</md-card-title-text>
@@ -124,6 +124,45 @@
                     </md-table-container>
                 </md-content>
             </md-card>
+            -->
+
+            <md-card>
+                <md-card-title>
+                    <md-card-title-text>Daily Sales Report</md-card-title-text>
+                </md-card-title>
+                <md-content>
+                    <md-datepicker ng-model="ctrlReport.daily_sales_from_date"
+                                   md-placeholder="From">
+                    </md-datepicker>
+
+                    <md-datepicker ng-model="ctrlReport.daily_sales_to_date"
+                                   md-placeholder="To">
+                    </md-datepicker>
+                    <br/>
+                    <md-button class="md-raised md-primary" ng-click="ctrlReport.getDailySalesCsv($event)">Submit</md-button>
+
+                    <md-table-container ng-show="ctrlReport.dayreports">
+                        <table md-table>
+                            <thead md-head>
+                                <tr md-row>
+                                    <th md-column>Date</th>
+                                    <th md-column>Orders</th>
+                                    <th md-column>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody md-body>
+                                <tr md-row ng-repeat="d in ctrlReport.dayreports">
+                                    <td md-cell>{{d.podate}}</td>
+                                    <td md-cell>{{d.pocount}}</td>
+                                    <td md-cell>{{d.daytotal}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </md-table-container>
+
+                </md-content>
+            </md-card>
+
         </div>
     </md-content>
 
