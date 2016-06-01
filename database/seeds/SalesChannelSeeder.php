@@ -23,7 +23,8 @@ class SalesChannelSeeder extends Seeder
             ['name' => 'Etsy'],
             ['name' => 'Amazon'],
             ['name' => 'Shopify'],
-            ['name' => 'Other']
+            ['name' => 'Other'],
+            ['name' => 'Kijiji']
         );
 
         foreach ($sales_channels as $sc)
