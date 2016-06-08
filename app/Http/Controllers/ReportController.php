@@ -224,4 +224,31 @@ class ReportController extends Controller
 
     }
 
+    public function getSalesChannelReport(Request $request)
+    {
+        $query = PurchaseOrder::select(DB::raw('sales_channels.name'), DB::raw('count(purchase_orders.id) as pocount'), DB::raw('sum(purchase_orders.total) as pototal'));
+
+        $reportParams = $request->input('reportParams');
+        if(isset($reportParams['sales_channel_from_date']) && $reportParams['sales_channel_from_date'] !== '')
+        {
+            $sDate = new Carbon($reportParams['sales_channel_from_date']);
+            $query->whereDate('purchase_orders.created_at', '>=', $sDate->toDateString());
+        }
+
+        if(isset($reportParams['sales_channel_to_date']) && $reportParams['sales_channel_to_date'] !== '')
+        {
+            $eDate = new Carbon($reportParams['sales_channel_to_date']);
+            $query->whereDate('purchase_orders.created_at', '<=', $eDate->toDateString());
+        }
+
+        $query->join('sales_channels', 'purchase_orders.sales_channel_id', '=', 'sales_channels.id');
+        $query->groupBy(DB::raw('purchase_orders.sales_channel_id'));
+        $query->orderBy('sales_channels.name', 'asc');
+
+        $dataPoints = $query->get();
+
+        return response()->json($dataPoints);
+
+    }
+
 }
