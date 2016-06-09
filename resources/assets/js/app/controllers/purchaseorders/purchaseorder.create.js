@@ -8,7 +8,7 @@
         RestService.getAllCustomers(self);
         RestService.getAllProducts(self);
         RestService.getAllPaymentTypes(self);
-        RestService.getFullyBookedDays(self);
+        //RestService.getFullyBookedDays(self);
 
         RestService.getAllSalesChannels().then(function(data)
         {
