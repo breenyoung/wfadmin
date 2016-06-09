@@ -136,12 +136,21 @@ class ReportController extends Controller
         $startOfWeek = Carbon::today('America/Halifax')->startOfWeek();
         $endOfWeek = Carbon::today('America/Halifax')->endOfWeek();
 
+        /*
         $results = WorkOrder::whereDate('start_date', '>=', $startOfWeek)
                                 ->whereDate('start_date', '<=', $endOfWeek)
                                 ->where('completed', 0)
                                 ->with(['product', 'customer', 'purchaseOrder'])
                                 ->orderBy('start_date', 'asc')
                                 ->get();
+        */
+
+        $results = WorkOrder::whereDate('start_date', '<=', $endOfWeek)
+            ->where('completed', 0)
+            ->with(['product', 'customer', 'purchaseOrder'])
+            ->orderBy('end_date', 'asc')
+            ->get();
+
 
         return response()->json($results);
     }
