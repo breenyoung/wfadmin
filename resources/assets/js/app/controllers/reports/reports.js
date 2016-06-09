@@ -257,6 +257,27 @@
 
         };
 
+        self.getSalesChannels = function(e)
+        {
+            console.log(self.sales_channel_from_date);
+            console.log(self.sales_channel_to_date);
+
+
+            self.reportParams.sales_channel_from_date  = self.sales_channel_from_date;
+            self.reportParams.sales_channel_to_date  = self.sales_channel_to_date;
+
+            Restangular.all('reports/getSalesChannelReport').post({ 'reportParams': self.reportParams}).then(function(data)
+                {
+                    console.log(data);
+                    self.channelreports = data;
+                    //console.log(self.results[0]);
+                },
+                function()
+                {
+                    // Error
+                });
+        };
+
     }
 
     angular.module('app.controllers').controller('ReportController', ['$scope', '$auth', '$state', '$moment', 'Restangular', 'RestService', 'ChartService', ReportController]);
