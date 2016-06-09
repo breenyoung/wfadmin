@@ -10,7 +10,7 @@
                     <th md-column>Product</th>
                     <th md-column>Customer</th>
                     <th md-column>Amount Owing</th>
-                    <th md-column>Start Date</th>
+                    <th md-column>Due Date</th>
                     <th md-column>Notes</th>
                 </tr>
                 </thead>
@@ -20,7 +20,7 @@
                     <td md-cell>{{w.product.name}}</td>
                     <td md-cell>{{w.customer.first_name}} {{w.customer.last_name}}</td>
                     <td md-cell>{{w.purchase_order.total - w.purchase_order.amount_paid}}</td>
-                    <td md-cell>{{w.start_date | amDateFormat:'MM-DD-YYYY'}}</td>
+                    <td md-cell>{{w.end_date | amDateFormat:'MM-DD-YYYY'}}</td>
                     <td md-cell>{{w.notes}}</td>
                 </tr>
                 </tbody>
