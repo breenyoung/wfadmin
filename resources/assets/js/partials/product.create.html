@@ -7,155 +7,173 @@
 <body>
 <h2>Product create</h2>
 <form name="ctrlProductCreate.form1" novalidate>
-<div layout="row">
-    <div flex>
 
-        <md-input-container class="md-block" flex-gt-sm>
-            <label>Product Name</label>
-            <input type="text" name="productname" ng-model="ctrlProductCreate.product.name" required ng-minlength="5" ng-maxlength="200"/>
+<div>
+    <md-tabs md-dynamic-height md-border-bottom>
 
-            <div ng-messages="ctrlProductCreate.form1.productname.$error" role="alert" ng-show="ctrlProductCreate.form1.productname.$touched || ctrlProductCreate.form1.$submitted">
-                <div ng-messages-include="error-messages"></div>
-            </div>
+        <md-tab label="General">
 
-        </md-input-container>
+            <div layout="row" layout-padding>
+                <div flex>
 
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Product Name</label>
+                        <input type="text" name="productname" ng-model="ctrlProductCreate.product.name" required ng-minlength="5" ng-maxlength="200"/>
 
-    </div>
+                        <div ng-messages="ctrlProductCreate.form1.productname.$error" role="alert" ng-show="ctrlProductCreate.form1.productname.$touched || ctrlProductCreate.form1.$submitted">
+                            <div ng-messages-include="error-messages"></div>
+                        </div>
 
-    <div flex>
-
-        <md-input-container class="md-block" flex-gt-sm>
-            <label>SKU</label>
-            <input type="text" ng-model="ctrlProductCreate.product.sku" name="sku" required ng-minlength="1" ng-maxlength="100"/>
-
-            <div ng-messages="ctrlProductCreate.form1.sku.$error" role="alert" ng-show="ctrlProductCreate.form1.sku.$touched || ctrlProductCreate.form1.$submitted">
-                <div ng-messages-include="error-messages"></div>
-            </div>
-
-        </md-input-container>
+                    </md-input-container>
 
 
-
-    </div>
-</div>
-
-<div layout="row">
-    <div flex>
-        <md-input-container class="md-block" flex-gt-sm>
-            <label>Price</label>
-            <input type="text" ng-model="ctrlProductCreate.product.price" name="price" required ng-pattern="ctrlProductCreate.decimalRegex"/>
-
-            <div ng-messages="ctrlProductCreate.form1.price.$error" role="alert" ng-show="ctrlProductCreate.form1.price.$touched || ctrlProductCreate.form1.$submitted">
-                <div class="errorMessage" ng-message="pattern">This field must be a number</div>
-                <div ng-messages-include="error-messages"></div>
-            </div>
-
-        </md-input-container>
-
-    </div>
-
-    <div flex>
-
-        <md-input-container class="md-block" flex-gt-sm>
-            <label>Cost</label>
-            <input type="text" ng-model="ctrlProductCreate.product.cost" name="cost" required ng-pattern="ctrlProductCreate.decimalRegex"/>
-
-            <div ng-messages="ctrlProductCreate.form1.cost.$error" role="alert" ng-show="ctrlProductCreate.form1.cost.$touched || ctrlProductCreate.form1.$submitted">
-                <div class="errorMessage" ng-message="pattern">This field must be a number</div>
-                <div ng-messages-include="error-messages"></div>
-            </div>
-
-        </md-input-container>
-
-    </div>
-</div>
-<div layout="row">
-    <div layout="row">
-        <div flex>
-            <md-input-container class="md-block" flex-gt-sm>
-                <label>Minimum Stock</label>
-                <input type="text" ng-model="ctrlProductCreate.product.minimum_stock" name="minimum_stock" ng-pattern="ctrlProductCreate.numericRegex"/>
-
-                <div ng-messages="ctrlProductCreate.form1.minimum_stock.$error" role="alert" ng-show="ctrlProductCreate.form1.minimum_stock.$touched || ctrlProductCreate.form1.$submitted">
-                    <div class="errorMessage" ng-message="pattern">This field must be a number</div>
-                    <div ng-messages-include="error-messages"></div>
                 </div>
 
-            </md-input-container>
-        </div>
+                <div flex>
 
-        <div flex>
-            <md-input-container class="md-block" flex-gt-sm>
-                <label>Current Stock</label>
-                <input type="text" ng-model="ctrlProductCreate.product.current_stock" name="current_stock" ng-pattern="ctrlProductCreate.numericRegex"/>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>SKU</label>
+                        <input type="text" ng-model="ctrlProductCreate.product.sku" name="sku" required ng-minlength="1" ng-maxlength="100"/>
 
-                <div ng-messages="ctrlProductCreate.form1.current_stock.$error" role="alert" ng-show="ctrlProductCreate.form1.current_stock.$touched || ctrlProductCreate.form1.$submitted">
-                    <div class="errorMessage" ng-message="pattern">This field must be a number</div>
-                    <div ng-messages-include="error-messages"></div>
+                        <div ng-messages="ctrlProductCreate.form1.sku.$error" role="alert" ng-show="ctrlProductCreate.form1.sku.$touched || ctrlProductCreate.form1.$submitted">
+                            <div ng-messages-include="error-messages"></div>
+                        </div>
+
+                    </md-input-container>
+
+
+
+                </div>
+            </div>
+
+            <div layout="row" layout-padding>
+                <div flex>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Price</label>
+                        <input type="text" ng-model="ctrlProductCreate.product.price" name="price" required ng-pattern="ctrlProductCreate.decimalRegex"/>
+
+                        <div ng-messages="ctrlProductCreate.form1.price.$error" role="alert" ng-show="ctrlProductCreate.form1.price.$touched || ctrlProductCreate.form1.$submitted">
+                            <div class="errorMessage" ng-message="pattern">This field must be a number</div>
+                            <div ng-messages-include="error-messages"></div>
+                        </div>
+
+                    </md-input-container>
+
                 </div>
 
+                <div flex>
 
-            </md-input-container>
-        </div>
-    </div>
-</div>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Cost</label>
+                        <input type="text" ng-model="ctrlProductCreate.product.cost" name="cost" required ng-pattern="ctrlProductCreate.decimalRegex"/>
 
-<div layout="row">
-    <md-checkbox ng-model="ctrlProductCreate.product.is_custom" aria-label="Custom Product">
-        Custom Product
-    </md-checkbox>
-</div>
+                        <div ng-messages="ctrlProductCreate.form1.cost.$error" role="alert" ng-show="ctrlProductCreate.form1.cost.$touched || ctrlProductCreate.form1.$submitted">
+                            <div class="errorMessage" ng-message="pattern">This field must be a number</div>
+                            <div ng-messages-include="error-messages"></div>
+                        </div>
 
-<div layout="row">
+                    </md-input-container>
 
-    <md-input-container class="md-block" flex-gt-sm>
-        <label>Description</label>
-        <textarea ng-model="ctrlProductCreate.product.description"></textarea>
-    </md-input-container>
+                </div>
+            </div>
 
-</div>
+            <div layout="row" layout-padding>
+                <div layout="row">
+                    <div flex>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Minimum Stock</label>
+                            <input type="text" ng-model="ctrlProductCreate.product.minimum_stock" name="minimum_stock" ng-pattern="ctrlProductCreate.numericRegex"/>
 
-<div layout="row">
+                            <div ng-messages="ctrlProductCreate.form1.minimum_stock.$error" role="alert" ng-show="ctrlProductCreate.form1.minimum_stock.$touched || ctrlProductCreate.form1.$submitted">
+                                <div class="errorMessage" ng-message="pattern">This field must be a number</div>
+                                <div ng-messages-include="error-messages"></div>
+                            </div>
 
-    Add materials by:&nbsp;
-    <md-radio-group layout="row" ng-model="ctrlProductCreate.cbAddMaterialsBy">
-        <md-radio-button value="1">Item</md-radio-button>
-        <md-radio-button value="2">Set</md-radio-button>
-    </md-radio-group>
+                        </md-input-container>
+                    </div>
 
-</div>
+                    <div flex>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Current Stock</label>
+                            <input type="text" ng-model="ctrlProductCreate.product.current_stock" name="current_stock" ng-pattern="ctrlProductCreate.numericRegex"/>
 
-<div layout="row" ng-show="ctrlProductCreate.cbAddMaterialsBy == 1">
-    <div flex>
-
-        <select ng-model="ctrlProductCreate.selectedMaterial" ng-options="p as p.name for p in ctrlProductCreate.materials"></select>
-
-        <input type="text" name="quantity" placeholder="Quantity" ng-model="ctrlProductCreate.selectedQuantity"/>
-
-        <md-button class="md-raised md-primary" ng-click="ctrlProductCreate.addMaterial()">Add</md-button>
-    </div>
-
-</div>
-
-<div layout="row" ng-show="ctrlProductCreate.cbAddMaterialsBy == 2">
-    <div flex>
-        <select ng-model="ctrlProductCreate.selectedMaterialSet" ng-options="s as s.name for s in ctrlProductCreate.materialSets"></select>
-
-        <md-button class="md-raised md-primary" ng-click="ctrlProductCreate.addMaterialSet()">Add</md-button>
-    </div>
-</div>
+                            <div ng-messages="ctrlProductCreate.form1.current_stock.$error" role="alert" ng-show="ctrlProductCreate.form1.current_stock.$touched || ctrlProductCreate.form1.$submitted">
+                                <div class="errorMessage" ng-message="pattern">This field must be a number</div>
+                                <div ng-messages-include="error-messages"></div>
+                            </div>
 
 
-<div layout="row">
-    <div flex>
-        <md-list>
-            <md-list-item ng-repeat="pm in ctrlProductCreate.product.product_materials">
-                {{pm.material.name}} x {{pm.quantity}} (@{{pm.material.unit_cost}} each = ${{pm.material.unit_cost * pm.quantity }} )
-                <md-button ng-click="ctrlProductCreate.deleteMaterial($event, pm.material_id)" aria-label="Delete Material"><ng-md-icon icon="delete"></ng-md-icon></md-button>
-            </md-list-item>
-        </md-list>
-    </div>
+                        </md-input-container>
+                    </div>
+                </div>
+            </div>
+
+            <div layout="row" layout-padding>
+                <div flex>
+                <md-checkbox ng-model="ctrlProductCreate.product.is_custom" aria-label="Custom Product">
+                    Custom Product
+                </md-checkbox>
+                </div>
+            </div>
+
+            <div layout="row" layout-padding>
+
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Description</label>
+                    <textarea ng-model="ctrlProductCreate.product.description"></textarea>
+                </md-input-container>
+
+            </div>
+
+        </md-tab>
+
+        <md-tab label="Materials">
+
+            <div layout="row" layout-padding>
+                <div flex>
+                    Add materials by:&nbsp;
+                    <md-radio-group layout="row" ng-model="ctrlProductCreate.cbAddMaterialsBy">
+                        <md-radio-button value="1">Item</md-radio-button>
+                        <md-radio-button value="2">Set</md-radio-button>
+                    </md-radio-group>
+                </div>
+            </div>
+
+            <div layout="row" ng-show="ctrlProductCreate.cbAddMaterialsBy == 1" layout-padding>
+                <div flex>
+
+                    <select ng-model="ctrlProductCreate.selectedMaterial" ng-options="p as p.name for p in ctrlProductCreate.materials"></select>
+
+                    <input type="text" name="quantity" placeholder="Quantity" ng-model="ctrlProductCreate.selectedQuantity"/>
+
+                    <md-button class="md-raised md-primary" ng-click="ctrlProductCreate.addMaterial()">Add</md-button>
+                </div>
+
+            </div>
+
+            <div layout="row" ng-show="ctrlProductCreate.cbAddMaterialsBy == 2" layout-padding>
+                <div flex>
+                    <select ng-model="ctrlProductCreate.selectedMaterialSet" ng-options="s as s.name for s in ctrlProductCreate.materialSets"></select>
+
+                    <md-button class="md-raised md-primary" ng-click="ctrlProductCreate.addMaterialSet()">Add</md-button>
+                </div>
+            </div>
+
+
+            <div layout="row" layout-padding>
+                <div flex>
+                    <md-list>
+                        <md-list-item ng-repeat="pm in ctrlProductCreate.product.product_materials">
+                            {{pm.material.name}} x {{pm.quantity}} (@{{pm.material.unit_cost}} each = ${{pm.material.unit_cost * pm.quantity }} )
+                            <md-button ng-click="ctrlProductCreate.deleteMaterial($event, pm.material_id)" aria-label="Delete Material"><ng-md-icon icon="delete"></ng-md-icon></md-button>
+                        </md-list-item>
+                    </md-list>
+                </div>
+            </div>
+
+        </md-tab>
+
+    </md-tabs>
 </div>
 
 
