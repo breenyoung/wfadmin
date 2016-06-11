@@ -8,111 +8,139 @@
 <h2>Purchase Order Detail</h2>
 <form name="form1">
 
-<div layout="row">
+<div>
+    <md-tabs md-dynamic-height md-border-bottom>
 
-    <md-input-container>
-        <label>Customer</label>
-        <md-select ng-model="ctrlPurchaseOrderDetail.purchaseorder.customer_id">
-            <md-option ng-repeat="c in ctrlPurchaseOrderDetail.customers" value="{{c.id}}">
-                {{c.first_name}} {{c.last_name}}
-            </md-option>
-        </md-select>
-    </md-input-container>
+        <md-tab label="General">
 
+            <div layout="row">
+
+                <md-input-container>
+                    <label>Customer</label>
+                    <md-select ng-model="ctrlPurchaseOrderDetail.purchaseorder.customer_id">
+                        <md-option ng-repeat="c in ctrlPurchaseOrderDetail.customers" value="{{c.id}}">
+                            {{c.first_name}} {{c.last_name}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+
+            </div>
+
+            <md-content>
+                <p><strong>
+                    Created on {{ctrlPurchaseOrderDetail.purchaseorder.created_at | amDateFormat:'MM-DD-YYYY'}}
+                </strong>
+                </p>
+            </md-content>
+
+            <div layout="row">
+                <label>Pickup Date</label>
+                <md-datepicker ng-model="ctrlPurchaseOrderDetail.purchaseorder.pickup_date"
+                               md-placeholder="Pickup Date" utc-Parser>
+                </md-datepicker>
+            </div>
+
+            <div layout="row">
+                <md-input-container>
+                    <label>Sales Channel</label>
+                    <md-select ng-model="ctrlPurchaseOrderDetail.purchaseorder.sales_channel_id">
+                        <md-option ng-repeat="sc in ctrlPurchaseOrderDetail.saleschannels" value="{{sc.id}}">
+                            {{sc.name}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+
+            <div layout="row">
+                <md-input-container>
+                    <label>Payment Type</label>
+                    <md-select ng-model="ctrlPurchaseOrderDetail.purchaseorder.payment_type_id">
+                        <md-option ng-repeat="pt in ctrlPurchaseOrderDetail.paymenttypes" value="{{pt.id}}">
+                            {{pt.name}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+
+            <div layout="row" ng-repeat="pop in ctrlPurchaseOrderDetail.purchaseorder.purchase_order_products">
+                <div flex>
+                    {{pop.product.name}} x {{pop.quantity}} (@{{pop.product.price}} each = ${{pop.product.price * pop.quantity }} )
+                    (<a href="#" ng-click="ctrlPurchaseOrderDetail.deleteProduct($event, pop.product_id)">Delete</a>)
+                </div>
+            </div>
+
+            <div layout="row">
+                <div flex>
+
+                    <select ng-model="ctrlPurchaseOrderDetail.selectedProduct" ng-options="p as p.name for p in ctrlPurchaseOrderDetail.products"></select>
+
+                    <input type="text" name="quantity" placeholder="Quantity" ng-model="ctrlPurchaseOrderDetail.selectedQuantity"/>
+
+                    <md-button class="md-raised md-primary" ng-click="ctrlPurchaseOrderDetail.addProduct()">Add</md-button>
+                </div>
+            </div>
+
+            <div layout="row">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Notes</label>
+                    <textarea ng-model="ctrlPurchaseOrderDetail.purchaseorder.notes"></textarea>
+                </md-input-container>
+            </div>
+
+            <div layout="row">
+                <md-checkbox ng-model="ctrlPurchaseOrderDetail.purchaseorder.fulfilled" ng-true-value="1" ng-false-value="0" aria-label="Fulfilled">
+                    Fulfilled?
+                </md-checkbox>
+                <md-checkbox ng-model="ctrlPurchaseOrderDetail.purchaseorder.paid" ng-true-value="1" ng-false-value="0" aria-label="Paid" ng-click="((ctrlPurchaseOrderDetail.purchaseorder.paid == undefined || ctrlPurchaseOrderDetail.purchaseorder.paid == 0) ? ctrlPurchaseOrderDetail.purchaseorder.amount_paid = ctrlPurchaseOrderDetail.purchaseorder.total : ctrlPurchaseOrderDetail.purchaseorder.amount_paid = 0)">
+                    Paid?
+                </md-checkbox>
+            </div>
+
+            <div layout="row">
+                <div flex>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Amount Paid</label>
+                        <input type="text" ng-model="ctrlPurchaseOrderDetail.purchaseorder.amount_paid"/>
+                    </md-input-container>
+                </div>
+
+                <div flex>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Discount</label>
+                        <input type="text" ng-model="ctrlPurchaseOrderDetail.purchaseorder.discount"/>
+                    </md-input-container>
+                </div>
+
+                <div flex>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Total</label>
+                        <input type="text" ng-model="ctrlPurchaseOrderDetail.purchaseorder.total"/>
+                    </md-input-container>
+                </div>
+            </div>
+
+        </md-tab>
+
+        <md-tab label="Links">
+            <div layout="row" layout-padding>
+                <div flex>
+                    <strong>Work Orders</strong>
+                    <md-list>
+                        <md-list-item ng-repeat="wo in ctrlPurchaseOrderDetail.purchaseorder.workorders">
+                            <p><a ui-sref="app.workorders.detail({workOrderId: wo.id})" class="nounderline">#{{wo.id}}</a></p>
+                        </md-list-item>
+                    </md-list>
+
+                    <strong><a ui-sref="app.customers.detail({customerId: ctrlPurchaseOrderDetail.purchaseorder.customer_id})" class="nounderline">Customer Profile</a></strong>
+
+                </div>
+
+            </div>
+        </md-tab>
+
+    </md-tabs>
 </div>
 
-<md-content>
-    <p><strong>
-        Created on {{ctrlPurchaseOrderDetail.purchaseorder.created_at | amDateFormat:'MM-DD-YYYY'}}
-    </strong>
-    </p>
-</md-content>
-
-<div layout="row">
-    <label>Pickup Date</label>
-    <md-datepicker ng-model="ctrlPurchaseOrderDetail.purchaseorder.pickup_date"
-                   md-placeholder="Pickup Date" utc-Parser>
-    </md-datepicker>
-</div>
-
-<div layout="row">
-    <md-input-container>
-        <label>Sales Channel</label>
-        <md-select ng-model="ctrlPurchaseOrderDetail.purchaseorder.sales_channel_id">
-            <md-option ng-repeat="sc in ctrlPurchaseOrderDetail.saleschannels" value="{{sc.id}}">
-                {{sc.name}}
-            </md-option>
-        </md-select>
-    </md-input-container>
-</div>
-
-<div layout="row">
-    <md-input-container>
-        <label>Payment Type</label>
-        <md-select ng-model="ctrlPurchaseOrderDetail.purchaseorder.payment_type_id">
-            <md-option ng-repeat="pt in ctrlPurchaseOrderDetail.paymenttypes" value="{{pt.id}}">
-                {{pt.name}}
-            </md-option>
-        </md-select>
-    </md-input-container>
-</div>
-
-<div layout="row" ng-repeat="pop in ctrlPurchaseOrderDetail.purchaseorder.purchase_order_products">
-    <div flex>
-        {{pop.product.name}} x {{pop.quantity}} (@{{pop.product.price}} each = ${{pop.product.price * pop.quantity }} )
-        (<a href="#" ng-click="ctrlPurchaseOrderDetail.deleteProduct($event, pop.product_id)">Delete</a>)
-    </div>
-</div>
-
-<div layout="row">
-    <div flex>
-
-        <select ng-model="ctrlPurchaseOrderDetail.selectedProduct" ng-options="p as p.name for p in ctrlPurchaseOrderDetail.products"></select>
-
-        <input type="text" name="quantity" placeholder="Quantity" ng-model="ctrlPurchaseOrderDetail.selectedQuantity"/>
-
-        <md-button class="md-raised md-primary" ng-click="ctrlPurchaseOrderDetail.addProduct()">Add</md-button>
-    </div>
-</div>
-
-<div layout="row">
-    <md-input-container class="md-block" flex-gt-sm>
-        <label>Notes</label>
-        <textarea ng-model="ctrlPurchaseOrderDetail.purchaseorder.notes"></textarea>
-    </md-input-container>
-</div>
-
-<div layout="row">
-    <md-checkbox ng-model="ctrlPurchaseOrderDetail.purchaseorder.fulfilled" ng-true-value="1" ng-false-value="0" aria-label="Fulfilled">
-        Fulfilled?
-    </md-checkbox>
-    <md-checkbox ng-model="ctrlPurchaseOrderDetail.purchaseorder.paid" ng-true-value="1" ng-false-value="0" aria-label="Paid" ng-click="((ctrlPurchaseOrderDetail.purchaseorder.paid == undefined || ctrlPurchaseOrderDetail.purchaseorder.paid == 0) ? ctrlPurchaseOrderDetail.purchaseorder.amount_paid = ctrlPurchaseOrderDetail.purchaseorder.total : ctrlPurchaseOrderDetail.purchaseorder.amount_paid = 0)">
-        Paid?
-    </md-checkbox>
-</div>
-
-<div layout="row">
-    <div flex>
-        <md-input-container class="md-block" flex-gt-sm>
-            <label>Amount Paid</label>
-            <input type="text" ng-model="ctrlPurchaseOrderDetail.purchaseorder.amount_paid"/>
-        </md-input-container>
-    </div>
-
-    <div flex>
-        <md-input-container class="md-block" flex-gt-sm>
-            <label>Discount</label>
-            <input type="text" ng-model="ctrlPurchaseOrderDetail.purchaseorder.discount"/>
-        </md-input-container>
-    </div>
-
-    <div flex>
-        <md-input-container class="md-block" flex-gt-sm>
-            <label>Total</label>
-            <input type="text" ng-model="ctrlPurchaseOrderDetail.purchaseorder.total"/>
-        </md-input-container>
-    </div>
-</div>
 
 <div layout="row" layout-xs="column">
     <div flex layout="column">
