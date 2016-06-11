@@ -123,7 +123,7 @@ class PurchaseOrderController extends Controller
      */
     public function show($id)
     {
-        $purchaseOrder = PurchaseOrder::where('id', $id)->with('purchaseOrderProducts.product')->first();
+        $purchaseOrder = PurchaseOrder::where('id', $id)->with('purchaseOrderProducts.product')->with('workorders')->first();
 
         return $purchaseOrder;
     }
