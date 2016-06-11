@@ -37,7 +37,7 @@ class WorkOrderController extends Controller
     public function index()
     {
         // Retrieve all the work orders in the database and return them
-        $workOrders = WorkOrder::with('product', 'customer')->orderBy('start_date', 'asc')->orderBy('end_date', 'asc')->get();
+        $workOrders = WorkOrder::with('product', 'customer')->orderBy('end_date', 'asc')->get();
 
         return $workOrders;
     }
@@ -147,4 +147,7 @@ class WorkOrderController extends Controller
 
         }
     }
+
+
+
 }
