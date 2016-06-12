@@ -10,62 +10,108 @@
 
 <h2>Customer details</h2>
 
-<md-input-container class="md-block" flex-gt-sm>
-    <label>First Name</label>
-    <input type="text" name="first_name" ng-model="ctrlCustomerDetail.customer.first_name" required ng-maxlength="100"/>
+    <div>
 
-    <div ng-messages="ctrlCustomerDetail.form1.first_name.$error" role="alert" ng-show="ctrlCustomerDetail.form1.first_name.$touched || ctrlCustomerDetail.form1.$submitted">
-        <div ng-messages-include="error-messages"></div>
+        <md-tabs md-dynamic-height md-border-bottom>
+
+            <md-tab label="General">
+
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>First Name</label>
+                    <input type="text" name="first_name" ng-model="ctrlCustomerDetail.customer.first_name" required ng-maxlength="100"/>
+
+                    <div ng-messages="ctrlCustomerDetail.form1.first_name.$error" role="alert" ng-show="ctrlCustomerDetail.form1.first_name.$touched || ctrlCustomerDetail.form1.$submitted">
+                        <div ng-messages-include="error-messages"></div>
+                    </div>
+
+                </md-input-container>
+
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Last Name</label>
+                    <input type="text" name="last_name" ng-model="ctrlCustomerDetail.customer.last_name" required ng-maxlength="100"/>
+
+                    <div ng-messages="ctrlCustomerDetail.form1.last_name.$error" role="alert" ng-show="ctrlCustomerDetail.form1.last_name.$touched || ctrlCustomerDetail.form1.$submitted">
+                        <div ng-messages-include="error-messages"></div>
+                    </div>
+
+                </md-input-container>
+
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Email</label>
+                    <input type="email" name="email" ng-model="ctrlCustomerDetail.customer.email" ng-maxlength="100"/>
+
+                    <div ng-messages="ctrlCustomerDetail.form1.email.$error" role="alert" ng-show="ctrlCustomerDetail.form1.email.$touched || ctrlCustomerDetail.form1.$submitted">
+                        <div ng-messages-include="error-messages"></div>
+                    </div>
+
+                </md-input-container>
+
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Phone</label>
+                    <input type="text" name="phone" ng-model="ctrlCustomerDetail.customer.phone" ng-maxlength="25"/>
+
+                    <div ng-messages="ctrlCustomerDetail.form1.phone.$error" role="alert" ng-show="ctrlCustomerDetail.form1.phone.$touched || ctrlCustomerDetail.form1.$submitted">
+                        <div ng-messages-include="error-messages"></div>
+                    </div>
+
+                </md-input-container>
+
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Facebook Url</label>
+                    <input type="text" name="facebook_url" ng-model="ctrlCustomerDetail.customer.facebook_url" ng-maxlength="100"/>
+
+                    <div ng-messages="ctrlCustomerDetail.form1.facebook_url.$error" role="alert" ng-show="ctrlCustomerDetail.form1.facebook_url.$touched || ctrlCustomerDetail.form1.$submitted">
+                        <div ng-messages-include="error-messages"></div>
+                    </div>
+
+                </md-input-container>
+
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Description</label>
+                    <textarea ng-model="ctrlCustomerDetail.customer.notes"></textarea>
+                </md-input-container>
+
+            </md-tab>
+
+            <md-tab label="Links">
+
+                <div layout="row" layout-padding>
+
+
+                    <div flex>
+
+                        <strong>Purchase Orders</strong>
+
+                        <md-list>
+                            <md-list-item ng-repeat="po in ctrlCustomerDetail.customer.purchaseorders">
+                                <p><a ui-sref="app.purchaseorders.detail({purchaseOrderId: po.id})" class="nounderline">#{{po.id}}</a></p>
+                            </md-list-item>
+                        </md-list>
+
+
+                        <strong>Work Orders</strong>
+
+                        <md-list>
+                            <md-list-item ng-repeat="wo in ctrlCustomerDetail.customer.workorders">
+                                <p style="text-decoration: {{wo.completed == 1 ? 'line-through' : 'none'}}">
+                                    <a ui-sref="app.workorders.detail({workOrderId: wo.id})" class="nounderline">#{{wo.id}}</a>
+                                    - End Date: {{wo.end_date | amDateFormat:'MM-DD-YYYY'}}
+                                </p>
+
+                            </md-list-item>
+                        </md-list>
+
+                    </div>
+
+                </div>
+
+            </md-tab>
+
+
+        </md-tabs>
+
     </div>
 
-</md-input-container>
-
-<md-input-container class="md-block" flex-gt-sm>
-    <label>Last Name</label>
-    <input type="text" name="last_name" ng-model="ctrlCustomerDetail.customer.last_name" required ng-maxlength="100"/>
-
-    <div ng-messages="ctrlCustomerDetail.form1.last_name.$error" role="alert" ng-show="ctrlCustomerDetail.form1.last_name.$touched || ctrlCustomerDetail.form1.$submitted">
-        <div ng-messages-include="error-messages"></div>
-    </div>
-
-</md-input-container>
-
-<md-input-container class="md-block" flex-gt-sm>
-    <label>Email</label>
-    <input type="email" name="email" ng-model="ctrlCustomerDetail.customer.email" ng-maxlength="100"/>
-
-    <div ng-messages="ctrlCustomerDetail.form1.email.$error" role="alert" ng-show="ctrlCustomerDetail.form1.email.$touched || ctrlCustomerDetail.form1.$submitted">
-        <div ng-messages-include="error-messages"></div>
-    </div>
-
-</md-input-container>
-
-<md-input-container class="md-block" flex-gt-sm>
-    <label>Phone</label>
-    <input type="text" name="phone" ng-model="ctrlCustomerDetail.customer.phone" ng-maxlength="25"/>
-
-    <div ng-messages="ctrlCustomerDetail.form1.phone.$error" role="alert" ng-show="ctrlCustomerDetail.form1.phone.$touched || ctrlCustomerDetail.form1.$submitted">
-        <div ng-messages-include="error-messages"></div>
-    </div>
-
-</md-input-container>
-
-<md-input-container class="md-block" flex-gt-sm>
-    <label>Facebook Url</label>
-    <input type="text" name="facebook_url" ng-model="ctrlCustomerDetail.customer.facebook_url" ng-maxlength="100"/>
-
-    <div ng-messages="ctrlCustomerDetail.form1.facebook_url.$error" role="alert" ng-show="ctrlCustomerDetail.form1.facebook_url.$touched || ctrlCustomerDetail.form1.$submitted">
-        <div ng-messages-include="error-messages"></div>
-    </div>
-
-</md-input-container>
-
-<md-input-container class="md-block" flex-gt-sm>
-    <label>Description</label>
-    <textarea ng-model="ctrlCustomerDetail.customer.notes"></textarea>
-</md-input-container>
-
-<br/>
 
 <div layout="row" layout-xs="column">
     <div flex layout="column">
