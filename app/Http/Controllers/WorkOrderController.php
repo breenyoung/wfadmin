@@ -84,7 +84,7 @@ class WorkOrderController extends Controller
      */
     public function show($id)
     {
-        $workOrder = WorkOrder::find($id);
+        $workOrder = WorkOrder::where('id', $id)->with('workOrderProgress')->first();
 
         return $workOrder;
     }

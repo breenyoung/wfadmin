@@ -245,6 +245,11 @@
             getAllSalesChannels: function()
             {
                 return Restangular.all('saleschannel').getList();
+            },
+
+            getAllWorkOrderTasks: function()
+            {
+                return Restangular.all('workordertask').getList();
             }
 
         };

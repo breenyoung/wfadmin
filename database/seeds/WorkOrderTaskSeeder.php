@@ -18,14 +18,14 @@ class WorkOrderTaskSeeder extends Seeder
         DB::table('work_order_tasks')->delete();
 
         $work_order_tasks = array(
-            ['name' => 'Created'],
-            ['name' => 'Approved'],
-            ['name' => 'Cut'],
-            ['name' => 'Based'],
-            ['name' => 'Stencil Cut'],
-            ['name' => 'Painted'],
-            ['name' => 'Hardware / Stamped'],
-            ['name' => 'Completed']
+            ['name' => 'Created', 'order' => 1],
+            ['name' => 'Approved', 'order' => 2],
+            ['name' => 'Cut', 'order' => 3],
+            ['name' => 'Based', 'order' => 4],
+            ['name' => 'Stencil Cut', 'order' => 5],
+            ['name' => 'Painted', 'order' => 6],
+            ['name' => 'Hardware / Stamp', 'order' => 7],
+            ['name' => 'Completed', 'order' => 8]
         );
 
         foreach ($work_order_tasks as $wot)

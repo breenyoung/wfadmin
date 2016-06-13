@@ -18,6 +18,7 @@ class CreateTableWorkOrderTasks extends Migration
 
             $table->increments('id');
             $table->string('name', 200);
+            $table->integer('order')->unsigned();
             $table->timestamps();
         });
     }

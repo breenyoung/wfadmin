@@ -32,4 +32,9 @@ class WorkOrder extends Model
     {
         return $this->belongsTo('App\PurchaseOrder');
     }
+
+    public function workOrderProgress()
+    {
+        return $this->hasMany('App\WorkOrderProgress');
+    }
 }

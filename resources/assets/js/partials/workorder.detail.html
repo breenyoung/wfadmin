@@ -75,6 +75,15 @@
     Completed:
 </md-switch>
 
+<div layout="row">
+    <div flex>
+    <md-checkbox ng-repeat="wot in ctrlWorkOrderDetail.workordertasks">
+        {{wot.name}}
+    </md-checkbox>
+    </div>
+</div>
+
+
 <md-input-container class="md-block" flex-gt-sm>
     <label>Notes</label>
     <textarea ng-model="ctrlWorkOrderDetail.workorder.notes"></textarea>

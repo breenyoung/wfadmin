@@ -10,6 +10,11 @@
         RestService.getAllCustomers(self);
         RestService.getAllProducts(self);
 
+        RestService.getAllWorkOrderTasks().then(function(data)
+        {
+            self.workordertasks = data;
+        });
+
         self.numericRegex = ValidationService.numericRegex();
 
         self.toggleComplete = function(cbState)

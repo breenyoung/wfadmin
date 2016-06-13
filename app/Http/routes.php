@@ -45,6 +45,7 @@ Route::group(['prefix' => 'api'], function()
     Route::resource('materialtype', 'MaterialTypeController');
     Route::resource('bookeddate', 'BookedDateController');
     Route::resource('saleschannel', 'SalesChannelController');
+    Route::resource('workordertask', 'WorkOrderTaskController');
 
     Route::get('search/{query}', 'SearchController@index');
 
