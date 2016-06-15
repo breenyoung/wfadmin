@@ -73,8 +73,8 @@
                     // Hack for OLD mysql drivers on Hostgator which don't properly encode integer and return them as strings
                     data.completed = parseInt(data.completed);
 
-                    self.workorder = data;
-
+                    // Count work order progress states
+                    //scope.completedProgressCount = data.work_order_progress.length;
 
                     scope.workorder = data;
                 });
