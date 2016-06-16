@@ -5,7 +5,7 @@
 (function(){
     "use strict";
 
-    angular.module("app.services").factory('RestService', ['$auth', 'Restangular', '$moment', function($auth, Restangular, $moment){
+    angular.module("app.services").factory('RestService', ['$q', '$auth', 'Restangular', '$moment', function($q, $auth, Restangular, $moment){
 
         var baseProducts = Restangular.all('product');
 
@@ -60,9 +60,9 @@
                 });
             },
 
-            getWorkOrder: function(scope, id)
+            getWorkOrder: function(id)
             {
-                Restangular.one('workorder', id).get().then(function(data)
+                var p = Restangular.one('workorder', id).get().then(function(data)
                 {
                     //console.log(data);
 
@@ -76,8 +76,12 @@
                     // Count work order progress states
                     //scope.completedProgressCount = data.work_order_progress.length;
 
-                    scope.workorder = data;
+                    //scope.workorder = data;
+
+                    return data;
                 });
+
+                return p;
             },
 
             getAllEvents: function(scope)

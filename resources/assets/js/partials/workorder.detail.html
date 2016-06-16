@@ -78,9 +78,11 @@
 <div layout="row">
     <div flex>
         <p>Progress</p>
-    <md-checkbox ng-repeat="wot in ctrlWorkOrderDetail.workordertasks">
-        {{wot.name}}
-    </md-checkbox>
+        <span ng-repeat="wot in ctrlWorkOrderDetail.workordertasks" style="padding-right: 5px;">
+            <md-checkbox checklist-model="ctrlWorkOrderDetail.workorder.work_order_progress" checklist-value="wot.id">
+                {{wot.name}}
+            </md-checkbox>
+        </span>
     </div>
 </div>
 

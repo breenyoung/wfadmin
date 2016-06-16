@@ -50,30 +50,47 @@ class WorkOrderController extends Controller
      */
     public function store(Request $request)
     {
-        $workOrder = new WorkOrder();
-        $workOrder->customer_id = $request->input('customer_id');
-        $workOrder->product_id = $request->input('product_id');
-        $workOrder->quantity = $request->input('quantity');
 
-        if($request->input('start_date'))
+        try
         {
-            $strStartDate = substr($request->input('start_date'), 0, strpos($request->input('start_date'), 'T'));
-            $startDate = Carbon::createFromFormat('Y-m-d', $strStartDate);
-            $workOrder->start_date = $startDate;
+            \DB::beginTransaction();
+
+            $workOrder = new WorkOrder();
+            $workOrder->customer_id = $request->input('customer_id');
+            $workOrder->product_id = $request->input('product_id');
+            $workOrder->quantity = $request->input('quantity');
+
+            if($request->input('start_date'))
+            {
+                $strStartDate = substr($request->input('start_date'), 0, strpos($request->input('start_date'), 'T'));
+                $startDate = Carbon::createFromFormat('Y-m-d', $strStartDate);
+                $workOrder->start_date = $startDate;
+            }
+
+            if($request->input('end_date'))
+            {
+                $strEndDate = substr($request->input('end_date'), 0, strpos($request->input('end_date'), 'T'));
+                $endDate = Carbon::createFromFormat('Y-m-d', $strEndDate);
+                $workOrder->end_date = $endDate;
+            }
+
+            $workOrder->completed = $request->input('completed') ? 1 : 0;
+            $workOrder->notes = $request->input('notes');
+            $workOrder->image_filename = $request->input('image_filename');
+
+            $workOrder->save();
+
+            // Give each new WorkOrder the 'Created' progress task
+            WorkOrderTask::create($workOrder->id, 1);
+
+            \DB::commit();
+        }
+        catch(\Exception $ex)
+        {
+            \DB::rollBack();
+            throw $ex;
         }
 
-        if($request->input('end_date'))
-        {
-            $strEndDate = substr($request->input('end_date'), 0, strpos($request->input('end_date'), 'T'));
-            $endDate = Carbon::createFromFormat('Y-m-d', $strEndDate);
-            $workOrder->end_date = $endDate;
-        }
-
-        $workOrder->completed = $request->input('completed') ? 1 : 0;
-        $workOrder->notes = $request->input('notes');
-        $workOrder->image_filename = $request->input('image_filename');
-
-        $workOrder->save();
     }
 
     /**
@@ -101,30 +118,44 @@ class WorkOrderController extends Controller
         $workOrder = WorkOrder::find($id);
         if(isset($workOrder))
         {
-            $workOrder->customer_id = $request->input('customer_id');
-            $workOrder->product_id = $request->input('product_id');
-            $workOrder->quantity = $request->input('quantity');
-
-            if($request->input('start_date'))
+            try
             {
-                $strStartDate = substr($request->input('start_date'), 0, strpos($request->input('start_date'), 'T'));
-                $startDate = Carbon::createFromFormat('Y-m-d', $strStartDate);
-                $workOrder->start_date = $startDate;
+                \DB::beginTransaction();
+
+                $workOrder->customer_id = $request->input('customer_id');
+                $workOrder->product_id = $request->input('product_id');
+                $workOrder->quantity = $request->input('quantity');
+
+                if($request->input('start_date'))
+                {
+                    $strStartDate = substr($request->input('start_date'), 0, strpos($request->input('start_date'), 'T'));
+                    $startDate = Carbon::createFromFormat('Y-m-d', $strStartDate);
+                    $workOrder->start_date = $startDate;
+                }
+
+                if($request->input('end_date'))
+                {
+                    $strEndDate = substr($request->input('end_date'), 0, strpos($request->input('end_date'), 'T'));
+                    $endDate = Carbon::createFromFormat('Y-m-d', $strEndDate);
+                    $workOrder->end_date = $endDate;
+                }
+
+                //$workOrder->completed = $request->input('completed') ? 1 : 0;
+                $workOrder->completed = (int)$request->input('completed');
+                $workOrder->notes = $request->input('notes');
+                $workOrder->image_filename = $request->input('image_filename');
+
+                $workOrder->save();
+
+
+                \DB::commit();
+            }
+            catch(\Exception $ex)
+            {
+                \DB::rollBack();
+                throw $ex;
             }
 
-            if($request->input('end_date'))
-            {
-                $strEndDate = substr($request->input('end_date'), 0, strpos($request->input('end_date'), 'T'));
-                $endDate = Carbon::createFromFormat('Y-m-d', $strEndDate);
-                $workOrder->end_date = $endDate;
-            }
-
-            //$workOrder->completed = $request->input('completed') ? 1 : 0;
-            $workOrder->completed = (int)$request->input('completed');
-            $workOrder->notes = $request->input('notes');
-            $workOrder->image_filename = $request->input('image_filename');
-
-            $workOrder->save();
         }
     }
 

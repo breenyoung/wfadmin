@@ -6,7 +6,13 @@
         var self = this;
 
         //console.log($stateParams);
-        RestService.getWorkOrder(self, $stateParams.workOrderId);
+        RestService.getWorkOrder($stateParams.workOrderId).then(function(data)
+        {
+            //console.log(data);
+            self.workorder = data;
+
+        });
+
         RestService.getAllCustomers(self);
         RestService.getAllProducts(self);
 
@@ -105,6 +111,8 @@
 
             if(isValid)
             {
+                console.log(self.workorder);
+
                 self.workorder.put().then(function()
                 {
                     ToastService.show("Successfully updated");
@@ -113,6 +121,7 @@
                 {
                     ToastService.show("Error updating");
                 });
+
             }
         };
 
