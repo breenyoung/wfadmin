@@ -160,7 +160,7 @@ class WorkOrderSchedulerService
                     array_push($newWoIds, $newWo->id);
 
                     // Give each new WorkOrder the 'Created' progress task
-                    WorkOrderTask::create($newWo->id, 1);
+                    WorkOrderProgress::create(['work_order_id' => $newWo->id, 'work_order_task_id' => 1]);
                 }
 
 /*

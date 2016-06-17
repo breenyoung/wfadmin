@@ -83,7 +83,7 @@ class WorkOrderController extends Controller
             $workOrder->save();
 
             // Give each new WorkOrder the 'Created' progress task
-            WorkOrderTask::create($workOrder->id, 1);
+            WorkOrderProgress::create(['work_order_id' => $workOrder->id, 'work_order_task_id' => 1]);
 
             \DB::commit();
         }
