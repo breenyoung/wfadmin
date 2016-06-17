@@ -26,7 +26,7 @@ class WorkOrderTaskController extends Controller
      */
     public function index()
     {
-        $work_order_tasks = WorkOrderTask::orderBy('order', 'asc')->get();
+        $work_order_tasks = WorkOrderTask::select(['id', 'name'])->orderBy('order', 'asc')->get();
         return $work_order_tasks;
     }
 
