@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\WorkOrderProgress;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\WorkOrder;
+use App\WorkOrderTask;
 use Carbon\Carbon;
 use App\UploadHandler;
 
@@ -90,7 +92,6 @@ class WorkOrderController extends Controller
             \DB::rollBack();
             throw $ex;
         }
-
     }
 
     /**
@@ -147,6 +148,18 @@ class WorkOrderController extends Controller
 
                 $workOrder->save();
 
+                // Sync WorkOrderProgress
+                WorkOrderProgress::where('work_order_id', $id)->delete();
+                if($request->input('work_order_progress') && is_array($request->input('work_order_progress')))
+                {
+                    foreach($request->input('work_order_progress') as $wop)
+                    {
+                        $workOrder->workOrderProgress()->create([
+                            'work_order_id' => $id,
+                            'work_order_task_id' => $wop['work_order_task_id']
+                        ]);
+                    }
+                }
 
                 \DB::commit();
             }

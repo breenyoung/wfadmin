@@ -11,15 +11,17 @@
             //console.log(data);
             self.workorder = data;
 
+            RestService.getAllWorkOrderTasks().then(function(data)
+            {
+                self.workordertasks = data;
+            });
+
         });
 
         RestService.getAllCustomers(self);
         RestService.getAllProducts(self);
 
-        RestService.getAllWorkOrderTasks().then(function(data)
-        {
-            self.workordertasks = data;
-        });
+
 
         self.numericRegex = ValidationService.numericRegex();
 

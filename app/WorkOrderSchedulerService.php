@@ -15,6 +15,7 @@ use Mail;
 
 use App\PurchaseOrder;
 use App\WorkOrder;
+use App\WorkOrderTask;
 use App\Product;
 use App\Material;
 
