@@ -51,9 +51,14 @@
         function showWeeklyWorkOrders()
         {
 
+            RestService.getAllWorkOrderTasks().then(function(data)
+            {
+                self.workordertasks = data;
+            });
+
             Restangular.one('reports/getWeekWorkOrderReport').get().then(function(data)
                 {
-                    console.log(data);
+                    //console.log(data);
                     self.weekworkorders = data;
                 },
                 function()
