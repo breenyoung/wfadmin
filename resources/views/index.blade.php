@@ -117,7 +117,7 @@
     <md-toolbar layout="row" ng-show="!showSearch">
         <div class="md-toolbar-tools">
 
-            <md-button ng-click="toggleSidenav('left')" hide-gt-sm class="md-icon-button">
+            <md-button ng-click="toggleSidenav('left')"  class="md-icon-button">
                 <md-icon aria-label="Menu" md-svg-icon="{{url('/img/menu.svg')}}"></md-icon>
             </md-button>
 
@@ -169,7 +169,7 @@
     </md-toolbar>
 
     <div layout="row" flex>
-        <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" md-swipe-left="hideSideNav('left')">
+        <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="false" md-swipe-left="hideSideNav('left')">
             <md-list>
                 <md-list-item ng-click="hideSideNav('left')" ng-href="#/purchaseorders">
 
