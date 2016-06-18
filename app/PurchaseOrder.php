@@ -30,4 +30,9 @@ class PurchaseOrder extends Model
     {
         return $this->hasMany('App\WorkOrder');
     }
+
+    public function salesChannel()
+    {
+        return $this->hasOne('App\SalesChannel', 'id', 'sales_channel_id');
+    }
 }
