@@ -1,36 +1,37 @@
+<style type="text/css">
+
+    label {
+        display: inline;
+    }
+</style>
 
 <div layout="row">
-    <div flex>
-
-
-        <table class="reportTable">
-            <thead>
-            <tr>
-                <th>W.O #</th>
-                <th>Product</th>
-                <th>Customer</th>
-                <th>Amount Owing</th>
-                <th>Due Date</th>
-                <th>Notes</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat-start="w in ctrlReport.weekworkorders">
-                <table width="100%">
-                    <tbody>
-                        <tr>
-                            <td>W.O #{{w.id}}</td>
-                            <td>{{w.product.name}}</td>
-                            <td>{{w.customer.first_name}} {{w.customer.last_name}}</td>
-                            <td>{{w.purchase_order.total - w.purchase_order.amount_paid}}</td>
-                            <td>{{w.end_date | amDateFormat:'MM-DD-YYYY'}}</td>
-                            <td>{{w.notes}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </tr>
-            </tbody>
-        </table>
-
+    <input id="cbShowProgress" ng-model="ctrlReport.cbShowProgress" type="checkbox" /><label for="cbShowProgress">Show Detailed Progress</label>
+</div>
+<div layout="row" class="reportHeader">
+    <div flex="10" class="reportTable">W.O #</div>
+    <div flex="20" class="reportTable">Product</div>
+    <div flex="20" class="reportTable">Customer</div>
+    <div flex="10" class="reportTable">Amount Owing</div>
+    <div flex="10" class="reportTable">Due Date</div>
+    <div flex="30" class="reportTable">Notes</div>
+</div>
+<div ng-repeat="w in ctrlReport.weekworkorders">
+    <div layout="row">
+        <div flex="10" class="reportTable">W.O #{{w.id}}</div>
+        <div flex="20" class="reportTable">{{w.product.name}}</div>
+        <div flex="20" class="reportTable">{{w.customer.first_name}} {{w.customer.last_name}}</div>
+        <div flex="10" class="reportTable">{{w.purchase_order.total - w.purchase_order.amount_paid}}</div>
+        <div flex="10" class="reportTable">{{w.end_date | amDateFormat:'MM-DD-YYYY'}}</div>
+        <div flex="30" class="reportTable">{{w.notes}}</div>
+    </div>
+    <div layout="row" ng-show="ctrlReport.cbShowProgress" class="reportTableSub">
+        <div style="margin-left: 25px;">
+        <span ng-repeat="wot in ctrlReport.workordertasks" style="padding-right: 5px;">
+        <input type="checkbox" id="prog_{{wot.id}}" class="regular-checkbox big-checkbox" checklist-model="w.work_order_progress" checklist-value="{ work_order_id: w.id, work_order_task_id: wot.id}" disabled="disabled" /><label for="prog_{{wot.id}}"></label>
+            {{wot.name}}
+        </span>
+        </div>
     </div>
 </div>
+
