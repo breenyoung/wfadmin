@@ -58,8 +58,20 @@
 
             Restangular.one('reports/getWeekWorkOrderReport').get().then(function(data)
                 {
+                    // More Hostgator shit
+                    for(var i = 0; i < data.length; i++)
+                    {
+                        var wo = data[i];
+                        for(var j = 0; j < wo.work_order_progress.length; j++)
+                        {
+                            wo.work_order_progress[j].work_order_id = parseInt(wo.work_order_progress[j].work_order_id);
+                            wo.work_order_progress[j].work_order_task_id = parseInt(wo.work_order_progress[j].work_order_task_id);
+                        }
+                    }
+
                     //console.log(data);
                     self.weekworkorders = data;
+
                 },
                 function()
                 {
