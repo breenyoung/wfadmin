@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sales Channel Create</title>
+</head>
+<body>
+
+<form name="ctrlSalesChannelCreate.form1" novalidate>
+
+<h2>Payment Type create</h2>
+
+<md-input-container class="md-block" flex-gt-sm>
+    <label>Name</label>
+    <input type="text" name="saleschannelname" ng-model="ctrlSalesChannelCreate.saleschannel.name" required ng-maxlength="200"/>
+
+    <div ng-messages="ctrlSalesChannelCreate.form1.saleschannelname.$error" role="alert" ng-show="ctrlSalesChannelCreate.form1.saleschannelname.$touched || ctrlSalesChannelCreate.form1.$submitted">
+        <div ng-messages-include="error-messages"></div>
+    </div>
+
+</md-input-container>
+
+<div layout="row" layout-xs="column">
+    <div flex layout="column">
+        <md-button class="md-raised md-primary" ng-click="ctrlSalesChannelCreate.createSalesChannel()">Submit</md-button>
+    </div>
+    <div flex layout="column">
+        <md-button class="md-raised" ui-sref="app.saleschannels">Cancel</md-button>
+    </div>
+</div>
+
+</form>
+
+</body>
+</html>
