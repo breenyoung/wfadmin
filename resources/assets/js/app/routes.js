@@ -405,6 +405,36 @@
                     }
                 }
             })
+            .state('app.saleschannels', {
+                url: '/saleschannels',
+                views: {
+                    'main@': {
+                        templateUrl: getView('saleschannels'),
+                        controller: 'SalesChannelController',
+                        controllerAs: 'ctrlSalesChannel'
+                    }
+                }
+            })
+            .state('app.saleschannels.create', {
+                url: '/create',
+                views: {
+                    'main@': {
+                        templateUrl: getView('saleschannel.create'),
+                        controller: 'SalesChannelCreateController',
+                        controllerAs: 'ctrlSalesChannelCreate'
+                    }
+                }
+            })
+            .state('app.saleschannels.detail', {
+                url: '/detail/:salesChannelId',
+                views: {
+                    'main@': {
+                        templateUrl: getView('saleschannel.detail'),
+                        controller: 'SalesChannelDetailController',
+                        controllerAs: 'ctrlSalesChannelDetail'
+                    }
+                }
+            })
 
             ;
 
