@@ -38,11 +38,13 @@
                 //console.log($moment(oneWO.start_date));
                 workOrderEventSrc.events.push({
                     title: 'Work Order ' + oneWO.id,
-                    start: $moment(oneWO.start_date).format(),
+                    //start: $moment(oneWO.start_date).format(),
+                    start: $moment(oneWO.end_date).format(), // Set the start date to when the WO is due (end date)
                     woObj: oneWO,
                     bookingType: 'workorder'
                 });
             }
+
             eventSources.push(workOrderEventSrc);
 
             //bookedDateEvents.push({ title: 'test BOzzz', bookingType: 'bookedDate', start: $moment().format()});
