@@ -113,7 +113,7 @@ class ReportController extends Controller
     {
         $results = DB::table('purchase_orders')
                 ->join('customers', 'purchase_orders.customer_id', '=', 'customers.id')
-                ->select('purchase_orders.id', 'purchase_orders.pickup_date', 'purchase_orders.total', 'purchase_orders.customer_id', 'customers.first_name', 'customers.last_name')
+                ->select('purchase_orders.id', 'purchase_orders.pickup_date', 'purchase_orders.total', 'purchase_orders.amount_paid', 'purchase_orders.customer_id', 'customers.first_name', 'customers.last_name')
                 ->where('purchase_orders.paid', 0)
                 ->whereRaw('DATE(purchase_orders.pickup_date) <= CURDATE()')
                 ->orderBy('purchase_orders.pickup_date')
