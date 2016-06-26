@@ -8,6 +8,8 @@
 
     <md-dialog-content>
         <div class="md-dialog-content">
+
+            <div><a ui-sref="app.workorders.detail({workOrderId: woObj.id})" class="nounderline">Details</a></div>
             <div>Customer: <a ui-sref="app.customers.detail({customerId: woObj.customer_id})" class="nounderline">{{woObj.customer.first_name}} {{woObj.customer.last_name}}</a></div>
             <div>Product: <a ui-sref="app.products.detail({productId: woObj.product_id})" class="nounderline">{{woObj.product.name}}</a> x {{woObj.quantity}}</div>
             <div>Start Date: {{woObj.start_date | amDateFormat:'MM-DD-YYYY'}}</div>
