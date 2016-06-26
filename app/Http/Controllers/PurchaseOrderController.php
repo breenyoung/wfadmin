@@ -12,6 +12,7 @@ use App\PurchaseOrderProduct;
 use App\WorkOrder;
 use App\Product;
 use App\WorkOrderSchedulerService;
+use App\OrderLogicService;
 
 
 class PurchaseOrderController extends Controller
@@ -172,6 +173,12 @@ class PurchaseOrderController extends Controller
 
                 $purchaseOrder->save();
 
+                if($purchaseOrder->fulfilled == 1)
+                {
+                    // PO is marked as fulfilled (completed), initiate finalization tasks
+                    $orderLogicService = new OrderLogicService();
+                    $orderLogicService->finalizePurchaseOrder($purchaseOrder->id);
+                }
 
                 \DB::commit();
             }

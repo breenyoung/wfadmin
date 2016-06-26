@@ -30,16 +30,6 @@ class SalesChannelController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -47,7 +37,12 @@ class SalesChannelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $sales_channel = new SalesChannel();
+        $sales_channel->name = $request->input('name');
+
+        $sales_channel->save();
+
+        return response()->json(['newId' => $sales_channel->id]);
     }
 
     /**
@@ -58,18 +53,9 @@ class SalesChannelController extends Controller
      */
     public function show($id)
     {
-        //
-    }
+        $sales_channel = SalesChannel::find($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return $sales_channel;
     }
 
     /**
@@ -81,7 +67,12 @@ class SalesChannelController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $sales_channel = SalesChannel::find($id);
+        if(isset($sales_channel))
+        {
+            $sales_channel->name = $request->input('name');
+            $sales_channel->save();
+        }
     }
 
     /**
@@ -92,6 +83,10 @@ class SalesChannelController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $sales_channel = SalesChannel::find($id);
+        if(isset($sales_channel))
+        {
+            $sales_channel->delete();
+        }
     }
 }

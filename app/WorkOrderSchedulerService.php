@@ -253,8 +253,8 @@ class WorkOrderSchedulerService
     {
         $startOfWeek = Carbon::today('America/Halifax')->startOfWeek();
 
-        $results = WorkOrder::whereDate('start_date', '>=', $startOfWeek)
-            ->where('completed', 0)
+        //$results = WorkOrder::whereDate('start_date', '>=', $startOfWeek)
+        $results = WorkOrder::where('completed', 0)
             ->with(['product' => function($query)
                 {
                     $query->addSelect(array('id', 'name'));

@@ -48,7 +48,8 @@
             if($state.is("app.products") || $state.is("app.customers")
                 || $state.is("app.purchaseorders") || $state.is("app.paymenttypes")
                 || $state.is("app.workorders") || $state.is("app.events")
-                || $state.is("app.units") || $state.is("app.materials"))
+                || $state.is("app.units") || $state.is("app.materials")
+                || $state.is("app.saleschannels"))
             {
                 return true;
             }
@@ -86,6 +87,10 @@
                 case "app.materials":
                     url = "app.materials.create";
                     break;
+                case "app.saleschannels":
+                    url = "app.saleschannels.create";
+                    break;
+
             }
 
             $state.go(url);

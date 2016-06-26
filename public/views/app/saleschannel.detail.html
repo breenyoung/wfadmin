@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sales Channel Detail</title>
+</head>
+<body>
+
+<form name="ctrlSalesChannelDetail.form1" novalidate>
+
+<h2>Sales Channel details</h2>
+
+<md-input-container class="md-block" flex-gt-sm>
+    <label>Name</label>
+    <input type="text" name="saleschannelname" ng-model="ctrlSalesChannelDetail.saleschannel.name" required ng-maxlength="200"/>
+
+    <div ng-messages="ctrlSalesChannelDetail.form1.saleschannelname.$error" role="alert" ng-show="ctrlSalesChannelDetail.form1.saleschannelname.$touched || ctrlSalesChannelDetail.form1.$submitted">
+        <div ng-messages-include="error-messages"></div>
+    </div>
+
+</md-input-container>
+
+<div layout="row" layout-xs="column">
+    <div flex layout="column">
+        <md-button class="md-raised md-primary" ng-click="ctrlSalesChannelDetail.updateSalesChannel()">Submit</md-button>
+    </div>
+    <div flex layout="column">
+        <md-button class="md-raised md-warn" ng-click="ctrlSalesChannelDetail.showDeleteConfirm()">Delete</md-button>
+    </div>
+    <div flex layout="column">
+        <md-button class="md-raised" ui-sref="app.saleschannels">Cancel</md-button>
+    </div>
+</div>
+
+</form>
+
+</body>
+</html>

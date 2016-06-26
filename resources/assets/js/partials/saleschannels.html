@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sales Channels</title>
+</head>
+<body>
+
+<div layout="row">
+    <md-subheader class="md-primary">Sales Channels</md-subheader>
+</div>
+
+<md-list>
+    <md-list-item ng-repeat="sc in ctrlSalesChannel.saleschannels" ui-sref="app.saleschannels.detail({salesChannelId: sc.id})">
+            <p>{{sc.name}}</p>
+        <md-divider ng-if="!$last"></md-divider>
+    </md-list-item>
+</md-list>
+
+
+</body>
+</html>
