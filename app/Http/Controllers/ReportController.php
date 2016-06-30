@@ -113,9 +113,11 @@ class ReportController extends Controller
     {
         $results = DB::table('purchase_orders')
                 ->join('customers', 'purchase_orders.customer_id', '=', 'customers.id')
-                ->select('purchase_orders.id', 'purchase_orders.pickup_date', 'purchase_orders.total', 'purchase_orders.amount_paid', 'purchase_orders.customer_id', 'customers.first_name', 'customers.last_name')
+                ->join('work_orders', 'purchase_orders.id', '=', 'work_orders.purchase_order_id')
+                ->select('purchase_orders.id', 'purchase_orders.pickup_date', 'purchase_orders.total', 'purchase_orders.amount_paid', 'purchase_orders.customer_id', 'customers.first_name', 'customers.last_name', DB::raw('count(work_orders.id) AS wocount'), DB::raw('sum(work_orders.completed) AS wocomplete'))
                 ->where('purchase_orders.paid', 0)
                 ->whereRaw('DATE(purchase_orders.pickup_date) <= CURDATE()')
+                ->groupBy('purchase_orders.id')
                 ->orderBy('purchase_orders.pickup_date')
                 ->get();
 
