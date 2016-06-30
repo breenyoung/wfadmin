@@ -2,6 +2,14 @@
   cursor: pointer;
 }
 
+.alertText {
+  color: red;
+}
+
+.goodText {
+  color: green;
+}
+
 .nounderline {
   text-decoration: none;
 }

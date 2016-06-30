@@ -27,7 +27,7 @@
                             <tr md-row ng-repeat="o in ctrlReport.overduePurchaseOrders">
                                 <td md-cell><a ui-sref="app.purchaseorders.detail({purchaseOrderId: o.id})" class="nounderline">P.O #{{o.id}}</a></td>
                                 <td md-cell><a ui-sref="app.customers.detail({customerId: o.customer_id})" class="nounderline">{{o.first_name}} {{o.last_name}}</a></td>
-                                <td md-cell>{{o.wocount == o.wocomplete ? 'Yes' : 'No'}}</td>
+                                <td md-cell><span class="{{o.wocount == o.wocomplete ? 'goodText' : 'alertText'}}">{{o.wocount == o.wocomplete ? 'Yes' : 'No'}}</span></td>
                                 <td md-cell>${{o.total - o.amount_paid}}</td>
                                 <td md-cell>{{o.pickup_date | amDateFormat:'MM-DD-YYYY'}}</td>
                             </tr>
