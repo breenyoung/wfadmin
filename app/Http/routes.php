@@ -28,6 +28,7 @@ Route::get('/', 'AngularController@serveApp');
 Route::get('/test', 'HomeController@scheduleTest');
 Route::get('/shopsy', 'HomeController@shopifyTest');
 Route::get('/etsy', 'HomeController@etsyTest');
+Route::match(['get', 'post'], '/print', 'PrintController@index');
 
 Route::group(['prefix' => 'api'], function()
 {
