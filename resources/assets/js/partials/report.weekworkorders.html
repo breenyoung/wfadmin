@@ -7,6 +7,8 @@
 
 <div layout="row">
     <input id="cbShowProgress" ng-model="ctrlReport.cbShowProgress" type="checkbox" /><label for="cbShowProgress">Show Detailed Progress</label>
+    &nbsp;|&nbsp;
+    <a href="/print?view=weekworkorders&details={{ctrlReport.cbShowProgress ? 1 : 0}}" target="_blank" class="nounderline">Show Print Friendly View</a>
 </div>
 <div layout="row" class="reportHeader">
     <div flex="10" class="reportTable">W.O #</div>

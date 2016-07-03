@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\PurchaseOrderProduct;
+use App\ReportService;
 use DB;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -16,12 +17,16 @@ use App\PurchaseOrder;
 class ReportController extends Controller
 {
 
+    protected $reportService;
 
     /**
      * ReportController constructor.
      */
-    public function __construct()
+    public function __construct(ReportService $rs)
     {
+
+        $this->reportService = $rs;
+
         // Apply the jwt.auth middleware to all methods in this controller
         $this->middleware('jwt.auth');
     }
@@ -135,24 +140,7 @@ class ReportController extends Controller
 
     public function getWeekWorkOrderReport()
     {
-        $startOfWeek = Carbon::today('America/Halifax')->startOfWeek();
-        $endOfWeek = Carbon::today('America/Halifax')->endOfWeek();
-
-        /*
-        $results = WorkOrder::whereDate('start_date', '>=', $startOfWeek)
-                                ->whereDate('start_date', '<=', $endOfWeek)
-                                ->where('completed', 0)
-                                ->with(['product', 'customer', 'purchaseOrder'])
-                                ->orderBy('start_date', 'asc')
-                                ->get();
-        */
-
-        $results = WorkOrder::whereDate('start_date', '<=', $endOfWeek)
-            ->where('completed', 0)
-            ->with(['product', 'customer', 'purchaseOrder', 'workOrderProgress'])
-            ->orderBy('end_date', 'asc')
-            ->get();
-
+        $results = $this->reportService->getWeekWorkOrderReport();
 
         return response()->json($results);
     }
