@@ -15,6 +15,7 @@ use App\WorkOrder;
 use App\Product;
 use App\PurchaseOrder;
 use App\PurchaseOrderProduct;
+use App\WorkOrderProgress;
 
 
 class ReportService
@@ -50,5 +51,23 @@ class ReportService
 
         return $results;
     }
+
+    public function getPendingApprovalWorkOrders()
+    {
+        $results = DB::table('work_orders')
+            ->select('work_orders.id', 'work_orders.end_date', 'work_orders.customer_id', 'customers.first_name', 'customers.last_name', 'work_orders.product_id', 'products.name')
+            ->leftJoin('work_order_progress', 'work_orders.id', '=', 'work_order_progress.work_order_id')
+            ->join('products', 'work_orders.product_id', '=', 'products.id')
+            ->join('customers', 'work_orders.customer_id', '=', 'customers.id')
+            ->where('work_orders.completed', 0)
+            ->where('products.is_custom', 1)
+            ->whereNull('work_order_progress.work_order_task_id')
+            ->orderBy('work_orders.end_date', 'asc')
+            ->get();
+
+
+        return $results;
+    }
+
 
 }

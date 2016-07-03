@@ -92,11 +92,10 @@
 
         function showDashboardWidgets()
         {
-            ChartService.getTopSellingProducts(self, 'Top Selling All Time');
-            //getWorstSellingProducts(self);
             getOverduePurchaseOrders(self);
             getMonthlyIncome(self);
             getOutstandingPayments(self);
+            getPendingApprovalWorkOrders(self);
 
             self.dayreports = [];
             self.daily_sales_from_date = moment().subtract(7, 'days').toDate();
@@ -137,18 +136,6 @@
             });
         };
 
-        function getWorstSellingProducts(scope)
-        {
-            Restangular.one('reports/getWorstSellingProducts').get().then(function(data)
-            {
-                self.worstSellingProducts = data;
-            },
-            function()
-            {
-                // Error
-            });
-        }
-
         function getOverduePurchaseOrders(scope)
         {
             Restangular.one('reports/getOverduePurchaseOrders').get().then(function(data)
@@ -162,6 +149,21 @@
             {
                 // Error
             });
+        }
+
+        function getPendingApprovalWorkOrders(scope)
+        {
+            Restangular.one('reports/getPendingApprovalWorkOrders').get().then(function(data)
+                {
+                    self.pendingApprovalWorkOrders = data;
+                    //self.poCount = data.length;
+
+                    console.log(data);
+                },
+                function()
+                {
+                    // Error
+                });
         }
 
         function getMonthlyIncome(scope)

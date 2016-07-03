@@ -250,4 +250,11 @@ class ReportController extends Controller
 
     }
 
+    public function getPendingApprovalWorkOrders()
+    {
+        $results = $this->reportService->getPendingApprovalWorkOrders();
+
+        return response()->json($results);
+    }
+
 }
