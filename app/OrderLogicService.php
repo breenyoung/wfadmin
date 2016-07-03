@@ -39,7 +39,7 @@ class OrderLogicService
         $workOrderIds = WorkOrder::where('purchase_order_id', $poId)->select(['id'])->get();
 
         // Get all WorkOrderTask statuses
-        $workOrderTaskIds = WorkOrderTask::select(['id'])->get();
+        $workOrderTaskIds = WorkOrderTask::select(['id'])->where('active', 1)->get();
 
         foreach($workOrderIds as $woId)
         {

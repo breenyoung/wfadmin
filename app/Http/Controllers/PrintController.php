@@ -33,7 +33,7 @@ class PrintController extends Controller
         switch($requestedReport)
         {
             case 'weekworkorders':
-                $returnVals['workordertasks'] = WorkOrderTask::select(['id', 'name'])->orderBy('order', 'asc')->get();
+                $returnVals['workordertasks'] = WorkOrderTask::select(['id', 'name'])->where('active', 1)->orderBy('order', 'asc')->get();
                 $returnVals['args']['detailsview'] = intval($request['details']);
                 $returnVals['results'] = $this->reportService->getWeekWorkOrderReport();
                 break;
