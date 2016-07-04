@@ -5,6 +5,8 @@
     {
         var self = this;
 
+        self.cardStates = {};
+
         self.reportParams = {};
 
         if($state.is('app.reports.currentstock'))
@@ -295,6 +297,42 @@
                 {
                     // Error
                 });
+        };
+
+        self.toggleCardVisibility = function(card)
+        {
+            var selectedCard = self.cardStates[card]
+            if(selectedCard)
+            {
+                selectedCard.visible ? selectedCard.visible = false : selectedCard.visible = true;
+            }
+            else
+            {
+                self.cardStates[card] = { visible: false };
+            }
+            
+            console.log(selectedCard);
+
+            /*
+
+            for(var i = 0; i < self.cardStates.length; i++)
+            {
+                var oneCard = self.cardStates[i];
+                if(oneCard.name === card)
+                {
+                    isNew = false;
+                    oneCard.visible ? oneCard.visible = false : oneCard.visible = true;
+                    break;
+                }
+            }
+
+            if(isNew)
+            {
+                self.cardStates.push({name: card, visible: false});
+            }
+*/
+            console.log(self.cardStates);
+
         };
 
     }
