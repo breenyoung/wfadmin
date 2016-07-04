@@ -29,37 +29,50 @@ class OrderLogicService
     {
         $returnData = [];
 
-
-        // Mark completed field for all work orders for this PO
-        // This field will be going away at some point
-        // TODO: remove this when we remove 'completed' field from work_orders table
-        WorkOrder::where('purchase_order_id', $poId)->update(['completed' => 1]);
-
-        // Get all work orders for this PO
-        $workOrderIds = WorkOrder::where('purchase_order_id', $poId)->select(['id'])->get();
-
-        // Get all WorkOrderTask statuses
-        $workOrderTaskIds = WorkOrderTask::select(['id'])->where('active', 1)->get();
-
-        foreach($workOrderIds as $woId)
+        try
         {
-            // Delete all existing progress rows first
-            WorkOrderProgress::where('work_order_id', $woId)->delete();
+            \DB::beginTransaction();
 
-            // Create full set of statuses for this work order
-            foreach($workOrderTaskIds as $woTaskId)
+            // Mark completed field for all work orders for this PO
+            WorkOrder::where('purchase_order_id', $poId)->update(['completed' => 1]);
+
+            // Get all work orders for this PO
+            $workOrderIds = WorkOrder::where('purchase_order_id', $poId)->select(['id'])->get();
+
+            // Get all WorkOrderTask statuses
+            $workOrderTaskIds = WorkOrderTask::select(['id'])->where('active', 1)->get();
+
+            foreach($workOrderIds as $woId)
             {
-                WorkOrderProgress::create([
-                    'work_order_id' => $woId,
-                    'work_order_task_id' => $woTaskId
-                ]);
+                // Delete all existing progress rows first
+                WorkOrderProgress::where('work_order_id', $woId)->delete();
             }
+
+            /*
+            foreach($workOrderIds as $woId)
+            {
+                // Create full set of statuses for this work order
+                foreach($workOrderTaskIds as $woTaskId)
+                {
+                    WorkOrderProgress::create([
+                        'work_order_id' => $woId,
+                        'work_order_task_id' => $woTaskId
+                    ]);
+                }
+            }
+            */
+
+            // Future PO finalization stuff goes here.
+
+            \DB::commit();
+
+            //return $returnData;
         }
-
-        // Future PO finalization stuff goes here.
-
-
-        return $returnData;
+        catch(\Exception $ex)
+        {
+            \DB::rollBack();
+            throw $ex;
+        }
     }
 
 }

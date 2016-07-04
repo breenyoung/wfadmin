@@ -59,6 +59,23 @@
             });
         };
 
+        self.showFulfillmentWarning = function(ev)
+        {
+            if(self.purchaseorder.fulfilled == false)
+            {
+                var dialog = DialogService.confirm(ev, 'Fulfill this purchase order? All work orders for this PO will be marked as complete', '');
+                dialog.then(function()
+                    {
+
+                    },
+                    function()
+                    {
+                        self.purchaseorder.fulfilled = false;
+                    });
+            }
+        };
+
+        
         self.applyDiscount = function()
         {
             if(self.purchaseorder.discount == null || self.purchaseorder.discount == 0)
